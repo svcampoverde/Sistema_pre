@@ -29,54 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.txtCiudad = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.labelX1 = new DevComponents.DotNetBar.LabelX();
-            this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.cmbProvincias = new MaterialSkin.Controls.MaterialComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnGuardarc = new Presentacion.btnpersonalizados.Botonper();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtCiudad = new MaterialSkin.Controls.MaterialTextBox2();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtCiudad
-            // 
-            // 
-            // 
-            // 
-            this.txtCiudad.Border.BackColorGradientAngle = 5;
-            this.txtCiudad.Border.Class = "TextBoxBorder";
-            this.txtCiudad.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtCiudad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCiudad.Location = new System.Drawing.Point(212, 133);
-            this.txtCiudad.Name = "txtCiudad";
-            this.txtCiudad.Size = new System.Drawing.Size(170, 26);
-            this.txtCiudad.TabIndex = 2;
-            // 
-            // labelX1
-            // 
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(69, 128);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(137, 23);
-            this.labelX1.TabIndex = 3;
-            this.labelX1.Text = "Nombre de ciudad";
-            // 
-            // labelX2
-            // 
-            // 
-            // 
-            // 
-            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX2.Location = new System.Drawing.Point(69, 190);
-            this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(137, 23);
-            this.labelX2.TabIndex = 4;
-            this.labelX2.Text = "Seleccionar provincia";
             // 
             // cmbProvincias
             // 
@@ -92,11 +52,11 @@
             this.cmbProvincias.FormattingEnabled = true;
             this.cmbProvincias.IntegralHeight = false;
             this.cmbProvincias.ItemHeight = 43;
-            this.cmbProvincias.Location = new System.Drawing.Point(245, 176);
+            this.cmbProvincias.Location = new System.Drawing.Point(104, 161);
             this.cmbProvincias.MaxDropDownItems = 4;
             this.cmbProvincias.MouseState = MaterialSkin.MouseState.OUT;
             this.cmbProvincias.Name = "cmbProvincias";
-            this.cmbProvincias.Size = new System.Drawing.Size(121, 49);
+            this.cmbProvincias.Size = new System.Drawing.Size(227, 49);
             this.cmbProvincias.StartIndex = 0;
             this.cmbProvincias.TabIndex = 7;
             // 
@@ -114,7 +74,7 @@
             this.btnGuardarc.FlatAppearance.BorderSize = 0;
             this.btnGuardarc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardarc.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarc.Location = new System.Drawing.Point(181, 266);
+            this.btnGuardarc.Location = new System.Drawing.Point(113, 254);
             this.btnGuardarc.Name = "btnGuardarc";
             this.btnGuardarc.Size = new System.Drawing.Size(150, 40);
             this.btnGuardarc.TabIndex = 6;
@@ -123,30 +83,84 @@
             this.btnGuardarc.UseVisualStyleBackColor = false;
             this.btnGuardarc.Click += new System.EventHandler(this.btnGuardarc_Click);
             // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(19, 106);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(59, 19);
+            this.materialLabel1.TabIndex = 8;
+            this.materialLabel1.Text = " Ciudad:";
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(19, 180);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(71, 19);
+            this.materialLabel2.TabIndex = 9;
+            this.materialLabel2.Text = "Provincia:";
+            // 
+            // txtCiudad
+            // 
+            this.txtCiudad.AnimateReadOnly = false;
+            this.txtCiudad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCiudad.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCiudad.Depth = 0;
+            this.txtCiudad.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCiudad.HideSelection = true;
+            this.txtCiudad.LeadingIcon = null;
+            this.txtCiudad.Location = new System.Drawing.Point(104, 91);
+            this.txtCiudad.MaxLength = 32767;
+            this.txtCiudad.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCiudad.Name = "txtCiudad";
+            this.txtCiudad.PasswordChar = '\0';
+            this.txtCiudad.PrefixSuffixText = null;
+            this.txtCiudad.ReadOnly = false;
+            this.txtCiudad.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCiudad.SelectedText = "";
+            this.txtCiudad.SelectionLength = 0;
+            this.txtCiudad.SelectionStart = 0;
+            this.txtCiudad.ShortcutsEnabled = true;
+            this.txtCiudad.Size = new System.Drawing.Size(227, 48);
+            this.txtCiudad.TabIndex = 10;
+            this.txtCiudad.TabStop = false;
+            this.txtCiudad.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCiudad.TrailingIcon = null;
+            this.txtCiudad.UseSystemPasswordChar = false;
+            // 
             // FrmCiudad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 323);
+            this.ClientSize = new System.Drawing.Size(387, 323);
+            this.Controls.Add(this.txtCiudad);
+            this.Controls.Add(this.materialLabel2);
+            this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.cmbProvincias);
             this.Controls.Add(this.btnGuardarc);
-            this.Controls.Add(this.labelX2);
-            this.Controls.Add(this.labelX1);
-            this.Controls.Add(this.txtCiudad);
             this.Name = "FrmCiudad";
             this.Text = "FrmCiudad";
             this.Load += new System.EventHandler(this.FrmCiudad_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private DevComponents.DotNetBar.Controls.TextBoxX txtCiudad;
-        private DevComponents.DotNetBar.LabelX labelX1;
-        private DevComponents.DotNetBar.LabelX labelX2;
+        
         private btnpersonalizados.Botonper btnGuardarc;
         private MaterialSkin.Controls.MaterialComboBox cmbProvincias;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialTextBox2 txtCiudad;
     }
 }
