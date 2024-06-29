@@ -1,30 +1,28 @@
-﻿using LogicDeNegocio.personas;
+﻿
+using Datos.AplicationDB;
 using MaterialSkin;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Presentacion.ModuloLogin
 {
     public partial class Login : MaterialSkin.Controls.MaterialForm
     {
-        UsuarioDao usuarioDao;
-        public Login()
+        private readonly SistemapContext _sistemapContext;
+
+        public Login(SistemapContext sistemapContext)
         {
             InitializeComponent();
+            _sistemapContext = sistemapContext;
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
-          
+
             SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
-            SkinManager.ColorScheme = new ColorScheme(Primary.Red900, Primary.Red900, Primary.Blue100,Accent.Green700,TextShade.BLACK);
+            SkinManager.ColorScheme = new ColorScheme(Primary.Red900, Primary.Red900, Primary.Blue100, Accent.Green700, TextShade.BLACK);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -61,26 +59,27 @@ namespace Presentacion.ModuloLogin
         }
         private void ConsultarCre(string user, string clave)
         {
-            usuarioDao = new UsuarioDao();
-            bool credencialV = usuarioDao.ValidarCredencial(user, clave);
+            //usuarioDao = new UsuarioDao();
+            //bool credencialV = usuarioDao.ValidarCredencial(user, clave);
             // bool us = usuarioDao.ValidarUsuario(user);
 
-            if (credencialV)
-            {
-                //  MessageBox.Show("Usuario bienvenido");
-                this.Hide();
-                FRMPrincipal obj = new FRMPrincipal();
-                obj.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Usuario o contraseña incorrecta");
-            }
+            //if (credencialV)
+            //{
+            //    //  MessageBox.Show("Usuario bienvenido");
+            //    this.Hide();
+            //    FRMPrincipal obj = new FRMPrincipal();
+            //    obj.ShowDialog();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Usuario o contraseña incorrecta");
+            //}
         }
         private void valUser(string user)
         {
-            usuarioDao = new UsuarioDao();
-            bool userexit = usuarioDao.ValidarUsuario(user);
+
+            //bool userexit = usuarioDao.ValidarUsuario(user);
+             var userexit=_sistemapContext.Usuarios.Any(u => u.Us == user);
 
             if (userexit)
             {

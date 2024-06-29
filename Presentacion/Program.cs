@@ -6,12 +6,12 @@ using System.Windows.Forms;
 using Presentacion.ModuloCiudad;
 using Presentacion.ModuloLogin;
 using Presentacion.ModuloUsuario;
+using Unity;
 
 namespace Presentacion
 {
      static class Program
     {
-        public static FRMPrincipal iniciar = null;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -20,8 +20,10 @@ namespace Presentacion
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(iniciar = new FRMPrincipal());
-           // Application.Run(new FRMPrincipal());
+            // Resolver el formulario principal con Unity
+            var form = UnityConfig.Container.Resolve<FRMPrincipal>();
+            Application.Run(form);
+            // Application.Run(new FRMPrincipal());
         }
     }
 }

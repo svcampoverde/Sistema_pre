@@ -1,24 +1,19 @@
-﻿using LogicDeNegocio.provincia;
+﻿using Datos.AplicationDB;
+using Datos.Models;
 using LogicDeNegocio;
 using MaterialSkin;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using LogicDeNegocio.personas;
 
 namespace Presentacion.ModuloRolusuario
 {
     public partial class FRMRol : MaterialSkin.Controls.MaterialForm
     {
-        AdmRol admr = new AdmRol();
-        public FRMRol()
+        private readonly SistemapContext _sistemapContext;
+        public FRMRol(SistemapContext sistemapContext)
         {
+            _sistemapContext = sistemapContext;
+
             InitializeComponent();
         }
 
@@ -35,9 +30,11 @@ namespace Presentacion.ModuloRolusuario
             {
                 if (Validar())
                 {
-
-                    Rol r = new Rol(rol);
-                    admr.insertRol(r);
+                    Rol rol1 = new Rol() {
+                        Descripcion = rol
+                    }; 
+                    _sistemapContext.Rols.Add(rol1);
+                    _sistemapContext.SaveChanges();
                     MessageBox.Show("Registro de provincia realizado con éxito");
                     Limpiar();
                 }

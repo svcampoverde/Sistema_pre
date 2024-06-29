@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 namespace Presentacion.btnpersonalizados
 {
     public class Botonper : Button
@@ -19,13 +15,13 @@ namespace Presentacion.btnpersonalizados
         //propiedades
 
         [Category("Advance")]
-        public int BorderSize { get { return borderSize;}set { borderSize = value; this.Invalidate(); }}
+        public int BorderSize { get { return borderSize; } set { borderSize = value; this.Invalidate(); } }
 
         [Category("Advance")]
-        public int BorderRadius { get {return borderRadius; } set { borderRadius = value; this.Invalidate(); }}
+        public int BorderRadius { get { return borderRadius; } set { borderRadius = value; this.Invalidate(); } }
 
         [Category("Advance")]
-        public Color BorderColor { get {return borderColor; } set { borderColor = value; this.Invalidate(); } }
+        public Color BorderColor { get { return borderColor; } set { borderColor = value; this.Invalidate(); } }
 
         [Category("Advance")]
         public Color BackgroundColor
@@ -41,8 +37,8 @@ namespace Presentacion.btnpersonalizados
             set { this.ForeColor = value; }
         }
         //constructor
-        public Botonper() 
-        { 
+        public Botonper()
+        {
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
             this.Size = new Size(150, 40);

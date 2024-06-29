@@ -1,13 +1,6 @@
-﻿using LogicDeNegocio;
-using LogicDeNegocio.provincia;
+﻿using Datos.AplicationDB;
+using LogicDeNegocio;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Presentacion.ModuloProvincia
@@ -15,9 +8,11 @@ namespace Presentacion.ModuloProvincia
 {
     public partial class FrmProvincia : MaterialSkin.Controls.MaterialForm
     {
-        AdmProvincia admp = new AdmProvincia();
-        public FrmProvincia()
+        private readonly SistemapContext _sistemapContext;
+        public FrmProvincia(SistemapContext sistemapContext)
         {
+            _sistemapContext = sistemapContext;
+
             InitializeComponent();
         }
 
@@ -30,14 +25,14 @@ namespace Presentacion.ModuloProvincia
                 if (Validar())
                 {
 
-                    Provincia provincia = new Provincia(prov);
-                    admp.insertarProvincia(provincia);
+                    //Provincia provincia = new Provincia(prov);
+                    //admp.insertarProvincia(provincia);
                     MessageBox.Show("Registro de provincia realizado con éxito");
                     Limpiar();
                 }
 
             }
-            catch(ExceptionSistema ex) 
+            catch (ExceptionSistema ex)
             {
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -45,13 +40,13 @@ namespace Presentacion.ModuloProvincia
 
         private bool Validar()
         {
-           bool campo = true;
-            if(txtProvincia.Text == "") 
-            { 
+            bool campo = true;
+            if (txtProvincia.Text == "")
+            {
                 campo = false;
                 errorProvider1.SetError(txtProvincia, "Ingrese nombre de provincia");
             }
-           return campo;
+            return campo;
         }
         public void Limpiar()
         {

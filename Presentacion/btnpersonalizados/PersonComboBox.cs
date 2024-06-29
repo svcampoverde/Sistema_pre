@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing.Drawing2D;
 using System.Drawing.Design;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 namespace Presentacion.btnpersonalizados
 {
-   [DefaultEvent("OnSelectedIndexChanged")]
-   class PersonComboBox : UserControl
+    [DefaultEvent("OnSelectedIndexChanged")]
+    class PersonComboBox : UserControl
     {
         //Campos
         private Color backColor = Color.WhiteSmoke;
@@ -212,7 +208,7 @@ namespace Presentacion.btnpersonalizados
             }
         }
 
-       
+
 
         [Category("Appearance")]
         public override Color ForeColor

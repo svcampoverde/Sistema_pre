@@ -30,6 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.cmbCiudad = new MaterialSkin.Controls.MaterialComboBox();
+            this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtDireccion = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.txtCelular = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
+            this.cmbGenero = new MaterialSkin.Controls.MaterialComboBox();
+            this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             this.cbRol = new MaterialSkin.Controls.MaterialComboBox();
             this.txtClave = new MaterialSkin.Controls.MaterialTextBox2();
             this.txtUsuario = new MaterialSkin.Controls.MaterialTextBox2();
@@ -48,14 +56,6 @@
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
-            this.cmbGenero = new MaterialSkin.Controls.MaterialComboBox();
-            this.materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtCelular = new MaterialSkin.Controls.MaterialTextBox2();
-            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
-            this.txtDireccion = new MaterialSkin.Controls.MaterialTextBox2();
-            this.materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
-            this.cmbCiudad = new MaterialSkin.Controls.MaterialComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.materialCard1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -99,6 +99,159 @@
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard1.Size = new System.Drawing.Size(783, 591);
             this.materialCard1.TabIndex = 0;
+            // 
+            // cmbCiudad
+            // 
+            this.cmbCiudad.AutoResize = false;
+            this.cmbCiudad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbCiudad.Depth = 0;
+            this.cmbCiudad.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbCiudad.DropDownHeight = 174;
+            this.cmbCiudad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCiudad.DropDownWidth = 121;
+            this.cmbCiudad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbCiudad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbCiudad.FormattingEnabled = true;
+            this.cmbCiudad.IntegralHeight = false;
+            this.cmbCiudad.ItemHeight = 43;
+            this.cmbCiudad.Location = new System.Drawing.Point(501, 197);
+            this.cmbCiudad.MaxDropDownItems = 4;
+            this.cmbCiudad.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbCiudad.Name = "cmbCiudad";
+            this.cmbCiudad.Size = new System.Drawing.Size(221, 49);
+            this.cmbCiudad.StartIndex = 0;
+            this.cmbCiudad.TabIndex = 40;
+            this.cmbCiudad.DropDown += new System.EventHandler(this.cmbCiudad_DropDown);
+            // 
+            // materialLabel12
+            // 
+            this.materialLabel12.AutoSize = true;
+            this.materialLabel12.Depth = 0;
+            this.materialLabel12.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel12.Location = new System.Drawing.Point(409, 270);
+            this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel12.Name = "materialLabel12";
+            this.materialLabel12.Size = new System.Drawing.Size(71, 19);
+            this.materialLabel12.TabIndex = 39;
+            this.materialLabel12.Text = "Dirección:";
+            // 
+            // txtDireccion
+            // 
+            this.txtDireccion.AnimateReadOnly = false;
+            this.txtDireccion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtDireccion.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtDireccion.Depth = 0;
+            this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtDireccion.HideSelection = true;
+            this.txtDireccion.LeadingIcon = null;
+            this.txtDireccion.Location = new System.Drawing.Point(501, 258);
+            this.txtDireccion.MaxLength = 32767;
+            this.txtDireccion.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtDireccion.Name = "txtDireccion";
+            this.txtDireccion.PasswordChar = '\0';
+            this.txtDireccion.PrefixSuffixText = null;
+            this.txtDireccion.ReadOnly = false;
+            this.txtDireccion.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtDireccion.SelectedText = "";
+            this.txtDireccion.SelectionLength = 0;
+            this.txtDireccion.SelectionStart = 0;
+            this.txtDireccion.ShortcutsEnabled = true;
+            this.txtDireccion.Size = new System.Drawing.Size(221, 48);
+            this.txtDireccion.TabIndex = 38;
+            this.txtDireccion.TabStop = false;
+            this.txtDireccion.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtDireccion.TrailingIcon = null;
+            this.txtDireccion.UseSystemPasswordChar = false;
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.Location = new System.Drawing.Point(409, 213);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(55, 19);
+            this.materialLabel4.TabIndex = 37;
+            this.materialLabel4.Text = "Ciudad:";
+            // 
+            // txtCelular
+            // 
+            this.txtCelular.AnimateReadOnly = false;
+            this.txtCelular.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtCelular.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtCelular.Depth = 0;
+            this.txtCelular.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCelular.HideSelection = true;
+            this.txtCelular.LeadingIcon = null;
+            this.txtCelular.Location = new System.Drawing.Point(501, 136);
+            this.txtCelular.MaxLength = 32767;
+            this.txtCelular.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtCelular.Name = "txtCelular";
+            this.txtCelular.PasswordChar = '\0';
+            this.txtCelular.PrefixSuffixText = null;
+            this.txtCelular.ReadOnly = false;
+            this.txtCelular.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCelular.SelectedText = "";
+            this.txtCelular.SelectionLength = 0;
+            this.txtCelular.SelectionStart = 0;
+            this.txtCelular.ShortcutsEnabled = true;
+            this.txtCelular.Size = new System.Drawing.Size(221, 48);
+            this.txtCelular.TabIndex = 36;
+            this.txtCelular.TabStop = false;
+            this.txtCelular.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCelular.TrailingIcon = null;
+            this.txtCelular.UseSystemPasswordChar = false;
+            // 
+            // materialLabel11
+            // 
+            this.materialLabel11.AutoSize = true;
+            this.materialLabel11.Depth = 0;
+            this.materialLabel11.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel11.Location = new System.Drawing.Point(409, 148);
+            this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel11.Name = "materialLabel11";
+            this.materialLabel11.Size = new System.Drawing.Size(54, 19);
+            this.materialLabel11.TabIndex = 35;
+            this.materialLabel11.Text = "Celular:";
+            // 
+            // cmbGenero
+            // 
+            this.cmbGenero.AutoResize = false;
+            this.cmbGenero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cmbGenero.Depth = 0;
+            this.cmbGenero.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cmbGenero.DropDownHeight = 174;
+            this.cmbGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGenero.DropDownWidth = 121;
+            this.cmbGenero.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cmbGenero.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cmbGenero.FormattingEnabled = true;
+            this.cmbGenero.IntegralHeight = false;
+            this.cmbGenero.ItemHeight = 43;
+            this.cmbGenero.Items.AddRange(new object[] {
+            "Masculino",
+            "Femenino",
+            "Otro"});
+            this.cmbGenero.Location = new System.Drawing.Point(146, 267);
+            this.cmbGenero.MaxDropDownItems = 4;
+            this.cmbGenero.MouseState = MaterialSkin.MouseState.OUT;
+            this.cmbGenero.Name = "cmbGenero";
+            this.cmbGenero.Size = new System.Drawing.Size(221, 49);
+            this.cmbGenero.StartIndex = 0;
+            this.cmbGenero.TabIndex = 34;
+            // 
+            // materialLabel10
+            // 
+            this.materialLabel10.AutoSize = true;
+            this.materialLabel10.Depth = 0;
+            this.materialLabel10.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel10.Location = new System.Drawing.Point(52, 287);
+            this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel10.Name = "materialLabel10";
+            this.materialLabel10.Size = new System.Drawing.Size(55, 19);
+            this.materialLabel10.TabIndex = 33;
+            this.materialLabel10.Text = "Genero:";
             // 
             // cbRol
             // 
@@ -205,6 +358,7 @@
             this.txtCorreo.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtCorreo.TrailingIcon = null;
             this.txtCorreo.UseSystemPasswordChar = false;
+            this.txtCorreo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCorreo_KeyPress);
             // 
             // txtTelefono
             // 
@@ -403,7 +557,7 @@
             // 
             this.Telefon.AutoSize = true;
             this.Telefon.Depth = 0;
-            this.Telefon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(1)), true);
+            this.Telefon.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.Telefon.Location = new System.Drawing.Point(409, 83);
             this.Telefon.MouseState = MaterialSkin.MouseState.HOVER;
             this.Telefon.Name = "Telefon";
@@ -446,159 +600,6 @@
             this.materialLabel1.Size = new System.Drawing.Size(54, 19);
             this.materialLabel1.TabIndex = 11;
             this.materialLabel1.Text = "Cedula:";
-            // 
-            // materialLabel10
-            // 
-            this.materialLabel10.AutoSize = true;
-            this.materialLabel10.Depth = 0;
-            this.materialLabel10.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel10.Location = new System.Drawing.Point(52, 287);
-            this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel10.Name = "materialLabel10";
-            this.materialLabel10.Size = new System.Drawing.Size(55, 19);
-            this.materialLabel10.TabIndex = 33;
-            this.materialLabel10.Text = "Genero:";
-            // 
-            // cmbGenero
-            // 
-            this.cmbGenero.AutoResize = false;
-            this.cmbGenero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cmbGenero.Depth = 0;
-            this.cmbGenero.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbGenero.DropDownHeight = 174;
-            this.cmbGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGenero.DropDownWidth = 121;
-            this.cmbGenero.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cmbGenero.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cmbGenero.FormattingEnabled = true;
-            this.cmbGenero.IntegralHeight = false;
-            this.cmbGenero.ItemHeight = 43;
-            this.cmbGenero.Items.AddRange(new object[] {
-            "Masculino",
-            "Femenino",
-            "Otro"});
-            this.cmbGenero.Location = new System.Drawing.Point(146, 267);
-            this.cmbGenero.MaxDropDownItems = 4;
-            this.cmbGenero.MouseState = MaterialSkin.MouseState.OUT;
-            this.cmbGenero.Name = "cmbGenero";
-            this.cmbGenero.Size = new System.Drawing.Size(221, 49);
-            this.cmbGenero.StartIndex = 0;
-            this.cmbGenero.TabIndex = 34;
-            // 
-            // materialLabel11
-            // 
-            this.materialLabel11.AutoSize = true;
-            this.materialLabel11.Depth = 0;
-            this.materialLabel11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel11.Location = new System.Drawing.Point(409, 148);
-            this.materialLabel11.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel11.Name = "materialLabel11";
-            this.materialLabel11.Size = new System.Drawing.Size(54, 19);
-            this.materialLabel11.TabIndex = 35;
-            this.materialLabel11.Text = "Celular:";
-            // 
-            // txtCelular
-            // 
-            this.txtCelular.AnimateReadOnly = false;
-            this.txtCelular.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtCelular.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtCelular.Depth = 0;
-            this.txtCelular.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtCelular.HideSelection = true;
-            this.txtCelular.LeadingIcon = null;
-            this.txtCelular.Location = new System.Drawing.Point(501, 136);
-            this.txtCelular.MaxLength = 32767;
-            this.txtCelular.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtCelular.Name = "txtCelular";
-            this.txtCelular.PasswordChar = '\0';
-            this.txtCelular.PrefixSuffixText = null;
-            this.txtCelular.ReadOnly = false;
-            this.txtCelular.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtCelular.SelectedText = "";
-            this.txtCelular.SelectionLength = 0;
-            this.txtCelular.SelectionStart = 0;
-            this.txtCelular.ShortcutsEnabled = true;
-            this.txtCelular.Size = new System.Drawing.Size(221, 48);
-            this.txtCelular.TabIndex = 36;
-            this.txtCelular.TabStop = false;
-            this.txtCelular.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtCelular.TrailingIcon = null;
-            this.txtCelular.UseSystemPasswordChar = false;
-            // 
-            // materialLabel4
-            // 
-            this.materialLabel4.AutoSize = true;
-            this.materialLabel4.Depth = 0;
-            this.materialLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.Location = new System.Drawing.Point(409, 213);
-            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel4.Name = "materialLabel4";
-            this.materialLabel4.Size = new System.Drawing.Size(55, 19);
-            this.materialLabel4.TabIndex = 37;
-            this.materialLabel4.Text = "Ciudad:";
-            // 
-            // txtDireccion
-            // 
-            this.txtDireccion.AnimateReadOnly = false;
-            this.txtDireccion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.txtDireccion.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.txtDireccion.Depth = 0;
-            this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.txtDireccion.HideSelection = true;
-            this.txtDireccion.LeadingIcon = null;
-            this.txtDireccion.Location = new System.Drawing.Point(501, 258);
-            this.txtDireccion.MaxLength = 32767;
-            this.txtDireccion.MouseState = MaterialSkin.MouseState.OUT;
-            this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.PasswordChar = '\0';
-            this.txtDireccion.PrefixSuffixText = null;
-            this.txtDireccion.ReadOnly = false;
-            this.txtDireccion.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtDireccion.SelectedText = "";
-            this.txtDireccion.SelectionLength = 0;
-            this.txtDireccion.SelectionStart = 0;
-            this.txtDireccion.ShortcutsEnabled = true;
-            this.txtDireccion.Size = new System.Drawing.Size(221, 48);
-            this.txtDireccion.TabIndex = 38;
-            this.txtDireccion.TabStop = false;
-            this.txtDireccion.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtDireccion.TrailingIcon = null;
-            this.txtDireccion.UseSystemPasswordChar = false;
-            // 
-            // materialLabel12
-            // 
-            this.materialLabel12.AutoSize = true;
-            this.materialLabel12.Depth = 0;
-            this.materialLabel12.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel12.Location = new System.Drawing.Point(409, 270);
-            this.materialLabel12.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel12.Name = "materialLabel12";
-            this.materialLabel12.Size = new System.Drawing.Size(71, 19);
-            this.materialLabel12.TabIndex = 39;
-            this.materialLabel12.Text = "Dirección:";
-            // 
-            // cmbCiudad
-            // 
-            this.cmbCiudad.AutoResize = false;
-            this.cmbCiudad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cmbCiudad.Depth = 0;
-            this.cmbCiudad.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cmbCiudad.DropDownHeight = 174;
-            this.cmbCiudad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbCiudad.DropDownWidth = 121;
-            this.cmbCiudad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cmbCiudad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cmbCiudad.FormattingEnabled = true;
-            this.cmbCiudad.IntegralHeight = false;
-            this.cmbCiudad.ItemHeight = 43;
-            this.cmbCiudad.Location = new System.Drawing.Point(501, 197);
-            this.cmbCiudad.MaxDropDownItems = 4;
-            this.cmbCiudad.MouseState = MaterialSkin.MouseState.OUT;
-            this.cmbCiudad.Name = "cmbCiudad";
-            this.cmbCiudad.Size = new System.Drawing.Size(221, 49);
-            this.cmbCiudad.StartIndex = 0;
-            this.cmbCiudad.TabIndex = 40;
-            this.cmbCiudad.DropDown += new System.EventHandler(this.cmbCiudad_DropDown);
             // 
             // errorProvider1
             // 

@@ -1,22 +1,21 @@
-﻿using LogicDeNegocio.provincia;
+﻿
+using Datos.AplicationDB;
 using LogicDeNegocio;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Presentacion.ModuloProvincia
 {
     public partial class FrmBuscarProvincia : MaterialSkin.Controls.MaterialForm
     {
-        AdmProvincia adm = new AdmProvincia();
-        public FrmBuscarProvincia()
+        private readonly SistemapContext _sistemapContext;
+
+        public FrmBuscarProvincia(SistemapContext sistemapContext)
         {
+            _sistemapContext = sistemapContext;
             InitializeComponent();
             LlenarDataGrid("");
             txtProvincia.TextChanged += new EventHandler(txtProvincia_TextChanged);
@@ -26,15 +25,15 @@ namespace Presentacion.ModuloProvincia
         {
             try
             {
-                List<Provincia> list = adm.ConsultarProvincia(datos);
+                var list = _sistemapContext.Provincia.Where(e=> e.Descripcion==datos).ToList();
                 dtgProvincia.Rows.Clear();
 
                 int cont = 0;
 
-                foreach (Provincia provincia in list)
+                foreach (var provincia in list)
                 {
                     dtgProvincia.Rows.Add(1);
-                    dtgProvincia.Rows[cont].Cells[0].Value = provincia.Descripcionp.ToString();
+                    dtgProvincia.Rows[cont].Cells[0].Value = provincia.Descripcion.ToString();
                     cont++;
                 }
 
@@ -72,7 +71,7 @@ namespace Presentacion.ModuloProvincia
                 if (dtgProvincia.Columns[e.ColumnIndex].Name == "btneditar")
                 {
                     string descripcion = row.Cells["descripcion"].Value.ToString();
-                   EditarProvincia(descripcion);
+                    EditarProvincia(descripcion);
                 }
 
                 // Eliminar
@@ -98,7 +97,7 @@ namespace Presentacion.ModuloProvincia
 
         private void dtgProvincia_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if(e.ColumnIndex >= 0 && this.dtgProvincia.Columns[e.ColumnIndex].Name == "Editar" && e.RowIndex >= 0)
+            if (e.ColumnIndex >= 0 && this.dtgProvincia.Columns[e.ColumnIndex].Name == "Editar" && e.RowIndex >= 0)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
                 DataGridViewButtonCell celBoton = this.dtgProvincia.Rows[e.RowIndex].Cells["Editar"] as DataGridViewButtonCell;

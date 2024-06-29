@@ -1,17 +1,10 @@
 ﻿using MaterialSkin;
-using Presentacion.ModuloLogin;
 using Presentacion.ModuloProvincia;
 using Presentacion.ModuloRolusuario;
 using Presentacion.ModuloUsuario;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Unity;
 
 namespace Presentacion
 {
@@ -20,12 +13,12 @@ namespace Presentacion
         public FRMPrincipal()
         {
             InitializeComponent();
-           
+
         }
 
         private void iconButton1_Click(object sender, EventArgs e)
         {
-            
+
         }
         private void Prueba_Load(object sender, EventArgs e)
         {
@@ -39,10 +32,10 @@ namespace Presentacion
         private void iconButton2_Click(object sender, EventArgs e)
         {
             this.PanelContent.Controls.Clear();
-            FrmRegistrarUsuario Frm = new FrmRegistrarUsuario();
-            Frm.TopLevel = false;
-            PanelContent.Controls.Add(Frm);
-            Frm.Show();
+            var frm = UnityConfig.Container.Resolve<FrmRegistrarUsuario>();
+            frm.TopLevel = false;
+            PanelContent.Controls.Add(frm);
+            frm.Show();
 
         }
 
@@ -86,22 +79,24 @@ namespace Presentacion
                 case 1:
                     Registrar();
                     break;
-                    
+
             }
 
         }
 
         private void Registrar()
         {
-            if(cbUsuario.SelectedIndex == 1){
+            if (cbUsuario.SelectedIndex == 1)
+            {
                 this.PanelContent.Controls.Clear();
-                FrmRegistrarUsuario Frm = new FrmRegistrarUsuario();
-                Frm.TopLevel = false;
-                PanelContent.Controls.Add(Frm);
-                Frm.Show();
+                var frm = UnityConfig.Container.Resolve<FrmRegistrarUsuario>();
+                frm.TopLevel = false;
+                PanelContent.Controls.Add(frm);
+                frm.Show();
+
             }
-           
-        
+
+
         }
 
         private void cbProvincia_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,10 +105,10 @@ namespace Presentacion
             {
                 case 0:
                     this.PanelContent.Controls.Clear();
-                    FrmBuscarProvincia Frm = new FrmBuscarProvincia();
-                    Frm.TopLevel = false;
-                    PanelContent.Controls.Add(Frm);
-                    Frm.Show();
+                    var frm = UnityConfig.Container.Resolve<FrmBuscarProvincia>();
+                    frm.TopLevel = false;
+                    PanelContent.Controls.Add(frm);
+                    frm.Show();
                     break;
                 case 1:
                     RegistrarProv();
@@ -126,7 +121,7 @@ namespace Presentacion
             if (cbProvincia.SelectedIndex == 1)
             {
                 this.PanelContent.Controls.Clear();
-                FrmProvincia Frm = new FrmProvincia();
+                var Frm = UnityConfig.Container.Resolve<FrmProvincia>();
                 Frm.TopLevel = false;
                 PanelContent.Controls.Add(Frm);
                 Frm.Show();
@@ -139,7 +134,7 @@ namespace Presentacion
             {
                 case 0:
                     this.PanelContent.Controls.Clear();
-                    BuscarRol Frm = new BuscarRol();
+                    var Frm = UnityConfig.Container.Resolve<BuscarRol>();
                     Frm.TopLevel = false;
                     PanelContent.Controls.Add(Frm);
                     Frm.Show();
@@ -155,7 +150,7 @@ namespace Presentacion
             {
 
                 this.PanelContent.Controls.Clear();
-                FRMRol Frm = new FRMRol();
+                var Frm = UnityConfig.Container.Resolve<FRMRol>();
                 Frm.TopLevel = false;
                 PanelContent.Controls.Add(Frm);
                 Frm.Show();

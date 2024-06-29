@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Presentacion.btnpersonalizados
@@ -211,12 +206,12 @@ namespace Presentacion.btnpersonalizados
         [Category("Advance")]
         public string Texts
         {
-            get 
+            get
             {
                 if (isPlaceholder) return "";
                 else return textBox1.Text;
             }
-            set 
+            set
             {
                 textBox1.Text = value;
                 SetPlaceholder();
@@ -257,7 +252,7 @@ namespace Presentacion.btnpersonalizados
                 SetPlaceholder();
             }
         }
-        
+
         #endregion
         //Overridden methods
         #region -> Overridden methods
@@ -277,7 +272,7 @@ namespace Presentacion.btnpersonalizados
         {
             base.OnPaint(e);
             Graphics graph = e.Graphics;
-            if(borderRadius > 1)//Rounded TextBox
+            if (borderRadius > 1)//Rounded TextBox
             {
                 // campos
                 //-Fields
@@ -313,10 +308,11 @@ namespace Presentacion.btnpersonalizados
                     }
                 }
 
-            } else
-            { 
-                                //Draw border
-               using (Pen penBorder = new Pen(borderColor, borderSize))
+            }
+            else
+            {
+                //Draw border
+                using (Pen penBorder = new Pen(borderColor, borderSize))
                 {
                     this.Region = new Region(this.ClientRectangle);
                     penBorder.Alignment = System.Drawing.Drawing2D.PenAlignment.Inset;
@@ -330,7 +326,7 @@ namespace Presentacion.btnpersonalizados
             }
 
         }
-    
+
         #endregion
 
         //TextBox events
@@ -358,5 +354,5 @@ namespace Presentacion.btnpersonalizados
             this.OnKeyPress(e);
         }
     }
-    
+
 }

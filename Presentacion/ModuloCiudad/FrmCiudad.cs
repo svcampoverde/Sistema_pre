@@ -1,32 +1,28 @@
-﻿using LogicDeNegocio.personas;
+﻿using Datos.AplicationDB;
+using Datos.Models;
 using LogicDeNegocio;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using LogicDeNegocio.provincia;
 
 namespace Presentacion.ModuloCiudad
 {
     public partial class FrmCiudad : MaterialSkin.Controls.MaterialForm
     {
-        AdmCiudad admc = new AdmCiudad();
-        Provincia adm = new Provincia();
-        public FrmCiudad()
+        private readonly SistemapContext _sistemapContext;
+
+        public FrmCiudad(SistemapContext sistemapContext)
         {
             InitializeComponent();
             llenarCombobox();
+            _sistemapContext = sistemapContext;
         }
         private void llenarCombobox()
         {
             try
             {
-                List<Provincia> list = adm.llenarCombo();
+                List<Provincia> list = _sistemapContext.Provincia.ToList();
                 if (list == null || list.Count == 0)
                 {
                     MessageBox.Show("No se encontraron provincias para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -36,7 +32,7 @@ namespace Presentacion.ModuloCiudad
                 cmbProvincias.DataSource = list;
                 cmbProvincias.DisplayMember = "Descripcionp";
                 cmbProvincias.ValueMember = "Idprovincia";
-                
+
             }
             catch (ExceptionSistema ex)
             {
@@ -52,15 +48,18 @@ namespace Presentacion.ModuloCiudad
 
             try
             {
-            
-            if (Validar())
-            {
 
-                Ciudad ciu = new Ciudad(ciudad, idp);
-                admc.insertCiudad(ciu);
-                MessageBox.Show("Registro de ciudad realizada con éxito");
-                Limpiar();
-            }
+                if (Validar())
+                {
+
+                    Ciudad ciu = new Ciudad();
+                    ciu.Descripcion = ciudad;
+                    ciu.Idprovincia = idp;
+                    _sistemapContext.Add(ciu);
+                    _sistemapContext.SaveChanges();
+                    MessageBox.Show("Registro de ciudad realizada con éxito");
+                    Limpiar();
+                }
 
             }
             catch (ExceptionSistema ex)
@@ -72,8 +71,8 @@ namespace Presentacion.ModuloCiudad
         private bool Validar()
         {
             bool campo = true;
-            if (txtCiudad.Text =="") 
-            { 
+            if (txtCiudad.Text == "")
+            {
                 campo = false;
                 errorProvider1.SetError(txtCiudad, "Ingrese el nombre de la ciudad");
             }
@@ -88,9 +87,9 @@ namespace Presentacion.ModuloCiudad
 
         private void FrmCiudad_Load(object sender, EventArgs e)
         {
-            
+
         }
 
-      
+
     }
 }

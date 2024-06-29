@@ -1,47 +1,40 @@
-﻿using LogicDeNegocio.provincia;
+﻿using Datos.AplicationDB;
 using LogicDeNegocio;
-using MaterialSkin;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using LogicDeNegocio.personas;
-using static MaterialSkin.MaterialItemCollection;
 
 namespace Presentacion.ModuloRolusuario
 {
     public partial class BuscarRol : MaterialSkin.Controls.MaterialForm
     {
         int Id;
-        AdmRol adm = new AdmRol();
-        
-        public BuscarRol()
+        private readonly SistemapContext _sistemapContext;
+
+        public BuscarRol(SistemapContext sistemapContext)
         {
+            _sistemapContext = sistemapContext;
             InitializeComponent();
             LlenarDataGridR("");
             txtRol.TextChanged += new System.EventHandler(txtRol_TextChanged);
         }
 
-        
+
         private void LlenarDataGridR(string datos)
         {
             try
             {
-                List<Rol> list = adm.ConsultarRol(datos);
+                var list = _sistemapContext.Rols.Where(e=>e.Descripcion.Contains(datos)).ToList();
                 dtgRol.Rows.Clear();
 
                 int cont = 0;
 
-                foreach (Rol rol in list)
+                foreach (var rol in list)
                 {
                     dtgRol.Rows.Add(1);
-                    dtgRol.Rows[cont].Cells[0].Value = rol.Idrol.ToString();
-                    dtgRol.Rows[cont].Cells[1].Value = rol.RolUsuario.ToString();
+                    dtgRol.Rows[cont].Cells[0].Value = rol.Id.ToString();
+                    dtgRol.Rows[cont].Cells[1].Value = rol.Descripcion.ToString();
                     cont++;
                 }
 
@@ -76,7 +69,9 @@ namespace Presentacion.ModuloRolusuario
             if (dtgRol.Columns[e.ColumnIndex].Name == "btnEditar")
             {
                 Id = Convert.ToInt32(dtgRol.CurrentRow.Cells["Id"].Value.ToString());
-                Program.iniciar.Hide();
+
+                //Program.iniciar.Hide();
+
                 FrmModificarRol frm = new FrmModificarRol();
                 frm.ShowDialog();
 

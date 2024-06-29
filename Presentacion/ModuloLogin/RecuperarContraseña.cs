@@ -1,13 +1,8 @@
 ﻿using MaterialSkin;
+using Presentacion.ModuloProvincia;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 
 namespace Presentacion.ModuloLogin
 {
@@ -21,7 +16,7 @@ namespace Presentacion.ModuloLogin
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            Login frm = new Login();
+            var frm = UnityConfig.Container.Resolve<Login>();
             frm.ShowDialog();
         }
 
@@ -36,11 +31,12 @@ namespace Presentacion.ModuloLogin
             if (chnpass.Checked)
             {
                 txtnpass.PasswordChar = '\0';
-            }else
+            }
+            else
             {
                 txtnpass.PasswordChar = '*';
             }
-            
+
         }
 
         private void chcpass_CheckedChanged(object sender, EventArgs e)
@@ -59,10 +55,11 @@ namespace Presentacion.ModuloLogin
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if(txtnpass.Text == txtcpass.Text)
+            if (txtnpass.Text == txtcpass.Text)
             {
                 MessageBox.Show("son igules");
-            }else
+            }
+            else
             {
                 MessageBox.Show("Verificar las claves no coinciden");
             }
