@@ -99,76 +99,7 @@ namespace Presentacion.ModuloUsuario
             }
 
         }
-        //private bool validar()
-        //{
-        //    Validacionp valida = new Validacionp();
-        //    bool campo = true;
-        //    if (valida.ValidarCedula(txtCedula.Text) != true)
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(txtCedula, "Se esperaba 10 numeros.");
-        //    }
-        //    if (txtNombre.Text == "")
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(txtNombre, "Ingrese un nombre completo.");
-        //    }
-        //    if (txtApellido.Text == "")
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(txtNombre, "Ingrese un apellido completo.");
-        //    }
-        //    if (valida.ValidarTelefono(txtTelefono.Text) != true)
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(txtTelefono, "Se esperaba 10 numeros.");
-        //    }
-        //    if (valida.ValidarCelular(txtCelular.Text) != true)
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(txtCelular, "Se esperaba 10 numeros");
-        //    }
-        //    if (cmbGenero.SelectedIndex < 0)
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(cmbGenero, "Selecione un tipo de genero.");
-        //    }
-        //    if (cmbCiudad.SelectedIndex < 0)
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(cmbCiudad, "Selecione una ciudad.");
-        //    }
-        //    if (cbRol.SelectedIndex < 0)
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(cbRol, "Selecione un tipo de rol.");
-        //    }
-        //    if (valida.validarEmail(txtCorreo.Text) != true)
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(txtCorreo, "Ingrese su correo electronico.");
-        //    }
-        //    if (txtClave.Text == "")
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(txtClave, "Ingrese una contraseña.");
-        //    }
-        //    if (txtDireccion.Text == "")
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(txtDireccion, "Ingrese una direccion.");
-        //    }
-        //    if (txtUsuario.Text == "")
-        //    {
-        //        campo = false;
-        //        errorProvider1.SetError(txtUsuario, "Ingrese un usuario.");
-        //    }
-        //    if (!campo)
-        //    {
-        //        throw new ExceptionSistema("Datos no validos!");
-        //    }
-        //    return campo;
-        //}
+  
         private void BorrarAlerta()
         {
             errorProvider1.SetError(txtCedula, "");
@@ -208,7 +139,7 @@ namespace Presentacion.ModuloUsuario
                 }
                 cmbCiudad.DataSource = null;
                 cmbCiudad.DataSource = list;
-                cmbCiudad.DisplayMember = "Descripcion";
+                cmbCiudad.DisplayMember = "Nombre";
                 cmbCiudad.ValueMember = "Id";
 
             }

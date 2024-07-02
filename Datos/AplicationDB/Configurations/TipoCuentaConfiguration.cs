@@ -4,39 +4,37 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Datos.AplicationDB.Configurations
 {
-    public partial class ServicioConfiguration : IEntityTypeConfiguration<Servicio>
+    public partial class TipoCuentaConfiguration : IEntityTypeConfiguration<TipoCuenta>
     {
-        public void Configure(EntityTypeBuilder<Servicio> entity)
+        public void Configure(EntityTypeBuilder<TipoCuenta> entity)
         {
-            entity.ToTable("servicio"); // 
+            entity.ToTable("tipocuenta"); 
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
 
             entity.Property(e => e.Id)
-                .HasColumnName("id") // Nombre de la columna en minúsculas y específico para Servicio
+                .HasColumnName("id")
                 .HasColumnType("int")
                 .IsRequired()
                 .ValueGeneratedOnAdd(); 
 
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
-                .HasColumnType("nvarchar(200)") 
+            entity.Property(e => e.Codigo)
+                .HasColumnName("codigo") // Nombre de la columna en la base de datos
+                .HasColumnType("varchar(20)") // Tipo y tamaño de datos según tus requisitos
                 .IsRequired();
 
-            // Relación con PresupuestoDetalle (uno a muchos)
-            entity.HasMany(e => e.PresupuestoDetalles)
-                .WithOne(p => p.IdservicioNavigation)
-                .HasForeignKey(e => e.IdServicio)
-                .OnDelete(DeleteBehavior.Restrict) // 
-                .HasConstraintName("servicio_presupuestodetallefk");
+            entity.Property(e => e.Descripcion)
+                .HasColumnName("descripcion") // Nombre de la columna en la base de datos
+                .HasColumnType("varchar(200)") // Tipo y tamaño de datos según tus requisitos
+                .IsRequired();
 
-            // Relación con Proveedor (muchos a muchos o uno a muchos según tu diseño)
-            entity.HasMany(e => e.Proveedores)
-                .WithOne(p => p.IdServicioNavigation)
-                .HasForeignKey(e => e.ServicioId)
+            // Relación con Cuenta (uno a muchos)
+            entity.HasMany(e => e.Cuenta)
+                .WithOne(p => p.IdTipoCuentaNavigation)
+                .HasForeignKey(e => e.IdTipoCuenta)
                 .OnDelete(DeleteBehavior.Restrict) // 
-                .HasConstraintName("servicio_proveedorfk");
+                .HasConstraintName("tipocuenta_cuentafk");
 
             // 
             entity.Property(e => e.FechaCreacionUTC)
@@ -58,6 +56,6 @@ namespace Datos.AplicationDB.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Servicio> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<TipoCuenta> entity);
     }
 }

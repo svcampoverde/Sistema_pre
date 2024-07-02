@@ -22,7 +22,7 @@ namespace Presentacion.ModuloCiudad
         {
             try
             {
-                List<Provincia> list = _sistemapContext.Provincia.ToList();
+                List<Provincia> list = _sistemapContext.Provincias.ToList();
                 if (list == null || list.Count == 0)
                 {
                     MessageBox.Show("No se encontraron provincias para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -53,8 +53,8 @@ namespace Presentacion.ModuloCiudad
                 {
 
                     Ciudad ciu = new Ciudad();
-                    ciu.Descripcion = ciudad;
-                    ciu.Idprovincia = idp;
+                    ciu.Nombre = ciudad;
+                    ciu.IdProvincia = idp;
                     _sistemapContext.Add(ciu);
                     _sistemapContext.SaveChanges();
                     MessageBox.Show("Registro de ciudad realizada con éxito");

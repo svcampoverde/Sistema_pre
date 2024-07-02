@@ -26,12 +26,11 @@ namespace Presentacion
         public static void RegisterTypes(IUnityContainer container)
         {
             var optionsBuilder = new DbContextOptionsBuilder<SistemapContext>()
-                .UseMySQL("Server=localhost;Database=sistemap;User=root;Password=Kawasaki2512;");
+             .UseMySQL("Server=localhost;Database=sistemap;User=root;Password=Kawasaki2512;");
 
-            var options = optionsBuilder.Options;
-
-            container.RegisterInstance(options);
+            container.RegisterInstance(optionsBuilder.Options);
             container.RegisterType<SistemapContext>(new HierarchicalLifetimeManager());
+
             container.RegisterType<BuscarRol>();
             container.RegisterType<FrmRegistrarUsuario>();
             container.RegisterType<FRMPrincipal>();

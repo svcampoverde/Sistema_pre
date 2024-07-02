@@ -44,8 +44,7 @@ namespace LogicDeNegocio.Personas
             {
                 var persona = _mapper.Map<Persona>(userDto);
                 var user = _mapper.Map<Usuario>(userDto);
-                persona.Usuarios = new List<Usuario>();
-                persona.Usuarios.Add(user);
+                persona.UsuarioNavegation = user;
                 await _sistemapContext.AddAsync(persona);
                 await _sistemapContext.SaveChangesAsync();
 

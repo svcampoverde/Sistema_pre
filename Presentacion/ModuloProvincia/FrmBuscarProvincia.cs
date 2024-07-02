@@ -25,7 +25,7 @@ namespace Presentacion.ModuloProvincia
         {
             try
             {
-                var list = _sistemapContext.Provincia.Where(e=> e.Descripcion==datos).ToList();
+                var list = _sistemapContext.Provincias.Where(e=> e.Nombre==datos).ToList();
                 dtgProvincia.Rows.Clear();
 
                 int cont = 0;
@@ -33,7 +33,7 @@ namespace Presentacion.ModuloProvincia
                 foreach (var provincia in list)
                 {
                     dtgProvincia.Rows.Add(1);
-                    dtgProvincia.Rows[cont].Cells[0].Value = provincia.Descripcion.ToString();
+                    dtgProvincia.Rows[cont].Cells[0].Value = provincia.Nombre.ToString();
                     cont++;
                 }
 

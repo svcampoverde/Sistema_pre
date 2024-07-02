@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Datos.AplicationDB.Configurations
 {
-    public partial class TipoEmpresaConfiguration : IEntityTypeConfiguration<TipoEmpresa>
+    public partial class CategoriaConfiguration : IEntityTypeConfiguration<Categoria>
     {
-        public void Configure(EntityTypeBuilder<TipoEmpresa> entity)
+        public void Configure(EntityTypeBuilder<Categoria> entity)
         {
-            entity.ToTable("tipoempresa"); // Nombre de la tabla en la base de datos
+            entity.ToTable("categoria"); // 
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -19,21 +19,20 @@ namespace Datos.AplicationDB.Configurations
                 .ValueGeneratedOnAdd(); 
 
             entity.Property(e => e.Codigo)
-                .HasColumnName("codigo") // Nombre de la columna en la base de datos
-                .HasColumnType("varchar(20)") // Tipo y tamaño de datos según tus requisitos
+                .HasColumnName("codigo")
+                .HasColumnType("nvarchar(50)") // Ajusta según la longitud necesaria
                 .IsRequired();
 
             entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion") // Nombre de la columna en la base de datos
-                .HasColumnType("varchar(200)") // Tipo y tamaño de datos según tus requisitos
-                .IsRequired();
+                .HasColumnName("descripcion")
+                .HasColumnType("nvarchar(200)"); // Ajusta según la longitud necesaria
 
-            // Relación con Empresa (uno a muchos)
-            entity.HasMany(e => e.Empresas)
-                .WithOne(p => p.IdTipoEmpresaNavigation)
-                .HasForeignKey(e => e.IdTipoEmpresa)
-                .OnDelete(DeleteBehavior.Restrict) // 
-                .HasConstraintName("tipoempresa_empresafk");
+            // Relación uno a muchos con Producto
+            entity.HasMany(e => e.Productos)
+                .WithOne(e => e.IdCategoriaNavigation)
+                .HasForeignKey(e => e.IdCategoria)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("categoria_productofk");
 
             // 
             entity.Property(e => e.FechaCreacionUTC)
@@ -55,6 +54,6 @@ namespace Datos.AplicationDB.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<TipoEmpresa> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<Categoria> entity);
     }
 }

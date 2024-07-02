@@ -4,36 +4,36 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Datos.AplicationDB.Configurations
 {
-    public partial class TipoEmpresaConfiguration : IEntityTypeConfiguration<TipoEmpresa>
+    public partial class TipoServicioConfiguration : IEntityTypeConfiguration<TipoServicio>
     {
-        public void Configure(EntityTypeBuilder<TipoEmpresa> entity)
+        public void Configure(EntityTypeBuilder<TipoServicio> entity)
         {
-            entity.ToTable("tipoempresa"); // Nombre de la tabla en la base de datos
+            entity.ToTable("tipo_servicio"); // Nombre de la tabla en la base de datos
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
 
             entity.Property(e => e.Id)
-                .HasColumnName("id").HasColumnType("int")
+                .HasColumnName("id") // Nombre de la columna en la base de datos
+                .HasColumnType("int")
                 .IsRequired()
                 .ValueGeneratedOnAdd(); 
 
             entity.Property(e => e.Codigo)
                 .HasColumnName("codigo") // Nombre de la columna en la base de datos
-                .HasColumnType("varchar(20)") // Tipo y tamaño de datos según tus requisitos
+                .HasColumnType("varchar(50)") // Tipo y tamaño de datos según tus requisitos
                 .IsRequired();
 
             entity.Property(e => e.Descripcion)
                 .HasColumnName("descripcion") // Nombre de la columna en la base de datos
-                .HasColumnType("varchar(200)") // Tipo y tamaño de datos según tus requisitos
-                .IsRequired();
+                .HasColumnType("varchar(255)"); // Tipo y tamaño de datos según tus requisitos
 
-            // Relación con Empresa (uno a muchos)
-            entity.HasMany(e => e.Empresas)
-                .WithOne(p => p.IdTipoEmpresaNavigation)
-                .HasForeignKey(e => e.IdTipoEmpresa)
+            // Relación con Servicio (uno a muchos)
+            entity.HasMany(ts => ts.Servicios)
+                .WithOne(s => s.TipoServicio)
+                .HasForeignKey(s => s.IdTipoServicio)
                 .OnDelete(DeleteBehavior.Restrict) // 
-                .HasConstraintName("tipoempresa_empresafk");
+                .HasConstraintName("servicio_tipo_servicio_fk");
 
             // 
             entity.Property(e => e.FechaCreacionUTC)
@@ -55,6 +55,6 @@ namespace Datos.AplicationDB.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<TipoEmpresa> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<TipoServicio> entity);
     }
 }
