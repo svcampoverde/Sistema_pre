@@ -2,7 +2,7 @@
 
 namespace Datos.Models
 {
-    public partial class Ciudad : BaseEntity<int>
+    public partial class Ciudad  
     {
         public Ciudad()
         {
@@ -11,8 +11,7 @@ namespace Datos.Models
             Personas = new HashSet<Persona>();
             Proveedors = new HashSet<Proveedor>();
         }
-
-        public new int Id { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public int IdProvincia { get; set; }
         public virtual Provincia ProvinciaNavigation { get; set; } // Corregido a ProvinciaNavigation

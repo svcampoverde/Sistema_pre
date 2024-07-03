@@ -14,6 +14,7 @@ namespace Datos.AplicationDB
             : base(options)
         {
             Database.Migrate();
+
         }
 
         public virtual DbSet<Banco> Bancos { get; set; }
@@ -39,7 +40,7 @@ namespace Datos.AplicationDB
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SistemapContext).Assembly);
- 
+  
             OnModelCreatingPartial(modelBuilder);
         }
 
@@ -57,5 +58,21 @@ namespace Datos.AplicationDB
 
             return base.SaveChanges();
         }
+
+        //public void Seed()
+        //{
+        //    var excel = @"Recursos\FileExcelSeeder\ProvinciasCiudades.xlsx";
+        //    if (!Provincias.Any())
+        //    {
+        //        Provincias.AddRange(ExcelLoader.LoadProvinciasFromExcel(excel));
+        //        SaveChanges();
+        //    }
+
+        //    if (!Ciudads.Any())
+        //    {
+        //        Ciudads.AddRange(ExcelLoader.LoadCiudadesFromExcel(excel));
+        //        SaveChanges();
+        //    }
+        //}
     }
 }

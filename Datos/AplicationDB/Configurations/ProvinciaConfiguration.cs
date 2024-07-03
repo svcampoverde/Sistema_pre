@@ -1,4 +1,5 @@
 ﻿using Datos.Models;
+using Datos.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -27,7 +28,7 @@ namespace Datos.AplicationDB.Configurations
                 .WithOne(e => e.ProvinciaNavigation)
                 .HasForeignKey(e=>e.IdProvincia)
                 ;
-             
+            entity.SeedProvincias();
             OnConfigurePartial(entity);
         }
 
