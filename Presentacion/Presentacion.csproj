@@ -15,6 +15,9 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,14 +29,11 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -197,6 +197,7 @@
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.3.0.0\lib\netstandard2.0\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
@@ -217,6 +218,9 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="ReaLTaiizor, Version=3.7.8.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReaLTaiizor.3.7.8.2\lib\net472\ReaLTaiizor.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -348,6 +352,12 @@
     <Compile Include="btnpersonalizados\TextBoxPersonalizado.Designer.cs">
       <DependentUpon>TextBoxPersonalizado.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmIPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmIPrincipal.Designer.cs">
+      <DependentUpon>FrmIPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -372,6 +382,24 @@
     <Compile Include="ModuloLogin\RecuperarContraseña.Designer.cs">
       <DependentUpon>RecuperarContraseña.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuloPresupuesto\FrmListarPresupuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloPresupuesto\FrmListarPresupuesto.Designer.cs">
+      <DependentUpon>FrmListarPresupuesto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloPresupuesto\FrmRegistrarPresupuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloPresupuesto\FrmRegistrarPresupuesto.Designer.cs">
+      <DependentUpon>FrmRegistrarPresupuesto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloProvincia\FrmProvincia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloProvincia\FrmProvincia.Designer.cs">
+      <DependentUpon>FrmProvincia.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModuloRolusuario\BuscarRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -390,31 +418,17 @@
     <Compile Include="ModuloRolusuario\FRMRol.Designer.cs">
       <DependentUpon>FRMRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FRMPrincipal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FRMPrincipal.Designer.cs">
-      <DependentUpon>FRMPrincipal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ModuloProvincia\FrmBuscarProvincia.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ModuloProvincia\FrmBuscarProvincia.Designer.cs">
-      <DependentUpon>FrmBuscarProvincia.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ModuloProvincia\FrmProvincia.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ModuloProvincia\FrmProvincia.Designer.cs">
-      <DependentUpon>FrmProvincia.cs</DependentUpon>
-    </Compile>
     <Compile Include="ModuloUsuario\BuscarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ModuloUsuario\BuscarUsuario.Designer.cs">
       <DependentUpon>BuscarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloUsuario\FrmModificarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloUsuario\FrmModificarUsuario.Designer.cs">
+      <DependentUpon>FrmModificarUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="ModuloUsuario\FrmRegistrarUsuario.cs">
       <SubType>Form</SubType>
@@ -422,8 +436,13 @@
     <Compile Include="ModuloUsuario\FrmRegistrarUsuario.Designer.cs">
       <DependentUpon>FrmRegistrarUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="btnpersonalizados\TextBoxPersonalizado.resx">
       <DependentUpon>TextBoxPersonalizado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmIPrincipal.resx">
+      <DependentUpon>FrmIPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
@@ -437,6 +456,15 @@
     <EmbeddedResource Include="ModuloLogin\RecuperarContraseña.resx">
       <DependentUpon>RecuperarContraseña.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModuloPresupuesto\FrmListarPresupuesto.resx">
+      <DependentUpon>FrmListarPresupuesto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloPresupuesto\FrmRegistrarPresupuesto.resx">
+      <DependentUpon>FrmRegistrarPresupuesto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloProvincia\FrmProvincia.resx">
+      <DependentUpon>FrmProvincia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModuloRolusuario\BuscarRol.resx">
       <DependentUpon>BuscarRol.cs</DependentUpon>
     </EmbeddedResource>
@@ -445,6 +473,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloRolusuario\FRMRol.resx">
       <DependentUpon>FRMRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloUsuario\BuscarUsuario.resx">
+      <DependentUpon>BuscarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloUsuario\FrmModificarUsuario.resx">
+      <DependentUpon>FrmModificarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloUsuario\FrmRegistrarUsuario.resx">
+      <DependentUpon>FrmRegistrarUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -456,21 +493,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="FRMPrincipal.resx">
-      <DependentUpon>FRMPrincipal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModuloProvincia\FrmBuscarProvincia.resx">
-      <DependentUpon>FrmBuscarProvincia.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModuloProvincia\FrmProvincia.resx">
-      <DependentUpon>FrmProvincia.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModuloUsuario\BuscarUsuario.resx">
-      <DependentUpon>BuscarUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModuloUsuario\FrmRegistrarUsuario.resx">
-      <DependentUpon>FrmRegistrarUsuario.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -517,6 +539,42 @@
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delicious.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\homes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\module.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\budget.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\budgeting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maximize-size.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maximize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\draw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

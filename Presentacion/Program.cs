@@ -21,7 +21,7 @@ namespace Presentacion
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Resolver el formulario principal con Unity
-            var form = UnityConfig.Container.Resolve<FRMPrincipal>();
+            var form = UnityConfig.Container.Resolve<FrmIPrincipal>();
             Application.Run(form);
             // Application.Run(new FRMPrincipal());
         }
