@@ -61,6 +61,11 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("datetime")
                 .IsRequired();
 
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+
             // Relaciones con otras entidades
             entity.HasOne(d => d.Persona)
                 .WithMany()
@@ -102,11 +107,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
 
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
-
+    
             entity.HasQueryFilter(e => e.Activo);
             // 
             OnConfigurePartial(entity);

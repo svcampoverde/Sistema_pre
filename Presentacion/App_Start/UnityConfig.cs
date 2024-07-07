@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Presentacion.ModuloProvincia;
 using Presentacion.ModuloRolusuario;
 using Presentacion.ModuloUsuario;
+using Presentacion.Servicio;
 using System;
 using System.Web.UI.WebControls;
 using Unity;
@@ -26,11 +27,18 @@ namespace Presentacion
         public static void RegisterTypes(IUnityContainer container)
         {
             var optionsBuilder = new DbContextOptionsBuilder<SistemapContext>()
-             .UseMySQL("Server=localhost;Database=sistemap;User=root;Password=Kawasaki2512;");
+                .UseMySQL("Server=localhost;Database=sistemap;User=root;Password=Kawasaki2512;", e =>
+                {
+                    e.MigrationsAssembly(typeof(SistemapContext).Assembly.FullName);
+                });
 
+            // Registrar DbContextOptions para inyección de dependencias
             container.RegisterInstance(optionsBuilder.Options);
-            container.RegisterType<SistemapContext>(new HierarchicalLifetimeManager());
 
+            // Registrar SistemapContext con ciclo de vida adecuado
+            container.RegisterType<SistemapContext>();
+
+            // Registrar otros servicios y formularios
             container.RegisterType<BuscarRol>();
             container.RegisterType<FrmRegistrarUsuario>();
             container.RegisterType<FRMPrincipal>();
@@ -40,8 +48,10 @@ namespace Presentacion
             container.RegisterType<FrmProvincia>();
             container.RegisterType<Login>();
             container.RegisterType<BuscarUsuario>();
+            container.RegisterType<FrmServicio>();
             container.RegisterTypes();
         }
+
     }
 }
 

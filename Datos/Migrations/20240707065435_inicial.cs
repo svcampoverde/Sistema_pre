@@ -9,14 +9,14 @@ namespace Datos.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "banco",
+                name: "bancos",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     nombre = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     direccion = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
@@ -27,14 +27,31 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "categoria",
+                name: "categorias_atributo",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Activo = table.Column<bool>(nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    codigo = table.Column<string>(type: "varchar(50)", nullable: false),
+                    descripcion = table.Column<string>(type: "nvarchar(200)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_categorias_atributo", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "categorias_producto",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
+                    fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     codigo = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(200)", nullable: true)
                 },
@@ -49,9 +66,9 @@ namespace Datos.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Activo = table.Column<bool>(nullable: false),
                     FechaCreacionUTC = table.Column<DateTime>(nullable: false),
                     FechaModificacionUTC = table.Column<DateTime>(nullable: false),
-                    Activo = table.Column<bool>(nullable: false),
                     Codigo = table.Column<string>(nullable: true),
                     Nombre = table.Column<string>(nullable: true),
                     Descripcion = table.Column<string>(nullable: true)
@@ -80,9 +97,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     codigo = table.Column<string>(type: "nvarchar(70)", nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(200)", nullable: false)
                 },
@@ -92,14 +109,31 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tipo_producto",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
+                    fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    codigo = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    descripcion = table.Column<string>(type: "nvarchar(200)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PRIMARY", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tipo_servicio",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     codigo = table.Column<string>(type: "varchar(50)", nullable: false),
                     descripcion = table.Column<string>(type: "varchar(255)", nullable: true)
                 },
@@ -114,9 +148,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     codigo = table.Column<string>(type: "varchar(20)", nullable: false),
                     descripcion = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
@@ -131,9 +165,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     codigo = table.Column<string>(type: "varchar(20)", nullable: false),
                     descripcion = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
@@ -143,32 +177,25 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "producto",
+                name: "atributos",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
-                    descripcion = table.Column<string>(type: "nvarchar(200)", nullable: false),
-                    precio = table.Column<float>(type: "float", nullable: false),
-                    idCategoria = table.Column<int>(type: "int", nullable: false),
-                    CategoriaId = table.Column<int>(nullable: true)
+                    nombre = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    unidades = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    fk_categoria_atributo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PRIMARY", x => x.id);
+                    table.PrimaryKey("PK_atributos", x => x.id);
                     table.ForeignKey(
-                        name: "FK_producto_categoria_CategoriaId",
-                        column: x => x.CategoriaId,
-                        principalTable: "categoria",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "producto_categoriafk",
-                        column: x => x.idCategoria,
-                        principalTable: "categoria",
+                        name: "categoria_atributo_fk",
+                        column: x => x.fk_categoria_atributo,
+                        principalTable: "categorias_atributo",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -194,15 +221,45 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "productos",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Activo = table.Column<bool>(nullable: false),
+                    FechaCreacionUTC = table.Column<DateTime>(nullable: false),
+                    FechaModificacionUTC = table.Column<DateTime>(nullable: false),
+                    nombre = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    precio = table.Column<float>(type: "float", nullable: false),
+                    fk_categoria = table.Column<int>(type: "int", nullable: false),
+                    fk_tipo_producto = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_productos", x => x.id);
+                    table.ForeignKey(
+                        name: "producto_categoria_producto_fk",
+                        column: x => x.fk_categoria,
+                        principalTable: "categorias_producto",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "producto_tipoproducto_fk",
+                        column: x => x.fk_tipo_producto,
+                        principalTable: "tipo_producto",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "servicio",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
-                    Codigo = table.Column<string>(nullable: true),
                     descripcion = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     IdTipoServicio = table.Column<int>(nullable: false)
                 },
@@ -223,9 +280,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    FechaCreacionUTC = table.Column<DateTime>(nullable: false),
-                    FechaModificacionUTC = table.Column<DateTime>(nullable: false),
-                    Activo = table.Column<bool>(nullable: false),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
+                    fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     numcuenta = table.Column<string>(type: "nvarchar(80)", nullable: false),
                     idBanco = table.Column<int>(type: "int", nullable: false),
                     idTipocuenta = table.Column<int>(type: "int", nullable: false)
@@ -236,7 +293,7 @@ namespace Datos.Migrations
                     table.ForeignKey(
                         name: "banco_cuentafk",
                         column: x => x.idBanco,
-                        principalTable: "banco",
+                        principalTable: "bancos",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -253,9 +310,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     telefono = table.Column<string>(type: "nvarchar(20)", nullable: true),
                     correo = table.Column<string>(type: "nvarchar(100)", nullable: true),
@@ -274,37 +331,14 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Inventario",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    ProductoId = table.Column<int>(nullable: false),
-                    Cantidad = table.Column<int>(nullable: false),
-                    Ubicacion = table.Column<string>(nullable: true),
-                    PrecioCompra = table.Column<decimal>(nullable: false),
-                    PrecioVenta = table.Column<decimal>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Inventario", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Inventario_producto_ProductoId",
-                        column: x => x.ProductoId,
-                        principalTable: "producto",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "evento",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(200)", nullable: false),
                     fecha_evento = table.Column<DateTime>(type: "datetime", nullable: false),
                     promotor = table.Column<string>(type: "nvarchar(100)", nullable: true),
@@ -329,9 +363,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     cedula = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     nombre = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     apellido = table.Column<string>(type: "nvarchar(100)", nullable: false),
@@ -341,23 +375,79 @@ namespace Datos.Migrations
                     correo = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     direccion = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     idCiudad = table.Column<int>(type: "int", nullable: false),
-                    CiudadId1 = table.Column<int>(nullable: true)
+                    CiudadId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PRIMARY", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_persona_ciudad_CiudadId",
+                        column: x => x.CiudadId,
+                        principalTable: "ciudad",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "persona_ciudadfk",
                         column: x => x.idCiudad,
                         principalTable: "ciudad",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "atributos_producto",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
+                    fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fk_producto = table.Column<int>(type: "int", nullable: false),
+                    fk_atributo = table.Column<int>(type: "int", nullable: false),
+                    valor = table.Column<string>(type: "nvarchar(200)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_atributos_producto", x => x.id);
                     table.ForeignKey(
-                        name: "FK_persona_ciudad_CiudadId1",
-                        column: x => x.CiudadId1,
-                        principalTable: "ciudad",
+                        name: "atributo_producto_fk_atributo",
+                        column: x => x.fk_atributo,
+                        principalTable: "atributos",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "atributo_producto_fk_producto",
+                        column: x => x.fk_producto,
+                        principalTable: "productos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "inventario",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
+                    fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    producto_id = table.Column<int>(type: "int", nullable: false),
+                    cantidad = table.Column<int>(type: "int", nullable: false),
+                    ubicacion = table.Column<string>(type: "nvarchar(500)", nullable: true),
+                    precio_compra = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    precio_venta = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PRIMARY", x => x.id);
+                    table.ForeignKey(
+                        name: "inventario_producto_fk",
+                        column: x => x.producto_id,
+                        principalTable: "productos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -366,9 +456,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     codigo = table.Column<int>(type: "int", nullable: false),
                     version = table.Column<float>(type: "float", nullable: false),
                     descripcion = table.Column<string>(type: "nvarchar(200)", nullable: false),
@@ -403,9 +493,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     idPersona = table.Column<int>(type: "int", nullable: false),
                     idCiudad = table.Column<int>(type: "int", nullable: false),
                     idCuenta = table.Column<int>(type: "int", nullable: false),
@@ -492,9 +582,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     idPersona = table.Column<int>(type: "int", nullable: false),
                     empresa = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     sueldo = table.Column<float>(type: "float", nullable: false),
@@ -524,9 +614,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     idPersona = table.Column<int>(type: "int", nullable: false),
                     empresa = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     tiposervicio = table.Column<string>(type: "nvarchar(50)", nullable: true),
@@ -583,14 +673,14 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     IdPersona = table.Column<int>(nullable: false),
                     nombre_usuario = table.Column<string>(type: "varchar(100)", nullable: false),
                     contrasena = table.Column<string>(nullable: false),
                     contrasena_hash = table.Column<byte[]>(nullable: true),
-                    rol_id = table.Column<int>(type: "int", nullable: false)
+                    idRol = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -603,7 +693,7 @@ namespace Datos.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "usuario_rol_fk",
-                        column: x => x.rol_id,
+                        column: x => x.idRol,
                         principalTable: "rol",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
@@ -615,9 +705,9 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    activo = table.Column<ulong>(type: "bit", nullable: false),
                     servicio = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     idServicio = table.Column<int>(type: "int", nullable: false),
                     idProducto = table.Column<int>(type: "int", nullable: false),
@@ -633,9 +723,9 @@ namespace Datos.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "presupuesto_detalle_productofk",
+                        name: "producto_presupuestodetalle_fk_producto",
                         column: x => x.idProducto,
-                        principalTable: "producto",
+                        principalTable: "productos",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -647,35 +737,52 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "categorias_producto",
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                values: new object[,]
+                {
+                    { 1, 1ul, "ELECT", "Electrónicos", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 1ul, "HOME_APPL", "Electrodomésticos", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 1ul, "APPAREL", "Ropa y calzado", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, 1ul, "BEAUTY", "Belleza y cuidado personal", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 1ul, "SPORTS", "Deportes y aire libre", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, 1ul, "TOYS", "Juguetes y juegos", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, 1ul, "BOOKS", "Libros y audiolibros", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, 1ul, "GROCERY", "Abarrotes y supermercado", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 9, 1ul, "AUTOMOTIVE", "Automotriz", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 10, 1ul, "PET_SUPPLIES", "Suministros para mascotas", new DateTime(2024, 7, 7, 6, 54, 33, 831, DateTimeKind.Utc).AddTicks(7487), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
                 table: "provincias",
                 columns: new[] { "id", "nombre" },
                 values: new object[,]
                 {
-                    { 1, "Azuay" },
-                    { 25, "Zonas No Delimitadas" },
-                    { 24, "Santa Elena" },
-                    { 23, "Santo Domingo de Los Tsáchilas" },
-                    { 22, "Orellana" },
-                    { 21, "Sucumbíos" },
-                    { 20, "Galápagos" },
-                    { 19, "Zamora Chinchipe" },
-                    { 18, "Tungurahua" },
-                    { 17, "Pichincha" },
                     { 16, "Pastaza" },
+                    { 17, "Pichincha" },
+                    { 18, "Tungurahua" },
+                    { 19, "Zamora Chinchipe" },
+                    { 20, "Galápagos" },
+                    { 25, "Zonas No Delimitadas" },
+                    { 22, "Orellana" },
+                    { 23, "Santo Domingo de Los Tsáchilas" },
+                    { 24, "Santa Elena" },
                     { 15, "Napo" },
+                    { 21, "Sucumbíos" },
                     { 14, "Morona Santiago" },
-                    { 12, "Los Rios" },
                     { 11, "Loja" },
-                    { 10, "Imbabura" },
-                    { 9, "Guayas" },
-                    { 8, "Esmeraldas" },
-                    { 7, "El Oro" },
-                    { 6, "Chimborazo" },
-                    { 5, "Cotopaxi" },
-                    { 4, "Carchi" },
-                    { 3, "Cañar" },
+                    { 12, "Los Rios" },
+                    { 1, "Azuay" },
                     { 2, "Bolívar" },
-                    { 13, "Manabi" }
+                    { 13, "Manabi" },
+                    { 4, "Carchi" },
+                    { 5, "Cotopaxi" },
+                    { 3, "Cañar" },
+                    { 7, "El Oro" },
+                    { 8, "Esmeraldas" },
+                    { 9, "Guayas" },
+                    { 10, "Imbabura" },
+                    { 6, "Chimborazo" }
                 });
 
             migrationBuilder.InsertData(
@@ -683,8 +790,87 @@ namespace Datos.Migrations
                 columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
                 values: new object[,]
                 {
-                    { 1, 1ul, "ADM", "Administrador", new DateTime(2024, 7, 3, 6, 10, 33, 454, DateTimeKind.Utc).AddTicks(8756), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1ul, "USEST", "Usuario Estándar", new DateTime(2024, 7, 3, 6, 10, 33, 454, DateTimeKind.Utc).AddTicks(8756), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 9, 1ul, "SUPPORT", "Soporte Técnico", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 15, 1ul, "QA", "Aseguramiento de Calidad", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 14, 1ul, "DEV", "Desarrollador", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 13, 1ul, "CUSTSERV", "Servicio al Cliente", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 12, 1ul, "MARKET", "Marketing", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 10, 1ul, "ANALYST", "Analista", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, 1ul, "IT", "Tecnología de la Información", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 11, 1ul, "PROJMAN", "Gerente de Proyecto", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, 1ul, "ACCT", "Contador", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 1ul, "HR", "Recursos Humanos", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, 1ul, "SALES", "Ventas", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, 1ul, "MNGR", "Gerente", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 1ul, "SUP", "Supervisor", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 1ul, "USER", "Usuario Estándar", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, 1ul, "ADM", "Administrador", new DateTime(2024, 7, 7, 6, 54, 33, 894, DateTimeKind.Utc).AddTicks(7495), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "tipo_producto",
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                values: new object[,]
+                {
+                    { 13, 1ul, "WASHING_MACHINE", "Lavadora", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 14, 1ul, "DRYER", "Secadora", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 15, 1ul, "BLENDER", "Licuadora", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 16, 1ul, "VACUUM_CLEANER", "Aspiradora", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 17, 1ul, "COFFEE_MACHINE", "Cafetera", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 18, 1ul, "TOASTER", "Tostadora", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 19, 1ul, "IRON", "Plancha", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 20, 1ul, "PROJECTOR", "Proyector", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 33, 1ul, "DAIRY", "Productos lácteos", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 32, 1ul, "VEGETABLES", "Verduras", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 12, 1ul, "FRIDGE", "Refrigerador", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 34, 1ul, "BAKERY", "Panadería", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 35, 1ul, "MEAT", "Carne y aves", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 36, 1ul, "SEAFOOD", "Mariscos", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 37, 1ul, "BEVERAGES", "Bebidas", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 38, 1ul, "SNACKS", "Snacks y golosinas", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 39, 1ul, "CONDIMENTS", "Condimentos y salsas", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 31, 1ul, "FRUITS", "Frutas", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 11, 1ul, "MICROWAVE", "Microondas", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 7, 1ul, "HEADPHONES", "Audífonos", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 9, 1ul, "MONITOR", "Monitor", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 8, 1ul, "PRINTER", "Impresora", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, 1ul, "CAMERA", "Cámara Fotográfica", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 1ul, "TV", "TV", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, 1ul, "SMARTWATCH", "Smartwatch", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 1ul, "TABLET", "Tablet", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 1ul, "LAPTOP", "Laptop", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, 1ul, "SMARTPHONE", "Smartphone", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 40, 1ul, "CANNED_FOODS", "Alimentos enlatados", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 10, 1ul, "ROUTER", "Router", new DateTime(2024, 7, 7, 6, 54, 33, 909, DateTimeKind.Utc).AddTicks(7496), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "tipo_servicio",
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                values: new object[] { 1, 1ul, "CAMERINO", "Camerino", new DateTime(2024, 7, 7, 6, 54, 33, 912, DateTimeKind.Utc).AddTicks(7517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "tipocuenta",
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                values: new object[,]
+                {
+                    { 5, 1ul, "IP", "Cuenta de Inversión Personal", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
+                    { 4, 1ul, "MM", "Cuenta de Mercado Monetario", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
+                    { 3, 1ul, "PF", "Cuenta a Plazo Fijo", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
+                    { 2, 1ul, "CC", "Cuenta Corriente", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
+                    { 1, 1ul, "CA", "Cuenta de Ahorros", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "tipoempresa",
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                values: new object[,]
+                {
+                    { 2, 1ul, "SRL", "Sociedad de Responsabilidad Limitada", new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492), new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492) },
+                    { 1, 1ul, "SA", "Sociedad Anónima", new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492), new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492) },
+                    { 5, 1ul, "COOP", "Cooperativa", new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492), new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492) },
+                    { 4, 1ul, "SC", "Sociedad en Comandita", new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492), new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492) },
+                    { 3, 1ul, "SC", "Sociedad Colectiva", new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492), new DateTime(2024, 7, 7, 6, 54, 33, 904, DateTimeKind.Utc).AddTicks(7492) }
                 });
 
             migrationBuilder.InsertData(
@@ -918,6 +1104,21 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_atributos_fk_categoria_atributo",
+                table: "atributos",
+                column: "fk_categoria_atributo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_atributos_producto_fk_atributo",
+                table: "atributos_producto",
+                column: "fk_atributo");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_atributos_producto_fk_producto",
+                table: "atributos_producto",
+                column: "fk_producto");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ciudad_idProvincia",
                 table: "ciudad",
                 column: "idProvincia");
@@ -1003,20 +1204,20 @@ namespace Datos.Migrations
                 column: "IdCiudad");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventario_ProductoId",
-                table: "Inventario",
-                column: "ProductoId",
+                name: "IX_inventario_producto_id",
+                table: "inventario",
+                column: "producto_id",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_persona_CiudadId",
+                table: "persona",
+                column: "CiudadId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_persona_idCiudad",
                 table: "persona",
                 column: "idCiudad");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_persona_CiudadId1",
-                table: "persona",
-                column: "CiudadId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_presupuesto_EventoId",
@@ -1044,14 +1245,14 @@ namespace Datos.Migrations
                 column: "idServicio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_producto_CategoriaId",
-                table: "producto",
-                column: "CategoriaId");
+                name: "IX_productos_fk_categoria",
+                table: "productos",
+                column: "fk_categoria");
 
             migrationBuilder.CreateIndex(
-                name: "IX_producto_idCategoria",
-                table: "producto",
-                column: "idCategoria");
+                name: "IX_productos_fk_tipo_producto",
+                table: "productos",
+                column: "fk_tipo_producto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_proveedor_idCiudad",
@@ -1095,13 +1296,16 @@ namespace Datos.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_usuario_rol_id",
+                name: "IX_usuario_idRol",
                 table: "usuario",
-                column: "rol_id");
+                column: "idRol");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "atributos_producto");
+
             migrationBuilder.DropTable(
                 name: "cliente");
 
@@ -1109,7 +1313,7 @@ namespace Datos.Migrations
                 name: "empleado");
 
             migrationBuilder.DropTable(
-                name: "Inventario");
+                name: "inventario");
 
             migrationBuilder.DropTable(
                 name: "presupuesto_detalle");
@@ -1121,10 +1325,13 @@ namespace Datos.Migrations
                 name: "usuario");
 
             migrationBuilder.DropTable(
+                name: "atributos");
+
+            migrationBuilder.DropTable(
                 name: "presupuesto");
 
             migrationBuilder.DropTable(
-                name: "producto");
+                name: "productos");
 
             migrationBuilder.DropTable(
                 name: "cuenta");
@@ -1145,13 +1352,19 @@ namespace Datos.Migrations
                 name: "rol");
 
             migrationBuilder.DropTable(
+                name: "categorias_atributo");
+
+            migrationBuilder.DropTable(
                 name: "evento");
 
             migrationBuilder.DropTable(
-                name: "categoria");
+                name: "categorias_producto");
 
             migrationBuilder.DropTable(
-                name: "banco");
+                name: "tipo_producto");
+
+            migrationBuilder.DropTable(
+                name: "bancos");
 
             migrationBuilder.DropTable(
                 name: "tipocuenta");

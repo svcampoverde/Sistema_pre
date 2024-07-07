@@ -38,7 +38,7 @@ namespace Presentacion.ModuloUsuario
                 }
                 cbRol.DataSource = null;
                 cbRol.DataSource = list;
-                cbRol.DisplayMember = "RolUsuario";
+                cbRol.DisplayMember = "Descripcion";
                 cbRol.ValueMember = "Id";
             }
             catch (ExceptionSistema ex)

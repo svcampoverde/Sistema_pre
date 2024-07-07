@@ -40,8 +40,20 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("direccion")
                 .HasColumnType("nvarchar(200)");
 
-          
-  
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+
+            entity.Property(e => e.FechaCreacionUTC)
+               .HasColumnName("fecha_creacion_utc")
+               .HasColumnType("datetime")
+               .IsRequired();
+
+            entity.Property(e => e.FechaModificacionUTC)
+                .HasColumnName("fecha_modificacion_utc")
+                .HasColumnType("datetime");
+
             entity.HasOne(e => e.CiudadNavegation)
                 .WithMany(e=>e.Eventos)
                 .HasForeignKey(e => e.IdCiudad)
@@ -56,10 +68,6 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
 
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
 
             entity.HasQueryFilter(e => e.Activo);
         }

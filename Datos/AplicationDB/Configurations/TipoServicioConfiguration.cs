@@ -1,4 +1,5 @@
 ﻿using Datos.Models;
+using Datos.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -28,30 +29,26 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("descripcion") // Nombre de la columna en la base de datos
                 .HasColumnType("varchar(255)"); // Tipo y tamaño de datos según tus requisitos
 
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+
             // Relación con Servicio (uno a muchos)
             entity.HasMany(ts => ts.Servicios)
                 .WithOne(s => s.TipoServicio)
                 .HasForeignKey(s => s.IdTipoServicio)
                 .OnDelete(DeleteBehavior.Restrict) // 
                 .HasConstraintName("servicio_tipo_servicio_fk");
-
-            // 
             entity.Property(e => e.FechaCreacionUTC)
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
                 .IsRequired();
-
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
-
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
-
             entity.HasQueryFilter(e => e.Activo);
-            // 
+            entity.SeedTipoServicio();
             OnConfigurePartial(entity);
         }
 

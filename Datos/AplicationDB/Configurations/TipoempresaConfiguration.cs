@@ -1,4 +1,5 @@
 ﻿using Datos.Models;
+using Datos.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -28,6 +29,11 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("varchar(200)") // Tipo y tamaño de datos según tus requisitos
                 .IsRequired();
 
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+
             // Relación con Empresa (uno a muchos)
             entity.HasMany(e => e.Empresas)
                 .WithOne(p => p.IdTipoEmpresaNavigation)
@@ -44,14 +50,9 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
-
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
-
+ 
             entity.HasQueryFilter(e => e.Activo);
-            // 
+            entity.SeedTipoEmpresa();
             OnConfigurePartial(entity);
         }
 

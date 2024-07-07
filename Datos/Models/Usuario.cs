@@ -11,7 +11,7 @@ namespace Datos.Models
         public string NombreUsuario { get; set; }
         public string Contrasena { get; set; }
         public byte[] ContrasenaHash { get; set; }
-        public int RolId { get; set; }
+        public int IdRol { get; set; }
 
         public virtual Persona Persona { get; set; }
         public virtual Rol Rol { get; set; }

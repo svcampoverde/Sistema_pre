@@ -9,7 +9,6 @@ namespace Datos.Models
             PresupuestoDetalles = new HashSet<PresupuestoDetalle>();
             Proveedores = new HashSet<Proveedor>();
         }
-        public string Codigo { get; set; }
 
         public string Descripcion { get; set; }
         public int IdTipoServicio { get; set; }

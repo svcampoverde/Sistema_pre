@@ -40,6 +40,20 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("int")
                 .IsRequired();
 
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+
+            entity.Property(e => e.FechaCreacionUTC)
+                           .HasColumnName("fecha_creacion_utc")
+                           .HasColumnType("datetime")
+                           .IsRequired();
+
+            entity.Property(e => e.FechaModificacionUTC)
+                .HasColumnName("fecha_modificacion_utc")
+                .HasColumnType("datetime");
+
             // Relación con TipoEmpresa
             entity.HasOne(d => d.IdTipoEmpresaNavigation)
                 .WithMany(e=>e.Empresas)
@@ -56,11 +70,6 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
-
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
 
             entity.HasQueryFilter(e => e.Activo);
             // 

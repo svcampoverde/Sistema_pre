@@ -53,19 +53,16 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("direccion")
                 .HasColumnType("nvarchar(200)");
 
-            entity.Property(e => e.CiudadId)
+            entity.Property(e => e.IdCiudad)
                 .HasColumnName("idCiudad")
                 .HasColumnType("int")
                 .IsRequired();
 
-            // Relaciones con otras entidades
-            entity.HasOne(d => d.CiudadNavegation)
-                .WithMany()
-                .HasForeignKey(d => d.CiudadId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("persona_ciudadfk");
-
-            // 
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+            entity.HasQueryFilter(e => e.Activo);
             entity.Property(e => e.FechaCreacionUTC)
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
@@ -74,14 +71,12 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
-
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
-
-            entity.HasQueryFilter(e => e.Activo);
-            // 
+            // Relaciones con otras entidades
+            entity.HasOne(d => d.CiudadNavegation)
+                .WithMany()
+                .HasForeignKey(d => d.IdCiudad)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("persona_ciudadfk");
             OnConfigurePartial(entity);
         }
 

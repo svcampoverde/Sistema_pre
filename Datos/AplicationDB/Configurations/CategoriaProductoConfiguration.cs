@@ -1,14 +1,15 @@
 ﻿using Datos.Models;
+using Datos.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Datos.AplicationDB.Configurations
 {
-    public partial class CategoriaConfiguration : IEntityTypeConfiguration<Categoria>
+    public partial class CategoriaProductoConfiguration : IEntityTypeConfiguration<CategoriaProducto>
     {
-        public void Configure(EntityTypeBuilder<Categoria> entity)
+        public void Configure(EntityTypeBuilder<CategoriaProducto> entity)
         {
-            entity.ToTable("categoria"); // 
+            entity.ToTable("categorias_producto"); // 
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -27,14 +28,13 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("descripcion")
                 .HasColumnType("nvarchar(200)"); // Ajusta según la longitud necesaria
 
-            // Relación uno a muchos con Producto
-            entity.HasMany(e => e.Productos)
-                .WithOne(e => e.IdCategoriaNavigation)
-                .HasForeignKey(e => e.IdCategoria)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("categoria_productofk");
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
 
-            // 
+            entity.HasQueryFilter(e => e.Activo);
+
             entity.Property(e => e.FechaCreacionUTC)
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
@@ -44,16 +44,17 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
 
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
+            // Relación uno a muchos con Producto
+            entity.HasMany(e => e.Productos)
+                .WithOne(e => e.CategoriaProducto)
+                .HasForeignKey(e => e.IdCategoriaProducto)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("categoria_productofk");
 
-            entity.HasQueryFilter(e => e.Activo);
-            // 
+            entity.SeedCategoriaProducto();
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Categoria> entity);
+        partial void OnConfigurePartial(EntityTypeBuilder<CategoriaProducto> entity);
     }
 }

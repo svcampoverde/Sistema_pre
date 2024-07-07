@@ -24,6 +24,11 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("nvarchar(200)") 
                 .IsRequired();
 
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+
             // Relación con PresupuestoDetalle (uno a muchos)
             entity.HasMany(e => e.PresupuestoDetalles)
                 .WithOne(p => p.IdservicioNavigation)
@@ -47,11 +52,6 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
-
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
 
             entity.HasQueryFilter(e => e.Activo);
             // 

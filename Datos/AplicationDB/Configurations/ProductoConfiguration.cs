@@ -8,56 +8,57 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Producto> entity)
         {
-            entity.ToTable("producto"); // 
+            entity.ToTable("productos"); // Nombre de la tabla en la base de datos
 
-            entity.HasKey(e => e.Id)
-                .HasName("PRIMARY");
+            entity.HasKey(e => e.Id); // Definición de la clave primaria
 
             entity.Property(e => e.Id)
-                .HasColumnName("id") // Nombre de la columna en minúsculas y específico para Producto
+                .HasColumnName("id")
                 .HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd(); // Configuración de la columna Id
 
             entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
+                .HasColumnName("nombre")
                 .HasColumnType("nvarchar(200)")
-                .IsRequired();
+                .IsRequired(); // Configuración de la columna Descripcion
 
             entity.Property(e => e.Precio)
                 .HasColumnName("precio")
                 .HasColumnType("float")
-                .IsRequired();
+                .IsRequired(); // Configuración de la columna Precio
 
-            entity.Property(e => e.IdCategoria)
-                .HasColumnName("idCategoria")
+            entity.Property(e => e.IdCategoriaProducto)
+                .HasColumnName("fk_categoria")
                 .HasColumnType("int")
-                .IsRequired();
+                .IsRequired(); // Configuración de la columna IdCategoriaProducto
 
-            // Relación con Categoria
-            entity.HasOne(d => d.IdCategoriaNavigation)
-                .WithMany()
-                .HasForeignKey(d => d.IdCategoria)
+            entity.Property(e => e.IdTipoProducto)
+                .HasColumnName("fk_tipo_producto")
+                .HasColumnType("int"); // Configuración de la columna IdTipoProducto (nullable)
+
+            // Relación uno a muchos con PresupuestoDetalle
+            entity.HasMany(e => e.PresupuestoDetalles)
+                .WithOne(p => p.IdproductoNavigation)
+                .HasForeignKey(e => e.IdProducto)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("producto_categoriafk");
+                .HasConstraintName("producto_presupuestodetalle_fk_producto"); // Relación con PresupuestoDetalle, configuración de la clave externa
 
-            // 
-            entity.Property(e => e.FechaCreacionUTC)
-                .HasColumnName("fecha_creacion_utc")
-                .HasColumnType("datetime")
-                .IsRequired();
+            // Relación muchos a uno con CategoriaProducto
+            entity.HasOne(e => e.CategoriaProducto)
+                .WithMany(cp => cp.Productos)
+                .HasForeignKey(e => e.IdCategoriaProducto)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("producto_categoria_producto_fk"); // Relación con CategoriaProducto, configuración de la clave externa
 
-            entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+            // Relación muchos a uno con TipoProducto (opcional)
+            entity.HasOne(e => e.TipoProducto)
+                .WithMany(tp => tp.Productos)
+                .HasForeignKey(e => e.IdTipoProducto)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("producto_tipo_producto_fk"); // Relación con TipoProducto, configuración de la clave externa (opcional)
 
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
-
-            entity.HasQueryFilter(e => e.Activo);
-            // 
+            // Llamada a método parcial para configuración adicional
             OnConfigurePartial(entity);
         }
 

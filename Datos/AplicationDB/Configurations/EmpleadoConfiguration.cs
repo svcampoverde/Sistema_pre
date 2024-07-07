@@ -42,6 +42,19 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("int")
                 .IsRequired();
 
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+            entity.Property(e => e.FechaCreacionUTC)
+               .HasColumnName("fecha_creacion_utc")
+               .HasColumnType("datetime")
+               .IsRequired();
+
+            entity.Property(e => e.FechaModificacionUTC)
+                .HasColumnName("fecha_modificacion_utc")
+                .HasColumnType("datetime");
+
             // Relaciones con otras entidades
             entity.HasOne(d => d.IdPersonaNavigation)
                 .WithMany(e=>e.Empleados)
@@ -54,22 +67,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasForeignKey(d => d.IdCiudad)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("empleado_ciudadfk");
-
-            // 
-            entity.Property(e => e.FechaCreacionUTC)
-                .HasColumnName("fecha_creacion_utc")
-                .HasColumnType("datetime")
-                .IsRequired();
-
-            entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
-
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
-
+ 
             entity.HasQueryFilter(e => e.Activo);
             // 
             OnConfigurePartial(entity);

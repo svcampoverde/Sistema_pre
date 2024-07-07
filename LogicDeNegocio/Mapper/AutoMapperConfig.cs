@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using LogicDeNegocio.Mapper.Profiles;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace LogicDeNegocio.Mapper
 {
@@ -14,9 +11,18 @@ namespace LogicDeNegocio.Mapper
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<MappingProfile>();
-                // Agrega más perfiles si es necesario
+                // Obtiene el ensamblado donde están los perfiles
+                var profilesAssembly = Assembly.GetExecutingAssembly();
+
+                // Encuentra todas las clases que heredan de Profile
+                var profiles = profilesAssembly.GetTypes()
+                    .Where(t => typeof(Profile).IsAssignableFrom(t) && !t.IsAbstract);
+                foreach (var profile in profiles)
+                {
+                    cfg.AddProfile(Activator.CreateInstance(profile) as Profile);
+                }
             });
+
             return config.CreateMapper();
         }
     }

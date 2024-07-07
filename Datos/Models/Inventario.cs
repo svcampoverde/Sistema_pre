@@ -1,8 +1,7 @@
 ﻿namespace Datos.Models
 {
-    public partial class Inventario
+    public partial class Inventario : BaseEntity<int>
     {
-        public int Id { get; set; }
         public int ProductoId { get; set; }
         public int Cantidad { get; set; }
         public string Ubicacion { get; set; }

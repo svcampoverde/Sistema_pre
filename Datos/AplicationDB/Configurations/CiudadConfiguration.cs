@@ -28,6 +28,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("int")
                 .IsRequired();
 
+ 
             // Relación con la tabla Provincia
             entity.HasOne(e => e.ProvinciaNavigation)
                 .WithMany()

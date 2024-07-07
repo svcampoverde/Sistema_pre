@@ -19,7 +19,7 @@ namespace Datos.AplicationDB
 
         public virtual DbSet<Banco> Bancos { get; set; }
         public virtual DbSet<Presupuesto> Cabpresupuestos { get; set; }
-        public virtual DbSet<Categoria> Categoria { get; set; }
+        public virtual DbSet<CategoriaProducto> Categoria { get; set; }
         public virtual DbSet<Ciudad> Ciudads { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Cuenta> Cuenta { get; set; }

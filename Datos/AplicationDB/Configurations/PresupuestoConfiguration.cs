@@ -17,7 +17,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("id") // Nombre de la columna en minúsculas y específico para Presupuesto
                 .HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.Codigo)
                 .HasColumnName("codigo")
@@ -63,6 +63,19 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("idevento")
                 .HasColumnType("int")
                 .IsRequired();
+            entity.Property(e => e.Activo)
+             .HasColumnName("activo")
+             .HasColumnType("bit")
+             .IsRequired();
+            entity.Property(e => e.FechaCreacionUTC)
+                 .HasColumnName("fecha_creacion_utc")
+                 .HasColumnType("datetime")
+                 .IsRequired();
+
+            entity.Property(e => e.FechaModificacionUTC)
+                .HasColumnName("fecha_modificacion_utc")
+                .HasColumnType("datetime");
+
 
             // Relación con Evento
             entity.HasOne(d => d.IdeventoNavigation)
@@ -72,19 +85,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasConstraintName("presupuesto_eventofk");
 
             // 
-            entity.Property(e => e.FechaCreacionUTC)
-                .HasColumnName("fecha_creacion_utc")
-                .HasColumnType("datetime")
-                .IsRequired();
 
-            entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
-
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
 
             entity.HasQueryFilter(e => e.Activo);
             // 

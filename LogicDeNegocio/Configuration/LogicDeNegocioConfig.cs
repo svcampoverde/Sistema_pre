@@ -17,8 +17,8 @@ namespace LogicDeNegocio.Configuration
         {
             /// Registrar Servicio de Usuarios
             container.RegisterType<IUserService, UserService>();
-
-
+            /// Registrar Servicio de Servicios
+            container.RegisterType<IServicioServices, ServicioServices>();
             // Registrar AutoMapper
             var mapper = AutoMapperConfig.Initialize();
             container.RegisterInstance(mapper);
@@ -27,6 +27,7 @@ namespace LogicDeNegocio.Configuration
             // Registro de ILogger en Unity
             container.RegisterType<ILoggerFactory, LoggerFactory>(new ContainerControlledLifetimeManager());
             container.RegisterType(typeof(ILogger<>), typeof(Logger<>));
+            
             return container;
 
         }

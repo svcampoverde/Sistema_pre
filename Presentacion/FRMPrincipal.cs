@@ -2,9 +2,12 @@
 using Presentacion.ModuloProvincia;
 using Presentacion.ModuloRolusuario;
 using Presentacion.ModuloUsuario;
+using Presentacion.Servicio;
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 using Unity;
+
 
 namespace Presentacion
 {
@@ -101,6 +104,7 @@ namespace Presentacion
 
         private void cbProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             switch (cbProvincia.SelectedIndex)
             {
                 case 0:
@@ -156,5 +160,37 @@ namespace Presentacion
                 Frm.Show();
             }
         }
+
+        private void panel2_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+
+        }
+
+        private void cbSelectIndexServicio(object sender, EventArgs e)
+        {
+
+        }
+        private void ShowFormInPanel(Form form)
+        {
+            // Limpia el contenido previo del panel
+            PanelContent.Controls.Clear();
+
+            // Ajusta el formulario para ocupar todo el panel
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+
+            // Agrega el formulario al panel y muestra
+            PanelContent.Controls.Add(form);
+            form.Show();
+        }
+
+
+        private void materialButton1_Click(object sender, EventArgs e)
+        {
+            var frmServicio = UnityConfig.Container.Resolve<FrmServicio>();
+            ShowFormInPanel(frmServicio);
+        }
+
     }
 }

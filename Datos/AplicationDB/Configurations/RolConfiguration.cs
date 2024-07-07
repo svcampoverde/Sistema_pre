@@ -31,9 +31,15 @@ namespace Datos.AplicationDB.Configurations
        
             entity.HasMany(e => e.Usuarios)
                 .WithOne(u => u.Rol)
-                .HasForeignKey(u => u.RolId)
-                .OnDelete(DeleteBehavior.Restrict) // 
+                .HasForeignKey(u => u.IdRol)
+                .OnDelete(DeleteBehavior.Restrict)  
                 .HasConstraintName("FK_usuario_rol");
+
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+
 
             // 
             entity.Property(e => e.FechaCreacionUTC)
@@ -44,12 +50,7 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
-
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
-
+ 
             entity.HasQueryFilter(e => e.Activo);
             entity.SeedRol();
             OnConfigurePartial(entity);

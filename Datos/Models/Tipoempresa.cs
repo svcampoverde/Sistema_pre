@@ -11,8 +11,6 @@ namespace Datos.Models
 
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
-
-        // Relación con Empresa (uno a muchos)
         public virtual ICollection<Empresa> Empresas { get; set; }
     }
 }

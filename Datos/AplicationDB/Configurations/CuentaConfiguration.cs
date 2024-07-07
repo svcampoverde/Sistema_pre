@@ -14,7 +14,8 @@ namespace Datos.AplicationDB.Configurations
                 .HasName("PRIMARY");
 
             entity.Property(e => e.Id)
-                .HasColumnName("id").HasColumnType("int")
+                .HasColumnName("id")
+                .HasColumnType("int")
                 .IsRequired()
                 .ValueGeneratedOnAdd(); 
 
@@ -22,7 +23,6 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("numcuenta")
                 .HasColumnType("nvarchar(80)") // Ajusta según la longitud necesaria
                 .IsRequired();
-
 
             entity.Property(e => e.IdBanco)
                 .HasColumnName("idBanco")
@@ -33,6 +33,20 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("idTipocuenta")
                 .HasColumnType("int")
                 .IsRequired();
+
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
+            // 
+            entity.Property(e => e.FechaCreacionUTC)
+                .HasColumnName("fecha_creacion_utc")
+                .HasColumnType("datetime")
+                .IsRequired();
+
+            entity.Property(e => e.FechaModificacionUTC)
+                .HasColumnName("fecha_modificacion_utc")
+                .HasColumnType("datetime");
 
             // Relaciones
             entity.HasOne(e => e.IdBancoNavigation)

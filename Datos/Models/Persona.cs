@@ -19,7 +19,7 @@ namespace Datos.Models
         public string Celular { get; set; }
         public string Correo { get; set; }
         public string Direccion { get; set; }
-        public int CiudadId { get; set; }
+        public int IdCiudad { get; set; }
 
         public virtual Ciudad CiudadNavegation { get; set; }
         public virtual Usuario UsuarioNavegation { get; set; }

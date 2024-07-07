@@ -23,20 +23,19 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("nombre_usuario") // Nombre de la columna en la base de datos
                 .HasColumnType("varchar(100)") // Tipo y tamaño de datos según tus requisitos
                 .IsRequired();
-
             entity.Property(e => e.Contrasena)
                 .HasColumnName("contrasena") // Nombre de la columna en la base de datos
-
                 .IsRequired();
-
             entity.Property(e => e.ContrasenaHash)
                 .HasColumnName("contrasena_hash"); // Ajusta según el tamaño necesario para el hash
-
-            entity.Property(e => e.RolId)
-                .HasColumnName("rol_id") // Nombre de la columna en la base de datos
+            entity.Property(e => e.IdRol)
+                .HasColumnName("idRol") // Nombre de la columna en la base de datos
                 .HasColumnType("int")
                 .IsRequired();
-
+            entity.Property(e => e.Activo)
+                .HasColumnName("activo")
+                .HasColumnType("bit")
+                .IsRequired();
             // Relación con Persona (uno a uno)
             entity.HasOne(d => d.Persona)
                 .WithOne(p => p.UsuarioNavegation)
@@ -47,7 +46,7 @@ namespace Datos.AplicationDB.Configurations
             // Relación con Rol
             entity.HasOne(d => d.Rol)
                 .WithMany(p => p.Usuarios)
-                .HasForeignKey(d => d.RolId)
+                .HasForeignKey(d => d.IdRol)
                 .OnDelete(DeleteBehavior.Restrict) // 
                 .HasConstraintName("usuario_rol_fk");
 
@@ -60,12 +59,7 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
-
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
-
+ 
             entity.HasQueryFilter(e => e.Activo);
             // 
             OnConfigurePartial(entity);

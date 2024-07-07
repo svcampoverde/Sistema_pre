@@ -2,16 +2,15 @@
 
 namespace Datos.Models
 {
-    public partial class Categoria : BaseEntity<int>
+    public partial class TipoProducto : BaseEntity<int>
     {
-        public Categoria()
+        public TipoProducto()
         {
             Productos = new HashSet<Producto>();
         }
 
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
-
         public virtual ICollection<Producto> Productos { get; set; }
     }
 }
