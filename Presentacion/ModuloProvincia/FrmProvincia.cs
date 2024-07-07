@@ -1,5 +1,4 @@
 ﻿using LogicDeNegocio;
-using LogicDeNegocio.provincia;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

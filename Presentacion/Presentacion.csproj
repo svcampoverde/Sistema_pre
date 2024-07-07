@@ -400,18 +400,6 @@
     <Compile Include="ModuloProvincia\FrmProvincia.Designer.cs">
       <DependentUpon>FrmProvincia.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuloRolusuario\BuscarRol.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ModuloRolusuario\BuscarRol.Designer.cs">
-      <DependentUpon>BuscarRol.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ModuloRolusuario\FrmModificarRol.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ModuloRolusuario\FrmModificarRol.Designer.cs">
-      <DependentUpon>FrmModificarRol.cs</DependentUpon>
-    </Compile>
     <Compile Include="ModuloRolusuario\FRMRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -464,12 +452,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloProvincia\FrmProvincia.resx">
       <DependentUpon>FrmProvincia.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModuloRolusuario\BuscarRol.resx">
-      <DependentUpon>BuscarRol.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModuloRolusuario\FrmModificarRol.resx">
-      <DependentUpon>FrmModificarRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloRolusuario\FRMRol.resx">
       <DependentUpon>FRMRol.cs</DependentUpon>

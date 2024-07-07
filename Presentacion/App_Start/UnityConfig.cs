@@ -31,11 +31,11 @@ namespace Presentacion
             container.RegisterInstance(optionsBuilder.Options);
             container.RegisterType<SistemapContext>(new HierarchicalLifetimeManager());
 
-            container.RegisterType<BuscarRol>();
+           // container.RegisterType<BuscarRol>();
             container.RegisterType<FrmRegistrarUsuario>();
             container.RegisterType<FrmIPrincipal>();
             container.RegisterType<FRMRol>();
-            container.RegisterType<FrmModificarRol>();;
+           // container.RegisterType<FrmModificarRol>();;
             container.RegisterType<FrmProvincia>();
             container.RegisterType<Login>();
             container.RegisterType<BuscarUsuario>();
