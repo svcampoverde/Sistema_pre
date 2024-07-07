@@ -394,6 +394,12 @@
     <Compile Include="ModuloPresupuesto\FrmRegistrarPresupuesto.Designer.cs">
       <DependentUpon>FrmRegistrarPresupuesto.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuloProducto\FrmCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloProducto\FrmCategoria.Designer.cs">
+      <DependentUpon>FrmCategoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModuloProvincia\FrmProvincia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -405,6 +411,12 @@
     </Compile>
     <Compile Include="ModuloRolusuario\FRMRol.Designer.cs">
       <DependentUpon>FRMRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloServicio\FrmServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloServicio\FrmServicio.Designer.cs">
+      <DependentUpon>FrmServicio.cs</DependentUpon>
     </Compile>
     <Compile Include="ModuloUsuario\BuscarUsuario.cs">
       <SubType>Form</SubType>
@@ -450,11 +462,17 @@
     <EmbeddedResource Include="ModuloPresupuesto\FrmRegistrarPresupuesto.resx">
       <DependentUpon>FrmRegistrarPresupuesto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModuloProducto\FrmCategoria.resx">
+      <DependentUpon>FrmCategoria.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModuloProvincia\FrmProvincia.resx">
       <DependentUpon>FrmProvincia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloRolusuario\FRMRol.resx">
       <DependentUpon>FRMRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloServicio\FrmServicio.resx">
+      <DependentUpon>FrmServicio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloUsuario\BuscarUsuario.resx">
       <DependentUpon>BuscarUsuario.cs</DependentUpon>
