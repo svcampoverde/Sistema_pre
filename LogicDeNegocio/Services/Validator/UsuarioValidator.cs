@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
-using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
+using LogicDeNegocio.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services.Validator
 {
-    internal class UsuarioDtoValidator: AbstractValidator<UserDto>
+    internal class UsuarioValidator: AbstractValidator<UsuarioRequest>
     {
-        public UsuarioDtoValidator()
+        public UsuarioValidator()
         {
             RuleFor(u => u.IdCiudad)
                 .GreaterThan(0).WithMessage("Seleccione una ciudad válida.");

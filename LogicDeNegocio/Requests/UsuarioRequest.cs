@@ -1,15 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LogicDeNegocio.Dtos
+namespace LogicDeNegocio.Requests
 {
-    public class UserDto
+    public class UsuarioRequest
     {
-        public int Id { get; set; }
+  
 
         [Required]
         public int IdCiudad { get; set; }
@@ -56,4 +53,5 @@ namespace LogicDeNegocio.Dtos
         [StringLength(100)]
         public string Clave { get; set; }
     }
+
 }

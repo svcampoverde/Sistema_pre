@@ -33,7 +33,7 @@ namespace Presentacion.ModuloRolusuario
                     Rol rol1 = new Rol() {
                         Descripcion = rol
                     }; 
-                    _sistemapContext.Rols.Add(rol1);
+                    _sistemapContext.Roles.Add(rol1);
                     _sistemapContext.SaveChanges();
                     MessageBox.Show("Registro de provincia realizado con éxito");
                     Limpiar();

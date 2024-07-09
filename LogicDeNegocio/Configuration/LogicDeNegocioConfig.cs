@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Mapper;
 using LogicDeNegocio.Services.Validator;
@@ -9,6 +9,7 @@ using Unity;
 using LogicDeNegocio.Personas;
 using Microsoft.Extensions.Logging;
 using Unity.Lifetime;
+using LogicDeNegocio.Requests;
 namespace LogicDeNegocio.Configuration
 {
     public static class LogicDeNegocioConfig
@@ -23,7 +24,7 @@ namespace LogicDeNegocio.Configuration
             var mapper = AutoMapperConfig.Initialize();
             container.RegisterInstance(mapper);
             // Register FluentValidation validators
-            container.RegisterType<IValidator<UserDto>, UsuarioDtoValidator>();
+            container.RegisterType<IValidator<UsuarioRequest>, UsuarioValidator>();
             // Registro de ILogger en Unity
             container.RegisterType<ILoggerFactory, LoggerFactory>(new ContainerControlledLifetimeManager());
             container.RegisterType(typeof(ILogger<>), typeof(Logger<>));

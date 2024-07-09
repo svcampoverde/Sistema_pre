@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Datos.Models;
-using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
 using LogicDeNegocio.Extensions;
+using LogicDeNegocio.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,14 @@ namespace LogicDeNegocio.Mapper.Profiles
     {
         public MappingProfile()
         {
-            // Mapeo de UserDto a Persona
-            CreateMap<UserDto, Persona>()
+            // Mapeo de UsuarioRequest a Persona
+            CreateMap<UsuarioRequest, Persona>()
                  .IgnoreIfEmpty();
 
 
-            // Mapeo de UserDto a Usuario
-            CreateMap<UserDto, Usuario>()
-                .ForMember(dest => dest.NombreUsuario, opt => opt.MapFrom(src => src.Usuario))
-                .ForMember(dest => dest.Contrasena, opt => opt.MapFrom(src => src.Clave)).IgnoreIfEmpty();
+            // Mapeo de UsuarioRequest a Usuario
+            CreateMap<UsuarioRequest, Usuario>()
+                .ForMember(dest => dest.NombreUsuario, opt => opt.MapFrom(src => src.Usuario)) .IgnoreIfEmpty();
 
         }
     }

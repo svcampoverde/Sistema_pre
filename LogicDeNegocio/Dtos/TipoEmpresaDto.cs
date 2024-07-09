@@ -1,0 +1,12 @@
+using System;
+using System.Collections.Generic;
+using LogicDeNegocio.Requests;
+
+namespace LogicDeNegocio.Dtos
+{
+    public class TipoEmpresaDto : TipoEmpresaRequest
+    {
+        public int Id { get; set; }
+
+    }
+}

@@ -1,15 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LogicDeNegocio.Requests;
 
 namespace LogicDeNegocio.Dtos
 {
-    public class ServicioDto
+    public class ServicioDto : ServicioRequest
     {
         public int Id { get; set; }
-        public string Descripcion { get; set; }
-        public string TipoServicio { get; set; }
+
     }
 }

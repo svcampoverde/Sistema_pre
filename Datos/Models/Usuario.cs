@@ -9,8 +9,8 @@ namespace Datos.Models
     {
         public int IdPersona { get; set; }
         public string NombreUsuario { get; set; }
-        public string Contrasena { get; set; }
         public byte[] ContrasenaHash { get; set; }
+        public byte[] ContrasenaSalt { get; set; }
         public int IdRol { get; set; }
 
         public virtual Persona Persona { get; set; }

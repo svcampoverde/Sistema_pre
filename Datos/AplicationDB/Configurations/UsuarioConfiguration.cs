@@ -2,69 +2,69 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Datos.AplicationDB.Configurations
+namespace Datos.ModelsConfiguration
 {
-    public partial class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
+    public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
     {
-        public void Configure(EntityTypeBuilder<Usuario> entity)
+        public void Configure(EntityTypeBuilder<Usuario> builder)
         {
-            entity.ToTable("usuario"); // Nombre de la tabla en la base de datos
+            // Configuración de la tabla
+            builder.ToTable("usuario");
 
-            entity.HasKey(e => e.Id)
-                .HasName("PRIMARY");
+            // Configuración de la clave primaria
+            builder.HasKey(u => u.Id);
+            builder.Property(u => u.Id)
+                   .HasColumnName("id")
+                   .ValueGeneratedOnAdd()
+                   .IsRequired();
+            // BaseEntity properties
+            builder.Property(u => u.Activo)
+                   .HasColumnName("activo")
+                   .IsRequired();
 
-            entity.Property(e => e.Id)
-                .HasColumnName("id") // Nombre de la columna en la base de datos
-                .HasColumnType("int")
-                .IsRequired()
-                .ValueGeneratedOnAdd(); 
+            builder.Property(u => u.FechaCreacionUTC)
+                   .HasColumnName("fecha_creacion_utc")
+                   .IsRequired();
 
-            entity.Property(e => e.NombreUsuario)
-                .HasColumnName("nombre_usuario") // Nombre de la columna en la base de datos
-                .HasColumnType("varchar(100)") // Tipo y tamaño de datos según tus requisitos
-                .IsRequired();
-            entity.Property(e => e.Contrasena)
-                .HasColumnName("contrasena") // Nombre de la columna en la base de datos
-                .IsRequired();
-            entity.Property(e => e.ContrasenaHash)
-                .HasColumnName("contrasena_hash"); // Ajusta según el tamaño necesario para el hash
-            entity.Property(e => e.IdRol)
-                .HasColumnName("idRol") // Nombre de la columna en la base de datos
-                .HasColumnType("int")
-                .IsRequired();
-            entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
-            // Relación con Persona (uno a uno)
-            entity.HasOne(d => d.Persona)
-                .WithOne(p => p.UsuarioNavegation)
-                .HasForeignKey<Usuario>(d => d.IdPersona)
-                .OnDelete(DeleteBehavior.Restrict) // 
-                .HasConstraintName("usuario_persona_fk");
+            builder.Property(u => u.FechaModificacionUTC)
+                   .HasColumnName("fecha_modificacion_utc")
+                   .IsRequired();
+            // Configuración de otras propiedades
+            builder.Property(u => u.IdPersona)
+                   .HasColumnName("id_persona")
+                   .IsRequired();
 
-            // Relación con Rol
-            entity.HasOne(d => d.Rol)
-                .WithMany(p => p.Usuarios)
-                .HasForeignKey(d => d.IdRol)
-                .OnDelete(DeleteBehavior.Restrict) // 
-                .HasConstraintName("usuario_rol_fk");
+            builder.Property(u => u.NombreUsuario)
+                   .HasColumnName("nombre_usuario")
+                   .HasMaxLength(100)
+                   .IsRequired();
 
-            // 
-            entity.Property(e => e.FechaCreacionUTC)
-                .HasColumnName("fecha_creacion_utc")
-                .HasColumnType("datetime")
-                .IsRequired();
+            builder.Property(u => u.ContrasenaHash)
+                   .HasColumnName("contrasena_hash")
+                   .IsRequired();
 
-            entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
- 
-            entity.HasQueryFilter(e => e.Activo);
-            // 
-            OnConfigurePartial(entity);
+            builder.Property(u => u.ContrasenaSalt)
+                   .HasColumnName("contrasena_salt")
+                   .IsRequired();
+
+            builder.Property(u => u.IdRol)
+                   .HasColumnName("id_rol")
+                   .IsRequired();
+
+            // Relaciones
+            builder.HasOne(u => u.Persona)
+                   .WithOne(p => p.UsuarioNavegation)
+                   .HasForeignKey<Usuario>(u => u.IdPersona)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(u => u.Rol)
+                   .WithMany(r => r.Usuarios)
+                   .HasForeignKey(u => u.IdRol)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasQueryFilter(e => e.Activo);
+
+
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<Usuario> entity);
     }
 }

@@ -25,7 +25,7 @@ namespace Presentacion.ModuloRolusuario
         {
             try
             {
-                var list = _sistemapContext.Rols.Where(e=>e.Descripcion.Contains(datos)).ToList();
+                var list = _sistemapContext.Roles.Where(e=>e.Descripcion.Contains(datos)).ToList();
                 dtgRol.Rows.Clear();
 
                 int cont = 0;

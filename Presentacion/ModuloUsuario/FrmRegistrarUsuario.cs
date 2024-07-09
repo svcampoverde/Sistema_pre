@@ -3,6 +3,7 @@ using FluentValidation;
 using LogicDeNegocio;
 using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
 using MaterialSkin;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace Presentacion.ModuloUsuario
         {
             try
             {
-                var list = _sistemapContext.Rols.ToList();
+                var list = _sistemapContext.Roles.ToList();
 
                 if (list == null || list.Count == 0)
                 {
@@ -67,7 +68,7 @@ namespace Presentacion.ModuloUsuario
             BorrarAlerta();
             try
             {
-                var usuarioDto = new UserDto
+                var usuarioDto = new UsuarioRequest
                 {
                     IdCiudad = Convert.ToInt32(cmbCiudad.SelectedValue),
                     IdRol = Convert.ToInt32(cbRol.SelectedValue),
@@ -131,7 +132,7 @@ namespace Presentacion.ModuloUsuario
         {
             try
             {
-                var list = _sistemapContext.Ciudads.ToList();
+                var list = _sistemapContext.Ciudades.ToList();
                 if (list == null || list.Count == 0)
                 {
                     MessageBox.Show("No se encontraron provincias para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
