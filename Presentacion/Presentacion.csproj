@@ -370,6 +370,18 @@
     <Compile Include="ModuloCiudad\FrmCiudad.Designer.cs">
       <DependentUpon>FrmCiudad.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuloEmpresa\FrmEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloEmpresa\FrmEmpresa.Designer.cs">
+      <DependentUpon>FrmEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloEmpresa\FrmTipoEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloEmpresa\FrmTipoEmpresa.Designer.cs">
+      <DependentUpon>FrmTipoEmpresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModuloLogin\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -449,6 +461,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloCiudad\FrmCiudad.resx">
       <DependentUpon>FrmCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloEmpresa\FrmEmpresa.resx">
+      <DependentUpon>FrmEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloEmpresa\FrmTipoEmpresa.resx">
+      <DependentUpon>FrmTipoEmpresa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloLogin\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
