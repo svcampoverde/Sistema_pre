@@ -370,6 +370,28 @@
     <Compile Include="ModuloCiudad\FrmCiudad.Designer.cs">
       <DependentUpon>FrmCiudad.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuloCliente\FrmRegistrarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloCliente\FrmRegistrarCliente.Designer.cs">
+      <DependentUpon>FrmRegistrarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloEmpeado\FrmEmpleado.cs" />
+    <Compile Include="ModuloEmpeado\FrmEmpleado.Designer.cs">
+      <DependentUpon>FrmEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloEmpresa\FrmEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloEmpresa\FrmEmpresa.Designer.cs">
+      <DependentUpon>FrmEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloEmpresa\FrmTipoEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloEmpresa\FrmTipoEmpresa.Designer.cs">
+      <DependentUpon>FrmTipoEmpresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModuloLogin\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -399,6 +421,16 @@
     </Compile>
     <Compile Include="ModuloProducto\FrmCategoria.Designer.cs">
       <DependentUpon>FrmCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloProducto\FrmInventario.cs" />
+    <Compile Include="ModuloProducto\FrmInventario.Designer.cs">
+      <DependentUpon>FrmInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloProveedor\FrmRegistroProveedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloProveedor\FrmRegistroProveedor.Designer.cs">
+      <DependentUpon>FrmRegistroProveedor.cs</DependentUpon>
     </Compile>
     <Compile Include="ModuloProvincia\FrmProvincia.cs">
       <SubType>Form</SubType>
@@ -450,6 +482,18 @@
     <EmbeddedResource Include="ModuloCiudad\FrmCiudad.resx">
       <DependentUpon>FrmCiudad.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModuloCliente\FrmRegistrarCliente.resx">
+      <DependentUpon>FrmRegistrarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloEmpeado\FrmEmpleado.resx">
+      <DependentUpon>FrmEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloEmpresa\FrmEmpresa.resx">
+      <DependentUpon>FrmEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloEmpresa\FrmTipoEmpresa.resx">
+      <DependentUpon>FrmTipoEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModuloLogin\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -464,6 +508,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloProducto\FrmCategoria.resx">
       <DependentUpon>FrmCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloProducto\FrmInventario.resx">
+      <DependentUpon>FrmInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloProveedor\FrmRegistroProveedor.resx">
+      <DependentUpon>FrmRegistroProveedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloProvincia\FrmProvincia.resx">
       <DependentUpon>FrmProvincia.cs</DependentUpon>
@@ -576,6 +626,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\office.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\categorization.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
