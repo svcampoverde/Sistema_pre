@@ -1,6 +1,6 @@
 ﻿namespace Presentacion.ModuloLogin
 {
-    partial class RecuperarContraseña
+    partial class FrmRecuperarContrasena
     {
         /// <summary>
         /// Required designer variable.
@@ -203,7 +203,7 @@
             this.chcpass.UseVisualStyleBackColor = true;
             this.chcpass.CheckedChanged += new System.EventHandler(this.chcpass_CheckedChanged);
             // 
-            // RecuperarContraseña
+            // FrmRecuperarContrasena
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -218,9 +218,9 @@
             this.Controls.Add(this.materialLabel2);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
-            this.Name = "RecuperarContraseña";
+            this.Name = "FrmRecuperarContrasena";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "RecuperarContraseña";
+            this.Text = "FrmRecuperarContrasena";
             this.Load += new System.EventHandler(this.RecuperarContraseña_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

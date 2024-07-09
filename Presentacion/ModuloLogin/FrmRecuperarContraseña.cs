@@ -6,9 +6,9 @@ using Unity;
 
 namespace Presentacion.ModuloLogin
 {
-    public partial class RecuperarContraseña : MaterialSkin.Controls.MaterialForm
+    public partial class FrmRecuperarContrasena : MaterialSkin.Controls.MaterialForm
     {
-        public RecuperarContraseña()
+        public FrmRecuperarContrasena()
         {
             InitializeComponent();
         }
@@ -16,7 +16,7 @@ namespace Presentacion.ModuloLogin
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Dispose();
-            var frm = UnityConfig.Container.Resolve<Login>();
+            var frm = UnityConfig.Container.Resolve<FrmLogin>();
             frm.ShowDialog();
         }
 

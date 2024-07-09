@@ -1,6 +1,8 @@
 using Datos.AplicationDB;
 using LogicDeNegocio.Configuration;
 using Microsoft.EntityFrameworkCore;
+
+using Presentacion.App_Start;
 using Presentacion.ModuloProvincia;
 using Presentacion.ModuloRolusuario;
 using Presentacion.ModuloUsuario;
@@ -38,13 +40,8 @@ namespace Presentacion
             container.RegisterType<SistemapContext>();
 
             // Registrar otros servicios y formularios
-            container.RegisterType<FrmRegistrarUsuario>();
-            container.RegisterType<FrmIPrincipal>();
-            container.RegisterType<FRMRol>();
-            container.RegisterType<FrmProvincia>();
-            container.RegisterType<Login>();
-            container.RegisterType<BuscarUsuario>();
-            container.RegisterTypes();
+            
+            container.RegisterTypes().RegisterForms();
         }
 
     }

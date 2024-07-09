@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace Presentacion.ModuloLogin
 {
-    public partial class Login : MaterialSkin.Controls.MaterialForm
+    public partial class FrmLogin : MaterialSkin.Controls.MaterialForm
     {
         private readonly SistemapContext _sistemapContext;
 
-        public Login(SistemapContext sistemapContext)
+        public FrmLogin(SistemapContext sistemapContext)
         {
             InitializeComponent();
             _sistemapContext = sistemapContext;
@@ -84,7 +84,7 @@ namespace Presentacion.ModuloLogin
             if (userexit)
             {
                 this.Hide();
-                RecuperarContraseña ob = new RecuperarContraseña();
+                FrmRecuperarContrasena ob = new FrmRecuperarContrasena();
                 ob.ShowDialog();
             }
             else

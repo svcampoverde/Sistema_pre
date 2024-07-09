@@ -1,6 +1,6 @@
 ﻿namespace Presentacion.ModuloLogin
 {
-    partial class Login
+    partial class FrmLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -245,7 +245,7 @@
             this.txtClave.TrailingIcon = null;
             this.txtClave.UseSystemPasswordChar = false;
             // 
-            // Login
+            // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -253,7 +253,7 @@
             this.ClientSize = new System.Drawing.Size(717, 385);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
-            this.Name = "Login";
+            this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Login_Load);
             this.panel1.ResumeLayout(false);

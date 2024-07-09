@@ -36,7 +36,7 @@ namespace Presentacion
         private void ptbempresa_Click(object sender, EventArgs e)
         {
             this.Close();
-            Frmdi.OpenChildForm(new FrmEmpresa());
+            Frmdi.OpenChildForm<FrmEmpresa>();
         }
         private void CloseAllMdiChildren()
         {
@@ -49,7 +49,7 @@ namespace Presentacion
         private void ptbCategoria_Click(object sender, EventArgs e)
         {
             this.Close();
-            Frmdi.OpenChildForm(new FrmCategoria());
+            Frmdi.OpenChildForm<FrmCategoria>();
         }
     }
 }

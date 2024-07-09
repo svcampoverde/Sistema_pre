@@ -14,11 +14,11 @@ using System.Windows.Forms;
 
 namespace Presentacion.ModuloRolusuario
 {
-    public partial class FRMRol : Form
+    public partial class FrmRol : Form
     {
        // Rol admr = new Rol();
         int Id;
-        public FRMRol()
+        public FrmRol()
         {
             InitializeComponent();
             this.Load += new EventHandler(FRMRol_Load);

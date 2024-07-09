@@ -1,6 +1,6 @@
 ﻿namespace Presentacion.ModuloUsuario
 {
-    partial class btnActualizar
+    partial class FrmModificarUsuario
     {
         /// <summary>
         /// Required designer variable.
@@ -431,7 +431,7 @@
             this.labelEdit1.TabIndex = 52;
             this.labelEdit1.Text = "Cedula:";
             // 
-            // btnActualizar
+            // FrmModificarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -464,7 +464,7 @@
             this.Controls.Add(this.labelEdit2);
             this.Controls.Add(this.labelEdit1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "btnActualizar";
+            this.Name = "FrmModificarUsuario";
             this.Text = "FrmModificarUsuario";
             this.Load += new System.EventHandler(this.FrmModificarUsuario_Load);
             this.ResumeLayout(false);

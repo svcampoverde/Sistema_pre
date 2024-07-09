@@ -239,7 +239,7 @@
             this.pnlModificarpro.TabIndex = 74;
             this.pnlModificarpro.Visible = false;
             // 
-            // btnActualizar
+            // FrmModificarUsuario
             // 
             this.btnActualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
             this.btnActualizar.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
@@ -251,7 +251,7 @@
             this.btnActualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActualizar.ForeColor = System.Drawing.Color.White;
             this.btnActualizar.Location = new System.Drawing.Point(153, 156);
-            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Name = "FrmModificarUsuario";
             this.btnActualizar.Size = new System.Drawing.Size(150, 40);
             this.btnActualizar.TabIndex = 26;
             this.btnActualizar.Text = "Actualizar";

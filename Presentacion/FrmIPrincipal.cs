@@ -19,10 +19,13 @@ namespace Presentacion
     public partial class FrmIPrincipal : Form// MaterialSkin.Controls.MaterialForm
     {
         private Form activarForm = null;
+        private readonly Dictionary<Type, Form> activeForms = new Dictionary<Type, Form>();
+        private readonly IUnityContainer _container;
 
-        public FrmIPrincipal()
+        public FrmIPrincipal(IUnityContainer container)
         {
             InitializeComponent();
+            _container = container;
             mdiPro();
             // Establecer las propiedades del formulario
             this.FormBorderStyle = FormBorderStyle.Sizable; // Asegura que el formulario sea redimensionable
@@ -31,8 +34,8 @@ namespace Presentacion
             // Agregar el evento Resize
             this.Resize += new EventHandler(FrmIPrincipal_Resize);
             this.SizeChanged += FrmIPrincipal_SizeChanged;
-
         }
+
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -45,10 +48,10 @@ namespace Presentacion
         }
         private void menuTransicion_Tick(object sender, EventArgs e)
         {
-            if(expandir == false)
+            if (expandir == false)
             {
                 contUsuario.Height += 10;
-                if(contUsuario.Height >= 241)
+                if (contUsuario.Height >= 241)
                 {
                     menuTransicion.Stop();
                     expandir = true;
@@ -102,7 +105,7 @@ namespace Presentacion
             if (expandirslider)
             {
                 pnelMenu.Width -= 18;
-                if(pnelMenu.Width <= 72) 
+                if (pnelMenu.Width <= 72)
                 {
                     expandirslider = false;
                     slidebarTrans.Stop();
@@ -125,7 +128,7 @@ namespace Presentacion
                 }
             }
         }
-         
+
         private void ptbMenu_Click(object sender, EventArgs e)
         {
             slidebarTrans.Start();
@@ -137,62 +140,54 @@ namespace Presentacion
                 child.Close();
             }
         }
-        public void OpenChildForm(Form childForm)
-        { 
-            // Cierra todos los formularios MDI hijos
-            CloseAllMdiChildren();
-            // Establece el formulario hijo como el formulario activo
+        public void OpenChildForm<T>(Action<T> configureForm = null) where T : Form
+        {
             if (activarForm != null)
             {
                 activarForm.Close();
-                activarForm = null;
             }
 
-            activarForm = childForm;
+            if (!activeForms.ContainsKey(typeof(T)))
+            {
+                var form = _container.Resolve<T>();
+                activeForms[typeof(T)] = form;
+                form.MdiParent = this;
+                form.FormClosed += (sender, e) => activeForms.Remove(typeof(T));
+            }
 
-            // Ajusta el tamaño del formulario hijo si es necesario
-            AdjustMdiSize(childForm);
+            activarForm = activeForms[typeof(T)];
 
-            // Establece el formulario hijo como MDI hijo
-            childForm.MdiParent = this;
+            configureForm?.Invoke((T)activarForm);
 
-            // Muestra el formulario hijo
-            childForm.Show();
-
-            // Maneja el evento FormClosed para liberar la referencia al formulario hijo
-            childForm.FormClosed += (sender, e) => { activarForm = null; };
+            activarForm.WindowState = FormWindowState.Maximized;
+            activarForm.FormBorderStyle = FormBorderStyle.None;
+            activarForm.ControlBox = false;
+            activarForm.MinimizeBox = false;
+            activarForm.MaximizeBox = false;
+            activarForm.Show();
         }
 
         private void btnHome_Click(object sender, EventArgs e)
-        
-        {
-            OpenChildForm(new Home(this));
 
+        {
+            OpenChildForm<Home>();
         }
 
         private void btnMr_Click(object sender, EventArgs e)
         {
             // Resuelve la instancia de FrmRegistrarUsuario usando Unity
-            var form = UnityConfig.Container.Resolve<FrmRegistrarUsuario>();
-
-            // Abre el formulario hijo
-            OpenChildForm(form);
+            OpenChildForm<FrmRegistrarUsuario>();
 
         }
 
         private void btnML_Click(object sender, EventArgs e)
         {
-           
-            var buscarUsuarioForm = new BuscarUsuario(this);
-
-            // Abre el formulario hijo
-            OpenChildForm(buscarUsuarioForm);
-           // OpenChildForm(new BuscarUsuario(this));
+            OpenChildForm<FrmBuscarUsuario>();
         }
-        
+
         private void btnRegistrarp_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FrmRegistrarPresupuesto());
+            OpenChildForm<FrmRegistrarPresupuesto>();
         }
         private void FrmIPrincipal_SizeChanged(object sender, EventArgs e)
         {
@@ -201,9 +196,9 @@ namespace Presentacion
                 if (this.WindowState == FormWindowState.Maximized)
                 {
                     AdjustMdiSize(childForm);
-                   
+
                 }
-               
+
             }
         }
 
@@ -227,8 +222,8 @@ namespace Presentacion
             PositionMdiChild(childForm);
 
         }
-        
-        
+
+
         private void PositionMdiChild(Form childForm)
         {
             // Asegurar que el formulario secundario no esté maximizado antes de calcular la posición
@@ -237,7 +232,7 @@ namespace Presentacion
             // Establecer la posición del formulario secundario
             childForm.StartPosition = FormStartPosition.Manual;
 
-             childForm.Location = new Point(80, 10);
+            childForm.Location = new Point(80, 10);
         }
 
         private void FrmIPrincipal_Load(object sender, EventArgs e)
@@ -269,7 +264,7 @@ namespace Presentacion
 
         private void icnmin_Click(object sender, EventArgs e)
         {
-            this.WindowState=FormWindowState.Minimized;
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void panelHeader_MouseDown(object sender, MouseEventArgs e)
@@ -296,7 +291,7 @@ namespace Presentacion
         private void btnUsuario_Click(object sender, EventArgs e)
         {
 
-            //btnActualizar c = new btnActualizar(id);
+            //FrmModificarUsuario c = new FrmModificarUsuario(id);
             //c.Show();
         }
     }

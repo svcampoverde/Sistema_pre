@@ -1,6 +1,6 @@
 ﻿namespace Presentacion.ModuloRolusuario
 {
-    partial class FRMRol
+    partial class FrmRol
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FRMRol));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRol));
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlRegistrorol = new System.Windows.Forms.Panel();
             this.txtRol = new ReaLTaiizor.Controls.TextBoxEdit();

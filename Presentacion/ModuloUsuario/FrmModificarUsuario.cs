@@ -1,4 +1,8 @@
 ﻿//using LogicDeNegocio.personas;
+using LogicDeNegocio.Interfaces;
+
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,18 +15,24 @@ using System.Windows.Forms;
 
 namespace Presentacion.ModuloUsuario
 {
-    public partial class btnActualizar : Form
+    public partial class FrmModificarUsuario : Form
     {
-       // Usuario us = new Usuario();
-        //int id;
-        public btnActualizar(int id)
+
+        private readonly IUsuarioService _usuarioService;
+        private int id;
+        public FrmModificarUsuario(IUsuarioService usuarioService)
         {
             InitializeComponent();
             this.Load += new EventHandler(FrmModificarUsuario_Load);
-            
-            MessageBox.Show("Idusuario" + id);
-           // ObtenerDatos(id);
+            _usuarioService = usuarioService;
+            // ObtenerDatos(id);
         }
+        public void SetIdUsuario(int id)
+        {
+            this.id = id;
+            MessageBox.Show("usuario");
+        }
+
         //private void ObtenerDatos(int idUsuario)
         //{
         //    List<Usuario> user = us.BuscarDatos(idUsuario);
@@ -37,7 +47,7 @@ namespace Presentacion.ModuloUsuario
         //        txtCorreo.Text = usuario.Correo;
         //        txtDireccion.Text = usuario.Direccion;
         //       // cmbCiudad.SelectedValue = usuario.Ciudad.Descripcion;
-                
+
         //        //cbRol.SelectedValue = usuario.Rol.RolUsuario;
         //        txtUsuario.Text = usuario.User;
         //    }

@@ -12,10 +12,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Security;
 using System.Windows.Forms;
+using LogicDeNegocio.Interfaces;
 
 namespace Presentacion.ModuloUsuario
 {
-    public partial class FrmRegistrarUsuario : Form
+    public partial class FrmRegistrarUsuario : Form,IForm
     {
         //AdmRol adm = new AdmRol();
         //UsuarioDao usuarioDao = new UsuarioDao();
@@ -205,7 +206,10 @@ namespace Presentacion.ModuloUsuario
             txtUsuario.Text = "";
             txtClave.Text = "";
         }
-
-        
+         
+            public void ShowForm()
+            {
+                this.Show();
+            }
     }
 }

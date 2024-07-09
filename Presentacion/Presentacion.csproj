@@ -338,6 +338,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ConfigForms.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="btnpersonalizados\Botonper.cs">
@@ -376,7 +377,9 @@
     <Compile Include="ModuloCliente\FrmRegistrarCliente.Designer.cs">
       <DependentUpon>FrmRegistrarCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuloEmpeado\FrmEmpleado.cs" />
+    <Compile Include="ModuloEmpeado\FrmEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ModuloEmpeado\FrmEmpleado.Designer.cs">
       <DependentUpon>FrmEmpleado.cs</DependentUpon>
     </Compile>
@@ -392,17 +395,17 @@
     <Compile Include="ModuloEmpresa\FrmTipoEmpresa.Designer.cs">
       <DependentUpon>FrmTipoEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuloLogin\Login.cs">
+    <Compile Include="ModuloLogin\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuloLogin\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="ModuloLogin\FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuloLogin\RecuperarContraseña.cs">
+    <Compile Include="ModuloLogin\FrmRecuperarContraseña.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuloLogin\RecuperarContraseña.Designer.cs">
-      <DependentUpon>RecuperarContraseña.cs</DependentUpon>
+    <Compile Include="ModuloLogin\FrmRecuperarContraseña.Designer.cs">
+      <DependentUpon>FrmRecuperarContraseña.cs</DependentUpon>
     </Compile>
     <Compile Include="ModuloPresupuesto\FrmListarPresupuesto.cs">
       <SubType>Form</SubType>
@@ -422,7 +425,9 @@
     <Compile Include="ModuloProducto\FrmCategoria.Designer.cs">
       <DependentUpon>FrmCategoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuloProducto\FrmInventario.cs" />
+    <Compile Include="ModuloProducto\FrmInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ModuloProducto\FrmInventario.Designer.cs">
       <DependentUpon>FrmInventario.cs</DependentUpon>
     </Compile>
@@ -438,11 +443,11 @@
     <Compile Include="ModuloProvincia\FrmProvincia.Designer.cs">
       <DependentUpon>FrmProvincia.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuloRolusuario\FRMRol.cs">
+    <Compile Include="ModuloRolusuario\FrmRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuloRolusuario\FRMRol.Designer.cs">
-      <DependentUpon>FRMRol.cs</DependentUpon>
+    <Compile Include="ModuloRolusuario\FrmRol.Designer.cs">
+      <DependentUpon>FrmRol.cs</DependentUpon>
     </Compile>
     <Compile Include="ModuloServicio\FrmServicio.cs">
       <SubType>Form</SubType>
@@ -450,11 +455,11 @@
     <Compile Include="ModuloServicio\FrmServicio.Designer.cs">
       <DependentUpon>FrmServicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuloUsuario\BuscarUsuario.cs">
+    <Compile Include="ModuloUsuario\FrmBuscarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuloUsuario\BuscarUsuario.Designer.cs">
-      <DependentUpon>BuscarUsuario.cs</DependentUpon>
+    <Compile Include="ModuloUsuario\FrmBuscarUsuario.Designer.cs">
+      <DependentUpon>FrmBuscarUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="ModuloUsuario\FrmModificarUsuario.cs">
       <SubType>Form</SubType>
@@ -494,11 +499,11 @@
     <EmbeddedResource Include="ModuloEmpresa\FrmTipoEmpresa.resx">
       <DependentUpon>FrmTipoEmpresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModuloLogin\Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="ModuloLogin\FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModuloLogin\RecuperarContraseña.resx">
-      <DependentUpon>RecuperarContraseña.cs</DependentUpon>
+    <EmbeddedResource Include="ModuloLogin\FrmRecuperarContraseña.resx">
+      <DependentUpon>FrmRecuperarContraseña.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloPresupuesto\FrmListarPresupuesto.resx">
       <DependentUpon>FrmListarPresupuesto.cs</DependentUpon>
@@ -518,14 +523,14 @@
     <EmbeddedResource Include="ModuloProvincia\FrmProvincia.resx">
       <DependentUpon>FrmProvincia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModuloRolusuario\FRMRol.resx">
-      <DependentUpon>FRMRol.cs</DependentUpon>
+    <EmbeddedResource Include="ModuloRolusuario\FrmRol.resx">
+      <DependentUpon>FrmRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloServicio\FrmServicio.resx">
       <DependentUpon>FrmServicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModuloUsuario\BuscarUsuario.resx">
-      <DependentUpon>BuscarUsuario.cs</DependentUpon>
+    <EmbeddedResource Include="ModuloUsuario\FrmBuscarUsuario.resx">
+      <DependentUpon>FrmBuscarUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloUsuario\FrmModificarUsuario.resx">
       <DependentUpon>FrmModificarUsuario.cs</DependentUpon>
@@ -585,7 +590,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Recursos\Fuente\" />
-    <Folder Include="Servicio\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

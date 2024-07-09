@@ -296,6 +296,7 @@
     <Compile Include="Interfaces\IEmpleadoService.cs" />
     <Compile Include="Interfaces\IEmpresaService.cs" />
     <Compile Include="Interfaces\IEventoService.cs" />
+    <Compile Include="Interfaces\IForm.cs" />
     <Compile Include="Interfaces\IFormaPagoService.cs" />
     <Compile Include="Interfaces\IInventarioService.cs" />
     <Compile Include="Interfaces\ILoginService.cs" />
