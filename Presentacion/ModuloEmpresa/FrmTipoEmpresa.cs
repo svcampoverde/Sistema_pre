@@ -1,4 +1,4 @@
-﻿using LogicDeNegocio.personas;
+﻿///using LogicDeNegocio.personas;
 using LogicDeNegocio;
 using System;
 using System.Collections.Generic;
@@ -9,14 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LogicDeNegocio.Empresa;
+//using LogicDeNegocio.Empresa;
 using DevComponents.DotNetBar.Validator;
 
 namespace Presentacion.ModuloEmpresa
 {
     public partial class FrmTipoEmpresa : Form
     {
-        TipoEmpresa temp= new TipoEmpresa();
+        //TipoEmpresa temp= new TipoEmpresa();
         int Id;
         public FrmTipoEmpresa()
         {
@@ -27,18 +27,18 @@ namespace Presentacion.ModuloEmpresa
         {
             try
             {
-                List<TipoEmpresa> list = temp.BuscarTipempresa(dato);
-                dtgTipEmpresa.Rows.Clear();
+                //List<TipoEmpresa> list = temp.BuscarTipempresa(dato);
+                //dtgTipEmpresa.Rows.Clear();
 
-                int cont = 0;
+                //int cont = 0;
 
-                foreach (TipoEmpresa t in list)
-                {
-                    dtgTipEmpresa.Rows.Add(1);
-                    dtgTipEmpresa.Rows[cont].Cells[0].Value = t.Id.ToString();
-                    dtgTipEmpresa.Rows[cont].Cells[1].Value = t.Descripcion.ToString();
-                    cont++;
-                }
+                //foreach (TipoEmpresa t in list)
+                //{
+                //    dtgTipEmpresa.Rows.Add(1);
+                //    dtgTipEmpresa.Rows[cont].Cells[0].Value = t.Id.ToString();
+                //    dtgTipEmpresa.Rows[cont].Cells[1].Value = t.Descripcion.ToString();
+                //    cont++;
+               // }
 
             }
             catch (ExceptionSistema ex)
@@ -57,12 +57,12 @@ namespace Presentacion.ModuloEmpresa
 
         private void brnGuardarTE_Click(object sender, EventArgs e)
         {
-            temp.Descripcion = txtTipempresa.Text;
+          //  temp.Descripcion = txtTipempresa.Text;
             try
             {
                 if (Validar())
                 {
-                    temp.InsertarTipEmpresa(temp);
+                   // temp.InsertarTipEmpresa(temp);
                     MessageBox.Show("Registro de provincia realizado con éxito");
                     Limpiar();
                     LlenarDataGrid("");
@@ -124,7 +124,7 @@ namespace Presentacion.ModuloEmpresa
                         if (result == DialogResult.OK)
                         {
                             Id = Convert.ToInt32(dtgTipEmpresa.Rows[e.RowIndex].Cells["idtipo"].Value);
-                            temp.EliminarTipempresa(Id);
+                            //temp.EliminarTipempresa(Id);
                             LlenarDataGrid("");
                         }
 
@@ -142,10 +142,10 @@ namespace Presentacion.ModuloEmpresa
             string tipo = txtMtipemp.Text;
             if (!String.IsNullOrEmpty(txtMtipemp.Text))
             {
-                temp.Id = Id;
-                temp.Descripcion = tipo;
+                //temp.Id = Id;
+                //temp.Descripcion = tipo;
 
-                temp.ActualizarTipempresa(temp);
+                //temp.ActualizarTipempresa(temp);
                 MessageBox.Show("Datos actualizados con exito.");
                 LlenarDataGrid("");
             }

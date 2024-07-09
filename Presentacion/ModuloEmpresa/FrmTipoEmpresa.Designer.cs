@@ -154,7 +154,7 @@
             // pnlRegistrotip
             // 
             this.pnlRegistrotip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
-            this.pnlRegistrotip.Controls.Add(this.brnGuardarTE);
+//            this.pnlRegistrotip.Controls.Add(this.brnGuardarTE);
             this.pnlRegistrotip.Controls.Add(this.txtTipempresa);
             this.pnlRegistrotip.Controls.Add(this.labelEdit1);
             this.pnlRegistrotip.Controls.Add(this.labelEdit2);

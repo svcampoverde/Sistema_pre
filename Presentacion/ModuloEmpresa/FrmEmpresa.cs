@@ -1,7 +1,7 @@
 ﻿using DevComponents.DotNetBar.Validator;
 using LogicDeNegocio;
-using LogicDeNegocio.Empresa;
-using LogicDeNegocio.provincia;
+//using LogicDeNegocio.Empresa;
+//using LogicDeNegocio.provincia;
 using Presentacion.btnpersonalizados;
 using System;
 using System.Collections.Generic;
@@ -18,8 +18,8 @@ namespace Presentacion.ModuloEmpresa
 {
     public partial class FrmEmpresa : Form
     {
-        TipoEmpresa tp = new TipoEmpresa();
-        Empresa emp = new Empresa();
+        //TipoEmpresa tp = new TipoEmpresa();
+        //Empresa emp = new Empresa();
         int Id;
         public FrmEmpresa()
         {
@@ -30,16 +30,16 @@ namespace Presentacion.ModuloEmpresa
         {
             try
             {
-                List<TipoEmpresa> list = tp.LlenarComboTip();
-                if (list == null || list.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron provincias para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                combo.DataSource = null;
-                combo.DataSource = list;
-                combo.DisplayMember = "Descripcion";
-                combo.ValueMember = "Id";
+                //List<TipoEmpresa> list = tp.LlenarComboTip();
+                //if (list == null || list.Count == 0)
+                //{
+                //    MessageBox.Show("No se encontraron provincias para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return;
+                //}
+                //combo.DataSource = null;
+                //combo.DataSource = list;
+                //combo.DisplayMember = "Descripcion";
+                //combo.ValueMember = "Id";
 
             }
             catch (ExceptionSistema ex)
@@ -52,23 +52,23 @@ namespace Presentacion.ModuloEmpresa
         {
             try
             {
-                List<Empresa> list = emp.BuscarEmpresa(dato);
-                dtgEmpresa.Rows.Clear();
+                //List<Empresa> list = emp.BuscarEmpresa(dato);
+                //dtgEmpresa.Rows.Clear();
 
-                int cont = 0;
+                //int cont = 0;
 
-                foreach (Empresa t in list)
-                {
-                    dtgEmpresa.Rows.Add(1);
-                    dtgEmpresa.Rows[cont].Cells[0].Value = t.Id.ToString();
-                    dtgEmpresa.Rows[cont].Cells[1].Value = t.Descripcion.ToString();
-                    dtgEmpresa.Rows[cont].Cells[2].Value = t.Tipo.Descripcion.ToString();
-                    dtgEmpresa.Rows[cont].Cells[3].Value = t.Telefono.ToString();
-                    dtgEmpresa.Rows[cont].Cells[4].Value = t.Correo.ToString();
-                    dtgEmpresa.Rows[cont].Cells[5].Value = t.Direccion.ToString();
+                //foreach (Empresa t in list)
+                //{
+                //    dtgEmpresa.Rows.Add(1);
+                //    dtgEmpresa.Rows[cont].Cells[0].Value = t.Id.ToString();
+                //    dtgEmpresa.Rows[cont].Cells[1].Value = t.Descripcion.ToString();
+                //    dtgEmpresa.Rows[cont].Cells[2].Value = t.Tipo.Descripcion.ToString();
+                //    dtgEmpresa.Rows[cont].Cells[3].Value = t.Telefono.ToString();
+                //    dtgEmpresa.Rows[cont].Cells[4].Value = t.Correo.ToString();
+                //    dtgEmpresa.Rows[cont].Cells[5].Value = t.Direccion.ToString();
 
-                    cont++;
-                }
+                //    cont++;
+                //}
 
             }
             catch (ExceptionSistema ex)
@@ -108,16 +108,16 @@ namespace Presentacion.ModuloEmpresa
 
         private void btnGuardarE_Click(object sender, EventArgs e)
         {
-            emp.Descripcion = txtEmpresa.Text;
-            emp.Telefono = txtTelefono.Text;
-            emp.Correo = txtCorreo.Text;
-            emp.Direccion = txtDireccion.Text;
-            emp.Idtipo = Convert.ToInt32(cmbtipempresa.SelectedValue);
+            //emp.Descripcion = txtEmpresa.Text;
+            //emp.Telefono = txtTelefono.Text;
+            //emp.Correo = txtCorreo.Text;
+            //emp.Direccion = txtDireccion.Text;
+            //emp.Idtipo = Convert.ToInt32(cmbtipempresa.SelectedValue);
             try
             {
                 if (Validar())
                 {
-                    emp.InsertarEmpresa(emp);
+                 //   emp.InsertarEmpresa(emp);
                     MessageBox.Show("Registro de provincia realizado con éxito");
                     Limpiar();
                     LlenarDataGrid("");
@@ -222,7 +222,7 @@ namespace Presentacion.ModuloEmpresa
                         if (result == DialogResult.OK)
                         {
                             Id = Convert.ToInt32(dtgEmpresa.Rows[e.RowIndex].Cells["idempresa"].Value);
-                            emp.EliminarEmpresa(Id);
+                            //emp.EliminarEmpresa(Id);
                             LlenarDataGrid("");
                         }
 
@@ -242,13 +242,13 @@ namespace Presentacion.ModuloEmpresa
             int tpe = Convert.ToInt32(cmbMtipemp.SelectedValue);
             if (!String.IsNullOrEmpty(empresa))
             {
-                emp.Id = Id;
-                emp.Descripcion = empresa;
-                emp.Idtipo = tpe;
-                emp.Telefono= telef;
-                emp.Correo = correo;
-                emp.Direccion = direccion;
-                emp.ActualizarEmpresa(emp);
+                //emp.Id = Id;
+                //emp.Descripcion = empresa;
+                //emp.Idtipo = tpe;
+                //emp.Telefono= telef;
+                //emp.Correo = correo;
+                //emp.Direccion = direccion;
+                //emp.ActualizarEmpresa(emp);
                 MessageBox.Show("Datos actualizados con exito.");
                 pnlListEmp.Visible = true;
                 ptbleftm.Visible = false;
