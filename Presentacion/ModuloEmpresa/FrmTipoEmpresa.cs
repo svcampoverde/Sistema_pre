@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 //using LogicDeNegocio.Empresa;
-using DevComponents.DotNetBar.Validator;
+
 
 namespace Presentacion.ModuloEmpresa
 {
