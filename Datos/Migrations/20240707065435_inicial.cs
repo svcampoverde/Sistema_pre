@@ -854,11 +854,11 @@ namespace Datos.Migrations
                 columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
                 values: new object[,]
                 {
-                    { 5, 1ul, "IP", "Cuenta de Inversión Personal", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
-                    { 4, 1ul, "MM", "Cuenta de Mercado Monetario", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
-                    { 3, 1ul, "PF", "Cuenta a Plazo Fijo", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
-                    { 2, 1ul, "CC", "Cuenta Corriente", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
-                    { 1, 1ul, "CA", "Cuenta de Ahorros", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) }
+                    { 5, 1ul, "IP", "Cuentas de Inversión Personal", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
+                    { 4, 1ul, "MM", "Cuentas de Mercado Monetario", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
+                    { 3, 1ul, "PF", "Cuentas a Plazo Fijo", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
+                    { 2, 1ul, "CC", "Cuentas Corriente", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) },
+                    { 1, 1ul, "CA", "Cuentas de Ahorros", new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517), new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517) }
                 });
 
             migrationBuilder.InsertData(

@@ -1,14 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -27,48 +29,48 @@ namespace LogicDeNegocio.Services
         // Método para registrar una Empresa
         public async Task<EmpresaDto> RegistrarEmpresa(EmpresaRequest request)
         {
-            var  = _mapper.Map<Empresa>(request);
-            await _sistemapContext.Empresas.AddAsync();
+            var entidad = _mapper.Map<Empresa>(request);
+            await _sistemapContext.Empresas.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<EmpresaDto>();
+            return _mapper.Map<EmpresaDto>(entidad);
         }
 
         // Método para actualizar una Empresa
         public async Task<EmpresaDto> ActualizarEmpresa(int id, EmpresaRequest request)
         {
-            var  = await _sistemapContext.Empresas.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Empresas.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Empresa con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.Empresas.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.Empresas.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<EmpresaDto>();
+            return _mapper.Map<EmpresaDto>(entidad);
         }
 
         // Método para eliminar una Empresa
         public async Task EliminarEmpresa(int id)
         {
-            var  = await _sistemapContext.Empresas.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Empresas.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Empresa con ID {id} no encontrado.");
             }
 
-            _sistemapContext.Empresas.Remove();
+            _sistemapContext.Empresas.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
         // Método para obtener todas las Empresas
         public async Task<List<EmpresaDto>> ObtenerTodasEmpresas()
         {
-            var s = await _sistemapContext.Empresas
+            var entidadDto = await _sistemapContext.Empresas
                                             .ProjectTo<EmpresaDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

@@ -1757,7 +1757,7 @@ namespace Datos.Migrations
                     b.ToTable("cliente");
                 });
 
-            modelBuilder.Entity("Datos.Models.Cuenta", b =>
+            modelBuilder.Entity("Datos.Models.Cuentas", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2714,7 +2714,7 @@ namespace Datos.Migrations
                             Id = 1,
                             Activo = 1ul,
                             Codigo = "CA",
-                            Descripcion = "Cuenta de Ahorros",
+                            Descripcion = "Cuentas de Ahorros",
                             FechaCreacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517),
                             FechaModificacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517)
                         },
@@ -2723,7 +2723,7 @@ namespace Datos.Migrations
                             Id = 2,
                             Activo = 1ul,
                             Codigo = "CC",
-                            Descripcion = "Cuenta Corriente",
+                            Descripcion = "Cuentas Corriente",
                             FechaCreacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517),
                             FechaModificacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517)
                         },
@@ -2732,7 +2732,7 @@ namespace Datos.Migrations
                             Id = 3,
                             Activo = 1ul,
                             Codigo = "PF",
-                            Descripcion = "Cuenta a Plazo Fijo",
+                            Descripcion = "Cuentas a Plazo Fijo",
                             FechaCreacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517),
                             FechaModificacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517)
                         },
@@ -2741,7 +2741,7 @@ namespace Datos.Migrations
                             Id = 4,
                             Activo = 1ul,
                             Codigo = "MM",
-                            Descripcion = "Cuenta de Mercado Monetario",
+                            Descripcion = "Cuentas de Mercado Monetario",
                             FechaCreacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517),
                             FechaModificacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517)
                         },
@@ -2750,7 +2750,7 @@ namespace Datos.Migrations
                             Id = 5,
                             Activo = 1ul,
                             Codigo = "IP",
-                            Descripcion = "Cuenta de Inversión Personal",
+                            Descripcion = "Cuentas de Inversión Personal",
                             FechaCreacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517),
                             FechaModificacionUTC = new DateTime(2024, 7, 7, 6, 54, 33, 900, DateTimeKind.Utc).AddTicks(7517)
                         });
@@ -3287,13 +3287,13 @@ namespace Datos.Migrations
                         .WithMany("Clientes")
                         .HasForeignKey("CiudadId1");
 
-                    b.HasOne("Datos.Models.Cuenta", "Cuenta")
+                    b.HasOne("Datos.Models.Cuentas", "Cuentas")
                         .WithMany()
                         .HasForeignKey("CuentaId")
                         .HasConstraintName("cliente_cuentafk")
                         .IsRequired();
 
-                    b.HasOne("Datos.Models.Cuenta", null)
+                    b.HasOne("Datos.Models.Cuentas", null)
                         .WithMany("Clientes")
                         .HasForeignKey("CuentaId1");
 
@@ -3328,16 +3328,16 @@ namespace Datos.Migrations
                         .HasForeignKey("PersonaId1");
                 });
 
-            modelBuilder.Entity("Datos.Models.Cuenta", b =>
+            modelBuilder.Entity("Datos.Models.Cuentas", b =>
                 {
                     b.HasOne("Datos.Models.Banco", "IdBancoNavigation")
-                        .WithMany("Cuenta")
+                        .WithMany("Cuentas")
                         .HasForeignKey("IdBanco")
                         .HasConstraintName("banco_cuentafk")
                         .IsRequired();
 
                     b.HasOne("Datos.Models.TipoCuenta", "IdTipoCuentaNavigation")
-                        .WithMany("Cuenta")
+                        .WithMany("Cuentas")
                         .HasForeignKey("IdTipoCuenta")
                         .HasConstraintName("tipocuenta_cuentafk")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -3455,12 +3455,12 @@ namespace Datos.Migrations
             modelBuilder.Entity("Datos.Models.Proveedor", b =>
                 {
                     b.HasOne("Datos.Models.Ciudad", "IdCiudadNavigation")
-                        .WithMany("Proveedors")
+                        .WithMany("Proveedores")
                         .HasForeignKey("IdCiudad")
                         .HasConstraintName("proveedor_ciudadfk")
                         .IsRequired();
 
-                    b.HasOne("Datos.Models.Cuenta", "IdCuentaNavigation")
+                    b.HasOne("Datos.Models.Cuentas", "IdCuentaNavigation")
                         .WithMany("Proveedores")
                         .HasForeignKey("IdCuenta")
                         .HasConstraintName("proveedor_cuentafk")

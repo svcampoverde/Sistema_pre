@@ -1,14 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -27,48 +29,48 @@ namespace LogicDeNegocio.Services
         // Método para registrar una CategoriaProducto
         public async Task<CategoriaProductoDto> RegistrarCategoriaProducto(CategoriaProductoRequest request)
         {
-            var  = _mapper.Map<CategoriaProducto>(request);
-            await _sistemapContext.CategoriaProductos.AddAsync();
+            var entidad = _mapper.Map<CategoriaProducto>(request);
+            await _sistemapContext.CategoriaProductos.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<CategoriaProductoDto>();
+            return _mapper.Map<CategoriaProductoDto>(entidad);
         }
 
         // Método para actualizar una CategoriaProducto
         public async Task<CategoriaProductoDto> ActualizarCategoriaProducto(int id, CategoriaProductoRequest request)
         {
-            var  = await _sistemapContext.CategoriaProductos.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.CategoriaProductos.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"CategoriaProducto con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.CategoriaProductos.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.CategoriaProductos.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<CategoriaProductoDto>();
+            return _mapper.Map<CategoriaProductoDto>(entidad);
         }
 
         // Método para eliminar una CategoriaProducto
         public async Task EliminarCategoriaProducto(int id)
         {
-            var  = await _sistemapContext.CategoriaProductos.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.CategoriaProductos.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"CategoriaProducto con ID {id} no encontrado.");
             }
 
-            _sistemapContext.CategoriaProductos.Remove();
+            _sistemapContext.CategoriaProductos.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
         // Método para obtener todas las CategoriaProductos
         public async Task<List<CategoriaProductoDto>> ObtenerTodasCategoriaProductos()
         {
-            var s = await _sistemapContext.CategoriaProductos
+            var entidadDto = await _sistemapContext.CategoriaProductos
                                             .ProjectTo<CategoriaProductoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

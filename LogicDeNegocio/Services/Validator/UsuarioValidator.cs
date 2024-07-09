@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
+
 using LogicDeNegocio.Requests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services.Validator
 {
-    internal class UsuarioValidator: AbstractValidator<UsuarioRequest>
+    internal class UsuarioValidator : AbstractValidator<UsuarioRequest>
     {
         public UsuarioValidator()
         {

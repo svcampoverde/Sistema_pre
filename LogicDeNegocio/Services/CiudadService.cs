@@ -1,13 +1,17 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,11 +32,11 @@ namespace LogicDeNegocio.Services
             _logger = logger;
         }
 
-        public async Task<IEnumerable<CiudadDto>> ObtenerCiudadesAsync()
+        public async Task<List<CiudadDto>> ObtenerTodasCiudads()
         {
             _logger.LogInformation("Inicio del método ObtenerCiudadesAsync.");
             var ciudades = await _sistemapContext.Ciudades.ToListAsync();
-            return _mapper.Map<IEnumerable<CiudadDto>>(ciudades);
+            return _mapper.Map<List<CiudadDto>>(ciudades);
         }
 
         public async Task<CiudadDto> ObtenerCiudadPorIdAsync(int id)
@@ -47,7 +51,7 @@ namespace LogicDeNegocio.Services
             return _mapper.Map<CiudadDto>(ciudad);
         }
 
-        public async Task<CiudadDto> CrearCiudadAsync(CiudadRequest ciudadRequest)
+        public async Task<CiudadDto> RegistrarCiudad(CiudadRequest ciudadRequest)
         {
             _logger.LogInformation("Inicio del método CrearCiudadAsync.");
             var ciudad = _mapper.Map<Ciudad>(ciudadRequest);
@@ -56,9 +60,9 @@ namespace LogicDeNegocio.Services
             return _mapper.Map<CiudadDto>(ciudad);
         }
 
-        public async Task<CiudadDto> ActualizarCiudadAsync(int id, CiudadRequest ciudadRequest)
+        public async Task<CiudadDto> ActualizarCiudad(int id, CiudadRequest ciudadRequest)
         {
-            _logger.LogInformation("Inicio del método ActualizarCiudadAsync.");
+            _logger.LogInformation("Inicio del método ActualizarCiudad.");
             var ciudad = await _sistemapContext.Ciudades.FindAsync(id);
             if (ciudad == null)
             {
@@ -70,7 +74,7 @@ namespace LogicDeNegocio.Services
             return _mapper.Map<CiudadDto>(ciudad);
         }
 
-        public async Task<bool> EliminarCiudadAsync(int id)
+        public async Task EliminarCiudad(int id)
         {
             _logger.LogInformation("Inicio del método EliminarCiudadAsync.");
             var ciudad = await _sistemapContext.Ciudades.FindAsync(id);
@@ -81,7 +85,6 @@ namespace LogicDeNegocio.Services
             }
             _sistemapContext.Ciudades.Remove(ciudad);
             await _sistemapContext.SaveChangesAsync();
-            return true;
         }
 
         public async Task<Paginate<CiudadDto>> ObtenerCiudadesPaginadasAsync(string search = null, int pageIndex = 1, int pageSize = 10)

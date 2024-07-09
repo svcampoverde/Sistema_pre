@@ -1,14 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -27,48 +29,48 @@ namespace LogicDeNegocio.Services
         // Método para registrar una Inventario
         public async Task<InventarioDto> RegistrarInventario(InventarioRequest request)
         {
-            var  = _mapper.Map<Inventario>(request);
-            await _sistemapContext.Inventarios.AddAsync();
+            var entidad = _mapper.Map<Inventario>(request);
+            await _sistemapContext.Inventarios.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<InventarioDto>();
+            return _mapper.Map<InventarioDto>(entidad);
         }
 
         // Método para actualizar una Inventario
         public async Task<InventarioDto> ActualizarInventario(int id, InventarioRequest request)
         {
-            var  = await _sistemapContext.Inventarios.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Inventarios.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Inventario con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.Inventarios.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.Inventarios.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<InventarioDto>();
+            return _mapper.Map<InventarioDto>(entidad);
         }
 
         // Método para eliminar una Inventario
         public async Task EliminarInventario(int id)
         {
-            var  = await _sistemapContext.Inventarios.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Inventarios.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Inventario con ID {id} no encontrado.");
             }
 
-            _sistemapContext.Inventarios.Remove();
+            _sistemapContext.Inventarios.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
         // Método para obtener todas las Inventarios
         public async Task<List<InventarioDto>> ObtenerTodasInventarios()
         {
-            var s = await _sistemapContext.Inventarios
+            var entidadDto = await _sistemapContext.Inventarios
                                             .ProjectTo<InventarioDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

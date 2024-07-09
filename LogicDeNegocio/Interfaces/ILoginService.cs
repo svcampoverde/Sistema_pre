@@ -1,8 +1,5 @@
-﻿using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using LogicDeNegocio.Dtos;
+
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Interfaces

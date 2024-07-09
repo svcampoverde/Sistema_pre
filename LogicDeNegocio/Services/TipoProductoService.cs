@@ -1,14 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -27,48 +29,48 @@ namespace LogicDeNegocio.Services
         // Método para registrar una TipoProducto
         public async Task<TipoProductoDto> RegistrarTipoProducto(TipoProductoRequest request)
         {
-            var  = _mapper.Map<TipoProducto>(request);
-            await _sistemapContext.TipoProductos.AddAsync();
+            var entidad = _mapper.Map<TipoProducto>(request);
+            await _sistemapContext.TipoProductos.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<TipoProductoDto>();
+            return _mapper.Map<TipoProductoDto>(entidad);
         }
 
         // Método para actualizar una TipoProducto
         public async Task<TipoProductoDto> ActualizarTipoProducto(int id, TipoProductoRequest request)
         {
-            var  = await _sistemapContext.TipoProductos.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.TipoProductos.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"TipoProducto con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.TipoProductos.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.TipoProductos.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<TipoProductoDto>();
+            return _mapper.Map<TipoProductoDto>(entidad);
         }
 
         // Método para eliminar una TipoProducto
         public async Task EliminarTipoProducto(int id)
         {
-            var  = await _sistemapContext.TipoProductos.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.TipoProductos.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"TipoProducto con ID {id} no encontrado.");
             }
 
-            _sistemapContext.TipoProductos.Remove();
+            _sistemapContext.TipoProductos.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
         // Método para obtener todas las TipoProductos
         public async Task<List<TipoProductoDto>> ObtenerTodasTipoProductos()
         {
-            var s = await _sistemapContext.TipoProductos
+            var entidadDto = await _sistemapContext.TipoProductos
                                             .ProjectTo<TipoProductoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

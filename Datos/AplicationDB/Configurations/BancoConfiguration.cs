@@ -50,7 +50,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("fecha_modificacion_utc")
                 .HasColumnType("datetime");
 
-            // Relación uno a muchos con Cuenta
+            // Relación uno a muchos con Cuentas
             entity.HasMany(e => e.Cuenta)
                 .WithOne(e => e.IdBancoNavigation)
                 .HasForeignKey(e => e.IdBanco)

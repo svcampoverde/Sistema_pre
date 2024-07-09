@@ -1,13 +1,17 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +51,7 @@ namespace LogicDeNegocio.Services
             return _mapper.Map<ProvinciaDto>(provincia);
         }
 
-        public async Task<ProvinciaDto> CrearProvinciaAsync(ProvinciaRequest provinciaRequest)
+        public async Task<ProvinciaDto> RegistrarProvincia(ProvinciaRequest provinciaRequest)
         {
             _logger.LogInformation("Inicio del método CrearProvinciaAsync.");
             var provincia = _mapper.Map<Provincia>(provinciaRequest);
@@ -56,7 +60,7 @@ namespace LogicDeNegocio.Services
             return _mapper.Map<ProvinciaDto>(provincia);
         }
 
-        public async Task<ProvinciaDto> ActualizarProvinciaAsync(int id, ProvinciaRequest provinciaRequest)
+        public async Task<ProvinciaDto> ActualizarProvincia(int id, ProvinciaRequest provinciaRequest)
         {
             _logger.LogInformation("Inicio del método ActualizarProvinciaAsync.");
             var provincia = await _sistemapContext.Provincias.FindAsync(id);
@@ -70,9 +74,9 @@ namespace LogicDeNegocio.Services
             return _mapper.Map<ProvinciaDto>(provincia);
         }
 
-        public async Task<bool> EliminarProvinciaAsync(int id)
+        public async Task EliminarProvincia(int id)
         {
-            _logger.LogInformation("Inicio del método EliminarProvinciaAsync.");
+            _logger.LogInformation("Inicio del método EliminarProvincia.");
             var provincia = await _sistemapContext.Provincias.FindAsync(id);
             if (provincia == null)
             {
@@ -81,8 +85,7 @@ namespace LogicDeNegocio.Services
             }
             _sistemapContext.Provincias.Remove(provincia);
             await _sistemapContext.SaveChangesAsync();
-            return true;
-        }
+         }
 
         public async Task<Paginate<ProvinciaDto>> ObtenerProvinciasPaginadasAsync(string search = null, int pageIndex = 1, int pageSize = 10)
         {
@@ -118,6 +121,13 @@ namespace LogicDeNegocio.Services
                 _logger.LogError(ex, "Error al obtener provincias paginadas.");
                 throw;
             }
+        }
+
+
+        public async Task<List<ProvinciaDto>> ObtenerTodasProvincias()
+        {
+            return await _sistemapContext
+                .Provincias.ProjectTo<ProvinciaDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
     }
 }

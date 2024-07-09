@@ -35,7 +35,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("bit")
                 .IsRequired();
 
-            // Relación con Cuenta (uno a muchos)
+            // Relación con Cuentas (uno a muchos)
             entity.HasMany(e => e.Cuenta)
                 .WithOne(p => p.IdTipoCuentaNavigation)
                 .HasForeignKey(e => e.IdTipoCuenta)

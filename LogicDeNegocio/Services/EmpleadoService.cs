@@ -1,11 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,48 +32,48 @@ namespace LogicDeNegocio.Services
         // Método para registrar una Empleado
         public async Task<EmpleadoDto> RegistrarEmpleado(EmpleadoRequest request)
         {
-            var  = _mapper.Map<Empleado>(request);
-            await _sistemapContext.Empleados.AddAsync();
+            var entidad = _mapper.Map<Empleado>(request);
+            await _sistemapContext.Empleados.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<EmpleadoDto>();
+            return _mapper.Map<EmpleadoDto>(entidad);
         }
 
         // Método para actualizar una Empleado
         public async Task<EmpleadoDto> ActualizarEmpleado(int id, EmpleadoRequest request)
         {
-            var  = await _sistemapContext.Empleados.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Empleados.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Empleado con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.Empleados.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.Empleados.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<EmpleadoDto>();
+            return _mapper.Map<EmpleadoDto>(entidad);
         }
 
         // Método para eliminar una Empleado
         public async Task EliminarEmpleado(int id)
         {
-            var  = await _sistemapContext.Empleados.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Empleados.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Empleado con ID {id} no encontrado.");
             }
 
-            _sistemapContext.Empleados.Remove();
+            _sistemapContext.Empleados.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
         // Método para obtener todas las Empleados
         public async Task<List<EmpleadoDto>> ObtenerTodasEmpleados()
         {
-            var s = await _sistemapContext.Empleados
+            var entidadDto = await _sistemapContext.Empleados
                                             .ProjectTo<EmpleadoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

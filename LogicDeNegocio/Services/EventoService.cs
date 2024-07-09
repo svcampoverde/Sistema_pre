@@ -1,14 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -27,48 +29,48 @@ namespace LogicDeNegocio.Services
         // Método para registrar una Evento
         public async Task<EventoDto> RegistrarEvento(EventoRequest request)
         {
-            var  = _mapper.Map<Evento>(request);
-            await _sistemapContext.Eventos.AddAsync();
+            var entidad = _mapper.Map<Evento>(request);
+            await _sistemapContext.Eventos.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<EventoDto>();
+            return _mapper.Map<EventoDto>(entidad);
         }
 
         // Método para actualizar una Evento
         public async Task<EventoDto> ActualizarEvento(int id, EventoRequest request)
         {
-            var  = await _sistemapContext.Eventos.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Eventos.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Evento con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.Eventos.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.Eventos.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<EventoDto>();
+            return _mapper.Map<EventoDto>(entidad);
         }
 
         // Método para eliminar una Evento
         public async Task EliminarEvento(int id)
         {
-            var  = await _sistemapContext.Eventos.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Eventos.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Evento con ID {id} no encontrado.");
             }
 
-            _sistemapContext.Eventos.Remove();
+            _sistemapContext.Eventos.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
         // Método para obtener todas las Eventos
         public async Task<List<EventoDto>> ObtenerTodasEventos()
         {
-            var s = await _sistemapContext.Eventos
+            var entidadDto = await _sistemapContext.Eventos
                                             .ProjectTo<EventoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

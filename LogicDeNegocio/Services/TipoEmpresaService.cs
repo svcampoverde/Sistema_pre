@@ -1,14 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -27,48 +29,48 @@ namespace LogicDeNegocio.Services
         // Método para registrar una TipoEmpresa
         public async Task<TipoEmpresaDto> RegistrarTipoEmpresa(TipoEmpresaRequest request)
         {
-            var  = _mapper.Map<TipoEmpresa>(request);
-            await _sistemapContext.TipoEmpresas.AddAsync();
+            var entidad = _mapper.Map<TipoEmpresa>(request);
+            await _sistemapContext.TipoEmpresas.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<TipoEmpresaDto>();
+            return _mapper.Map<TipoEmpresaDto>(entidad);
         }
 
         // Método para actualizar una TipoEmpresa
         public async Task<TipoEmpresaDto> ActualizarTipoEmpresa(int id, TipoEmpresaRequest request)
         {
-            var  = await _sistemapContext.TipoEmpresas.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.TipoEmpresas.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"TipoEmpresa con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.TipoEmpresas.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.TipoEmpresas.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<TipoEmpresaDto>();
+            return _mapper.Map<TipoEmpresaDto>(entidad);
         }
 
         // Método para eliminar una TipoEmpresa
         public async Task EliminarTipoEmpresa(int id)
         {
-            var  = await _sistemapContext.TipoEmpresas.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.TipoEmpresas.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"TipoEmpresa con ID {id} no encontrado.");
             }
 
-            _sistemapContext.TipoEmpresas.Remove();
+            _sistemapContext.TipoEmpresas.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
         // Método para obtener todas las TipoEmpresas
         public async Task<List<TipoEmpresaDto>> ObtenerTodasTipoEmpresas()
         {
-            var s = await _sistemapContext.TipoEmpresas
+            var entidadDto = await _sistemapContext.TipoEmpresas
                                             .ProjectTo<TipoEmpresaDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

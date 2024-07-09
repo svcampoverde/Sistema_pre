@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
+
 using Datos.AplicationDB;
-using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
-using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+
 using System;
 using System.Threading.Tasks;
 

@@ -1,14 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -24,51 +26,51 @@ namespace LogicDeNegocio.Services
             _mapper = mapper;
         }
 
-        // Método para registrar una Cuenta
+        // Método para registrar una Cuentas
         public async Task<CuentaDto> RegistrarCuenta(CuentaRequest request)
         {
-            var  = _mapper.Map<Cuenta>(request);
-            await _sistemapContext.Cuentas.AddAsync();
+            var entidad = _mapper.Map<Cuenta>(request);
+            await _sistemapContext.Cuentas.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<CuentaDto>();
+            return _mapper.Map<CuentaDto>(entidad);
         }
 
-        // Método para actualizar una Cuenta
+        // Método para actualizar una Cuentas
         public async Task<CuentaDto> ActualizarCuenta(int id, CuentaRequest request)
         {
-            var  = await _sistemapContext.Cuentas.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Cuentas.FindAsync(id);
+            if (entidad == null)
             {
-                throw new KeyNotFoundException($"Cuenta con ID {id} no encontrado.");
+                throw new KeyNotFoundException($"Cuentas con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.Cuentas.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.Cuentas.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<CuentaDto>();
+            return _mapper.Map<CuentaDto>(entidad);
         }
 
-        // Método para eliminar una Cuenta
+        // Método para eliminar una Cuentas
         public async Task EliminarCuenta(int id)
         {
-            var  = await _sistemapContext.Cuentas.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Cuentas.FindAsync(id);
+            if (entidad == null)
             {
-                throw new KeyNotFoundException($"Cuenta con ID {id} no encontrado.");
+                throw new KeyNotFoundException($"Cuentas con ID {id} no encontrado.");
             }
 
-            _sistemapContext.Cuentas.Remove();
+            _sistemapContext.Cuentas.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
         // Método para obtener todas las Cuentas
         public async Task<List<CuentaDto>> ObtenerTodasCuentas()
         {
-            var s = await _sistemapContext.Cuentas
+            var entidadDto = await _sistemapContext.Cuentas
                                             .ProjectTo<CuentaDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

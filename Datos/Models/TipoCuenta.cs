@@ -12,7 +12,7 @@ namespace Datos.Models
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
 
-        // Relación con Cuenta (uno a muchos)
+        // Relación con Cuentas (uno a muchos)
         public virtual ICollection<Cuenta> Cuenta { get; set; }
     }
 }

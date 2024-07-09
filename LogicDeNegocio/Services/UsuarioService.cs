@@ -1,74 +1,163 @@
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using FluentValidation;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace LogicDeNegocio.Services
+namespace LogicDeNegocio.Personas
 {
-    internal class UsuarioService : IUsuarioService
+    public class UsuarioService : IUsuarioService
     {
         private readonly SistemapContext _sistemapContext;
         private readonly IMapper _mapper;
+        private readonly IValidator<UsuarioRequest> _validator;
+        private readonly ILogger<UsuarioService> _logger;
+        private readonly IPasswordHashService _passwordHashService;
 
-        public UsuarioService(SistemapContext sistemapContext, IMapper mapper)
+        public UsuarioService(SistemapContext sistemapContext, IMapper mapper,
+            IValidator<UsuarioRequest> validator, ILogger<UsuarioService> logger,
+            IPasswordHashService passwordHashService)
         {
             _sistemapContext = sistemapContext;
             _mapper = mapper;
+            _validator = validator;
+            _logger = logger;
+            _passwordHashService = passwordHashService;
         }
 
-        // Método para registrar una Usuario
-        public async Task<UsuarioDto> RegistrarUsuario(UsuarioRequest request)
+        public async Task<UsuarioDto> RegistrarUsuarioAsync(UsuarioRequest request)
         {
-            var  = _mapper.Map<Usuario>(request);
-            await _sistemapContext.Usuarios.AddAsync();
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<UsuarioDto>();
-        }
+            _logger.LogInformation("Inicio del método RegistrarUsuarioAsync.");
 
-        // Método para actualizar una Usuario
-        public async Task<UsuarioDto> ActualizarUsuario(int id, UsuarioRequest request)
-        {
-            var  = await _sistemapContext.Usuarios.FindAsync(id);
-            if ( == null)
+            var validationResult = await _validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
             {
-                throw new KeyNotFoundException($"Usuario con ID {id} no encontrado.");
+                _logger.LogWarning("Errores de validación: {Errors}", validationResult.Errors);
+                throw new ValidationException(validationResult.Errors);
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.Usuarios.Update();
-            await _sistemapContext.SaveChangesAsync();
+            try
+            {
+                var persona = _mapper.Map<Persona>(request);
+                var user = _mapper.Map<Usuario>(request);
 
-            return _mapper.Map<UsuarioDto>();
+                // Crear el hash y el salt de la contraseña
+                _passwordHashService.CreatePasswordHash(request.Clave, out byte[] passwordHash, out byte[] passwordSalt);
+                user.ContrasenaHash = passwordHash;
+                user.ContrasenaSalt = passwordSalt;
+
+                persona.UsuarioNavegation = user;
+                await _sistemapContext.AddAsync(persona);
+                await _sistemapContext.SaveChangesAsync();
+                var userDto = _mapper.Map<UsuarioDto>(persona);
+
+                _logger.LogInformation("Usuario registrado exitosamente.");
+                return userDto;
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Error al actualizar la base de datos.");
+                throw new Exception("Error al registrar el usuario. Intente nuevamente más tarde.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error inesperado al registrar el usuario.");
+                throw new Exception("Ocurrió un error inesperado al registrar el usuario.", ex);
+            }
         }
 
-        // Método para eliminar una Usuario
-        public async Task EliminarUsuario(int id)
+        public async Task<UsuarioDto> ActualizarUsuarioAsync(int id, UsuarioRequest request)
         {
-            var  = await _sistemapContext.Usuarios.FindAsync(id);
-            if ( == null)
+            _logger.LogInformation("Inicio del método ActualizarUsuarioAsync.");
+
+            var validationResult = await _validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
             {
-                throw new KeyNotFoundException($"Usuario con ID {id} no encontrado.");
+                _logger.LogWarning("Errores de validación: {Errors}", validationResult.Errors);
+                throw new ValidationException(validationResult.Errors);
             }
 
-            _sistemapContext.Usuarios.Remove();
-            await _sistemapContext.SaveChangesAsync();
+            try
+            {
+                var persona = await _sistemapContext.Personas.Include(p => p.UsuarioNavegation).FirstOrDefaultAsync(p => p.Id == id);
+                if (persona == null)
+                {
+                    _logger.LogWarning("Usuario no encontrado.");
+                    throw new Exception("Usuario no encontrado.");
+                }
+
+                _mapper.Map(request, persona);
+                var user = persona.UsuarioNavegation;
+                _mapper.Map(request, user);
+
+                // Actualizar la contraseña si se proporciona una nueva
+                if (!string.IsNullOrEmpty(request.Clave))
+                {
+                    _passwordHashService.CreatePasswordHash(request.Clave, out byte[] passwordHash, out byte[] passwordSalt);
+                    user.ContrasenaHash = passwordHash;
+                    user.ContrasenaSalt = passwordSalt;
+                }
+
+                await _sistemapContext.SaveChangesAsync();
+                var userDto = _mapper.Map<UsuarioDto>(persona);
+                _logger.LogInformation("Usuario actualizado exitosamente.");
+                return userDto;
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Error al actualizar la base de datos.");
+                throw new Exception("Error al actualizar el usuario. Intente nuevamente más tarde.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error inesperado al actualizar el usuario.");
+                throw new Exception("Ocurrió un error inesperado al actualizar el usuario.", ex);
+            }
         }
 
-        // Método para obtener todas las Usuarios
-        public async Task<List<UsuarioDto>> ObtenerTodasUsuarios()
+        public async Task<bool> CambiarClaveAsync(int id, string nuevaClave)
         {
-            var s = await _sistemapContext.Usuarios
-                                            .ProjectTo<UsuarioDto>(_mapper.ConfigurationProvider)
-                                            .ToListAsync();
-            return s;
+            _logger.LogInformation("Inicio del método CambiarClaveAsync.");
+
+            try
+            {
+                var usuario = await _sistemapContext.Usuarios.FindAsync(id);
+                if (usuario == null)
+                {
+                    _logger.LogWarning("Usuario no encontrado.");
+                    throw new Exception("Usuario no encontrado.");
+                }
+
+                // Crear el hash y el salt de la nueva contraseña
+                _passwordHashService.CreatePasswordHash(nuevaClave, out byte[] passwordHash, out byte[] passwordSalt);
+                usuario.ContrasenaHash = passwordHash;
+                usuario.ContrasenaSalt = passwordSalt;
+
+                await _sistemapContext.SaveChangesAsync();
+                _logger.LogInformation("Contraseña cambiada exitosamente.");
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Error al actualizar la base de datos.");
+                throw new Exception("Error al cambiar la contraseña. Intente nuevamente más tarde.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error inesperado al cambiar la contraseña.");
+                throw new Exception("Ocurrió un error inesperado al cambiar la contraseña.", ex);
+            }
         }
     }
 }

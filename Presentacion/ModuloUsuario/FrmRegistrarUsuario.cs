@@ -16,9 +16,9 @@ namespace Presentacion.ModuloUsuario
     public partial class FrmRegistrarUsuario : MaterialSkin.Controls.MaterialForm
     {
         private readonly SistemapContext _sistemapContext;
-        private readonly IUserService userService;
+        private readonly IUsuarioService userService;
 
-        public FrmRegistrarUsuario(SistemapContext sistemapContext, IUserService userService)
+        public FrmRegistrarUsuario(SistemapContext sistemapContext, IUsuarioService userService)
         {
             this.userService = userService;
             _sistemapContext = sistemapContext;

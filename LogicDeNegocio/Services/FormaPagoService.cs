@@ -1,14 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -27,48 +29,48 @@ namespace LogicDeNegocio.Services
         // Método para registrar una FormaPago
         public async Task<FormaPagoDto> RegistrarFormaPago(FormaPagoRequest request)
         {
-            var  = _mapper.Map<FormaPago>(request);
-            await _sistemapContext.FormaPagos.AddAsync();
+            var entidad = _mapper.Map<FormaPago>(request);
+            await _sistemapContext.FormaPagos.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<FormaPagoDto>();
+            return _mapper.Map<FormaPagoDto>(entidad);
         }
 
         // Método para actualizar una FormaPago
         public async Task<FormaPagoDto> ActualizarFormaPago(int id, FormaPagoRequest request)
         {
-            var  = await _sistemapContext.FormaPagos.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.FormaPagos.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"FormaPago con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.FormaPagos.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.FormaPagos.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<FormaPagoDto>();
+            return _mapper.Map<FormaPagoDto>(entidad);
         }
 
         // Método para eliminar una FormaPago
         public async Task EliminarFormaPago(int id)
         {
-            var  = await _sistemapContext.FormaPagos.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.FormaPagos.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"FormaPago con ID {id} no encontrado.");
             }
 
-            _sistemapContext.FormaPagos.Remove();
+            _sistemapContext.FormaPagos.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
         // Método para obtener todas las FormaPagos
         public async Task<List<FormaPagoDto>> ObtenerTodasFormaPagos()
         {
-            var s = await _sistemapContext.FormaPagos
+            var entidadDto = await _sistemapContext.FormaPagos
                                             .ProjectTo<FormaPagoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

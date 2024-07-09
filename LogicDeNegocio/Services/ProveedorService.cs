@@ -1,14 +1,16 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+
 using Datos.AplicationDB;
 using Datos.Models;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
-using LogicDeNegocio.Extensions;
+
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+
 using Microsoft.EntityFrameworkCore;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -27,48 +29,48 @@ namespace LogicDeNegocio.Services
         // Método para registrar una Proveedor
         public async Task<ProveedorDto> RegistrarProveedor(ProveedorRequest request)
         {
-            var  = _mapper.Map<Proveedor>(request);
-            await _sistemapContext.Proveedors.AddAsync();
+            var entidad = _mapper.Map<Proveedor>(request);
+            await _sistemapContext.Proveedores.AddAsync(entidad);
             await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<ProveedorDto>();
+            return _mapper.Map<ProveedorDto>(entidad);
         }
 
         // Método para actualizar una Proveedor
         public async Task<ProveedorDto> ActualizarProveedor(int id, ProveedorRequest request)
         {
-            var  = await _sistemapContext.Proveedors.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Proveedores.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Proveedor con ID {id} no encontrado.");
             }
 
-            _mapper.Map(request, );
-            _sistemapContext.Proveedors.Update();
+            entidad = _mapper.Map(request, entidad);
+            _sistemapContext.Proveedores.Update(entidad);
             await _sistemapContext.SaveChangesAsync();
 
-            return _mapper.Map<ProveedorDto>();
+            return _mapper.Map<ProveedorDto>(entidad);
         }
 
         // Método para eliminar una Proveedor
         public async Task EliminarProveedor(int id)
         {
-            var  = await _sistemapContext.Proveedors.FindAsync(id);
-            if ( == null)
+            var entidad = await _sistemapContext.Proveedores.FindAsync(id);
+            if (entidad == null)
             {
                 throw new KeyNotFoundException($"Proveedor con ID {id} no encontrado.");
             }
 
-            _sistemapContext.Proveedors.Remove();
+            _sistemapContext.Proveedores.Remove(entidad);
             await _sistemapContext.SaveChangesAsync();
         }
 
-        // Método para obtener todas las Proveedors
+        // Método para obtener todas las Proveedores
         public async Task<List<ProveedorDto>> ObtenerTodasProveedors()
         {
-            var s = await _sistemapContext.Proveedors
+            var entidadDto = await _sistemapContext.Proveedores
                                             .ProjectTo<ProveedorDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+            return entidadDto;
         }
     }
 }

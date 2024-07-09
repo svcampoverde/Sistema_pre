@@ -1,15 +1,16 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using LogicDeNegocio.Dtos;using LogicDeNegocio.Requests;
+﻿using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Requests;
+
+using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Interfaces
 {
     public interface IUsuarioService
     {
-        Task<UsuarioDto> RegistrarUsuario(UsuarioRequest request);
-        Task<UsuarioDto> ActualizarUsuario(int id, UsuarioRequest request);
-        Task EliminarUsuario(int id);
-        Task<List<UsuarioDto>> ObtenerTodasUsuarios();
+        Task<UsuarioDto> RegistrarUsuarioAsync(UsuarioRequest userDto);
+
+        Task<UsuarioDto> ActualizarUsuarioAsync(int id, UsuarioRequest userDto);
+
+        Task<bool> CambiarClaveAsync(int id, string nuevaClave);
     }
 }

@@ -9,10 +9,10 @@ namespace Presentacion.Servicio
 {
     public partial class FrmServicio : Form
     {
-        private readonly IServicioServices _servicioServices;
+        private readonly IServicioService _servicioServices;
         private VPagination pagination;
 
-        public FrmServicio(IServicioServices servicioServices)
+        public FrmServicio(IServicioService servicioServices)
         {
             _servicioServices = servicioServices;
             InitializeComponent();
