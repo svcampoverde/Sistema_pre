@@ -341,6 +341,7 @@
     <Compile Include="Mapper\Profiles\TipoProductoProfile.cs" />
     <Compile Include="Mapper\Profiles\TipoServicioProfile.cs" />
     <Compile Include="Mapper\Profiles\UsuarioProfile.cs" />
+    <Compile Include="MdiPropiedades.cs" />
     <Compile Include="Requests\AtributoProductoRequest.cs" />
     <Compile Include="Requests\AtributoRequest.cs" />
     <Compile Include="Requests\BancoRequest.cs" />

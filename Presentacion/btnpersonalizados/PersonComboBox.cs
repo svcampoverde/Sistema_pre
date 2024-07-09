@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Drawing2D;
+using System.Drawing.Design;
 using System.Windows.Forms;
+
 namespace Presentacion.btnpersonalizados
 {
     [DefaultEvent("OnSelectedIndexChanged")]
@@ -16,13 +17,15 @@ namespace Presentacion.btnpersonalizados
         private Color listTextColor = Color.DimGray;
         private Color borderColor = Color.MediumSlateBlue;
         private int borderSize = 1;
+        private int borderRadius = 0; // Nuevo campo para el borde redondeado
+
         //Items
         private ComboBox cmbList;
         private Label lblText;
         private Button btnIcon;
-        //Events
-        public event EventHandler OnSelectedIndexChanged;//Default event
 
+        //Events
+        public event EventHandler OnSelectedIndexChanged; //Default event
 
         //Constructor
         public PersonComboBox()
@@ -36,8 +39,9 @@ namespace Presentacion.btnpersonalizados
             cmbList.BackColor = listBackColor;
             cmbList.Font = new Font(this.Font.Name, 10F);
             cmbList.ForeColor = listTextColor;
-            cmbList.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndexChanged);//Default event
-            cmbList.TextChanged += new EventHandler(ComboBox_TextChanged);//Refresh text
+            cmbList.SelectedIndexChanged += new EventHandler(ComboBox_SelectedIndexChanged); //Default event
+            cmbList.TextChanged += new EventHandler(ComboBox_TextChanged); //Refresh text
+            cmbList.DropDown += new EventHandler(ComboBox_DropDown);
 
             //Button: Icon
             btnIcon.Dock = DockStyle.Right;
@@ -46,8 +50,8 @@ namespace Presentacion.btnpersonalizados
             btnIcon.BackColor = backColor;
             btnIcon.Size = new Size(30, 30);
             btnIcon.Cursor = Cursors.Hand;
-            btnIcon.Click += new EventHandler(Icon_Click);//Open dropdown list
-            btnIcon.Paint += new PaintEventHandler(Icon_Paint);//Draw icon
+            btnIcon.Click += new EventHandler(Icon_Click); //Open dropdown list
+            btnIcon.Paint += new PaintEventHandler(Icon_Paint); //Draw icon
 
             //Label: Text
             lblText.Dock = DockStyle.Fill;
@@ -56,19 +60,20 @@ namespace Presentacion.btnpersonalizados
             lblText.TextAlign = ContentAlignment.MiddleLeft;
             lblText.Padding = new Padding(8, 0, 0, 0);
             lblText.Font = new Font(this.Font.Name, 10F);
+
             //->Attach label events to user control event
-            lblText.Click += new EventHandler(Surface_Click);//Select combo box
+            lblText.Click += new EventHandler(Surface_Click); //Select combo box
             lblText.MouseEnter += new EventHandler(Surface_MouseEnter);
             lblText.MouseLeave += new EventHandler(Surface_MouseLeave);
 
             //User Control
-            this.Controls.Add(lblText);//2
-            this.Controls.Add(btnIcon);//1
-            this.Controls.Add(cmbList);//0
+            this.Controls.Add(lblText); //2
+            this.Controls.Add(btnIcon); //1
+            this.Controls.Add(cmbList); //0
             this.MinimumSize = new Size(200, 30);
             this.Size = new Size(200, 30);
             this.ForeColor = Color.DimGray;
-            this.Padding = new Padding(borderSize);//Border Size
+            this.Padding = new Padding(borderSize); //Border Size
             this.Font = new Font(this.Font.Name, 10F);
             base.BackColor = borderColor; //Border Color
             this.ResumeLayout();
@@ -96,6 +101,13 @@ namespace Presentacion.btnpersonalizados
             //Refresh text
             lblText.Text = cmbList.Text;
         }
+
+        //Dropdown event
+        private void ComboBox_DropDown(object sender, EventArgs e)
+        {
+            AdjustComboBoxDimensions();
+        }
+
         //-> Items actions
         private void Icon_Click(object sender, EventArgs e)
         {
@@ -103,6 +115,7 @@ namespace Presentacion.btnpersonalizados
             cmbList.Select();
             cmbList.DroppedDown = true;
         }
+
         private void Surface_Click(object sender, EventArgs e)
         {
             //Attach label click to user control click
@@ -110,8 +123,9 @@ namespace Presentacion.btnpersonalizados
             //Select combo box
             cmbList.Select();
             if (cmbList.DropDownStyle == ComboBoxStyle.DropDownList)
-                cmbList.DroppedDown = true;//Open dropdown list
+                cmbList.DroppedDown = true; //Open dropdown list
         }
+
         private void ComboBox_TextChanged(object sender, EventArgs e)
         {
             //Refresh text
@@ -159,7 +173,7 @@ namespace Presentacion.btnpersonalizados
             set
             {
                 iconColor = value;
-                btnIcon.Invalidate();//Redraw icon
+                btnIcon.Invalidate(); //Redraw icon
             }
         }
 
@@ -203,12 +217,22 @@ namespace Presentacion.btnpersonalizados
             set
             {
                 borderSize = value;
-                this.Padding = new Padding(borderSize);//Border Size
+                this.Padding = new Padding(borderSize); //Border Size
                 AdjustComboBoxDimensions();
+                this.Invalidate();
             }
         }
 
-
+        [Category("Appearance")]
+        public int BorderRadius
+        {
+            get { return borderRadius; }
+            set
+            {
+                borderRadius = value;
+                this.Invalidate();
+            }
+        }
 
         [Category("Appearance")]
         public override Color ForeColor
@@ -229,7 +253,7 @@ namespace Presentacion.btnpersonalizados
             {
                 base.Font = value;
                 lblText.Font = value;
-                cmbList.Font = value;//Optional
+                cmbList.Font = value; //Optional
             }
         }
 
@@ -273,7 +297,6 @@ namespace Presentacion.btnpersonalizados
         }
 
         [Category("RJ Code - Data")]
-        [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
         [EditorBrowsable(EditorBrowsableState.Always)]
@@ -342,6 +365,15 @@ namespace Presentacion.btnpersonalizados
             set { cmbList.ValueMember = value; }
         }
 
+        [Category("RJ Code - Data")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public object SelectedValue
+        {
+            get { return cmbList.SelectedValue; }
+            set { cmbList.SelectedValue = value; }
+        }
+
         //->Attach label events to user control event
         private void Surface_MouseLeave(object sender, EventArgs e)
         {
@@ -360,6 +392,42 @@ namespace Presentacion.btnpersonalizados
             AdjustComboBoxDimensions();
         }
 
-    }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
 
+            if (borderRadius > 0) // Si el radio del borde es mayor a 0, dibujamos bordes redondeados
+            {
+                var rectBorderSmooth = this.ClientRectangle;
+                var rectBorder = Rectangle.Inflate(rectBorderSmooth, -borderSize, -borderSize);
+                int smoothSize = borderSize > 0 ? borderSize : 1;
+
+                using (GraphicsPath pathBorderSmooth = GetFigurePath(rectBorderSmooth, borderRadius))
+                using (GraphicsPath pathBorder = GetFigurePath(rectBorder, borderRadius - borderSize))
+                using (Pen penBorderSmooth = new Pen(this.Parent.BackColor, smoothSize))
+                using (Pen penBorder = new Pen(borderColor, borderSize))
+                {
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    penBorder.Alignment = PenAlignment.Center;
+                    e.Graphics.DrawPath(penBorderSmooth, pathBorderSmooth);
+                    e.Graphics.DrawPath(penBorder, pathBorder);
+                }
+            }
+        }
+
+        private GraphicsPath GetFigurePath(RectangleF rect, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            float curveSize = radius * 2F;
+
+            path.StartFigure();
+            path.AddArc(rect.X, rect.Y, curveSize, curveSize, 180, 90);
+            path.AddArc(rect.Right - curveSize, rect.Y, curveSize, curveSize, 270, 90);
+            path.AddArc(rect.Right - curveSize, rect.Bottom - curveSize, curveSize, curveSize, 0, 90);
+            path.AddArc(rect.X, rect.Bottom - curveSize, curveSize, curveSize, 90, 90);
+            path.CloseFigure();
+
+            return path;
+        }
+    }
 }

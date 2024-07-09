@@ -1,46 +1,69 @@
-﻿using Datos.AplicationDB;
-using FluentValidation;
-using LogicDeNegocio;
-using LogicDeNegocio.Dtos;
-using LogicDeNegocio.Interfaces;
-using LogicDeNegocio.Requests;
+﻿using LogicDeNegocio;
+//using LogicDeNegocio.personas;
+//using LogicDeNegocio.provincia;
 using MaterialSkin;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Security;
 using System.Windows.Forms;
-using Unity;
 
 namespace Presentacion.ModuloUsuario
 {
-    public partial class FrmRegistrarUsuario : MaterialSkin.Controls.MaterialForm
+    public partial class FrmRegistrarUsuario : Form
     {
-        private readonly SistemapContext _sistemapContext;
-        private readonly IUsuarioService userService;
-
-        public FrmRegistrarUsuario(SistemapContext sistemapContext, IUsuarioService userService)
+        //AdmRol adm = new AdmRol();
+        //UsuarioDao usuarioDao = new UsuarioDao();
+        //Ciudad ciud = new Ciudad();
+        //Rol r = new Rol();
+        public FrmRegistrarUsuario()
         {
-            this.userService = userService;
-            _sistemapContext = sistemapContext;
             InitializeComponent();
             llenarCombobox();
-
+            llenarCiudad();
+            this.MaximizeBox = false;
         }
         private void llenarCombobox()
         {
+            try { 
+                //List<Rol> list = r.llenarComboRol();
+
+                //if (list == null || list.Count == 0)
+                //{
+                //    MessageBox.Show("No se encontraron roles para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return;
+                //}
+                //cbRol.DataSource = null;
+                //cbRol.DataSource = list;
+                //cbRol.DisplayMember = "RolUsuario";
+                //cbRol.ValueMember = "Idrol";
+            }
+            catch(ExceptionSistema ex)
+            {
+                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
+        private void llenarCiudad()
+        {
             try
             {
-                var list = _sistemapContext.Roles.ToList();
+                //List<Ciudad> list = ciud.llenarComboCiudad();
 
-                if (list == null || list.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron roles para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                cbRol.DataSource = null;
-                cbRol.DataSource = list;
-                cbRol.DisplayMember = "Descripcion";
-                cbRol.ValueMember = "Id";
+                //if (list == null || list.Count == 0)
+                //{
+                //    MessageBox.Show("No se encontraron ciudades para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    return;
+                ////}
+                //cmbCiudad.DataSource = null;
+                //cmbCiudad.DataSource = list;
+                //cmbCiudad.DisplayMember = "Descripcion";
+                //cmbCiudad.ValueMember = "Idciudad";
             }
             catch (ExceptionSistema ex)
             {
@@ -48,12 +71,12 @@ namespace Presentacion.ModuloUsuario
             }
 
         }
-
+       
         private void FrmRegistrarUsuario_Load(object sender, EventArgs e)
         {
-            SkinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;//.DARK;
-            SkinManager.ColorScheme = new ColorScheme(Primary.Red900, Primary.Red900, Primary.Blue100, Accent.Green700, TextShade.BLACK);
 
+            this.ControlBox = false;
+               
         }
 
 
@@ -62,45 +85,99 @@ namespace Presentacion.ModuloUsuario
         {
 
         }
-
-        private async void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e)
         {
+            int id = 0;
+            int idciudad = Convert.ToInt32(cmbCiudad.SelectedValue);
+            int idrol = Convert.ToInt32(cbRol.SelectedValue);
+            string cedula = txtCedula.Text, nombre = txtCedula.Text, apellido = txtApellido.Text, genero = cmbGenero.Text.Trim(),
+                   telefono = txtTelefono.Text, celular = txtCelular.Text, correo = txtCorreo.Text, direccion = txtDireccion.Text,
+                   usuario = txtUsuario.Text, clave = txtClave.Text;
             BorrarAlerta();
             try
             {
-                var usuarioDto = new UsuarioRequest
-                {
-                    IdCiudad = Convert.ToInt32(cmbCiudad.SelectedValue),
-                    IdRol = Convert.ToInt32(cbRol.SelectedValue),
-                    Cedula = txtCedula.Text.Trim(),
-                    Nombre = txtNombre.Text.Trim(), 
-                    Apellido = txtApellido.Text.Trim(),
-                    Genero = cmbGenero.Text.Trim(),
-                    Telefono = txtTelefono.Text.Trim(),
-                    Celular = txtCelular.Text.Trim(),
-                    Correo = txtCorreo.Text.Trim(),
-                    Direccion = txtDireccion.Text.Trim(),
-                    Usuario = txtUsuario.Text.Trim(),
-                    Clave = txtClave.Text.Trim()
-                };
-                 
-                var result = await userService.RegistrarUsuarioAsync(usuarioDto);
-                // Manejar el resultado
+                //if (validar())
+                //{
+                //    Usuario us = new Usuario(id, cedula, nombre, apellido, genero, telefono, celular, correo, direccion, idciudad, idrol, usuario, clave);
+                //    usuarioDao.InsertUsuario(us);
+                //    Limpiar();
+                //}
             }
-            catch (ValidationException ex)
+            catch (ExceptionSistema ex)
             {
-                // Manejar errores de validación
-                var errors = string.Join(Environment.NewLine, ex.Errors.Select(error => error.ErrorMessage));
-                MessageBox.Show($"Errores de validación:{Environment.NewLine}{errors}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex)
-            {
-                // Manejar otros errores
-                MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
         }
-  
+        //private bool validar()
+        //{
+        //    Validacionp valida = new Validacionp();
+        //    bool campo = true;
+        //    if (valida.ValidarCedula(txtCedula.Text) != true)
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(txtCedula, "Se esperaba 10 numeros.");
+        //    }
+        //    if (txtNombre.Text == "")
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(txtNombre, "Ingrese un nombre completo.");
+        //    }
+        //    if (txtApellido.Text == "")
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(txtNombre, "Ingrese un apellido completo.");
+        //    }
+        //    if (valida.ValidarTelefono(txtTelefono.Text) != true)
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(txtTelefono, "Se esperaba 10 numeros.");
+        //    }
+        //    if(valida.ValidarCelular(txtCelular.Text) != true)
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(txtCelular, "Se esperaba 10 numeros");
+        //    }
+        //    if (cmbGenero.SelectedIndex < 0)
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(cmbGenero, "Selecione un tipo de genero.");
+        //    }
+        //    if (cmbCiudad.SelectedIndex < 0)
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(cmbCiudad, "Selecione una ciudad.");
+        //    }
+        //    if (cbRol.SelectedIndex < 0)
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(cbRol, "Selecione un tipo de rol.");
+        //    }
+        //    if (valida.validarEmail(txtCorreo.Text) != true)
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(txtCorreo, "Ingrese su correo electronico.");
+        //    }
+        //    if (txtClave.Text == "")
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(txtClave, "Ingrese una contraseña.");
+        //    }
+        //    if (txtDireccion.Text == "")
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(txtDireccion, "Ingrese una direccion.");
+        //    }
+        //    if (txtUsuario.Text == "")
+        //    {
+        //        campo = false;
+        //        errorProvider1.SetError(txtUsuario, "Ingrese un usuario.");
+        //    }
+        //    if (!campo)
+        //    {
+        //        throw new ExceptionSistema("Datos no validos!");
+        //    }
+        //    return campo;
+        //}
         private void BorrarAlerta()
         {
             errorProvider1.SetError(txtCedula, "");
@@ -118,55 +195,17 @@ namespace Presentacion.ModuloUsuario
         }
         public void Limpiar()
         {
-            txtCedula.Clear();
-            txtNombre.Clear();
-            txtApellido.Clear();
-            txtTelefono.Clear();
-            txtCelular.Clear();
-            txtCorreo.Clear();
-            txtDireccion.Clear();
-            txtUsuario.Clear();
-            txtClave.Clear();
-        }
-        private void cmbCiudad_DropDown(object sender, EventArgs e)
-        {
-            try
-            {
-                var list = _sistemapContext.Ciudades.ToList();
-                if (list == null || list.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron provincias para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                cmbCiudad.DataSource = null;
-                cmbCiudad.DataSource = list;
-                cmbCiudad.DisplayMember = "Nombre";
-                cmbCiudad.ValueMember = "Id";
-
-            }
-            catch (ExceptionSistema ex)
-            {
-                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            txtCedula.Text="";
+            txtNombre.Text="";
+            txtApellido.Text="";
+            txtTelefono.Text ="";
+            txtCelular.Text = "";
+            txtCorreo.Text = "";
+            txtDireccion.Text = "";
+            txtUsuario.Text = "";
+            txtClave.Text = "";
         }
 
-        private void FrmRegistrarUsuario_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
-        private void txtCorreo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtCorreo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Only allow email format characters
-            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '@' && e.KeyChar != '.' && e.KeyChar != '_')
-            {
-                e.Handled = true;
-            }
-        }
+        
     }
 }
