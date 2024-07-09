@@ -376,6 +376,10 @@
     <Compile Include="ModuloCliente\FrmRegistrarCliente.Designer.cs">
       <DependentUpon>FrmRegistrarCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuloEmpeado\FrmEmpleado.cs" />
+    <Compile Include="ModuloEmpeado\FrmEmpleado.Designer.cs">
+      <DependentUpon>FrmEmpleado.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModuloEmpresa\FrmEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,6 +421,10 @@
     </Compile>
     <Compile Include="ModuloProducto\FrmCategoria.Designer.cs">
       <DependentUpon>FrmCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModuloProducto\FrmInventario.cs" />
+    <Compile Include="ModuloProducto\FrmInventario.Designer.cs">
+      <DependentUpon>FrmInventario.cs</DependentUpon>
     </Compile>
     <Compile Include="ModuloProveedor\FrmRegistroProveedor.cs">
       <SubType>Form</SubType>
@@ -477,6 +485,9 @@
     <EmbeddedResource Include="ModuloCliente\FrmRegistrarCliente.resx">
       <DependentUpon>FrmRegistrarCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ModuloEmpeado\FrmEmpleado.resx">
+      <DependentUpon>FrmEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModuloEmpresa\FrmEmpresa.resx">
       <DependentUpon>FrmEmpresa.cs</DependentUpon>
     </EmbeddedResource>
@@ -497,6 +508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloProducto\FrmCategoria.resx">
       <DependentUpon>FrmCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloProducto\FrmInventario.resx">
+      <DependentUpon>FrmInventario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloProveedor\FrmRegistroProveedor.resx">
       <DependentUpon>FrmRegistroProveedor.cs</DependentUpon>
