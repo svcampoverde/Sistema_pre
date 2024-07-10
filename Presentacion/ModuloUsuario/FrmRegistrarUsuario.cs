@@ -138,22 +138,6 @@ namespace Presentacion.ModuloUsuario
         private void BorrarAlertas()
         {
             errorProvider1.Clear();
-        }
-
-        private async void cbRol_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbRol.SelectedIndex != -1)
-            {
-                 LlenarComboBoxRoles();
-            }
-        }
-
-        private async void cmbCiudad_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbCiudad.SelectedIndex != -1)
-            {
-                 LlenarComboBoxCiudades();
-            }
-        }
+        } 
     }
 }

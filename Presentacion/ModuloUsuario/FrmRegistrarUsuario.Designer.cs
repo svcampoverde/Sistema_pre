@@ -407,6 +407,8 @@
             // 
             // cbRol
             // 
+            this.cbRol.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbRol.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbRol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.cbRol.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.cbRol.BorderRadius = 0;
@@ -424,10 +426,11 @@
             this.cbRol.Size = new System.Drawing.Size(267, 52);
             this.cbRol.TabIndex = 50;
             this.cbRol.Texts = "";
-            this.cbRol.OnSelectedIndexChanged += new System.EventHandler(this.cbRol_OnSelectedIndexChanged);
             // 
             // cmbGenero
             // 
+            this.cmbGenero.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbGenero.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbGenero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.cmbGenero.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.cmbGenero.BorderRadius = 0;
@@ -471,7 +474,6 @@
             this.cmbCiudad.Size = new System.Drawing.Size(270, 44);
             this.cmbCiudad.TabIndex = 48;
             this.cmbCiudad.Texts = "";
-            this.cmbCiudad.OnSelectedIndexChanged += new System.EventHandler(this.cmbCiudad_OnSelectedIndexChanged);
             // 
             // FrmRegistrarUsuario
             // 
