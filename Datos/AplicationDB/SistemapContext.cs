@@ -3,6 +3,9 @@ using Datos.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Threading.Tasks;
+using System.Threading;
 
 
 namespace Datos.AplicationDB
@@ -45,16 +48,39 @@ namespace Datos.AplicationDB
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public override int SaveChanges()
         {
-            var entities = ChangeTracker.Entries()
-                .Where(e => e.Entity is BaseEntity && (e.State == EntityState.Added || e.State == EntityState.Modified));
-
-            foreach (var entity in entities)
-            {
-                ((BaseEntity)entity.Entity).FechaModificacionUTC = DateTime.UtcNow;
-            }
-
+            UpdateBaseEntities();
             return base.SaveChanges();
         }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            UpdateBaseEntities();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void UpdateBaseEntities()
+        {
+            // Obtener todas las entidades que han cambiado
+            var entities = ChangeTracker.Entries<BaseEntity>()
+                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
+
+            // Actualizar la fecha de modificación y establecer como no activo si se elimina
+            foreach (var entityEntry in entities)
+            {
+                if (entityEntry.State == EntityState.Deleted)
+                {
+                    // Cambiar el estado a Detached para evitar la eliminación física
+                    entityEntry.State = EntityState.Detached;
+                    entityEntry.Entity.FechaModificacionUTC = DateTime.UtcNow;
+                    entityEntry.Entity.Activo = false;
+                }
+                else
+                {
+                    entityEntry.Entity.FechaModificacionUTC = DateTime.UtcNow;
+                }
+            }
+        }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -64,20 +90,6 @@ namespace Datos.AplicationDB
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-        //public void Seed()
-        //{
-        //    var excel = @"Recursos\FileExcelSeeder\ProvinciasCiudades.xlsx";
-        //    if (!Provincias.Any())
-        //    {
-        //        Provincias.AddRange(ExcelLoader.LoadProvinciasFromExcel(excel));
-        //        SaveChanges();
-        //    }
-
-        //    if (!Ciudades.Any())
-        //    {
-        //        Ciudades.AddRange(ExcelLoader.LoadCiudadesFromExcel(excel));
-        //        SaveChanges();
-        //    }
-        //}
+        
     }
 }
