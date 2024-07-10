@@ -1,5 +1,7 @@
 ﻿//using LogicDeNegocio.personas;
 using LogicDeNegocio;
+using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,29 +18,23 @@ namespace Presentacion.ModuloProducto
 {
     public partial class FrmCategoria : Form
     {
-       // Categoria cat = new Categoria();
+        private readonly ICategoriaProductoService _categoriaProductoService;
         int Id;
-        public FrmCategoria()
+        public FrmCategoria(ICategoriaProductoService categoriaProductoService)
         {
+            _categoriaProductoService = categoriaProductoService;
             InitializeComponent();
             this.Load += new EventHandler(FrmCategoria_Load);
         }
-        private void LlenarDataGrid(string datos)
+        private async void LlenarDataGrid(string datos)
         {
             try
             {
-                //List<Categoria> list = cat.BuscarCategoria(datos);
-                //dtgCategoria.Rows.Clear();
-
-                //int cont = 0;
-
-                //foreach (Categoria categoria in list)
-                //{
-                //    dtgCategoria.Rows.Add(1);
-                //    dtgCategoria.Rows[cont].Cells[0].Value = categoria.Id.ToString();
-                //    dtgCategoria.Rows[cont].Cells[1].Value = categoria.Descripcion.ToString();
-                //    cont++;
-                //}
+                var listacategoriaProducto = await _categoriaProductoService.ObtenerTodasCategoriaProductos();
+                dtgCategoria.DataSource = listacategoriaProducto;
+                DataTable dt = new DataTable();
+                dtgCategoria.Columns[2].Visible = false;
+                dtgCategoria.Columns[3].Visible = false;
 
             }
             catch (ExceptionSistema ex)
@@ -55,18 +51,19 @@ namespace Presentacion.ModuloProducto
             LlenarDataGrid("");
         }
 
-        private void btnRegistracat_Click(object sender, EventArgs e)
+        private async void btnRegistracat_Click(object sender, EventArgs e)
         {
-            //cat.Descripcion = txtCategoria.Text;
+           
             try
             {
-                //    if (Validar())
-                //    {
-                //        cat.InsertarCategoria(cat);
-                //        MessageBox.Show("Registro de provincia realizado con éxito");
-                //        Limpiar();
-                //        LlenarDataGrid("");
-                //    }
+                    if (Validar())
+                {
+                    CategoriaProductoRequest categoriaProducto = new CategoriaProductoRequest() { Codigo = txtCategoria.Text, Descripcion = txtCategoria.Text };
+                    await _categoriaProductoService.RegistrarCategoriaProducto(categoriaProducto);
+                    MessageBox.Show("Registro de provincia realizado con éxito");
+                    Limpiar();
+                    LlenarDataGrid("");
+                }
 
             }
             catch (ExceptionSistema ex)
@@ -99,7 +96,7 @@ namespace Presentacion.ModuloProducto
             LlenarDataGrid(txtBCategoria.Text);
         }
 
-        private void dtgCategoria_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void dtgCategoria_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -107,37 +104,40 @@ namespace Presentacion.ModuloProducto
                 if (e.RowIndex >= 0 && e.RowIndex < dtgCategoria.Rows.Count &&
                     e.ColumnIndex >= 0 && e.ColumnIndex <  dtgCategoria.Columns.Count)
                 {
-                    if (dtgCategoria.Columns[e.ColumnIndex].Name == "btnEditar")
-                    {
-                        // Verificar si la columna es de tipo DataGridViewImageColumn
-                        if (dtgCategoria.Columns[e.ColumnIndex] is DataGridViewImageColumn)
-                        {
-                            // Verificar que la celda tenga un valor válido
-                            if (dtgCategoria.Rows[e.RowIndex].Cells["idcategoria"].Value != null)
+                 
+                            if (dtgCategoria.Columns[e.ColumnIndex].Name == "Editar")
                             {
-                                Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells["idcategoria"].Value);
-                                txtMcategoria.Text = dtgCategoria.Rows[e.RowIndex].Cells["categoria"].Value.ToString();
-                                pnlRegistrorol.Visible = false;
-                                pnlModificarol.Visible = true;
-
+                                // Verificar si la columna es de tipo DataGridViewImageColumn
+                                if (dtgCategoria.Columns[e.ColumnIndex] is DataGridViewImageColumn)
+                                {
+                                    if (dtgCategoria.Rows[e.RowIndex].Cells[2].Value != null)
+                                    {
+                                        Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells[2].Value);
+                                        txtMcategoria.Text = dtgCategoria.Rows[e.RowIndex].Cells[4].Value.ToString();
+                                        pnlRegistrocat.Visible = false;
+                                        pnlModificacat.Visible = true;
+                                        pnllistCat.Visible = false;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("La celda no contiene un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
                             }
-                            else
+                            if (dtgCategoria.Columns[e.ColumnIndex].Name == "Eliminar" && dtgCategoria.Rows[e.RowIndex].Cells[2].Value != null)
                             {
-                                MessageBox.Show("La celda 'idroles' no contiene un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                    }
-                    if (e.ColumnIndex ==  dtgCategoria.Columns["btnEliminar"].Index)
-                    {
-                        DialogResult result = MessageBox.Show("Se eliminara el registro de forma permanete. ¿Desea continuar?", "Eliminar registro", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                        if (result == DialogResult.OK)
-                        {
-                            Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells["idcategoria"].Value);
-                           // cat.EliminarCategoria(Id);
-                            LlenarDataGrid("");
-                        }
+                                DialogResult result = MessageBox.Show("Se eliminara el registro de forma permanete. ¿Desea continuar?", "Eliminar registro", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                                if (result == DialogResult.OK)
+                                {
 
-                    }
+                                    Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells[2].Value);
+                                    await _categoriaProductoService.EliminarCategoriaProducto(Id);
+                                    LlenarDataGrid("");
+
+
+                                }
+
+                            }   
                 }
             }
             catch (ExceptionSistema ex)
@@ -146,23 +146,47 @@ namespace Presentacion.ModuloProducto
             }
         }
 
-        private void btncActualizar_Click(object sender, EventArgs e)
+        private async void btncActualizar_Click(object sender, EventArgs e)
         {
             string category = txtMcategoria.Text;
             if (!String.IsNullOrEmpty(txtMcategoria.Text))
             {
-                //cat.Id = Id;
-                //cat.Descripcion = category;
 
-                //cat.ActualizarCategoria(cat);
+                CategoriaProductoRequest categoriaProducto = new CategoriaProductoRequest()
+                { Descripcion = txtMcategoria.Text };
+                await _categoriaProductoService.ActualizarCategoriaProducto(Id, categoriaProducto);
                 MessageBox.Show("Datos actualizados con exito.");
                 LlenarDataGrid("");
+                pnlRegistrocat.Visible = false;
+                pnlModificacat.Visible = false;
+                pnllistCat.Visible = true;
             }
             else
             {
 
                 MessageBox.Show("Existe un campo vacio");
             }
+        }
+
+        private void ptbnewcat_Click(object sender, EventArgs e)
+        {
+            pnlRegistrocat.Visible = true;
+            pnlModificacat.Visible = false;
+            pnllistCat.Visible = false;
+        }
+
+        private void ptbRcat_Click(object sender, EventArgs e)
+        {
+            pnlRegistrocat.Visible = false;
+            pnlModificacat.Visible = false;
+            pnllistCat.Visible = true;
+        }
+
+        private void ptbAcat_Click(object sender, EventArgs e)
+        {
+            pnlRegistrocat.Visible = false;
+            pnlModificacat.Visible = false;
+            pnllistCat.Visible = true;
         }
     }
 }

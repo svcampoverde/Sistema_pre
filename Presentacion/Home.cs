@@ -1,6 +1,9 @@
 ﻿using MaterialSkin;
+using Presentacion.ModuloCliente;
+using Presentacion.ModuloEmpleado;
 using Presentacion.ModuloEmpresa;
 using Presentacion.ModuloProducto;
+using Presentacion.ModuloProveedor;
 using Presentacion.ModuloUsuario;
 using System;
 using System.Collections.Generic;
@@ -50,6 +53,30 @@ namespace Presentacion
         {
             this.Close();
             Frmdi.OpenChildForm<FrmCategoria>();
+        }
+
+        private void ptbproveedor_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Frmdi.OpenChildForm<FrmRegistroProveedor>();
+        }
+
+        private void ptbICliente_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Frmdi.OpenChildForm<FrmRegistrarCliente>();
+        }
+
+        private void ptempleado_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Frmdi.OpenChildForm<FrmEmpleado>();
+        }
+        
+        private void ptbIproducto_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Frmdi.OpenChildForm< FrmInventario> ();
         }
     }
 }
