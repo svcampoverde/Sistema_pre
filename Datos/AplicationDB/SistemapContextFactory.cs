@@ -10,7 +10,7 @@ namespace Datos.AplicationDB
             var optionsBuilder = new DbContextOptionsBuilder<SistemapContext>();
 
             // Configuración de MySQL
-            optionsBuilder.UseMySQL("Server=localhost;Database=sistemap;User=root;Password=Kawasaki2512;",
+            optionsBuilder.UseMySQL("Server=localhost;Database=sistemapresup;User=root;Password=admin;",
                 sql =>
                 {
                     sql.MigrationsAssembly(typeof(SistemapContextFactory).Assembly.FullName);

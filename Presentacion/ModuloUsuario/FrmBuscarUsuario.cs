@@ -15,17 +15,19 @@ namespace Presentacion.ModuloUsuario
 {
     public partial class FrmBuscarUsuario : Form
     {
-        private readonly FrmIPrincipal Frmdi;
-        private readonly IUsuarioService _usuarioService;
+        private  FrmIPrincipal Frmdi;
+        private IUnityContainer _container;
+        // private readonly IUsuarioService _usuarioService;
         private Usuario u = new Usuario();
         private int Id;
 
-        public FrmBuscarUsuario(FrmIPrincipal mdip, IUsuarioService usuarioService)
+        public FrmBuscarUsuario(IUnityContainer container, FrmIPrincipal mdip)//), IUsuarioService usuarioService)
         {
             InitializeComponent();
             this.Load += new EventHandler(BuscarUsuario_Load);
             this.Frmdi = mdip;
-            this._usuarioService = usuarioService;
+            this._container = container;
+            //this._usuarioService = usuarioService;
             this.dtgUsuario.CellClick += new DataGridViewCellEventHandler(this.dtgUsuario_CellClick);
         }
 
@@ -84,7 +86,12 @@ namespace Presentacion.ModuloUsuario
                         int id = Convert.ToInt32(dtgUsuario.Rows[e.RowIndex].Cells["Idusuario"].Value);
                         this.Close();
 
-                        Frmdi.OpenChildForm<FrmModificarUsuario>(frm => frm.SetIdUsuario(id));
+                        //Frmdi.OpenChildForm<FrmModificarUsuario>(frm => frm.SetIdUsuario(id));
+                        this.Close();
+                        var form = _container.Resolve<FrmModificarUsuario>();// frm => frm.SetIdUsuario(id));
+                        form.SetIdUsuario(id);
+
+                        Frmdi.OpenChildForm(form);
                     }
                     else
                     {

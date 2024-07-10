@@ -8,21 +8,28 @@ using LogicDeNegocio.Services;
 using Microsoft.EntityFrameworkCore;
 
 using Presentacion.App_Start;
-
+using Presentacion.ModuloCliente;
+using Presentacion.ModuloEmpleado;
+using Presentacion.ModuloEmpresa;
+using Presentacion.ModuloProducto;
+using Presentacion.ModuloProveedor;
+using Presentacion.ModuloProvincia;
+using Presentacion.ModuloRolusuario;
+using Presentacion.ModuloServicio;
+using Presentacion.ModuloUsuario;
 using System;
-
+using System.Web.UI.WebControls;
 using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
-
 namespace Presentacion
 {
     public static class UnityConfig
     {
         private static Lazy<IUnityContainer> container =
-          new Lazy<IUnityContainer>(() =>
-          {
-              var container = new UnityContainer();
+        new Lazy<IUnityContainer>(() =>
+        {
+            var container = new UnityContainer();
               RegisterTypes(container);
               return container;
           });
@@ -31,22 +38,37 @@ namespace Presentacion
 
         public static void RegisterTypes(IUnityContainer container)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<SistemapContext>();
-            optionsBuilder.UseMySQL("Server=localhost;Database=sistemap;User=root;Password=Kawasaki2512;",
-                                    sql => sql.MigrationsAssembly(typeof(SistemapContext).Assembly.FullName));
-            container.RegisterType<DbContextOptions<SistemapContext>>(
-            new InjectionFactory(_ =>
-            { 
-                return optionsBuilder.Options;
-            }));
-            
+            var optionsBuilder = new DbContextOptionsBuilder<SistemapContext>()
+                .UseMySQL("Server=localhost;Database=sistemapresup;User=root;Password=admin;", e =>
+                {
+                    e.MigrationsAssembly(typeof(SistemapContext).Assembly.FullName);
+                });
 
-            container.RegisterType<SistemapContext>(new HierarchicalLifetimeManager(),
-                                                    new InjectionFactory(c => new SistemapContext(optionsBuilder.Options)));
+            // Registrar DbContextOptions para inyección de dependencias
+            container.RegisterInstance(optionsBuilder.Options);
 
-            container.RegisterType<SistemapContext>(new TransientLifetimeManager());
-            container.RegisterType<Func<SistemapContext>>(new InjectionFactory(c => new Func<SistemapContext>(() => c.Resolve<SistemapContext>())));
-            container.RegisterTypes().RegisterForms();
+            // Registrar SistemapContext con ciclo de vida adecuado
+            container.RegisterType<SistemapContext>();
+
+            // Registrar otros servicios y formularios
+            container.RegisterType<FrmRegistrarUsuario>();
+            container.RegisterType<FrmIPrincipal>();
+            container.RegisterType<FrmRol>();
+            container.RegisterType<FrmProvincia>();
+            container.RegisterType<Login>();
+            container.RegisterType<FrmBuscarUsuario>();
+            container.RegisterType<FrmEmpleado>();
+            container.RegisterType<FrmCategoria>();
+            container.RegisterType<FrmRegistroProveedor>();
+            container.RegisterType<FrmServicio>();
+            container.RegisterType<FrmRegistrarCliente>();
+            container.RegisterType<FrmEmpresa>();
+            container.RegisterType<FrmTipoEmpresa>();
+            container.RegisterType<FrmInventario>();
+            container.RegisterType<Home>(new InjectionConstructor(typeof(IUnityContainer), typeof(FrmIPrincipal)));
+
+
+            container.RegisterTypes();
         }
     }
 }

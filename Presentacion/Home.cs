@@ -14,18 +14,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 
 namespace Presentacion
 {
     public partial class Home : Form
     {
         FrmIPrincipal Frmdi;
-
-        public Home(FrmIPrincipal mdip)
+        private IUnityContainer _container;
+        public Home(IUnityContainer container, FrmIPrincipal mdip)
         {
             InitializeComponent();
             this.Load += new EventHandler(Home_Load);
             this.Frmdi = mdip;
+            this._container = container;
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -39,7 +41,8 @@ namespace Presentacion
         private void ptbempresa_Click(object sender, EventArgs e)
         {
             this.Close();
-            Frmdi.OpenChildForm<FrmEmpresa>();
+            var form = _container.Resolve<FrmEmpresa>();
+            Frmdi.OpenChildForm(form);
         }
         private void CloseAllMdiChildren()
         {
@@ -52,31 +55,36 @@ namespace Presentacion
         private void ptbCategoria_Click(object sender, EventArgs e)
         {
             this.Close();
-            Frmdi.OpenChildForm<FrmCategoria>();
+            var form = _container.Resolve<FrmCategoria>();
+            Frmdi.OpenChildForm(form);
         }
 
         private void ptbproveedor_Click(object sender, EventArgs e)
         {
             this.Close();
-            Frmdi.OpenChildForm<FrmRegistroProveedor>();
+            var form = _container.Resolve<FrmRegistroProveedor>();
+            Frmdi.OpenChildForm(form);
         }
 
         private void ptbICliente_Click(object sender, EventArgs e)
         {
             this.Close();
-            Frmdi.OpenChildForm<FrmRegistrarCliente>();
+            var form = _container.Resolve<FrmRegistrarCliente>();
+            Frmdi.OpenChildForm(form);
         }
 
         private void ptempleado_Click(object sender, EventArgs e)
         {
             this.Close();
-            Frmdi.OpenChildForm<FrmEmpleado>();
+            var form = _container.Resolve<FrmEmpleado>();
+            Frmdi.OpenChildForm(form);
         }
         
         private void ptbIproducto_Click(object sender, EventArgs e)
         {
             this.Close();
-            Frmdi.OpenChildForm< FrmInventario> ();
+            var form = _container.Resolve<FrmInventario>();
+            Frmdi.OpenChildForm(form);
         }
     }
 }

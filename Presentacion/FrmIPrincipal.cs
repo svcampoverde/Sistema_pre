@@ -14,18 +14,19 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Presentacion.ModuloPresupuesto;
 using Unity;
+using Unity.Resolution;
 namespace Presentacion
 {
     public partial class FrmIPrincipal : Form// MaterialSkin.Controls.MaterialForm
     {
         private Form activarForm = null;
-        private readonly Dictionary<Type, Form> activeForms = new Dictionary<Type, Form>();
-        private readonly IUnityContainer _container;
+        //private readonly Dictionary<Type, Form> activeForms = new Dictionary<Type, Form>();
+        //private readonly IUnityContainer _container;
 
         public FrmIPrincipal(IUnityContainer container)
         {
             InitializeComponent();
-            _container = container;
+           // _container = container;
             mdiPro();
             // Establecer las propiedades del formulario
             this.FormBorderStyle = FormBorderStyle.Sizable; // Asegura que el formulario sea redimensionable
@@ -140,50 +141,84 @@ namespace Presentacion
                 child.Close();
             }
         }
-        public void OpenChildForm<T>(Action<T> configureForm = null) where T : Form
+        //public void OpenChildForm<T>(Action<T> configureForm = null) where T : Form
+        //{
+        //    if (activarForm != null)
+        //    {
+        //        activarForm.Close();
+        //    }
+        //    if (!activeForms.ContainsKey(typeof(T)))
+        //    {
+        //        var form = _container.Resolve<T>();
+        //        activeForms[typeof(T)] = form;
+        //        form.MdiParent = this;
+        //        form.FormClosed += (sender, e) => activeForms.Remove(typeof(T));
+        //    }
+        //    activarForm = activeForms[typeof(T)];
+        //    configureForm?.Invoke((T)activarForm);
+        //    activarForm.WindowState = FormWindowState.Maximized;
+        //    activarForm.FormBorderStyle = FormBorderStyle.None;
+        //    activarForm.ControlBox = false;
+        //    activarForm.MinimizeBox = false;
+        //    activarForm.MaximizeBox = false;
+        //    activarForm.Show();
+        //}
+        public void OpenChildForm(Form childForm)
         {
+            // Cierra todos los formularios MDI hijos
+            CloseAllMdiChildren();
+            // Establece el formulario hijo como el formulario activo
             if (activarForm != null)
             {
                 activarForm.Close();
+                activarForm = null;
             }
-            if (!activeForms.ContainsKey(typeof(T)))
-            {
-                var form = _container.Resolve<T>();
-                activeForms[typeof(T)] = form;
-                form.MdiParent = this;
-                form.FormClosed += (sender, e) => activeForms.Remove(typeof(T));
-            }
-            activarForm = activeForms[typeof(T)];
-            configureForm?.Invoke((T)activarForm);
-            activarForm.WindowState = FormWindowState.Maximized;
-            activarForm.FormBorderStyle = FormBorderStyle.None;
-            activarForm.ControlBox = false;
-            activarForm.MinimizeBox = false;
-            activarForm.MaximizeBox = false;
-            activarForm.Show();
+
+            activarForm = childForm;
+
+            // Ajusta el tamaño del formulario hijo si es necesario
+            AdjustMdiSize(childForm);
+
+            // Establece el formulario hijo como MDI hijo
+            childForm.MdiParent = this;
+
+            // Muestra el formulario hijo
+            childForm.Show();
+
+            // Maneja el evento FormClosed para liberar la referencia al formulario hijo
+            childForm.FormClosed += (sender, e) => { activarForm = null; };
         }
 
         private void btnHome_Click(object sender, EventArgs e)
 
         {
-            OpenChildForm<Home>();
+            //   OpenChildForm<Home>();
+            var form = UnityConfig.Container.Resolve<Home>(new ParameterOverride("container", UnityConfig.Container), new ParameterOverride("mdip", this));
+            OpenChildForm(form);
         }
 
         private void btnMr_Click(object sender, EventArgs e)
         {
             // Resuelve la instancia de FrmRegistrarUsuario usando Unity
-            OpenChildForm<FrmRegistrarUsuario>();
+            // OpenChildForm<FrmRegistrarUsuario>();
+            var form = UnityConfig.Container.Resolve<FrmRegistrarUsuario>();
+
+            // Abre el formulario hijo
+            OpenChildForm(form);
+
 
         }
 
         private void btnML_Click(object sender, EventArgs e)
         {
-            OpenChildForm<FrmBuscarUsuario>();
+           
+            var form = UnityConfig.Container.Resolve<FrmBuscarUsuario>(new ParameterOverride("container", UnityConfig.Container), new ParameterOverride("mdip", this));
+            OpenChildForm(form);
         }
 
         private void btnRegistrarp_Click(object sender, EventArgs e)
         {
-            OpenChildForm<FrmRegistrarPresupuesto>();
+            OpenChildForm(new FrmRegistrarPresupuesto());
         }
         private void FrmIPrincipal_SizeChanged(object sender, EventArgs e)
         {
