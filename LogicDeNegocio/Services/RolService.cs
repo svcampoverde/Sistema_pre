@@ -20,98 +20,115 @@ namespace LogicDeNegocio.Services
 {
     public class RolService : IRolService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
 
-        public RolService(SistemapContext sistemapContext, IMapper mapper)
+        public RolService(Func<SistemapContext> dbContextFactory, IMapper mapper)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
         }
 
         public async Task<RolDto> RegistrarRol(RolRequest request)
         {
-            var rol = _mapper.Map<Rol>(request);
-            await _sistemapContext.Roles.AddAsync(rol);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<RolDto>(rol);
+            using (var context = _dbContextFactory())
+            {
+                var rol = _mapper.Map<Rol>(request);
+                await context.Roles.AddAsync(rol);
+                await context.SaveChangesAsync();
+                return _mapper.Map<RolDto>(rol);
+            }
         }
 
         public async Task<RolDto> ActualizarRol(int id, RolRequest request)
         {
-            var rol = await _sistemapContext.Roles.FindAsync(id);
-            if (rol == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Rol con ID {id} no encontrado.");
+                var rol = await context.Roles.FindAsync(id);
+                if (rol == null)
+                {
+                    throw new KeyNotFoundException($"Rol con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, rol);
+                context.Roles.Update(rol);
+                await context.SaveChangesAsync();
+
+                return _mapper.Map<RolDto>(rol);
             }
-
-            _mapper.Map(request, rol);
-            _sistemapContext.Roles.Update(rol);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<RolDto>(rol);
         }
 
         public async Task EliminarRol(int id)
         {
-            var rol = await _sistemapContext.Roles.FindAsync(id);
-            if (rol == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Rol con ID {id} no encontrado.");
-            }
+                var rol = await context.Roles.FindAsync(id);
+                if (rol == null)
+                {
+                    throw new KeyNotFoundException($"Rol con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.Roles.Remove(rol);
-            await _sistemapContext.SaveChangesAsync();
+                context.Roles.Remove(rol);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task<Paginate<RolDto>> GetRolesPaginados(string search = null, int pageIndex = 1, int pageSize = 10)
         {
-            try
+            using (var context = _dbContextFactory())
             {
-                var query = _sistemapContext.Roles.AsNoTracking();
-
-                if (!string.IsNullOrWhiteSpace(search))
+                try
                 {
-                    query = query.Where(x => x.Descripcion.Contains(search) || x.Codigo.Contains(search));
+                    var query = context.Roles.AsNoTracking();
+
+                    if (!string.IsNullOrWhiteSpace(search))
+                    {
+                        query = query.Where(x => x.Descripcion.Contains(search) || x.Codigo.Contains(search));
+                    }
+
+                    var count = await query.CountAsync();
+
+                    var items = await query
+                                        .Skip((pageIndex - 1) * pageSize)
+                                        .Take(pageSize)
+                                        .ProjectTo<RolDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
+
+                    return new Paginate<RolDto>(items, count, pageIndex, pageSize);
                 }
-
-                var count = await query.CountAsync();
-
-                var items = await query
-                                    .Skip((pageIndex - 1) * pageSize)
-                                    .Take(pageSize)
-                                    .ProjectTo<RolDto>(_mapper.ConfigurationProvider)
-                                    .ToListAsync();
-
-                return new Paginate<RolDto>(items, count, pageIndex, pageSize);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener roles paginados", ex);
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al obtener roles paginados", ex);
+                }
             }
         }
 
         public async Task<List<RolDto>> ObtenerTodosLosRoles()
         {
-            try
+            using (var context = _dbContextFactory())
             {
-                var roles = await _sistemapContext.Roles
-                                    .AsNoTracking()
-                                    .ProjectTo<RolDto>(_mapper.ConfigurationProvider)
-                                    .ToListAsync();
+                try
+                {
+                    var roles = await context.Roles
+                                        .AsNoTracking()
+                                        .ProjectTo<RolDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
 
-                return roles;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener todos los roles", ex);
+                    return roles;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al obtener todos los roles", ex);
+                }
             }
         }
 
         public int GetTotalRoles()
         {
-            return _sistemapContext.Roles.Count();
+            using (var context = _dbContextFactory())
+            {
+                return context.Roles.Count();
+            }
         }
-         
     }
 }

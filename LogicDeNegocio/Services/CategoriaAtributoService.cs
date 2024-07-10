@@ -1,76 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class CategoriaAtributoService : ICategoriaAtributoService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<CategoriaAtributoService> _logger;
 
-        public CategoriaAtributoService(SistemapContext sistemapContext, IMapper mapper)
+        public CategoriaAtributoService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<CategoriaAtributoService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una CategoriaAtributo
         public async Task<CategoriaAtributoDto> RegistrarCategoriaAtributo(CategoriaAtributoRequest request)
         {
-            var entidad = _mapper.Map<CategoriaAtributo>(request);
-            await _sistemapContext.CategoriaAtributos.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<CategoriaAtributoDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<CategoriaAtributo>(request);
+                await context.CategoriaAtributos.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<CategoriaAtributoDto>(entidad);
+            }
         }
 
-        // Método para actualizar una CategoriaAtributo
         public async Task<CategoriaAtributoDto> ActualizarCategoriaAtributo(int id, CategoriaAtributoRequest request)
         {
-            var entidad = await _sistemapContext.CategoriaAtributos.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"CategoriaAtributo con ID {id} no encontrado.");
+                var entidad = await context.CategoriaAtributos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("CategoriaAtributo no encontrada.");
+                    throw new KeyNotFoundException($"CategoriaAtributo con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<CategoriaAtributoDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.CategoriaAtributos.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<CategoriaAtributoDto>(entidad);
         }
 
-        // Método para eliminar una CategoriaAtributo
         public async Task EliminarCategoriaAtributo(int id)
         {
-            var entidad = await _sistemapContext.CategoriaAtributos.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"CategoriaAtributo con ID {id} no encontrado.");
-            }
+                var entidad = await context.CategoriaAtributos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("CategoriaAtributo no encontrada.");
+                    throw new KeyNotFoundException($"CategoriaAtributo con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.CategoriaAtributos.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.CategoriaAtributos.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las CategoriaAtributos
         public async Task<List<CategoriaAtributoDto>> ObtenerTodasCategoriaAtributos()
         {
-            var entidadDto = await _sistemapContext.CategoriaAtributos
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.CategoriaAtributos
                                             .ProjectTo<CategoriaAtributoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }

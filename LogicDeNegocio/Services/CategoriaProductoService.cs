@@ -1,76 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class CategoriaProductoService : ICategoriaProductoService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<CategoriaProductoService> _logger;
 
-        public CategoriaProductoService(SistemapContext sistemapContext, IMapper mapper)
+        public CategoriaProductoService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<CategoriaProductoService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una CategoriaProducto
         public async Task<CategoriaProductoDto> RegistrarCategoriaProducto(CategoriaProductoRequest request)
         {
-            var entidad = _mapper.Map<CategoriaProducto>(request);
-            await _sistemapContext.CategoriaProductos.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<CategoriaProductoDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<CategoriaProducto>(request);
+                await context.CategoriaProductos.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<CategoriaProductoDto>(entidad);
+            }
         }
 
-        // Método para actualizar una CategoriaProducto
         public async Task<CategoriaProductoDto> ActualizarCategoriaProducto(int id, CategoriaProductoRequest request)
         {
-            var entidad = await _sistemapContext.CategoriaProductos.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"CategoriaProducto con ID {id} no encontrado.");
+                var entidad = await context.CategoriaProductos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("CategoriaProducto no encontrada.");
+                    throw new KeyNotFoundException($"CategoriaProducto con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<CategoriaProductoDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.CategoriaProductos.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<CategoriaProductoDto>(entidad);
         }
 
-        // Método para eliminar una CategoriaProducto
         public async Task EliminarCategoriaProducto(int id)
         {
-            var entidad = await _sistemapContext.CategoriaProductos.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"CategoriaProducto con ID {id} no encontrado.");
-            }
+                var entidad = await context.CategoriaProductos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("CategoriaProducto no encontrada.");
+                    throw new KeyNotFoundException($"CategoriaProducto con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.CategoriaProductos.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.CategoriaProductos.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las CategoriaProductos
         public async Task<List<CategoriaProductoDto>> ObtenerTodasCategoriaProductos()
         {
-            var entidadDto = await _sistemapContext.CategoriaProductos
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.CategoriaProductos
                                             .ProjectTo<CategoriaProductoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }

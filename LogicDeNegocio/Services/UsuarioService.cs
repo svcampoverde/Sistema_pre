@@ -19,17 +19,17 @@ namespace LogicDeNegocio.Personas
 {
     public class UsuarioService : IUsuarioService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
         private readonly IValidator<UsuarioRequest> _validator;
         private readonly ILogger<UsuarioService> _logger;
         private readonly IPasswordHashService _passwordHashService;
 
-        public UsuarioService(SistemapContext sistemapContext, IMapper mapper,
+        public UsuarioService(Func<SistemapContext> dbContextFactory, IMapper mapper,
             IValidator<UsuarioRequest> validator, ILogger<UsuarioService> logger,
             IPasswordHashService passwordHashService)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
             _validator = validator;
             _logger = logger;
@@ -49,21 +49,24 @@ namespace LogicDeNegocio.Personas
 
             try
             {
-                var persona = _mapper.Map<Persona>(request);
-                var user = _mapper.Map<Usuario>(request);
+                using (var context = _dbContextFactory())
+                {
+                    var persona = _mapper.Map<Persona>(request);
+                    var user = _mapper.Map<Usuario>(request);
 
-                // Crear el hash y el salt de la contraseña
-                _passwordHashService.CreatePasswordHash(request.Clave, out byte[] passwordHash, out byte[] passwordSalt);
-                user.ContrasenaHash = passwordHash;
-                user.ContrasenaSalt = passwordSalt;
+                    // Crear el hash y el salt de la contraseña
+                    _passwordHashService.CreatePasswordHash(request.Clave, out byte[] passwordHash, out byte[] passwordSalt);
+                    user.ContrasenaHash = passwordHash;
+                    user.ContrasenaSalt = passwordSalt;
 
-                persona.UsuarioNavegation = user;
-                await _sistemapContext.AddAsync(persona);
-                await _sistemapContext.SaveChangesAsync();
-                var userDto = _mapper.Map<UsuarioDto>(persona);
+                    persona.UsuarioNavegation = user;
+                    await context.AddAsync(persona);
+                    await context.SaveChangesAsync();
+                    var userDto = _mapper.Map<UsuarioDto>(persona);
 
-                _logger.LogInformation("Usuario registrado exitosamente.");
-                return userDto;
+                    _logger.LogInformation("Usuario registrado exitosamente.");
+                    return userDto;
+                }
             }
             catch (DbUpdateException ex)
             {
@@ -90,29 +93,32 @@ namespace LogicDeNegocio.Personas
 
             try
             {
-                var persona = await _sistemapContext.Personas.Include(p => p.UsuarioNavegation).FirstOrDefaultAsync(p => p.Id == id);
-                if (persona == null)
+                using (var context = _dbContextFactory())
                 {
-                    _logger.LogWarning("Usuario no encontrado.");
-                    throw new Exception("Usuario no encontrado.");
+                    var persona = await context.Personas.Include(p => p.UsuarioNavegation).FirstOrDefaultAsync(p => p.Id == id);
+                    if (persona == null)
+                    {
+                        _logger.LogWarning("Usuario no encontrado.");
+                        throw new Exception("Usuario no encontrado.");
+                    }
+
+                    _mapper.Map(request, persona);
+                    var user = persona.UsuarioNavegation;
+                    _mapper.Map(request, user);
+
+                    // Actualizar la contraseña si se proporciona una nueva
+                    if (!string.IsNullOrEmpty(request.Clave))
+                    {
+                        _passwordHashService.CreatePasswordHash(request.Clave, out byte[] passwordHash, out byte[] passwordSalt);
+                        user.ContrasenaHash = passwordHash;
+                        user.ContrasenaSalt = passwordSalt;
+                    }
+
+                    await context.SaveChangesAsync();
+                    var userDto = _mapper.Map<UsuarioDto>(persona);
+                    _logger.LogInformation("Usuario actualizado exitosamente.");
+                    return userDto;
                 }
-
-                _mapper.Map(request, persona);
-                var user = persona.UsuarioNavegation;
-                _mapper.Map(request, user);
-
-                // Actualizar la contraseña si se proporciona una nueva
-                if (!string.IsNullOrEmpty(request.Clave))
-                {
-                    _passwordHashService.CreatePasswordHash(request.Clave, out byte[] passwordHash, out byte[] passwordSalt);
-                    user.ContrasenaHash = passwordHash;
-                    user.ContrasenaSalt = passwordSalt;
-                }
-
-                await _sistemapContext.SaveChangesAsync();
-                var userDto = _mapper.Map<UsuarioDto>(persona);
-                _logger.LogInformation("Usuario actualizado exitosamente.");
-                return userDto;
             }
             catch (DbUpdateException ex)
             {
@@ -132,21 +138,24 @@ namespace LogicDeNegocio.Personas
 
             try
             {
-                var usuario = await _sistemapContext.Usuarios.FindAsync(id);
-                if (usuario == null)
+                using (var context = _dbContextFactory())
                 {
-                    _logger.LogWarning("Usuario no encontrado.");
-                    throw new Exception("Usuario no encontrado.");
+                    var usuario = await context.Usuarios.FindAsync(id);
+                    if (usuario == null)
+                    {
+                        _logger.LogWarning("Usuario no encontrado.");
+                        throw new Exception("Usuario no encontrado.");
+                    }
+
+                    // Crear el hash y el salt de la nueva contraseña
+                    _passwordHashService.CreatePasswordHash(nuevaClave, out byte[] passwordHash, out byte[] passwordSalt);
+                    usuario.ContrasenaHash = passwordHash;
+                    usuario.ContrasenaSalt = passwordSalt;
+
+                    await context.SaveChangesAsync();
+                    _logger.LogInformation("Contraseña cambiada exitosamente.");
+                    return true;
                 }
-
-                // Crear el hash y el salt de la nueva contraseña
-                _passwordHashService.CreatePasswordHash(nuevaClave, out byte[] passwordHash, out byte[] passwordSalt);
-                usuario.ContrasenaHash = passwordHash;
-                usuario.ContrasenaSalt = passwordSalt;
-
-                await _sistemapContext.SaveChangesAsync();
-                _logger.LogInformation("Contraseña cambiada exitosamente.");
-                return true;
             }
             catch (DbUpdateException ex)
             {

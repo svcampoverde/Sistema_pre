@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,125 +15,72 @@ using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
-    public class ProductoService : IProductoService
+    internal class ProductoService : IProductoService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<ProductoService> _logger;
 
-        public ProductoService(SistemapContext sistemapContext, IMapper mapper)
+        public ProductoService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<ProductoService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<ProductoDto> RegistrarProducto(ProductoRequest request)
         {
-            var producto = _mapper.Map<Producto>(request);
-            await _sistemapContext.Productos.AddAsync(producto);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<ProductoDto>(producto);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<Producto>(request);
+                await context.Productos.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<ProductoDto>(entidad);
+            }
         }
 
         public async Task<ProductoDto> ActualizarProducto(int id, ProductoRequest request)
         {
-            var producto = await ObtenerProductoPorIdAsync(id);
-            if (producto == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Producto con ID {id} no encontrado.");
+                var entidad = await context.Productos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Producto no encontrada.");
+                    throw new KeyNotFoundException($"Producto con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<ProductoDto>(entidad);
             }
-
-            _mapper.Map(request, producto);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<ProductoDto>(producto);
         }
 
         public async Task EliminarProducto(int id)
         {
-            var producto = await ObtenerProductoPorIdAsync(id);
-            if (producto == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Producto con ID {id} no encontrado.");
-            }
-
-            _sistemapContext.Productos.Remove(producto);
-            await _sistemapContext.SaveChangesAsync();
-        }
-
-        public async Task<Paginate<ProductoDto>> GetProductosPaginados(string search = null, int pageIndex = 1, int pageSize = 10)
-        {
-            try
-            {
-                var query = _sistemapContext.Productos
-                                    .Include(p => p.CategoriaProducto)
-                                    .Include(p => p.TipoProducto)
-                                    .AsNoTracking();
-
-                if (!string.IsNullOrWhiteSpace(search))
+                var entidad = await context.Productos.FindAsync(id);
+                if (entidad == null)
                 {
-                    query = query.Where(p => p.Descripcion.Contains(search));
+                    _logger.LogWarning("Producto no encontrada.");
+                    throw new KeyNotFoundException($"Producto con ID {id} no encontrado.");
                 }
 
-                var count = await query.CountAsync();
-
-                var items = await query
-                                    .Skip((pageIndex - 1) * pageSize)
-                                    .Take(pageSize)
-                                    .ProjectTo<ProductoDto>(_mapper.ConfigurationProvider)
-                                    .ToListAsync();
-
-                return new Paginate<ProductoDto>(items, count, pageIndex, pageSize);
+                context.Productos.Remove(entidad);
+                await context.SaveChangesAsync();
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener productos paginados", ex);
-            }
-        }
-
-        public async Task<ProductoDto> ObtenerProductoDtoPorIdAsync(int id)
-        {
-            try
-            {
-                Producto producto = await ObtenerProductoPorIdAsync(id);
-
-                return _mapper.Map<ProductoDto>(producto);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Error al obtener el producto con ID {id}", ex);
-            }
-        }
-
-        private async Task<Producto> ObtenerProductoPorIdAsync(int id)
-        {
-            return await _sistemapContext.Productos
-                                                .Include(p => p.CategoriaProducto)
-                                                .Include(p => p.TipoProducto)
-                                                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<List<ProductoDto>> ObtenerTodoslosProductos()
         {
-            try
+            using (var context = _dbContextFactory())
             {
-                var productos = await _sistemapContext.Productos
-                                    .Include(p => p.CategoriaProducto)
-                                    .Include(p => p.TipoProducto)
-                                    .AsNoTracking()
-                                    .ProjectTo<ProductoDto>(_mapper.ConfigurationProvider)
-                                    .ToListAsync();
-
-                return productos;
+                var entidadDto = await context.Productos
+                                            .ProjectTo<ProductoDto>(_mapper.ConfigurationProvider)
+                                            .ToListAsync();
+                return entidadDto;
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener todos los productos", ex);
-            }
-        }
-
-        public int GetTotalProductos()
-        {
-            return _sistemapContext.Productos.Count();
         }
     }
 }

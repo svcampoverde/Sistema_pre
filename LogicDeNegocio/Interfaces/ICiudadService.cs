@@ -10,6 +10,6 @@ namespace LogicDeNegocio.Interfaces
         Task<CiudadDto> RegistrarCiudad(CiudadRequest request);
         Task<CiudadDto> ActualizarCiudad(int id, CiudadRequest request);
         Task EliminarCiudad(int id);
-        Task<List<CiudadDto>> ObtenerTodasCiudads();
+        Task<List<CiudadDto>> obtenerCiudades();
     }
 }

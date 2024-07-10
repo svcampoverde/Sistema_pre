@@ -15,15 +15,18 @@ namespace LogicDeNegocio.Personas
 {
     public class LoginService : ILoginService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
         private readonly ILogger<LoginService> _logger;
         private readonly IPasswordHashService _passwordHashService;
 
-        public LoginService(SistemapContext sistemapContext, IMapper mapper,
-            ILogger<LoginService> logger, IPasswordHashService passwordHashService)
+        public LoginService(
+            Func<SistemapContext> dbContextFactory,
+            IMapper mapper,
+            ILogger<LoginService> logger,
+            IPasswordHashService passwordHashService)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
             _logger = logger;
             _passwordHashService = passwordHashService;
@@ -35,26 +38,30 @@ namespace LogicDeNegocio.Personas
 
             try
             {
-                var usuario = await _sistemapContext.Usuarios
-                    .Include(u => u.Persona)
-                    .FirstOrDefaultAsync(u => u.NombreUsuario == nombreUsuario);
-
-                if (usuario == null)
+                using (var context = _dbContextFactory())
                 {
-                    _logger.LogWarning("Usuario no encontrado.");
-                    throw new Exception("Usuario o contraseña incorrectos.");
-                }
+                    var usuario = await context.Usuarios
+                        .Include(u => u.Persona)
+                        .FirstOrDefaultAsync(u => u.NombreUsuario == nombreUsuario);
 
-                // Verificar el hash de la contraseña
-                if (!_passwordHashService.VerifyPasswordHash(clave, usuario.ContrasenaHash, usuario.ContrasenaSalt))
-                {
-                    _logger.LogWarning("Contraseña incorrecta para el usuario {NombreUsuario}.", nombreUsuario);
-                    throw new Exception("Usuario o contraseña incorrectos.");
+                    if (usuario == null)
+                    {
+                        _logger.LogWarning("Usuario no encontrado.");
+                        throw new Exception("Usuario o contraseña incorrectos.");
+                    }
+
+                    // Verificar el hash de la contraseña
+                    if (!_passwordHashService.VerifyPasswordHash(clave, usuario.ContrasenaHash, usuario.ContrasenaSalt))
+                    {
+                        _logger.LogWarning("Contraseña incorrecta para el usuario {NombreUsuario}.", nombreUsuario);
+                        throw new Exception("Usuario o contraseña incorrectos.");
+                    }
+
+                    // Mapear a UsuarioRequest y devolver
+                    var userDto = _mapper.Map<UsuarioDto>(usuario.Persona);
+                    _logger.LogInformation("Inicio de sesión exitoso para el usuario {NombreUsuario}.", nombreUsuario);
+                    return userDto;
                 }
-                // Mapear a UsuarioRequest y devolver
-                var userDto = _mapper.Map<UsuarioDto>(usuario.Persona);
-                _logger.LogInformation("Inicio de sesión exitoso para el usuario {NombreUsuario}.", nombreUsuario);
-                return userDto;
             }
             catch (Exception ex)
             {

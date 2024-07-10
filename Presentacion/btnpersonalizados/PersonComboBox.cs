@@ -43,6 +43,10 @@ namespace Presentacion.btnpersonalizados
             cmbList.TextChanged += new EventHandler(ComboBox_TextChanged); //Refresh text
             cmbList.DropDown += new EventHandler(ComboBox_DropDown);
 
+            // Habilitar autocompletado
+            cmbList.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbList.AutoCompleteSource = AutoCompleteSource.ListItems;
+
             //Button: Icon
             btnIcon.Dock = DockStyle.Right;
             btnIcon.FlatStyle = FlatStyle.Flat;
@@ -79,6 +83,7 @@ namespace Presentacion.btnpersonalizados
             this.ResumeLayout();
             AdjustComboBoxDimensions();
         }
+
 
         //Private methods, metodo para posicion de combobox
         private void AdjustComboBoxDimensions()

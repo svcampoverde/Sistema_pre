@@ -1,76 +1,86 @@
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class AtributoProductoService : IAtributoProductoService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<AtributoProductoService> _logger;
 
-        public AtributoProductoService(SistemapContext sistemapContext, IMapper mapper)
+        public AtributoProductoService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<AtributoProductoService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una AtributoProducto
         public async Task<AtributoProductoDto> RegistrarAtributoProducto(AtributoProductoRequest request)
         {
-            var atributoProducto = _mapper.Map<AtributoProducto>(request);
-            await _sistemapContext.AtributoProductos.AddAsync(atributoProducto);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<AtributoProductoDto>(atributoProducto);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<AtributoProducto>(request);
+                await context.AtributoProductos.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<AtributoProductoDto>(entidad);
+            }
         }
 
-        // Método para actualizar una AtributoProducto
         public async Task<AtributoProductoDto> ActualizarAtributoProducto(int id, AtributoProductoRequest request)
         {
-            var atributoProducto = await _sistemapContext.AtributoProductos.FindAsync(id);
-            if (atributoProducto == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"AtributoProducto con ID {id} no encontrado.");
+                var entidad = await context.AtributoProductos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("AtributoProducto no encontrada.");
+                    throw new KeyNotFoundException($"AtributoProducto con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<AtributoProductoDto>(entidad);
             }
-
-            atributoProducto = _mapper.Map(request, atributoProducto);
-            _sistemapContext.AtributoProductos.Update(atributoProducto);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<AtributoProductoDto>(atributoProducto);
         }
 
-        // Método para eliminar una AtributoProducto
         public async Task EliminarAtributoProducto(int id)
         {
-            var tributoProducto = await _sistemapContext.AtributoProductos.FindAsync(id);
-            if (tributoProducto == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"AtributoProducto con ID {id} no encontrado.");
-            }
+                var entidad = await context.AtributoProductos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("AtributoProducto no encontrada.");
+                    throw new KeyNotFoundException($"AtributoProducto con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.AtributoProductos.Remove(tributoProducto);
-            await _sistemapContext.SaveChangesAsync();
+                context.AtributoProductos.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las AtributoProductos
         public async Task<List<AtributoProductoDto>> ObtenerTodasAtributoProductos()
         {
-            var s = await _sistemapContext.AtributoProductos
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.AtributoProductos
                                             .ProjectTo<AtributoProductoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return s;
+                return entidadDto;
+            }
         }
     }
 }

@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,108 +15,71 @@ using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
-    public class CiudadService : ICiudadService
+    internal class CiudadService : ICiudadService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
         private readonly ILogger<CiudadService> _logger;
 
-        public CiudadService(SistemapContext sistemapContext, IMapper mapper, ILogger<CiudadService> logger)
+        public CiudadService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<CiudadService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
             _logger = logger;
         }
 
-        public async Task<List<CiudadDto>> ObtenerTodasCiudads()
+        public async Task<CiudadDto> RegistrarCiudad(CiudadRequest request)
         {
-            _logger.LogInformation("Inicio del método ObtenerCiudadesAsync.");
-            var ciudades = await _sistemapContext.Ciudades.ToListAsync();
-            return _mapper.Map<List<CiudadDto>>(ciudades);
-        }
-
-        public async Task<CiudadDto> ObtenerCiudadPorIdAsync(int id)
-        {
-            _logger.LogInformation("Inicio del método ObtenerCiudadPorIdAsync.");
-            var ciudad = await _sistemapContext.Ciudades.FindAsync(id);
-            if (ciudad == null)
+            using (var context = _dbContextFactory())
             {
-                _logger.LogWarning("Ciudad no encontrada.");
-                throw new KeyNotFoundException("Ciudad no encontrada.");
+                var entidad = _mapper.Map<Ciudad>(request);
+                await context.Ciudades.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<CiudadDto>(entidad);
             }
-            return _mapper.Map<CiudadDto>(ciudad);
         }
 
-        public async Task<CiudadDto> RegistrarCiudad(CiudadRequest ciudadRequest)
+        public async Task<CiudadDto> ActualizarCiudad(int id, CiudadRequest request)
         {
-            _logger.LogInformation("Inicio del método CrearCiudadAsync.");
-            var ciudad = _mapper.Map<Ciudad>(ciudadRequest);
-            await _sistemapContext.Ciudades.AddAsync(ciudad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<CiudadDto>(ciudad);
-        }
-
-        public async Task<CiudadDto> ActualizarCiudad(int id, CiudadRequest ciudadRequest)
-        {
-            _logger.LogInformation("Inicio del método ActualizarCiudad.");
-            var ciudad = await _sistemapContext.Ciudades.FindAsync(id);
-            if (ciudad == null)
+            using (var context = _dbContextFactory())
             {
-                _logger.LogWarning("Ciudad no encontrada.");
-                throw new KeyNotFoundException("Ciudad no encontrada.");
+                var entidad = await context.Ciudades.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Ciudad no encontrada.");
+                    throw new KeyNotFoundException($"Ciudad con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<CiudadDto>(entidad);
             }
-            _mapper.Map(ciudadRequest, ciudad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<CiudadDto>(ciudad);
         }
 
         public async Task EliminarCiudad(int id)
         {
-            _logger.LogInformation("Inicio del método EliminarCiudadAsync.");
-            var ciudad = await _sistemapContext.Ciudades.FindAsync(id);
-            if (ciudad == null)
+            using (var context = _dbContextFactory())
             {
-                _logger.LogWarning("Ciudad no encontrada.");
-                throw new KeyNotFoundException("Ciudad no encontrada.");
-            }
-            _sistemapContext.Ciudades.Remove(ciudad);
-            await _sistemapContext.SaveChangesAsync();
-        }
-
-        public async Task<Paginate<CiudadDto>> ObtenerCiudadesPaginadasAsync(string search = null, int pageIndex = 1, int pageSize = 10)
-        {
-            try
-            {
-                // Preparar la consulta con proyección temprana
-                var query = _sistemapContext.Ciudades
-                                    .Include(c => c.ProvinciaNavigation)
-                                    .AsNoTracking();
-
-                // Aplicar el filtro si es necesario
-                if (!string.IsNullOrWhiteSpace(search))
+                var entidad = await context.Ciudades.FindAsync(id);
+                if (entidad == null)
                 {
-                    query = query.Where(c => c.Nombre.Contains(search) || c.ProvinciaNavigation.Nombre.Contains(search));
+                    _logger.LogWarning("Ciudad no encontrada.");
+                    throw new KeyNotFoundException($"Ciudad con ID {id} no encontrado.");
                 }
 
-                // Ejecutar la consulta para contar los registros
-                var count = await query.CountAsync();
-
-                // Ejecutar la consulta para obtener los registros paginados
-                var items = await query
-                                .OrderBy(c => c.Id) // Ordenar por algún criterio si es necesario
-                                .Skip((pageIndex - 1) * pageSize)
-                                .Take(pageSize)
-                                .ProjectTo<CiudadDto>(_mapper.ConfigurationProvider)
-                                .ToListAsync();
-
-                // Crear y devolver la instancia de Paginate
-                return new Paginate<CiudadDto>(items, count, pageIndex, pageSize);
+                context.Ciudades.Remove(entidad);
+                await context.SaveChangesAsync();
             }
-            catch (Exception ex)
+        }
+
+        public async Task<List<CiudadDto>> obtenerCiudades()
+        {
+            using (var context = _dbContextFactory())
             {
-                // Manejar excepciones si es necesario
-                _logger.LogError(ex, "Error al obtener ciudades paginadas.");
-                throw;
+                var entidadDto = await context.Ciudades
+                                            .ProjectTo<CiudadDto>(_mapper.ConfigurationProvider)
+                                            .ToListAsync();
+                return entidadDto;
             }
         }
     }

@@ -1,76 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class ProveedorService : IProveedorService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<ProveedorService> _logger;
 
-        public ProveedorService(SistemapContext sistemapContext, IMapper mapper)
+        public ProveedorService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<ProveedorService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una Proveedor
         public async Task<ProveedorDto> RegistrarProveedor(ProveedorRequest request)
         {
-            var entidad = _mapper.Map<Proveedor>(request);
-            await _sistemapContext.Proveedores.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<ProveedorDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<Proveedor>(request);
+                await context.Proveedores.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<ProveedorDto>(entidad);
+            }
         }
 
-        // Método para actualizar una Proveedor
         public async Task<ProveedorDto> ActualizarProveedor(int id, ProveedorRequest request)
         {
-            var entidad = await _sistemapContext.Proveedores.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Proveedor con ID {id} no encontrado.");
+                var entidad = await context.Proveedores.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Proveedor no encontrada.");
+                    throw new KeyNotFoundException($"Proveedor con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<ProveedorDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.Proveedores.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<ProveedorDto>(entidad);
         }
 
-        // Método para eliminar una Proveedor
         public async Task EliminarProveedor(int id)
         {
-            var entidad = await _sistemapContext.Proveedores.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Proveedor con ID {id} no encontrado.");
-            }
+                var entidad = await context.Proveedores.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Proveedor no encontrada.");
+                    throw new KeyNotFoundException($"Proveedor con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.Proveedores.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.Proveedores.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las Proveedores
         public async Task<List<ProveedorDto>> ObtenerTodasProveedors()
         {
-            var entidadDto = await _sistemapContext.Proveedores
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.Proveedores
                                             .ProjectTo<ProveedorDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }

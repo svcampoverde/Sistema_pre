@@ -146,7 +146,6 @@ namespace Presentacion
             {
                 activarForm.Close();
             }
-
             if (!activeForms.ContainsKey(typeof(T)))
             {
                 var form = _container.Resolve<T>();
@@ -154,11 +153,8 @@ namespace Presentacion
                 form.MdiParent = this;
                 form.FormClosed += (sender, e) => activeForms.Remove(typeof(T));
             }
-
             activarForm = activeForms[typeof(T)];
-
             configureForm?.Invoke((T)activarForm);
-
             activarForm.WindowState = FormWindowState.Maximized;
             activarForm.FormBorderStyle = FormBorderStyle.None;
             activarForm.ControlBox = false;

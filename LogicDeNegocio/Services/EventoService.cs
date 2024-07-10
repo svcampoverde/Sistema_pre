@@ -1,76 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class EventoService : IEventoService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<EventoService> _logger;
 
-        public EventoService(SistemapContext sistemapContext, IMapper mapper)
+        public EventoService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<EventoService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una Evento
         public async Task<EventoDto> RegistrarEvento(EventoRequest request)
         {
-            var entidad = _mapper.Map<Evento>(request);
-            await _sistemapContext.Eventos.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<EventoDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<Evento>(request);
+                await context.Eventos.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<EventoDto>(entidad);
+            }
         }
 
-        // Método para actualizar una Evento
         public async Task<EventoDto> ActualizarEvento(int id, EventoRequest request)
         {
-            var entidad = await _sistemapContext.Eventos.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Evento con ID {id} no encontrado.");
+                var entidad = await context.Eventos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Evento no encontrada.");
+                    throw new KeyNotFoundException($"Evento con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<EventoDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.Eventos.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<EventoDto>(entidad);
         }
 
-        // Método para eliminar una Evento
         public async Task EliminarEvento(int id)
         {
-            var entidad = await _sistemapContext.Eventos.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Evento con ID {id} no encontrado.");
-            }
+                var entidad = await context.Eventos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Evento no encontrada.");
+                    throw new KeyNotFoundException($"Evento con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.Eventos.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.Eventos.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las Eventos
         public async Task<List<EventoDto>> ObtenerTodasEventos()
         {
-            var entidadDto = await _sistemapContext.Eventos
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.Eventos
                                             .ProjectTo<EventoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }

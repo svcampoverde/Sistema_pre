@@ -20,51 +20,59 @@ namespace LogicDeNegocio.Services
 {
     internal class ServicioService : IServicioService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
 
-        public ServicioService(SistemapContext sistemapContext, IMapper mapper)
+        public ServicioService(Func<SistemapContext> dbContextFactory, IMapper mapper)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
         }
 
         // Método para registrar un servicio
         public async Task<ServicioDto> RegistrarServicio(ServicioRequest request)
         {
-            var servicio = _mapper.Map<Servicio>(request);
-            await _sistemapContext.Servicios.AddAsync(servicio);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<ServicioDto>(servicio);
+            using (var context = _dbContextFactory())
+            {
+                var servicio = _mapper.Map<Servicio>(request);
+                await context.Servicios.AddAsync(servicio);
+                await context.SaveChangesAsync();
+                return _mapper.Map<ServicioDto>(servicio);
+            }
         }
 
         // Método para actualizar un servicio
         public async Task<ServicioDto> ActualizarServicio(int id, ServicioRequest request)
         {
-            var servicio = await _sistemapContext.Servicios.FindAsync(id);
-            if (servicio == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Servicio con ID {id} no encontrado.");
+                var servicio = await context.Servicios.FindAsync(id);
+                if (servicio == null)
+                {
+                    throw new KeyNotFoundException($"Servicio con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, servicio);
+                context.Servicios.Update(servicio);
+                await context.SaveChangesAsync();
+                return _mapper.Map<ServicioDto>(servicio);
             }
-
-            _mapper.Map(request, servicio);
-            _sistemapContext.Servicios.Update(servicio);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<ServicioDto>(servicio);
         }
 
         // Método para eliminar un servicio
         public async Task EliminarServicio(int id)
         {
-            var servicio = await _sistemapContext.Servicios.FindAsync(id);
-            if (servicio == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Servicio con ID {id} no encontrado.");
-            }
+                var servicio = await context.Servicios.FindAsync(id);
+                if (servicio == null)
+                {
+                    throw new KeyNotFoundException($"Servicio con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.Servicios.Remove(servicio);
-            await _sistemapContext.SaveChangesAsync();
+                context.Servicios.Remove(servicio);
+                await context.SaveChangesAsync();
+            }
         }
 
         // Método para obtener servicios paginados
@@ -72,28 +80,30 @@ namespace LogicDeNegocio.Services
         {
             try
             {
-                // Preparar la consulta con proyección temprana
-                var query = _sistemapContext.Servicios
-                                    .AsNoTracking();
-
-                // Aplicar el filtro si es necesario
-                if (!string.IsNullOrWhiteSpace(search))
+                using (var context = _dbContextFactory())
                 {
-                    query = query.Where(x => x.Descripcion.Contains(search));
+                    // Preparar la consulta con proyección temprana
+                    var query = context.Servicios.AsNoTracking();
+
+                    // Aplicar el filtro si es necesario
+                    if (!string.IsNullOrWhiteSpace(search))
+                    {
+                        query = query.Where(x => x.Descripcion.Contains(search));
+                    }
+
+                    // Ejecutar la consulta para contar los registros
+                    var count = await query.CountAsync();
+
+                    // Ejecutar la consulta para obtener los registros paginados
+                    var items = await query
+                        .Skip((pageIndex - 1) * pageSize)
+                        .Take(pageSize)
+                        .ProjectTo<ServicioDto>(_mapper.ConfigurationProvider)
+                        .ToListAsync();
+
+                    // Crear y devolver la instancia de Paginate
+                    return new Paginate<ServicioDto>(items, count, pageIndex, pageSize);
                 }
-
-                // Ejecutar la consulta para contar los registros
-                var count = await query.CountAsync();
-
-                // Ejecutar la consulta para obtener los registros paginados
-                var items = await query
-                                .Skip((pageIndex - 1) * pageSize)
-                                .Take(pageSize)
-                                .ProjectTo<ServicioDto>(_mapper.ConfigurationProvider)
-                                .ToListAsync();
-
-                // Crear y devolver la instancia de Paginate
-                return new Paginate<ServicioDto>(items, count, pageIndex, pageSize);
             }
             catch (Exception ex)
             {
@@ -104,7 +114,10 @@ namespace LogicDeNegocio.Services
 
         public int GetTotalServicios()
         {
-            return _sistemapContext.Servicios.Count();
+            using (var context = _dbContextFactory())
+            {
+                return context.Servicios.Count();
+            }
         }
     }
 }

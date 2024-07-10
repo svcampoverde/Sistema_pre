@@ -1,76 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class InventarioService : IInventarioService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<InventarioService> _logger;
 
-        public InventarioService(SistemapContext sistemapContext, IMapper mapper)
+        public InventarioService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<InventarioService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una Inventario
         public async Task<InventarioDto> RegistrarInventario(InventarioRequest request)
         {
-            var entidad = _mapper.Map<Inventario>(request);
-            await _sistemapContext.Inventarios.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<InventarioDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<Inventario>(request);
+                await context.Inventarios.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<InventarioDto>(entidad);
+            }
         }
 
-        // Método para actualizar una Inventario
         public async Task<InventarioDto> ActualizarInventario(int id, InventarioRequest request)
         {
-            var entidad = await _sistemapContext.Inventarios.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Inventario con ID {id} no encontrado.");
+                var entidad = await context.Inventarios.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Inventario no encontrada.");
+                    throw new KeyNotFoundException($"Inventario con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<InventarioDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.Inventarios.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<InventarioDto>(entidad);
         }
 
-        // Método para eliminar una Inventario
         public async Task EliminarInventario(int id)
         {
-            var entidad = await _sistemapContext.Inventarios.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Inventario con ID {id} no encontrado.");
-            }
+                var entidad = await context.Inventarios.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Inventario no encontrada.");
+                    throw new KeyNotFoundException($"Inventario con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.Inventarios.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.Inventarios.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las Inventarios
         public async Task<List<InventarioDto>> ObtenerTodasInventarios()
         {
-            var entidadDto = await _sistemapContext.Inventarios
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.Inventarios
                                             .ProjectTo<InventarioDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }

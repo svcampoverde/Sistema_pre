@@ -1,76 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class TipoServicioService : ITipoServicioService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<TipoServicioService> _logger;
 
-        public TipoServicioService(SistemapContext sistemapContext, IMapper mapper)
+        public TipoServicioService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<TipoServicioService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una TipoServicio
         public async Task<TipoServicioDto> RegistrarTipoServicio(TipoServicioRequest request)
         {
-            var entidad = _mapper.Map<TipoServicio>(request);
-            await _sistemapContext.TipoServicios.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<TipoServicioDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<TipoServicio>(request);
+                await context.TipoServicios.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<TipoServicioDto>(entidad);
+            }
         }
 
-        // Método para actualizar una TipoServicio
         public async Task<TipoServicioDto> ActualizarTipoServicio(int id, TipoServicioRequest request)
         {
-            var entidad = await _sistemapContext.TipoServicios.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"TipoServicio con ID {id} no encontrado.");
+                var entidad = await context.TipoServicios.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("TipoServicio no encontrada.");
+                    throw new KeyNotFoundException($"TipoServicio con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<TipoServicioDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.TipoServicios.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<TipoServicioDto>(entidad);
         }
 
-        // Método para eliminar una TipoServicio
         public async Task EliminarTipoServicio(int id)
         {
-            var entidad = await _sistemapContext.TipoServicios.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"TipoServicio con ID {id} no encontrado.");
-            }
+                var entidad = await context.TipoServicios.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("TipoServicio no encontrada.");
+                    throw new KeyNotFoundException($"TipoServicio con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.TipoServicios.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.TipoServicios.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las TipoServicios
         public async Task<List<TipoServicioDto>> ObtenerTodasTipoServicios()
         {
-            var entidadDto = await _sistemapContext.TipoServicios
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.TipoServicios
                                             .ProjectTo<TipoServicioDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }

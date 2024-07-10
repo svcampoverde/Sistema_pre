@@ -1,77 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class AtributoService : IAtributoService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<AtributoService> _logger;
 
-        public AtributoService(SistemapContext sistemapContext, IMapper mapper)
+        public AtributoService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<AtributoService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una Atributo
         public async Task<AtributoDto> RegistrarAtributo(AtributoRequest request)
         {
-            var entidad = _mapper.Map<Atributo>(request);
-            await _sistemapContext.Atributos.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<AtributoDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<Atributo>(request);
+                await context.Atributos.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<AtributoDto>(entidad);
+            }
         }
 
-        // Método para actualizar una Atributo
         public async Task<AtributoDto> ActualizarAtributo(int id, AtributoRequest request)
         {
-            var entidad = await _sistemapContext.Atributos.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Atributo con ID {id} no encontrado.");
+                var entidad = await context.Atributos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Atributo no encontrada.");
+                    throw new KeyNotFoundException($"Atributo con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<AtributoDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.Atributos.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<AtributoDto>(entidad);
         }
 
-        // Método para eliminar una Atributo
         public async Task EliminarAtributo(int id)
         {
-            var entidad = await _sistemapContext.Atributos.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Atributo con ID {id} no encontrado.");
-            }
+                var entidad = await context.Atributos.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Atributo no encontrada.");
+                    throw new KeyNotFoundException($"Atributo con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.Atributos.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.Atributos.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las Atributos
         public async Task<List<AtributoDto>> ObtenerTodasAtributos()
         {
-            var entidadDto = await _sistemapContext.Atributos
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.Atributos
                                             .ProjectTo<AtributoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }

@@ -416,9 +416,9 @@ namespace Presentacion
             this.Mdpresupuesto.Location = new System.Drawing.Point(19, 16);
             this.Mdpresupuesto.Name = "Mdpresupuesto";
             this.Mdpresupuesto.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
-            this.Mdpresupuesto.Size = new System.Drawing.Size(154, 31);
+            this.Mdpresupuesto.Size = new System.Drawing.Size(164, 31);
             this.Mdpresupuesto.TabIndex = 2;
-            this.Mdpresupuesto.Text = "    Presupuesto";
+            this.Mdpresupuesto.Text = " Presupuesto";
             this.Mdpresupuesto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Mdpresupuesto.UseVisualStyleBackColor = false;
             this.Mdpresupuesto.Click += new System.EventHandler(this.Mdpresupuesto_Click);

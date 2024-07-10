@@ -1,76 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class TipoCuentaService : ITipoCuentaService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<TipoCuentaService> _logger;
 
-        public TipoCuentaService(SistemapContext sistemapContext, IMapper mapper)
+        public TipoCuentaService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<TipoCuentaService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una TipoCuenta
         public async Task<TipoCuentaDto> RegistrarTipoCuenta(TipoCuentaRequest request)
         {
-            var entidad = _mapper.Map<TipoCuenta>(request);
-            await _sistemapContext.TipoCuentas.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<TipoCuentaDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<TipoCuenta>(request);
+                await context.TipoCuentas.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<TipoCuentaDto>(entidad);
+            }
         }
 
-        // Método para actualizar una TipoCuenta
         public async Task<TipoCuentaDto> ActualizarTipoCuenta(int id, TipoCuentaRequest request)
         {
-            var entidad = await _sistemapContext.TipoCuentas.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"TipoCuenta con ID {id} no encontrado.");
+                var entidad = await context.TipoCuentas.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("TipoCuenta no encontrada.");
+                    throw new KeyNotFoundException($"TipoCuenta con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<TipoCuentaDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.TipoCuentas.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<TipoCuentaDto>(entidad);
         }
 
-        // Método para eliminar una TipoCuenta
         public async Task EliminarTipoCuenta(int id)
         {
-            var entidad = await _sistemapContext.TipoCuentas.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"TipoCuenta con ID {id} no encontrado.");
-            }
+                var entidad = await context.TipoCuentas.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("TipoCuenta no encontrada.");
+                    throw new KeyNotFoundException($"TipoCuenta con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.TipoCuentas.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.TipoCuentas.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las TipoCuentas
         public async Task<List<TipoCuentaDto>> ObtenerTodasTipoCuentas()
         {
-            var entidadDto = await _sistemapContext.TipoCuentas
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.TipoCuentas
                                             .ProjectTo<TipoCuentaDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }

@@ -6,9 +6,9 @@ using LogicDeNegocio.Requests;
 
 namespace LogicDeNegocio.Mapper.Profiles
 {
-    internal class TipoempresaProfile : Profile
+    internal class TipoEmpresaProfile : Profile
     {
-        public TipoempresaProfile()
+        public TipoEmpresaProfile()
         {
             CreateMap<TipoEmpresa, TipoEmpresaDto>().IgnoreIfEmpty();
             CreateMap<TipoEmpresa, TipoEmpresaRequest>().IgnoreIfEmpty();

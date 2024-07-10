@@ -1,76 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class EmpresaService : IEmpresaService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<EmpresaService> _logger;
 
-        public EmpresaService(SistemapContext sistemapContext, IMapper mapper)
+        public EmpresaService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<EmpresaService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una Empresa
         public async Task<EmpresaDto> RegistrarEmpresa(EmpresaRequest request)
         {
-            var entidad = _mapper.Map<Empresa>(request);
-            await _sistemapContext.Empresas.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<EmpresaDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<Empresa>(request);
+                await context.Empresas.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<EmpresaDto>(entidad);
+            }
         }
 
-        // Método para actualizar una Empresa
         public async Task<EmpresaDto> ActualizarEmpresa(int id, EmpresaRequest request)
         {
-            var entidad = await _sistemapContext.Empresas.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Empresa con ID {id} no encontrado.");
+                var entidad = await context.Empresas.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Empresa no encontrada.");
+                    throw new KeyNotFoundException($"Empresa con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<EmpresaDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.Empresas.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<EmpresaDto>(entidad);
         }
 
-        // Método para eliminar una Empresa
         public async Task EliminarEmpresa(int id)
         {
-            var entidad = await _sistemapContext.Empresas.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"Empresa con ID {id} no encontrado.");
-            }
+                var entidad = await context.Empresas.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("Empresa no encontrada.");
+                    throw new KeyNotFoundException($"Empresa con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.Empresas.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.Empresas.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las Empresas
         public async Task<List<EmpresaDto>> ObtenerTodasEmpresas()
         {
-            var entidadDto = await _sistemapContext.Empresas
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.Empresas
                                             .ProjectTo<EmpresaDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }

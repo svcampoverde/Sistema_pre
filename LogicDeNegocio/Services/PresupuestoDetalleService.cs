@@ -1,76 +1,86 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
 using Datos.AplicationDB;
 using Datos.Models;
-
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
-
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
 {
     internal class PresupuestoDetalleService : IPresupuestoDetalleService
     {
-        private readonly SistemapContext _sistemapContext;
+        private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
+        private readonly ILogger<PresupuestoDetalleService> _logger;
 
-        public PresupuestoDetalleService(SistemapContext sistemapContext, IMapper mapper)
+        public PresupuestoDetalleService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<PresupuestoDetalleService> logger)
         {
-            _sistemapContext = sistemapContext;
+            _dbContextFactory = dbContextFactory;
             _mapper = mapper;
+            _logger = logger;
         }
 
-        // Método para registrar una PresupuestoDetalle
         public async Task<PresupuestoDetalleDto> RegistrarPresupuestoDetalle(PresupuestoDetalleRequest request)
         {
-            var entidad = _mapper.Map<PresupuestoDetalle>(request);
-            await _sistemapContext.PresupuestoDetalles.AddAsync(entidad);
-            await _sistemapContext.SaveChangesAsync();
-            return _mapper.Map<PresupuestoDetalleDto>(entidad);
+            using (var context = _dbContextFactory())
+            {
+                var entidad = _mapper.Map<PresupuestoDetalle>(request);
+                await context.PresupuestoDetalles.AddAsync(entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<PresupuestoDetalleDto>(entidad);
+            }
         }
 
-        // Método para actualizar una PresupuestoDetalle
         public async Task<PresupuestoDetalleDto> ActualizarPresupuestoDetalle(int id, PresupuestoDetalleRequest request)
         {
-            var entidad = await _sistemapContext.PresupuestoDetalles.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"PresupuestoDetalle con ID {id} no encontrado.");
+                var entidad = await context.PresupuestoDetalles.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("PresupuestoDetalle no encontrada.");
+                    throw new KeyNotFoundException($"PresupuestoDetalle con ID {id} no encontrado.");
+                }
+
+                _mapper.Map(request, entidad);
+                await context.SaveChangesAsync();
+                return _mapper.Map<PresupuestoDetalleDto>(entidad);
             }
-
-            entidad = _mapper.Map(request, entidad);
-            _sistemapContext.PresupuestoDetalles.Update(entidad);
-            await _sistemapContext.SaveChangesAsync();
-
-            return _mapper.Map<PresupuestoDetalleDto>(entidad);
         }
 
-        // Método para eliminar una PresupuestoDetalle
         public async Task EliminarPresupuestoDetalle(int id)
         {
-            var entidad = await _sistemapContext.PresupuestoDetalles.FindAsync(id);
-            if (entidad == null)
+            using (var context = _dbContextFactory())
             {
-                throw new KeyNotFoundException($"PresupuestoDetalle con ID {id} no encontrado.");
-            }
+                var entidad = await context.PresupuestoDetalles.FindAsync(id);
+                if (entidad == null)
+                {
+                    _logger.LogWarning("PresupuestoDetalle no encontrada.");
+                    throw new KeyNotFoundException($"PresupuestoDetalle con ID {id} no encontrado.");
+                }
 
-            _sistemapContext.PresupuestoDetalles.Remove(entidad);
-            await _sistemapContext.SaveChangesAsync();
+                context.PresupuestoDetalles.Remove(entidad);
+                await context.SaveChangesAsync();
+            }
         }
 
-        // Método para obtener todas las PresupuestoDetalles
         public async Task<List<PresupuestoDetalleDto>> ObtenerTodasPresupuestoDetalles()
         {
-            var entidadDto = await _sistemapContext.PresupuestoDetalles
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.PresupuestoDetalles
                                             .ProjectTo<PresupuestoDetalleDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
-            return entidadDto;
+                return entidadDto;
+            }
         }
     }
 }
