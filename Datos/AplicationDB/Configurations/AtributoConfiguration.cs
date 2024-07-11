@@ -20,12 +20,12 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Nombre)
                 .HasColumnName("nombre")
-                .HasColumnType("nvarchar(200)")
+                .HasColumnType("VARCHAR(200)")
                 .IsRequired(); // Configuración de la columna Nombre
 
             entity.Property(e => e.Unidades)
                 .HasColumnName("unidades")
-                .HasColumnType("nvarchar(50)"); // Configuración de la columna Unidades
+                .HasColumnType("VARCHAR(50)"); // Configuración de la columna Unidades
 
             entity.Property(e => e.IdCategoriaAtributo)
                 .HasColumnName("fk_categoria_atributo")

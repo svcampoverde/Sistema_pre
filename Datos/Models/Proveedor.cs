@@ -16,6 +16,6 @@
         public virtual Cuenta IdCuentaNavigation { get; set; }
         public virtual Empresa IdEmpresaNavigation { get; set; }
         public virtual Persona IdPersonaNavigation { get; set; }
-        public virtual Servicio IdServicioNavigation { get; set; }
+        public virtual Servicio ServicionNavegation { get; set; }
     }
 }

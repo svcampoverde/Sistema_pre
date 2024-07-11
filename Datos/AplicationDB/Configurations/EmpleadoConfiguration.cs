@@ -25,7 +25,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Empresa)
                 .HasColumnName("empresa")
-                .HasColumnType("nvarchar(100)")
+                .HasColumnType("VARCHAR(100)")
                 .IsRequired();
 
             entity.Property(e => e.Sueldo)

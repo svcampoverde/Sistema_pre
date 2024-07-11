@@ -1,4 +1,5 @@
 ﻿using Datos.Models;
+using Datos.Seeders;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -22,17 +23,15 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Nombre)
                 .HasColumnName("nombre")
-                .HasColumnType("nvarchar(100)")
+                .HasColumnType("VARCHAR(100)")
                 .IsRequired();
 
             entity.Property(e => e.Descripcion)
                 .HasColumnName("descripcion")
-                .HasColumnType("nvarchar(200)")
                 .IsRequired();
 
             entity.Property(e => e.Direccion)
-                .HasColumnName("direccion")
-                .HasColumnType("nvarchar(500)");
+                .HasColumnName("direccion");
 
             entity.Property(e => e.Activo)
                 .HasColumnName("activo")
@@ -55,7 +54,8 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Telefono)
                 .HasColumnName("telefono")
-                .HasColumnType("nvarchar(20)");
+                .IsRequired(false)
+                .HasColumnType("varchar(30)");
 
             // Relación uno a muchos con Cuentas
             entity.HasMany(e => e.Cuenta)
@@ -70,6 +70,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasForeignKey(e => e.IdCategoriaBanco)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("banco_categoriabancofk");
+             entity.SeedBancos();
 
             OnConfigurePartial(entity);
         }

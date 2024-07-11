@@ -21,7 +21,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.NumCuenta)
                 .HasColumnName("numcuenta")
-                .HasColumnType("nvarchar(80)") // Ajusta según la longitud necesaria
+                .HasColumnType("VARCHAR(80)") // Ajusta según la longitud necesaria
                 .IsRequired();
 
             entity.Property(e => e.IdBanco)

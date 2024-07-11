@@ -21,12 +21,12 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Codigo)
                 .HasColumnName("codigo")
-                .HasColumnType("nvarchar(50)") // Ajusta según la longitud necesaria
+                .HasColumnType("VARCHAR(50)") // Ajusta según la longitud necesaria
                 .IsRequired();
 
             entity.Property(e => e.Descripcion)
                 .HasColumnName("descripcion")
-                .HasColumnType("nvarchar(200)"); // Ajusta según la longitud necesaria
+                .HasColumnType("VARCHAR(200)"); // Ajusta según la longitud necesaria
 
             entity.Property(e => e.Activo)
                 .HasColumnName("activo")

@@ -18,28 +18,13 @@ namespace Datos.AplicationDB.Configurations
                 .IsRequired()
                 .ValueGeneratedOnAdd(); 
 
-            entity.Property(e => e.PersonaId)
+            entity.Property(e => e.IdPersona)
                 .HasColumnName("idPersona")
                 .HasColumnType("int")
                 .IsRequired();
 
-            entity.Property(e => e.CiudadId)
+            entity.Property(e => e.IdCiudad)
                 .HasColumnName("idCiudad")
-                .HasColumnType("int")
-                .IsRequired();
-
-            entity.Property(e => e.CuentaId)
-                .HasColumnName("idCuenta")
-                .HasColumnType("int")
-                .IsRequired();
-
-            entity.Property(e => e.EmpresaId)
-                .HasColumnName("idEmpresa")
-                .HasColumnType("int")
-                .IsRequired();
-
-            entity.Property(e => e.FormaPagoId)
-                .HasColumnName("idFormapago")
                 .HasColumnType("int")
                 .IsRequired();
 
@@ -50,11 +35,11 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.ContactoCorreo)
                 .HasColumnName("contacto_correo")
-                .HasColumnType("nvarchar(200)");
+                .HasColumnType("VARCHAR(200)");
 
             entity.Property(e => e.ContactoTelefono)
                 .HasColumnName("contacto_telefono")
-                .HasColumnType("nvarchar(20)");
+                .HasColumnType("VARCHAR(20)");
 
             entity.Property(e => e.FechaRegistro)
                 .HasColumnName("fecha_registro")
@@ -68,31 +53,31 @@ namespace Datos.AplicationDB.Configurations
 
             // Relaciones con otras entidades
             entity.HasOne(d => d.Persona)
-                .WithMany()
-                .HasForeignKey(d => d.PersonaId)
+                .WithMany(e=>e.Clientes)
+                .HasForeignKey(d => d.IdPersona)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("cliente_personafk");
 
             entity.HasOne(d => d.Ciudad)
-                .WithMany()
-                .HasForeignKey(d => d.CiudadId)
+                .WithMany(e => e.Clientes)
+                .HasForeignKey(d => d.IdCiudad)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("cliente_ciudadfk");
 
             entity.HasOne(d => d.Cuenta)
-                .WithMany()
+                .WithMany(e => e.Clientes)
                 .HasForeignKey(d => d.CuentaId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("cliente_cuentafk");
 
             entity.HasOne(d => d.Empresa)
-                .WithMany()
+                .WithMany(e => e.Clientes)
                 .HasForeignKey(d => d.EmpresaId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("cliente_empresafk");
 
             entity.HasOne(d => d.FormaPago)
-                .WithMany()
+                .WithMany(e => e.Clientes)
                 .HasForeignKey(d => d.FormaPagoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("cliente_formapagofk");

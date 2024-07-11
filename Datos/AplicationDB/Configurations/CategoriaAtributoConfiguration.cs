@@ -25,7 +25,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Descripcion)
                 .HasColumnName("descripcion")
-                .HasColumnType("nvarchar(200)")
+                .HasColumnType("VARCHAR(200)")
                 .IsRequired(); // Configuración de la columna Descripcion
 
             entity.HasQueryFilter(e => e.Activo); // Filtro global para entidades activas

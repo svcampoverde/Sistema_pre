@@ -14,6 +14,9 @@ namespace LogicDeNegocio.Interfaces
 
         Task EliminarAtributo(int id);
 
-        Task<List<AtributoDto>> ObtenerTodasAtributos();
+        Task<List<AtributoDto>> ObtenerAtributos();
+        Task<AtributoDto> ObtenerAtributoPorId(int id);
+        Task<List<AtributoDto>> BuscarArtributo(string search);
+
     }
 }

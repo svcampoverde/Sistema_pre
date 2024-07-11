@@ -21,7 +21,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Servicio)
                 .HasColumnName("servicio")
-                .HasColumnType("nvarchar(200)"); // Ajusta según la longitud necesaria
+                .HasColumnType("VARCHAR(200)"); // Ajusta según la longitud necesaria
 
             entity.Property(e => e.IdServicio)
                 .HasColumnName("idServicio")
@@ -53,7 +53,7 @@ namespace Datos.AplicationDB.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("presupuesto_detalle_productofk");
 
-            entity.HasOne(e => e.IdservicioNavigation)
+            entity.HasOne(e => e.ServicionNavegation)
                 .WithMany(e=>e.PresupuestoDetalles)
                 .HasForeignKey(e => e.IdServicio)
                 .OnDelete(DeleteBehavior.ClientSetNull)

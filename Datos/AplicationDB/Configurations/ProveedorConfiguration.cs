@@ -26,12 +26,12 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Empresa)
                 .HasColumnName("empresa")
-                .HasColumnType("nvarchar(100)")
+                .HasColumnType("VARCHAR(100)")
                 .IsRequired();
 
             entity.Property(e => e.TipoServicio)
                 .HasColumnName("tiposervicio")
-                .HasColumnType("nvarchar(50)");
+                .HasColumnType("VARCHAR(50)");
 
             entity.Property(e => e.IdCiudad)
                 .HasColumnName("idCiudad")
@@ -89,7 +89,7 @@ namespace Datos.AplicationDB.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("proveedor_personafk");
 
-            entity.HasOne(d => d.IdServicioNavigation)
+            entity.HasOne(d => d.ServicionNavegation)
                 .WithMany(e => e.Proveedores)
                 .HasForeignKey(d => d.ServicioId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

@@ -40,12 +40,12 @@ namespace Datos.AplicationDB.Configurations
             // Configuración de columnas de TipoProducto
             entity.Property(e => e.Codigo)
                 .HasColumnName("codigo")
-                .HasColumnType("nvarchar(50)")
+                .HasColumnType("VARCHAR(50)")
                 .IsRequired();
 
             entity.Property(e => e.Descripcion)
                 .HasColumnName("descripcion")
-                .HasColumnType("nvarchar(200)")
+                .HasColumnType("VARCHAR(200)")
                 .IsRequired();
 
             // Relación uno a muchos con Producto

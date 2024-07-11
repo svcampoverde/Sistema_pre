@@ -21,7 +21,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Descripcion)
                 .HasColumnName("descripcion")
-                .HasColumnType("nvarchar(200)") 
+                .HasColumnType("VARCHAR(200)") 
                 .IsRequired();
 
             entity.Property(e => e.Activo)
@@ -31,14 +31,14 @@ namespace Datos.AplicationDB.Configurations
 
             // Relación con PresupuestoDetalle (uno a muchos)
             entity.HasMany(e => e.PresupuestoDetalles)
-                .WithOne(p => p.IdservicioNavigation)
+                .WithOne(p => p.ServicionNavegation)
                 .HasForeignKey(e => e.IdServicio)
                 .OnDelete(DeleteBehavior.Restrict) // 
                 .HasConstraintName("servicio_presupuestodetallefk");
 
             // Relación con Proveedor (muchos a muchos o uno a muchos según tu diseño)
             entity.HasMany(e => e.Proveedores)
-                .WithOne(p => p.IdServicioNavigation)
+                .WithOne(p => p.ServicionNavegation)
                 .HasForeignKey(e => e.ServicioId)
                 .OnDelete(DeleteBehavior.Restrict) // 
                 .HasConstraintName("servicio_proveedorfk");

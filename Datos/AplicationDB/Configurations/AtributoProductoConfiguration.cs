@@ -30,7 +30,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Valor)
                 .HasColumnName("valor")
-                .HasColumnType("nvarchar(200)")
+                .HasColumnType("VARCHAR(200)")
                 .IsRequired(); // Configuración de la columna Valor
               entity.Property(e => e.Activo)
                 .HasColumnName("activo")

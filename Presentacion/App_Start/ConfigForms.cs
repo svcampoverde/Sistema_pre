@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Unity;
+using Unity.Injection;
 using Unity.Lifetime;
 
 namespace Presentacion.App_Start
@@ -25,6 +26,7 @@ namespace Presentacion.App_Start
     {
         public static IUnityContainer RegisterForms(this IUnityContainer container)
         {
+            container.RegisterType<Home>(new InjectionConstructor(typeof(IUnityContainer), typeof(FrmIPrincipal)));
             container.RegisterType<FrmRegistrarUsuario>(new TransientLifetimeManager());
             container.RegisterType<FrmIPrincipal>(new TransientLifetimeManager());
             container.RegisterType<FrmRol>(new TransientLifetimeManager());

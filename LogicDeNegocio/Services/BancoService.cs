@@ -72,7 +72,7 @@ namespace LogicDeNegocio.Services
             }
         }
 
-        public async Task<List<BancoDto>> ObtenerTodasBancos()
+        public async Task<List<BancoDto>> ObtenerBancos()
         {
             using (var context = _dbContextFactory())
             {

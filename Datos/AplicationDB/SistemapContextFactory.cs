@@ -1,23 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
+using System.Configuration;
+
 namespace Datos.AplicationDB
 {
     public class SistemapContextFactory : IDesignTimeDbContextFactory<SistemapContext>
     {
         public SistemapContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<SistemapContext>();
+            string connectionString = ConfigurationManager.ConnectionStrings["SistemapContextConnection"].ConnectionString;
 
-            // Configuración de MySQL
-            optionsBuilder.UseMySQL("Server=localhost;Database=sistemapresup;User=root;Password=admin;",
-                sql =>
+            var optionsBuilder = new DbContextOptionsBuilder<SistemapContext>()
+                .UseMySql(connectionString, e =>
                 {
-                    sql.MigrationsAssembly(typeof(SistemapContextFactory).Assembly.FullName);
-                });
 
-          
-
+                    e.MigrationsAssembly(typeof(SistemapContext).Assembly.FullName);
+                }).EnableDetailedErrors().EnableSensitiveDataLogging().EnableServiceProviderCaching();
             return new SistemapContext(optionsBuilder.Options);
         }
     }

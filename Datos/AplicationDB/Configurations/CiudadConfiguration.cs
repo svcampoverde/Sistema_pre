@@ -20,7 +20,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Nombre)
                 .HasColumnName("nombre")
-                .HasColumnType("nvarchar(100)")
+                .HasColumnType("VARCHAR(100)")
                 .IsRequired();
 
             entity.Property(e => e.IdProvincia)
@@ -31,7 +31,7 @@ namespace Datos.AplicationDB.Configurations
  
             // Relación con la tabla Provincia
             entity.HasOne(e => e.ProvinciaNavigation)
-                .WithMany()
+                .WithMany(e=>e.Ciudades)
                 .HasForeignKey(e => e.IdProvincia)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_ciudad_provincia");

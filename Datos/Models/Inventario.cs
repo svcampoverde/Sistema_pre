@@ -2,7 +2,7 @@
 {
     public partial class Inventario : BaseEntity<int>
     {
-        public int ProductoId { get; set; }
+        public int IdProducto { get; set; }
         public int Cantidad { get; set; }
         public string Ubicacion { get; set; }
         public decimal PrecioCompra { get; set; } = 0M;

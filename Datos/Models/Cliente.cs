@@ -4,8 +4,8 @@ namespace Datos.Models
 {
     public partial class Cliente : BaseEntity<int>
     {
-        public int PersonaId { get; set; }
-        public int CiudadId { get; set; }
+        public int IdPersona { get; set; }
+        public int IdCiudad { get; set; }
         public int CuentaId { get; set; }
         public int EmpresaId { get; set; }
         public int FormaPagoId { get; set; }

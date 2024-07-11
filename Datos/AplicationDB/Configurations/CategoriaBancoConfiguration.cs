@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Datos.AplicationDB.Configurations
 {
-    public class CategoriaBancoConfiguration : IEntityTypeConfiguration<CategoriaBanco>
+    partial class CategoriaBancoConfiguration : IEntityTypeConfiguration<CategoriaBanco>
     {
         public void Configure(EntityTypeBuilder<CategoriaBanco> builder)
         {
@@ -23,18 +23,15 @@ namespace Datos.AplicationDB.Configurations
 
             builder.Property(e => e.Codigo)
                 .HasColumnName("codigo")
-                .HasColumnType("nvarchar(50)")
+                .HasColumnType("VARCHAR(50)")
                 .IsRequired();
 
             builder.Property(e => e.Nombre)
                 .HasColumnName("nombre")
-                .HasColumnType("nvarchar(100)")
                 .IsRequired();
 
             builder.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
-                .HasColumnType("nvarchar(200)");
-
+                .HasColumnName("descripcion");
             builder.Property(e => e.Activo)
                 .HasColumnName("activo")
                 .HasColumnType("bit")
@@ -51,7 +48,6 @@ namespace Datos.AplicationDB.Configurations
 
             builder.HasQueryFilter(e => e.Activo);
 
-            // Relación uno a muchos con Banco
             builder.HasMany(e => e.Bancos)
                 .WithOne(e => e.CategoriaBanco)
                 .HasForeignKey(e => e.IdCategoriaBanco)
@@ -60,6 +56,9 @@ namespace Datos.AplicationDB.Configurations
 
             // Llamada al seeder
             builder.SeedCategoriaBancos();
+            OnConfigurePartial(builder);
         }
+
+        partial void OnConfigurePartial(EntityTypeBuilder<CategoriaBanco> entity);
     }
 }

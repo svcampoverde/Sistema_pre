@@ -20,20 +20,20 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Descripcion)
                 .HasColumnName("descripcion")
-                .HasColumnType("nvarchar(200)")
+                .HasColumnType("VARCHAR(200)")
                 .IsRequired();
 
             entity.Property(e => e.Telefono)
                 .HasColumnName("telefono")
-                .HasColumnType("nvarchar(20)");
+                .HasColumnType("VARCHAR(20)");
 
             entity.Property(e => e.Correo)
                 .HasColumnName("correo")
-                .HasColumnType("nvarchar(100)");
+                .HasColumnType("VARCHAR(100)");
 
             entity.Property(e => e.Direccion)
                 .HasColumnName("direccion")
-                .HasColumnType("nvarchar(200)");
+                .HasColumnType("VARCHAR(200)");
 
             entity.Property(e => e.IdTipoEmpresa)
                 .HasColumnName("idTipoEmpresa")

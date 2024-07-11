@@ -20,7 +20,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Descripcion)
                 .HasColumnName("nombre")
-                .HasColumnType("nvarchar(200)")
+                .HasColumnType("VARCHAR(200)")
                 .IsRequired(); // Configuración de la columna Descripcion
 
             entity.Property(e => e.Precio)
@@ -29,12 +29,12 @@ namespace Datos.AplicationDB.Configurations
                 .IsRequired(); // Configuración de la columna Precio
 
             entity.Property(e => e.IdCategoriaProducto)
-                .HasColumnName("fk_categoria")
+                .HasColumnName("IdCategoriaProducto")
                 .HasColumnType("int")
                 .IsRequired(); // Configuración de la columna IdCategoriaProducto
 
             entity.Property(e => e.IdTipoProducto)
-                .HasColumnName("fk_tipo_producto")
+                .HasColumnName("IdTipoProducto")
                 .HasColumnType("int"); // Configuración de la columna IdTipoProducto (nullable)
 
             // Relación uno a muchos con PresupuestoDetalle

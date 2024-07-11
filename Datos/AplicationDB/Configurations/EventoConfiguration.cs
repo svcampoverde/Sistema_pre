@@ -20,7 +20,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Descripcion)
                 .HasColumnName("descripcion")
-                .HasColumnType("nvarchar(200)") 
+                .HasColumnType("VARCHAR(200)") 
                 .IsRequired();
 
             entity.Property(e => e.FechaEvento)
@@ -30,15 +30,15 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Promotor)
                 .HasColumnName("promotor")
-                .HasColumnType("nvarchar(100)");
+                .HasColumnType("VARCHAR(100)");
 
             entity.Property(e => e.Artista)
                 .HasColumnName("artista")
-                .HasColumnType("nvarchar(100)");
+                .HasColumnType("VARCHAR(100)");
 
             entity.Property(e => e.Direccion)
                 .HasColumnName("direccion")
-                .HasColumnType("nvarchar(200)");
+                .HasColumnType("VARCHAR(200)");
 
             entity.Property(e => e.Activo)
                 .HasColumnName("activo")

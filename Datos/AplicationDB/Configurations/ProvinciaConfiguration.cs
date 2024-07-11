@@ -22,7 +22,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Nombre)
                 .HasColumnName("nombre")
-                .HasColumnType("nvarchar(200)") 
+                .HasColumnType("VARCHAR(200)") 
                 .IsRequired();
             entity.HasMany(e => e.Ciudades)
                 .WithOne(e => e.ProvinciaNavigation)

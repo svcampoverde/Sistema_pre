@@ -22,8 +22,8 @@ namespace Datos.AplicationDB.Configurations
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
-            entity.Property(e => e.ProductoId)
-                .HasColumnName("producto_id")
+            entity.Property(e => e.IdProducto)
+                .HasColumnName("idProducto")
                 .HasColumnType("int")
                 .IsRequired();
 
@@ -34,7 +34,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Ubicacion)
                 .HasColumnName("ubicacion")
-                .HasColumnType("nvarchar(500)");
+                .HasColumnType("VARCHAR(500)");
 
             entity.Property(e => e.PrecioCompra)
                 .HasColumnName("precio_compra")
@@ -63,7 +63,7 @@ namespace Datos.AplicationDB.Configurations
             // Configuración de relación con Producto
             entity.HasOne(e => e.Producto)
                 .WithOne(p => p.Inventario)
-                .HasForeignKey<Inventario>(i => i.ProductoId)
+                .HasForeignKey<Inventario>(i => i.IdProducto)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("inventario_producto_fk");
         }

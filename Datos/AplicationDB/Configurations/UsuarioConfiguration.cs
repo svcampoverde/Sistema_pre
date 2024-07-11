@@ -31,24 +31,24 @@ namespace Datos.ModelsConfiguration
                    .IsRequired();
             // Configuración de otras propiedades
             builder.Property(u => u.IdPersona)
-                   .HasColumnName("id_persona")
+                   .HasColumnName("idPersona")
                    .IsRequired();
 
             builder.Property(u => u.NombreUsuario)
-                   .HasColumnName("nombre_usuario")
+                   .HasColumnName("nombreUsuario")
                    .HasMaxLength(100)
                    .IsRequired();
 
             builder.Property(u => u.ContrasenaHash)
-                   .HasColumnName("contrasena_hash")
+                   .HasColumnName("contrasenaHash")
                    .IsRequired();
 
             builder.Property(u => u.ContrasenaSalt)
-                   .HasColumnName("contrasena_salt")
+                   .HasColumnName("contrasenaSalt")
                    .IsRequired();
 
             builder.Property(u => u.IdRol)
-                   .HasColumnName("id_rol")
+                   .HasColumnName("idRol")
                    .IsRequired();
 
             // Relaciones

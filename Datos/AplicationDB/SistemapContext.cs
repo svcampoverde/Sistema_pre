@@ -16,7 +16,6 @@ namespace Datos.AplicationDB
         public SistemapContext(DbContextOptions<SistemapContext> options)
             : base(options)
         {
-            Database.Migrate();
 
         }
 
@@ -24,6 +23,7 @@ namespace Datos.AplicationDB
         public virtual DbSet<AtributoProducto> AtributoProductos { get; set; }
         public virtual DbSet<Banco> Bancos { get; set; }
         public virtual DbSet<CategoriaAtributo> CategoriaAtributos { get; set; }
+        public virtual DbSet<CategoriaBanco> CategoriaBancos { get; set; }
         public virtual DbSet<CategoriaProducto> CategoriaProductos { get; set; }
         public virtual DbSet<Ciudad> Ciudades { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
@@ -83,7 +83,7 @@ namespace Datos.AplicationDB
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {  
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SistemapContext).Assembly);
   
             OnModelCreatingPartial(modelBuilder);

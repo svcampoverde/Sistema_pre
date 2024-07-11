@@ -11,6 +11,6 @@ namespace Datos.Models
 
         public virtual Presupuesto IdPresupuestoNavigation { get; set; }
         public virtual Producto IdproductoNavigation { get; set; }
-        public virtual Servicio IdservicioNavigation { get; set; }
+        public virtual Servicio ServicionNavegation { get; set; }
     }
 }

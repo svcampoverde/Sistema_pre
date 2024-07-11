@@ -20,38 +20,38 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.Cedula)
                 .HasColumnName("cedula")
-                .HasColumnType("nvarchar(20)")
+                .HasColumnType("VARCHAR(20)")
                 .IsRequired();
 
             entity.Property(e => e.Nombre)
                 .HasColumnName("nombre")
-                .HasColumnType("nvarchar(100)")
+                .HasColumnType("VARCHAR(100)")
                 .IsRequired();
 
             entity.Property(e => e.Apellido)
                 .HasColumnName("apellido")
-                .HasColumnType("nvarchar(100)")
+                .HasColumnType("VARCHAR(100)")
                 .IsRequired();
 
             entity.Property(e => e.Genero)
                 .HasColumnName("genero")
-                .HasColumnType("nvarchar(20)");
+                .HasColumnType("VARCHAR(20)");
 
             entity.Property(e => e.Telefono)
                 .HasColumnName("telefono")
-                .HasColumnType("nvarchar(20)");
+                .HasColumnType("VARCHAR(20)");
 
             entity.Property(e => e.Celular)
                 .HasColumnName("celular")
-                .HasColumnType("nvarchar(20)");
+                .HasColumnType("VARCHAR(20)");
 
             entity.Property(e => e.Correo)
                 .HasColumnName("correo")
-                .HasColumnType("nvarchar(100)");
+                .HasColumnType("VARCHAR(100)");
 
             entity.Property(e => e.Direccion)
                 .HasColumnName("direccion")
-                .HasColumnType("nvarchar(200)");
+                .HasColumnType("VARCHAR(200)");
 
             entity.Property(e => e.IdCiudad)
                 .HasColumnName("idCiudad")

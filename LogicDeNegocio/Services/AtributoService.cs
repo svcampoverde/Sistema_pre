@@ -72,11 +72,35 @@ namespace LogicDeNegocio.Services
             }
         }
 
-        public async Task<List<AtributoDto>> ObtenerTodasAtributos()
+        public async Task<List<AtributoDto>> ObtenerAtributos()
         {
             using (var context = _dbContextFactory())
             {
                 var entidadDto = await context.Atributos
+                                            .ProjectTo<AtributoDto>(_mapper.ConfigurationProvider)
+                                            .ToListAsync();
+                return entidadDto;
+            }
+        }
+
+        public async Task<AtributoDto> ObtenerAtributoPorId(int id)
+        {
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.Atributos
+                .Where(x => x.Id == id)
+                                            .ProjectTo<AtributoDto>(_mapper.ConfigurationProvider)
+                                            .FirstOrDefaultAsync();
+                return entidadDto;
+            }
+        }
+
+        public async Task<List<AtributoDto>> BuscarArtributo(string search)
+        {
+            using (var context = _dbContextFactory())
+            {
+                var entidadDto = await context.Atributos
+                .Where(x => x.Nombre.Contains(search))
                                             .ProjectTo<AtributoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
                 return entidadDto;

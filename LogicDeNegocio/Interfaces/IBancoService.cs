@@ -14,6 +14,6 @@ namespace LogicDeNegocio.Interfaces
 
         Task EliminarBanco(int id);
 
-        Task<List<BancoDto>> ObtenerTodasBancos();
+        Task<List<BancoDto>> ObtenerBancos();
     }
 }

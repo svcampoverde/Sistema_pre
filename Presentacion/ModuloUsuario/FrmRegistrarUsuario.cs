@@ -24,8 +24,8 @@ namespace Presentacion.ModuloUsuario
         }
         private async void FrmRegistrarUsuario_Load(object sender, EventArgs e)
         {
-            await LlenarComboBoxRoles();
-            await LlenarComboBoxCiudades();
+             
+            await Task.WhenAll(LlenarComboBoxRoles(),LlenarComboBoxCiudades());
         }
         private async Task LlenarComboBoxRoles()
         {
