@@ -267,6 +267,7 @@
     <Compile Include="AplicationDB\Configurations\AtributoProductoConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\BancoConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\CategoriaAtributoConfiguration.cs" />
+    <Compile Include="AplicationDB\Configurations\CategoriaBancoConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\InventarioConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\PresupuestoConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\CategoriaProductoConfiguration.cs" />
@@ -290,16 +291,12 @@
     <Compile Include="AplicationDB\Configurations\UsuarioConfiguration.cs" />
     <Compile Include="AplicationDB\SistemapContext.cs" />
     <Compile Include="AplicationDB\SistemapContextFactory.cs" />
-    <Compile Include="Migrations\20240707065435_inicial.cs" />
-    <Compile Include="Migrations\20240707065435_inicial.Designer.cs">
-      <DependentUpon>20240707065435_inicial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\SistemapContextModelSnapshot.cs" />
     <Compile Include="Models\Atributo.cs" />
     <Compile Include="Models\AtributoProducto.cs" />
     <Compile Include="Models\Banco.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\CategoriaAtributo.cs" />
+    <Compile Include="Models\CategoriaBanco.cs" />
     <Compile Include="Models\FormaPago.cs" />
     <Compile Include="Models\Inventario.cs" />
     <Compile Include="Models\Presupuesto.cs" />
@@ -323,6 +320,8 @@
     <Compile Include="Models\TipoServicio.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seeders\BancoSeeder.cs" />
+    <Compile Include="Seeders\CategoriaBancoSeeder.cs" />
     <Compile Include="Seeders\CategoriaProductoSeeder.cs" />
     <Compile Include="Seeders\CiudadSeeder.cs" />
     <Compile Include="Seeders\ExcelLoader.cs" />
