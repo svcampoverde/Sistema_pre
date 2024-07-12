@@ -1,5 +1,8 @@
 ﻿///using LogicDeNegocio.personas;
 using LogicDeNegocio;
+using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,36 +12,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using LogicDeNegocio.Empresa;
 
 
 namespace Presentacion.ModuloEmpresa
 {
     public partial class FrmTipoEmpresa : Form
     {
-        //TipoEmpresa temp= new TipoEmpresa();
+        private readonly ITipoEmpresaService _tipoEmpresaService;
+
         int Id;
-        public FrmTipoEmpresa()
+        public FrmTipoEmpresa(ITipoEmpresaService tipoEmpresaService)
         {
+            _tipoEmpresaService = tipoEmpresaService;
             InitializeComponent();
+            this.Load += new EventHandler(FrmTipoEmpresa_Load);
         }
 
-        private void LlenarDataGrid(string dato)
+        private async void LlenarDataGrid(string dato)
         {
             try
             {
-                //List<TipoEmpresa> list = temp.BuscarTipempresa(dato);
-                //dtgTipEmpresa.Rows.Clear();
+                List<TipoEmpresaDto> list = await _tipoEmpresaService.ObtenerTipoEmpresas(dato);
+                dtgTipEmpresa.Rows.Clear();
 
-                //int cont = 0;
+                int cont = 0;
 
-                //foreach (TipoEmpresa t in list)
-                //{
-                //    dtgTipEmpresa.Rows.Add(1);
-                //    dtgTipEmpresa.Rows[cont].Cells[0].Value = t.Id.ToString();
-                //    dtgTipEmpresa.Rows[cont].Cells[1].Value = t.Descripcion.ToString();
-                //    cont++;
-               // }
+                foreach (TipoEmpresaDto t in list)
+                {
+                    dtgTipEmpresa.Rows.Add(1);
+                    dtgTipEmpresa.Rows[cont].Cells[0].Value = t.Id.ToString();
+                    dtgTipEmpresa.Rows[cont].Cells[1].Value = t.Descripcion.ToString();
+                    cont++;
+                }
+
+            }
+            catch (ExceptionSistema ex)
+            {
+                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private async void btnGuardartipEmpresa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Validar())
+                {
+                    // temp.InsertarTipEmpresa(temp);
+                    TipoEmpresaRequest tipo = new TipoEmpresaRequest()
+                    { Codigo = txtTipempresa.Text, Descripcion = txtTipempresa.Text };
+                    await _tipoEmpresaService.RegistrarTipoEmpresa(tipo);
+                    MessageBox.Show("Registro de provincia realizado con éxito");
+                    Limpiar();
+                    LlenarDataGrid("");
+                }
 
             }
             catch (ExceptionSistema ex)
@@ -55,25 +81,6 @@ namespace Presentacion.ModuloEmpresa
             LlenarDataGrid("");
         }
 
-        private void brnGuardarTE_Click(object sender, EventArgs e)
-        {
-          //  temp.Descripcion = txtTipempresa.Text;
-            try
-            {
-                if (Validar())
-                {
-                   // temp.InsertarTipEmpresa(temp);
-                    MessageBox.Show("Registro de provincia realizado con éxito");
-                    Limpiar();
-                    LlenarDataGrid("");
-                }
-
-            }
-            catch (ExceptionSistema ex)
-            {
-                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
         private bool Validar()
         {
             bool campo = true;
@@ -89,7 +96,7 @@ namespace Presentacion.ModuloEmpresa
             txtTipempresa.Text = "";
         }
 
-        private void dtgTipEmpresa_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void dtgTipEmpresa_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
             try
@@ -108,13 +115,15 @@ namespace Presentacion.ModuloEmpresa
                             {
                                 Id = Convert.ToInt32(dtgTipEmpresa.Rows[e.RowIndex].Cells["idtipo"].Value);
                                 txtMtipemp.Text = dtgTipEmpresa.Rows[e.RowIndex].Cells["tipemp"].Value.ToString();
+                                MessageBox.Show("ddd");
                                 pnlRegistrotip.Visible = false;
                                 pnlModificatipo.Visible = true;
+                                
 
                             }
                             else
                             {
-                                MessageBox.Show("La celda 'idroles' no contiene un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("La celda no contiene un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -125,6 +134,7 @@ namespace Presentacion.ModuloEmpresa
                         {
                             Id = Convert.ToInt32(dtgTipEmpresa.Rows[e.RowIndex].Cells["idtipo"].Value);
                             //temp.EliminarTipempresa(Id);
+                            await _tipoEmpresaService.EliminarTipoEmpresa(Id);
                             LlenarDataGrid("");
                         }
 
@@ -137,16 +147,22 @@ namespace Presentacion.ModuloEmpresa
             }
         }
 
-        private void btnActualizarTE_Click(object sender, EventArgs e)
+        private async void btnActualizarTE_Click(object sender, EventArgs e)
         {
             string tipo = txtMtipemp.Text;
             if (!String.IsNullOrEmpty(txtMtipemp.Text))
             {
                 //temp.Id = Id;
                 //temp.Descripcion = tipo;
-
                 //temp.ActualizarTipempresa(temp);
+                TipoEmpresaRequest tipoEmpresa = new TipoEmpresaRequest()
+                {
+                    Descripcion = tipo
+                };
+                await _tipoEmpresaService.ActualizarTipoEmpresa(Id, tipoEmpresa);
                 MessageBox.Show("Datos actualizados con exito.");
+                pnlRegistrotip.Visible = true;
+                pnlModificatipo.Visible = false;
                 LlenarDataGrid("");
             }
             else
@@ -158,12 +174,14 @@ namespace Presentacion.ModuloEmpresa
 
         private void txtBtipemp_TextChanged(object sender, EventArgs e)
         {
-            LlenarDataGrid(txtBtipemp.Text);
+            LlenarDataGrid(txtBtipempresa.Text);
         }
 
         private void btnBuscartemp_Click(object sender, EventArgs e)
         {
-            LlenarDataGrid(txtBtipemp.Text);
+            LlenarDataGrid(txtBtipempresa.Text);
         }
+
+       
     }
 }

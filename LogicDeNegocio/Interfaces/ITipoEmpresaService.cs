@@ -15,5 +15,6 @@ namespace LogicDeNegocio.Interfaces
         Task EliminarTipoEmpresa(int id);
 
         Task<List<TipoEmpresaDto>> ObtenerTodasTipoEmpresas();
+        Task<List<TipoEmpresaDto>> ObtenerTipoEmpresas(string dato);
     }
 }

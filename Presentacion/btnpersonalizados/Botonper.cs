@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-
 namespace Presentacion.btnpersonalizados
 {
     public class Botonper : Button
@@ -13,7 +12,8 @@ namespace Presentacion.btnpersonalizados
         private int borderRadius = 20;
         private Color borderColor = Color.PaleVioletRed;
 
-        // propiedades
+        //propiedades
+
         [Category("Advance")]
         public int BorderSize { get { return borderSize; } set { borderSize = value; this.Invalidate(); } }
 
@@ -36,8 +36,7 @@ namespace Presentacion.btnpersonalizados
             get { return this.ForeColor; }
             set { this.ForeColor = value; }
         }
-
-        // constructor
+        //constructor
         public Botonper()
         {
             this.FlatStyle = FlatStyle.Flat;
@@ -48,7 +47,7 @@ namespace Presentacion.btnpersonalizados
             this.Resize += new EventHandler(Button_Resize);
         }
 
-        // Methods
+        //Methods
         private GraphicsPath GetFigurePath(Rectangle rect, float radius)
         {
             GraphicsPath path = new GraphicsPath();
@@ -73,31 +72,31 @@ namespace Presentacion.btnpersonalizados
             if (borderSize > 0)
                 smoothSize = borderSize;
 
-            if (borderRadius > 2) // Rounded button
+            if (borderRadius > 2) //Rounded button
             {
                 using (GraphicsPath pathSurface = GetFigurePath(rectSurface, borderRadius))
                 using (GraphicsPath pathBorder = GetFigurePath(rectBorder, borderRadius - borderSize))
-                using (Pen penSurface = new Pen(this.Parent?.BackColor ?? Color.Transparent, smoothSize))
+                using (Pen penSurface = new Pen(this.Parent.BackColor, smoothSize))
                 using (Pen penBorder = new Pen(borderColor, borderSize))
                 {
                     pevent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    // Button surface
+                    //Button surface
                     this.Region = new Region(pathSurface);
-                    // Draw surface border for HD result
+                    //Draw surface border for HD result
                     pevent.Graphics.DrawPath(penSurface, pathSurface);
 
-                    // Button border                    
+                    //Button border                    
                     if (borderSize >= 1)
-                        // Draw control border
+                        //Draw control border
                         pevent.Graphics.DrawPath(penBorder, pathBorder);
                 }
             }
-            else // Normal button
+            else //Normal button
             {
                 pevent.Graphics.SmoothingMode = SmoothingMode.None;
-                // Button surface
+                //Button surface
                 this.Region = new Region(rectSurface);
-                // Button border
+                //Button border
                 if (borderSize >= 1)
                 {
                     using (Pen penBorder = new Pen(borderColor, borderSize))
@@ -112,17 +111,13 @@ namespace Presentacion.btnpersonalizados
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            if (this.Parent != null)
-            {
-                this.Parent.BackColorChanged += new EventHandler(Container_BackColorChanged);
-            }
+            this.Parent.BackColorChanged += new EventHandler(Container_BackColorChanged);
         }
 
         private void Container_BackColorChanged(object sender, EventArgs e)
         {
             this.Invalidate();
         }
-
         private void Button_Resize(object sender, EventArgs e)
         {
             if (borderRadius > this.Height)

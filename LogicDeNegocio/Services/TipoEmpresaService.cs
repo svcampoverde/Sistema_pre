@@ -66,9 +66,30 @@ namespace LogicDeNegocio.Services
                     _logger.LogWarning("TipoEmpresa no encontrada.");
                     throw new KeyNotFoundException($"TipoEmpresa con ID {id} no encontrado.");
                 }
+                entidad.Activo = false;
+                context.TipoEmpresas.Update(entidad);
+                //context.TipoEmpresas.Remove(entidad);
+                //await context.SaveChangesAsync();
+            }
+        }
+        public async Task<List<TipoEmpresaDto>> ObtenerTipoEmpresas(string dato)
+        {
+            using (var context = _dbContextFactory())
+            {
+                //  consulta inicial para obtener todos los tipos de empresa
+                var query = context.TipoEmpresas.AsQueryable();
 
-                context.TipoEmpresas.Remove(entidad);
-                await context.SaveChangesAsync();
+                // Si 'filtro' no está vacío, agregamos un filtro adicional a la consulta
+                if (!string.IsNullOrEmpty(dato))
+                {
+                    query = query.Where(te => te.Descripcion.Contains(dato));
+                }
+
+                var entidadDto = await query
+                                        .ProjectTo<TipoEmpresaDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
+
+                return entidadDto;
             }
         }
 

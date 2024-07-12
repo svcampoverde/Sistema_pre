@@ -4,15 +4,7 @@ using LogicDeNegocio;
 //using LogicDeNegocio.provincia;
 using Presentacion.btnpersonalizados;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Presentacion.ModuloEmpresa
 {
@@ -24,7 +16,7 @@ namespace Presentacion.ModuloEmpresa
         public FrmEmpresa()
         {
             InitializeComponent();
-           
+
         }
         private void llenarCombobox(PersonComboBox combo)
         {
@@ -97,13 +89,13 @@ namespace Presentacion.ModuloEmpresa
         //    dtg.Columns[3].Visible = false;
         //    dtg.Visible = true;
         //}
-           
+
         private void ptbadd_Click(object sender, EventArgs e)
         {
             pnlListEmp.Visible = false;
             pnlRegEmp.Visible = true;
             ptbadd.Visible = false;
-            pnlRegEmp.Visible=true;
+            pnlRegEmp.Visible = true;
         }
 
         private void btnGuardarE_Click(object sender, EventArgs e)
@@ -117,7 +109,7 @@ namespace Presentacion.ModuloEmpresa
             {
                 if (Validar())
                 {
-                 //   emp.InsertarEmpresa(emp);
+                    //   emp.InsertarEmpresa(emp);
                     MessageBox.Show("Registro de provincia realizado con éxito");
                     Limpiar();
                     LlenarDataGrid("");
@@ -165,12 +157,12 @@ namespace Presentacion.ModuloEmpresa
             txtCorreo.Text = "";
             txtDireccion.Text = "";
             txtTelefono.Text = "";
-        }    
+        }
         private void ptbleft_Click(object sender, EventArgs e)
         {
             pnlListEmp.Visible = true;
             pnlRegEmp.Visible = false;
-           // ptbadd.Visible = false;
+            // ptbadd.Visible = false;
             pnlRegEmp.Visible = false;
         }
         private void ptbleftm_Click(object sender, EventArgs e)
@@ -208,7 +200,7 @@ namespace Presentacion.ModuloEmpresa
                                 pnlMempresa.Visible = true;
                                 pnlListEmp.Visible = false;
                                 cmbMtipemp.Click += new EventHandler(cmbMtipemp_Click_1);
-                                
+
                             }
                             else
                             {
@@ -252,7 +244,7 @@ namespace Presentacion.ModuloEmpresa
                 MessageBox.Show("Datos actualizados con exito.");
                 pnlListEmp.Visible = true;
                 ptbleftm.Visible = false;
-                pnlMempresa.Visible= false;
+                pnlMempresa.Visible = false;
             }
             else
             {

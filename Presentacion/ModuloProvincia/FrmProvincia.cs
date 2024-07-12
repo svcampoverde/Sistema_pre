@@ -1,12 +1,5 @@
 ﻿using LogicDeNegocio;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Presentacion.ModuloProvincia
@@ -14,7 +7,7 @@ namespace Presentacion.ModuloProvincia
 {
     public partial class FrmProvincia : Form
     {
-       // Provincia admp = new Provincia();
+        // Provincia admp = new Provincia();
         int Id;
         public FrmProvincia()
         {
@@ -61,7 +54,7 @@ namespace Presentacion.ModuloProvincia
                 }
 
             }
-            catch(ExceptionSistema ex) 
+            catch (ExceptionSistema ex)
             {
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -69,17 +62,17 @@ namespace Presentacion.ModuloProvincia
 
         private bool Validar()
         {
-           bool campo = true;
-            if(txtProvincia.Text == "") 
-            { 
+            bool campo = true;
+            if (txtProvincia.Text == "")
+            {
                 campo = false;
                 errorProvider1.SetError(txtProvincia, "Ingrese nombre de provincia");
             }
-           return campo;
+            return campo;
         }
         public void Limpiar()
         {
-            txtProvincia.Text="";
+            txtProvincia.Text = "";
         }
         //eventos
         private void FrmProvincia_Load(object sender, EventArgs e)
@@ -151,7 +144,7 @@ namespace Presentacion.ModuloProvincia
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-          
+
             string ciudad = txtMprovincia.Text;
             if (!String.IsNullOrEmpty(txtMprovincia.Text))
             {

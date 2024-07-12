@@ -1,13 +1,6 @@
 ﻿//using LogicDeNegocio.personas;
 using LogicDeNegocio;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 //using LogicDeNegocio.Servicio;
 
@@ -16,7 +9,7 @@ namespace Presentacion.ModuloServicio
 {
     public partial class FrmServicio : Form
     {
-       // Servicio adms = new Servicio();
+        // Servicio adms = new Servicio();
         int Id;
         public FrmServicio()
         {
@@ -57,7 +50,7 @@ namespace Presentacion.ModuloServicio
 
         private void brnGuardarS_Click(object sender, EventArgs e)
         {
-           // adms.Descripcion = txtServicio.Text;
+            // adms.Descripcion = txtServicio.Text;
             try
             {
                 //if (Validar())
@@ -134,7 +127,7 @@ namespace Presentacion.ModuloServicio
                         if (result == DialogResult.OK)
                         {
                             Id = Convert.ToInt32(dtgServicio.Rows[e.RowIndex].Cells["idservicio"].Value);
-                           // adms.EliminarServicio(Id);
+                            // adms.EliminarServicio(Id);
                             LlenarDataGrid("");
                         }
 

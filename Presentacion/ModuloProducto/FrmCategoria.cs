@@ -3,13 +3,7 @@ using LogicDeNegocio;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 //using LogicDeNegocio.producto;
 
@@ -53,10 +47,10 @@ namespace Presentacion.ModuloProducto
 
         private async void btnRegistracat_Click(object sender, EventArgs e)
         {
-           
+
             try
             {
-                    if (Validar())
+                if (Validar())
                 {
                     CategoriaProductoRequest categoriaProducto = new CategoriaProductoRequest() { Codigo = txtCategoria.Text, Descripcion = txtCategoria.Text };
                     await _categoriaProductoService.RegistrarCategoriaProducto(categoriaProducto);
@@ -102,42 +96,42 @@ namespace Presentacion.ModuloProducto
             {
                 // Verificar que el índice de la columna y la fila estén dentro del rango
                 if (e.RowIndex >= 0 && e.RowIndex < dtgCategoria.Rows.Count &&
-                    e.ColumnIndex >= 0 && e.ColumnIndex <  dtgCategoria.Columns.Count)
+                    e.ColumnIndex >= 0 && e.ColumnIndex < dtgCategoria.Columns.Count)
                 {
-                 
-                            if (dtgCategoria.Columns[e.ColumnIndex].Name == "Editar")
+
+                    if (dtgCategoria.Columns[e.ColumnIndex].Name == "Editar")
+                    {
+                        // Verificar si la columna es de tipo DataGridViewImageColumn
+                        if (dtgCategoria.Columns[e.ColumnIndex] is DataGridViewImageColumn)
+                        {
+                            if (dtgCategoria.Rows[e.RowIndex].Cells[2].Value != null)
                             {
-                                // Verificar si la columna es de tipo DataGridViewImageColumn
-                                if (dtgCategoria.Columns[e.ColumnIndex] is DataGridViewImageColumn)
-                                {
-                                    if (dtgCategoria.Rows[e.RowIndex].Cells[2].Value != null)
-                                    {
-                                        Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells[2].Value);
-                                        txtMcategoria.Text = dtgCategoria.Rows[e.RowIndex].Cells[4].Value.ToString();
-                                        pnlRegistrocat.Visible = false;
-                                        pnlModificacat.Visible = true;
-                                        pnllistCat.Visible = false;
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("La celda no contiene un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    }
-                                }
+                                Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells[2].Value);
+                                txtMcategoria.Text = dtgCategoria.Rows[e.RowIndex].Cells[4].Value.ToString();
+                                pnlRegistrocat.Visible = false;
+                                pnlModificacat.Visible = true;
+                                pnllistCat.Visible = false;
                             }
-                            if (dtgCategoria.Columns[e.ColumnIndex].Name == "Eliminar" && dtgCategoria.Rows[e.RowIndex].Cells[2].Value != null)
+                            else
                             {
-                                DialogResult result = MessageBox.Show("Se eliminara el registro de forma permanete. ¿Desea continuar?", "Eliminar registro", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                                if (result == DialogResult.OK)
-                                {
+                                MessageBox.Show("La celda no contiene un valor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                    if (dtgCategoria.Columns[e.ColumnIndex].Name == "Eliminar" && dtgCategoria.Rows[e.RowIndex].Cells[2].Value != null)
+                    {
+                        DialogResult result = MessageBox.Show("Se eliminara el registro de forma permanete. ¿Desea continuar?", "Eliminar registro", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                        if (result == DialogResult.OK)
+                        {
 
-                                    Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells[2].Value);
-                                    await _categoriaProductoService.EliminarCategoriaProducto(Id);
-                                    LlenarDataGrid("");
+                            Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells[2].Value);
+                            await _categoriaProductoService.EliminarCategoriaProducto(Id);
+                            LlenarDataGrid("");
 
 
-                                }
+                        }
 
-                            }   
+                    }
                 }
             }
             catch (ExceptionSistema ex)

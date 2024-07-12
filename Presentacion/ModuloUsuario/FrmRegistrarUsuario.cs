@@ -1,10 +1,9 @@
-﻿using System;
+﻿using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using LogicDeNegocio.Interfaces;
-using LogicDeNegocio.Requests;
 
 namespace Presentacion.ModuloUsuario
 {
@@ -28,7 +27,7 @@ namespace Presentacion.ModuloUsuario
         {
             btnGuardar.Enabled = false;
             btnGuardar.Enabled = ValidarCampos();
-            await Task.WhenAll(LlenarComboBoxRoles(),LlenarComboBoxCiudades());
+            await Task.WhenAll(LlenarComboBoxRoles(), LlenarComboBoxCiudades());
         }
         private async Task LlenarComboBoxRoles()
         {
@@ -148,7 +147,7 @@ namespace Presentacion.ModuloUsuario
         {
             this.Show();
         }
-     
+
         private void txtCedula_Click(object sender, EventArgs e)
         {
             BorrarAlertas();

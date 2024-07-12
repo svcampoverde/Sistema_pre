@@ -1,14 +1,6 @@
 ﻿//using LogicDeNegocio.provincia;
 using LogicDeNegocio;
-using MaterialSkin;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 //using LogicDeNegocio.personas;
 
@@ -16,7 +8,7 @@ namespace Presentacion.ModuloRolusuario
 {
     public partial class FrmRol : Form
     {
-       // Rol admr = new Rol();
+        // Rol admr = new Rol();
         int Id;
         public FrmRol()
         {
@@ -65,7 +57,7 @@ namespace Presentacion.ModuloRolusuario
             {
                 if (Validar())
                 {
-                   // admr.InsertarRol(admr);
+                    // admr.InsertarRol(admr);
                     MessageBox.Show("Registro de provincia realizado con éxito");
                     Limpiar();
                 }
@@ -98,7 +90,7 @@ namespace Presentacion.ModuloRolusuario
             try
             {
                 // Verificar que el índice de la columna y la fila estén dentro del rango
-                if (e.RowIndex >= 0 && e.RowIndex <dtgRol.Rows.Count &&
+                if (e.RowIndex >= 0 && e.RowIndex < dtgRol.Rows.Count &&
                     e.ColumnIndex >= 0 && e.ColumnIndex < dtgRol.Columns.Count)
                 {
                     if (dtgRol.Columns[e.ColumnIndex].Name == "btnEditar")

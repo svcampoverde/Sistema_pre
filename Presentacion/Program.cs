@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Presentacion.ModuloCiudad;
-using Presentacion.ModuloLogin;
-using Presentacion.ModuloUsuario;
 using Unity;
 
 namespace Presentacion
 {
-     static class Program
+    static class Program
     {
         /// <summary>
         /// Punto de entrada principal para la aplicación.

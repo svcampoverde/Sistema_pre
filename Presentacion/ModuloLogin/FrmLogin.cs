@@ -79,7 +79,7 @@ namespace Presentacion.ModuloLogin
         {
 
             //bool userexit = usuarioDao.ValidarUsuario(user);
-             var userexit=_sistemapContext.Usuarios.Any(u => u.NombreUsuario == user);
+            var userexit = _sistemapContext.Usuarios.Any(u => u.NombreUsuario == user);
 
             if (userexit)
             {

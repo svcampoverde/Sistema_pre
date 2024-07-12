@@ -240,6 +240,7 @@
             this.ptbIpresupuesto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ptbIpresupuesto.TabIndex = 65;
             this.ptbIpresupuesto.TabStop = false;
+            this.ptbIpresupuesto.Click += new System.EventHandler(this.ptbIpresupuesto_Click);
             // 
             // labelEdit4
             // 
