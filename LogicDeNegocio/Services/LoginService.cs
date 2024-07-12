@@ -41,24 +41,24 @@ namespace LogicDeNegocio.Personas
                 using (var context = _dbContextFactory())
                 {
                     var usuario = await context.Usuarios
-                        .Include(u => u.Persona)
+                        .Include(u => u.PersonaNavegation)
                         .FirstOrDefaultAsync(u => u.NombreUsuario == nombreUsuario);
 
                     if (usuario == null)
                     {
-                        _logger.LogWarning("Usuario no encontrado.");
-                        throw new Exception("Usuario o contraseña incorrectos.");
+                        _logger.LogWarning("NombreUsuario no encontrado.");
+                        throw new Exception("NombreUsuario o contraseña incorrectos.");
                     }
 
                     // Verificar el hash de la contraseña
                     if (!_passwordHashService.VerifyPasswordHash(clave, usuario.ContrasenaHash, usuario.ContrasenaSalt))
                     {
                         _logger.LogWarning("Contraseña incorrecta para el usuario {NombreUsuario}.", nombreUsuario);
-                        throw new Exception("Usuario o contraseña incorrectos.");
+                        throw new Exception("NombreUsuario o contraseña incorrectos.");
                     }
 
                     // Mapear a UsuarioRequest y devolver
-                    var userDto = _mapper.Map<UsuarioDto>(usuario.Persona);
+                    var userDto = _mapper.Map<UsuarioDto>(usuario.PersonaNavegation);
                     _logger.LogInformation("Inicio de sesión exitoso para el usuario {NombreUsuario}.", nombreUsuario);
                     return userDto;
                 }

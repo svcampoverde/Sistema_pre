@@ -52,7 +52,7 @@ namespace Datos.ModelsConfiguration
                    .IsRequired();
 
             // Relaciones
-            builder.HasOne(u => u.Persona)
+            builder.HasOne(u => u.PersonaNavegation)
                    .WithOne(p => p.UsuarioNavegation)
                    .HasForeignKey<Usuario>(u => u.IdPersona)
                    .OnDelete(DeleteBehavior.Restrict);

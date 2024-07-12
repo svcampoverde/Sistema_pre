@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Web.UI;
 using System.Windows.Forms;
 
 using Unity;
@@ -15,13 +16,15 @@ namespace Presentacion.ModuloUsuario
 {
     public partial class FrmBuscarUsuario : Form
     {
-        private  FrmIPrincipal Frmdi;
+        private FrmIPrincipal Frmdi;
         private IUnityContainer _container;
+        private readonly IUsuarioService _service;
+        private readonly IPersonaService _personaService;
         // private readonly IUsuarioService _usuarioService;
         private Usuario u = new Usuario();
         private int Id;
 
-        public FrmBuscarUsuario(IUnityContainer container, FrmIPrincipal mdip)//), IUsuarioService usuarioService)
+        public FrmBuscarUsuario(IUnityContainer container, FrmIPrincipal mdip, IUsuarioService service, IPersonaService personaService)//), IUsuarioService usuarioService)
         {
             InitializeComponent();
             this.Load += new EventHandler(BuscarUsuario_Load);
@@ -29,6 +32,8 @@ namespace Presentacion.ModuloUsuario
             this._container = container;
             //this._usuarioService = usuarioService;
             this.dtgUsuario.CellClick += new DataGridViewCellEventHandler(this.dtgUsuario_CellClick);
+            _service = service;
+            _personaService = personaService;
         }
 
         private void BuscarUsuario_Load(object sender, EventArgs e)
@@ -41,26 +46,13 @@ namespace Presentacion.ModuloUsuario
             txtBuscar.TextChanged += new System.EventHandler(txtBuscar_TextChanged);
             dtgUsuario.CellClick += new DataGridViewCellEventHandler(dtgUsuario_CellClick);
         }
-        private void llenarDatagrid(string datos)
+        private async void llenarDatagrid(string datos)
         {
             try
             {
-                // List<Usuario> list = u.BuscarUs(datos);
-                // dtgUsuario.Rows.Clear();
-                // int cont = 0;
-                // foreach (Usuario us in list)
-                // {
-                //     dtgUsuario.Rows.Add(1);
-                //     dtgUsuario.Rows[cont].Cells[0].Value = us.Id.ToString();
-                //     dtgUsuario.Rows[cont].Cells[1].Value = us.Cedula.ToString();
-                //     dtgUsuario.Rows[cont].Cells[2].Value = us.Nombre.ToString();
-                //     dtgUsuario.Rows[cont].Cells[3].Value = us.Apellido.ToString();
-                //     dtgUsuario.Rows[cont].Cells[4].Value = us.Telefono.ToString();
-                //     dtgUsuario.Rows[cont].Cells[5].Value = us.Celular.ToString();
-                //     dtgUsuario.Rows[cont].Cells[6].Value = us.Ciudad.Descripcion.ToString();
-                //     dtgUsuario.Rows[cont].Cells[7].Value = us.User.ToString();
-                //     cont++;
-                // }
+                dtgUsuario.DataSource=await _personaService.BuscarPersona(datos);
+
+
             }
             catch (ExceptionSistema ex)
             {
@@ -91,7 +83,7 @@ namespace Presentacion.ModuloUsuario
                         var form = _container.Resolve<FrmModificarUsuario>();// frm => frm.SetIdUsuario(id));
                         form.SetIdUsuario(id);
 
-                        Frmdi.OpenChildForm(form);
+                        Frmdi.OpenChildForm<FrmModificarUsuario>();
                     }
                     else
                     {
@@ -104,13 +96,18 @@ namespace Presentacion.ModuloUsuario
                 MessageBox.Show("Se produjo un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-   
-    private void CloseAllMdiChildren()
+
+        private void CloseAllMdiChildren()
         {
             foreach (Form child in this.MdiChildren)
             {
                 child.Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            llenarDatagrid(txtBuscar.Text);
         }
     }
 }

@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using Datos.AplicationDB;
 using Datos.Models;
+using EFSecondLevelCache.Core;
 using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Interfaces;
@@ -70,6 +71,27 @@ namespace LogicDeNegocio.Services
                 context.Personas.Remove(entidad);
                 await context.SaveChangesAsync();
             }
+        }
+        public async Task<List<PersonaDto>> BuscarPersona(string search)
+        {
+            using (var context = _dbContextFactory())
+            {
+                var usuarios =await  context.Personas.Where(
+
+                   u => u.UsuarioNavegation.NombreUsuario.Contains(search) ||
+                        u.Nombre.Contains(search) ||
+                        u.Apellido.Contains(search) ||
+                        u.Cedula.Contains(search) ||
+                        u.Correo.Contains(search) ||
+                        u.Direccion.Contains(search) ||
+                        u.Telefono.Contains(search) ||
+                        u.Celular.Contains(search)||
+                        string.IsNullOrEmpty(search)
+                    )
+                    .ProjectTo<PersonaDto>(_mapper.ConfigurationProvider).ToListAsync();
+                return usuarios;
+                    
+             }
         }
 
         public async Task<List<PersonaDto>> ObtenerTodasPersonas()

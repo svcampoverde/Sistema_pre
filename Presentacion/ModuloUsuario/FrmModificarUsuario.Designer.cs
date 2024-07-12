@@ -277,7 +277,7 @@
             this.labelEdit7.Name = "labelEdit7";
             this.labelEdit7.Size = new System.Drawing.Size(68, 20);
             this.labelEdit7.TabIndex = 63;
-            this.labelEdit7.Text = "Usuario:";
+            this.labelEdit7.Text = "NombreUsuario:";
             // 
             // labelEdit6
             // 
@@ -417,7 +417,7 @@
             this.labelEdit2.Name = "labelEdit2";
             this.labelEdit2.Size = new System.Drawing.Size(133, 20);
             this.labelEdit2.TabIndex = 53;
-            this.labelEdit2.Text = "Registrar Usuario";
+            this.labelEdit2.Text = "Registrar NombreUsuario";
             // 
             // labelEdit1
             // 

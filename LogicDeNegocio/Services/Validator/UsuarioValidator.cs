@@ -42,7 +42,7 @@ namespace LogicDeNegocio.Services.Validator
             RuleFor(u => u.Direccion)
                 .NotEmpty().WithMessage("La dirección es requerida.");
 
-            RuleFor(u => u.Usuario)
+            RuleFor(u => u.NombreUsuario)
                 .NotEmpty().WithMessage("El nombre de usuario es requerido.");
 
             RuleFor(u => u.Clave)

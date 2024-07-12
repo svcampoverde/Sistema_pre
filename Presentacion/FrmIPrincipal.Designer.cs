@@ -154,7 +154,7 @@ namespace Presentacion
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(50, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 25);
+            this.label1.Size = new System.Drawing.Size(67, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Sistema";
             // 
@@ -182,7 +182,7 @@ namespace Presentacion
             this.pnelMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pnelMenu.Location = new System.Drawing.Point(0, 40);
             this.pnelMenu.Name = "pnelMenu";
-            this.pnelMenu.Size = new System.Drawing.Size(197, 584);
+            this.pnelMenu.Size = new System.Drawing.Size(186, 582);
             this.pnelMenu.TabIndex = 1;
             // 
             // panelhome
@@ -263,7 +263,7 @@ namespace Presentacion
             this.btnUs.Padding = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.btnUs.Size = new System.Drawing.Size(164, 41);
             this.btnUs.TabIndex = 2;
-            this.btnUs.Text = "    Usuario";
+            this.btnUs.Text = "  Usuario";
             this.btnUs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUs.UseVisualStyleBackColor = false;
             this.btnUs.Click += new System.EventHandler(this.btnUs_Click);

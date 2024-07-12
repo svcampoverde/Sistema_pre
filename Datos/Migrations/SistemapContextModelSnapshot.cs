@@ -2499,7 +2499,7 @@ namespace Datos.Migrations
                     b.ToTable("inventario");
                 });
 
-            modelBuilder.Entity("Datos.Models.Persona", b =>
+            modelBuilder.Entity("Datos.Models.PersonaNavegation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -3787,7 +3787,7 @@ namespace Datos.Migrations
                         .HasConstraintName("cliente_ciudadfk")
                         .IsRequired();
 
-                    b.HasOne("Datos.Models.Persona", "Persona")
+                    b.HasOne("Datos.Models.PersonaNavegation", "PersonaNavegation")
                         .WithMany("Clientes")
                         .HasForeignKey("IdPersona")
                         .HasConstraintName("cliente_personafk")
@@ -3818,7 +3818,7 @@ namespace Datos.Migrations
                         .HasConstraintName("empleado_ciudadfk")
                         .IsRequired();
 
-                    b.HasOne("Datos.Models.Persona", "IdPersonaNavigation")
+                    b.HasOne("Datos.Models.PersonaNavegation", "IdPersonaNavigation")
                         .WithMany("Empleados")
                         .HasForeignKey("IdPersona")
                         .HasConstraintName("empleado_personafk")
@@ -3855,7 +3855,7 @@ namespace Datos.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Datos.Models.Persona", b =>
+            modelBuilder.Entity("Datos.Models.PersonaNavegation", b =>
                 {
                     b.HasOne("Datos.Models.Ciudad", null)
                         .WithMany("Personas")
@@ -3944,7 +3944,7 @@ namespace Datos.Migrations
                         .HasConstraintName("proveedor_IdFormaPagofk")
                         .IsRequired();
 
-                    b.HasOne("Datos.Models.Persona", "IdPersonaNavigation")
+                    b.HasOne("Datos.Models.PersonaNavegation", "IdPersonaNavigation")
                         .WithMany("Proveedores")
                         .HasForeignKey("IdPersona")
                         .HasConstraintName("proveedor_personafk")
@@ -3970,7 +3970,7 @@ namespace Datos.Migrations
 
             modelBuilder.Entity("Datos.Models.Usuario", b =>
                 {
-                    b.HasOne("Datos.Models.Persona", "Persona")
+                    b.HasOne("Datos.Models.PersonaNavegation", "PersonaNavegation")
                         .WithOne("UsuarioNavegation")
                         .HasForeignKey("Datos.Models.Usuario", "IdPersona")
                         .OnDelete(DeleteBehavior.Restrict)

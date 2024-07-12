@@ -35,8 +35,8 @@ namespace Presentacion.ModuloUsuario
 
         //private void ObtenerDatos(int idUsuario)
         //{
-        //    List<Usuario> user = us.BuscarDatos(idUsuario);
-        //    foreach (Usuario usuario in user)
+        //    List<NombreUsuario> user = us.BuscarDatos(idUsuario);
+        //    foreach (NombreUsuario usuario in user)
         //    {
         //        txtCedula.Text = usuario.Cedula;
         //        txtNombre.Text = usuario.Nombre;

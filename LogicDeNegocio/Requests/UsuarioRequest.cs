@@ -47,7 +47,7 @@ namespace LogicDeNegocio.Requests
 
         [Required]
         [StringLength(50)]
-        public string Usuario { get; set; }
+        public string NombreUsuario { get; set; }
 
         [Required]
         [StringLength(100)]

@@ -65,14 +65,14 @@ namespace Presentacion.ModuloLogin
 
             //if (credencialV)
             //{
-            //    //  MessageBox.Show("Usuario bienvenido");
+            //    //  MessageBox.Show("NombreUsuario bienvenido");
             //    this.Hide();
             //    FRMPrincipal obj = new FRMPrincipal();
             //    obj.ShowDialog();
             //}
             //else
             //{
-            //    MessageBox.Show("Usuario o contraseña incorrecta");
+            //    MessageBox.Show("NombreUsuario o contraseña incorrecta");
             //}
         }
         private void valUser(string user)

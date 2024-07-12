@@ -13,7 +13,7 @@ namespace Datos.Models
         public byte[] ContrasenaSalt { get; set; }
         public int IdRol { get; set; }
 
-        public virtual Persona Persona { get; set; }
+        public virtual Persona PersonaNavegation { get; set; }
         public virtual Rol Rol { get; set; }
     }
 }

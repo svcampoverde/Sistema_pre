@@ -15,14 +15,14 @@ namespace LogicDeNegocio.Mapper.Profiles
     {
         public MappingProfile()
         {
-            // Mapeo de UsuarioRequest a Persona
+            // Mapeo de UsuarioRequest a PersonaNavegation
             CreateMap<UsuarioRequest, Persona>()
                  .IgnoreIfEmpty();
 
 
-            // Mapeo de UsuarioRequest a Usuario
+            // Mapeo de UsuarioRequest a NombreUsuario
             CreateMap<UsuarioRequest, Usuario>()
-                .ForMember(dest => dest.NombreUsuario, opt => opt.MapFrom(src => src.Usuario)) .IgnoreIfEmpty();
+                .ForMember(dest => dest.NombreUsuario, opt => opt.MapFrom(src => src.NombreUsuario)) .IgnoreIfEmpty();
 
         }
     }

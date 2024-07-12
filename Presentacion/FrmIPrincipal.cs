@@ -1,32 +1,26 @@
 ﻿using LogicDeNegocio;
-using Presentacion.ModuloCiudad;
-using Presentacion.ModuloRolusuario;
 using Presentacion.ModuloUsuario;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Presentacion.ModuloPresupuesto;
 using Unity;
-using Unity.Resolution;
+
 namespace Presentacion
 {
-    public partial class FrmIPrincipal : Form// MaterialSkin.Controls.MaterialForm
+    public partial class FrmIPrincipal : Form
     {
         private Form activarForm = null;
-        //private readonly Dictionary<Type, Form> activeForms = new Dictionary<Type, Form>();
-        //private readonly IUnityContainer _container;
+        private readonly Dictionary<Type, Form> activeForms = new Dictionary<Type, Form>();
+        private readonly IUnityContainer _container;
 
         public FrmIPrincipal(IUnityContainer container)
         {
             InitializeComponent();
-           // _container = container;
+            _container = container;
             mdiPro();
             // Establecer las propiedades del formulario
             this.FormBorderStyle = FormBorderStyle.Sizable; // Asegura que el formulario sea redimensionable
@@ -41,12 +35,14 @@ namespace Presentacion
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
+
         bool expandir = false;
         private void mdiPro()
         {
             this.setBevel(false);
-            Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.FromArgb(39, 51, 63);// 119, 146, 172);// 39, 51, 63); //232, 234, 237);39; 51; 63
+            Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.FromArgb(39, 51, 63); // Color de fondo del MdiClient
         }
+
         private void menuTransicion_Tick(object sender, EventArgs e)
         {
             if (expandir == false)
@@ -67,7 +63,6 @@ namespace Presentacion
                     expandir = false;
                 }
             }
-
         }
 
         private void btnUs_Click(object sender, EventArgs e)
@@ -96,10 +91,12 @@ namespace Presentacion
                 }
             }
         }
+
         private void Mdpresupuesto_Click(object sender, EventArgs e)
         {
             Mpresupuesto.Start();
         }
+
         bool expandirslider = true;
         private void slidebarTrans_Tick(object sender, EventArgs e)
         {
@@ -110,9 +107,7 @@ namespace Presentacion
                 {
                     expandirslider = false;
                     slidebarTrans.Stop();
-                    panelhome.Width = pnelMenu.Width;
-                    panelcliente.Width = pnelMenu.Width;
-                    contUsuario.Width = pnelMenu.Width;
+                    AdjustMenuControls();
                 }
             }
             else
@@ -122,11 +117,17 @@ namespace Presentacion
                 {
                     expandirslider = true;
                     slidebarTrans.Stop();
-
-                    panelhome.Width = pnelMenu.Width;
-                    panelcliente.Width = pnelMenu.Width;
-                    contUsuario.Width = pnelMenu.Width;
+                    AdjustMenuControls();
                 }
+            }
+        }
+
+        private void AdjustMenuControls()
+        {
+            foreach (Control control in pnelMenu.Controls)
+            {
+                control.Width = pnelMenu.Width - control.Margin.Left - control.Margin.Right;
+                control.Invalidate(); // Redibuja el control para reflejar el nuevo tamaño
             }
         }
 
@@ -134,6 +135,7 @@ namespace Presentacion
         {
             slidebarTrans.Start();
         }
+
         private void CloseAllMdiChildren()
         {
             foreach (Form child in this.MdiChildren)
@@ -141,85 +143,61 @@ namespace Presentacion
                 child.Close();
             }
         }
-        //public void OpenChildForm<T>(Action<T> configureForm = null) where T : Form
-        //{
-        //    if (activarForm != null)
-        //    {
-        //        activarForm.Close();
-        //    }
-        //    if (!activeForms.ContainsKey(typeof(T)))
-        //    {
-        //        var form = _container.Resolve<T>();
-        //        activeForms[typeof(T)] = form;
-        //        form.MdiParent = this;
-        //        form.FormClosed += (sender, e) => activeForms.Remove(typeof(T));
-        //    }
-        //    activarForm = activeForms[typeof(T)];
-        //    configureForm?.Invoke((T)activarForm);
-        //    activarForm.WindowState = FormWindowState.Maximized;
-        //    activarForm.FormBorderStyle = FormBorderStyle.None;
-        //    activarForm.ControlBox = false;
-        //    activarForm.MinimizeBox = false;
-        //    activarForm.MaximizeBox = false;
-        //    activarForm.Show();
-        //}
-        public void OpenChildForm(Form childForm)
+
+        public void OpenChildForm<T>(Action<T> configureForm = null) where T : Form
         {
-            // Cierra todos los formularios MDI hijos
-            CloseAllMdiChildren();
-            // Establece el formulario hijo como el formulario activo
             if (activarForm != null)
             {
                 activarForm.Close();
-                activarForm = null;
             }
 
-            activarForm = childForm;
+            if (!activeForms.ContainsKey(typeof(T)))
+            {
+                var form = _container.Resolve<T>();
+                activeForms[typeof(T)] = form;
+                form.MdiParent = this;
+                form.FormClosed += (sender, e) => activeForms.Remove(typeof(T));
+            }
 
-            // Ajusta el tamaño del formulario hijo si es necesario
-            AdjustMdiSize(childForm);
+            activarForm = activeForms[typeof(T)];
+            configureForm?.Invoke((T)activarForm);
 
-            // Establece el formulario hijo como MDI hijo
-            childForm.MdiParent = this;
+            // Obtener el tamaño y la ubicación de los paneles
+            int leftPanelWidth = pnelMenu.Width;
+            int topPanelHeight = panelHeader.Height;
 
-            // Muestra el formulario hijo
-            childForm.Show();
+            // Ajustar el formulario hijo para que no se superponga con los paneles
+            activarForm.Location = new Point(leftPanelWidth, topPanelHeight);
+            activarForm.Size = new Size(this.ClientSize.Width - leftPanelWidth, this.ClientSize.Height - topPanelHeight);
 
-            // Maneja el evento FormClosed para liberar la referencia al formulario hijo
-            childForm.FormClosed += (sender, e) => { activarForm = null; };
+            activarForm.FormBorderStyle = FormBorderStyle.None;
+            activarForm.ControlBox = false;
+            activarForm.MinimizeBox = false;
+            activarForm.MaximizeBox = false;
+            activarForm.Show();
         }
 
         private void btnHome_Click(object sender, EventArgs e)
-
         {
-            //   OpenChildForm<Home>();
-            var form = UnityConfig.Container.Resolve<Home>(new ParameterOverride("container", UnityConfig.Container), new ParameterOverride("mdip", this));
-            OpenChildForm(form);
+            OpenChildForm<Home>();
         }
 
         private void btnMr_Click(object sender, EventArgs e)
         {
             // Resuelve la instancia de FrmRegistrarUsuario usando Unity
-            // OpenChildForm<FrmRegistrarUsuario>();
-            var form = UnityConfig.Container.Resolve<FrmRegistrarUsuario>();
-
-            // Abre el formulario hijo
-            OpenChildForm(form);
-
-
+            OpenChildForm<FrmRegistrarUsuario>();
         }
 
         private void btnML_Click(object sender, EventArgs e)
         {
-           
-            var form = UnityConfig.Container.Resolve<FrmBuscarUsuario>(new ParameterOverride("container", UnityConfig.Container), new ParameterOverride("mdip", this));
-            OpenChildForm(form);
+            OpenChildForm<FrmBuscarUsuario>();
         }
 
         private void btnRegistrarp_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FrmRegistrarPresupuesto());
+            OpenChildForm<FrmRegistrarPresupuesto>();
         }
+
         private void FrmIPrincipal_SizeChanged(object sender, EventArgs e)
         {
             foreach (Form childForm in this.MdiChildren)
@@ -227,9 +205,7 @@ namespace Presentacion
                 if (this.WindowState == FormWindowState.Maximized)
                 {
                     AdjustMdiSize(childForm);
-
                 }
-
             }
         }
 
@@ -251,9 +227,7 @@ namespace Presentacion
                 this.ClientSize = new Size(this.ClientSize.Width + 20, ClientSize.Height + 50);
             }
             PositionMdiChild(childForm);
-
         }
-
 
         private void PositionMdiChild(Form childForm)
         {
@@ -262,16 +236,12 @@ namespace Presentacion
 
             // Establecer la posición del formulario secundario
             childForm.StartPosition = FormStartPosition.Manual;
-
             childForm.Location = new Point(80, 10);
         }
 
         private void FrmIPrincipal_Load(object sender, EventArgs e)
         {
-            //BuscarUsuario childForm = new BuscarUsuario();
-            //childForm.MdiParent = this;
-            //childForm.Show();
-
+            // Inicialización adicional si es necesario
         }
 
         private void icncerrar_Click(object sender, EventArgs e)
@@ -321,9 +291,7 @@ namespace Presentacion
 
         private void btnUsuario_Click(object sender, EventArgs e)
         {
-
-            //FrmModificarUsuario c = new FrmModificarUsuario(id);
-            //c.Show();
+            // Implementación para el botón Usuario si es necesario
         }
     }
 }

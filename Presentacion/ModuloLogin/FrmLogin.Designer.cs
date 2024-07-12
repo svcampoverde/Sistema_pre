@@ -114,7 +114,7 @@
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(59, 19);
             this.materialLabel1.TabIndex = 22;
-            this.materialLabel1.Text = "Usuario:";
+            this.materialLabel1.Text = "NombreUsuario:";
             // 
             // txtUsuario
             // 

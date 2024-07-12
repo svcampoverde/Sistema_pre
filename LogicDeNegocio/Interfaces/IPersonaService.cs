@@ -15,5 +15,6 @@ namespace LogicDeNegocio.Interfaces
         Task EliminarPersona(int id);
 
         Task<List<PersonaDto>> ObtenerTodasPersonas();
+        Task<List<PersonaDto>> BuscarPersona(string search);
     }
 }

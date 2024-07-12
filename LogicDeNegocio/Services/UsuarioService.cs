@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-
+using AutoMapper.QueryableExtensions;
 using Datos.AplicationDB;
 using Datos.Models;
 
@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Personas
@@ -53,17 +55,14 @@ namespace LogicDeNegocio.Personas
                 {
                     var persona = _mapper.Map<Persona>(request);
                     var user = _mapper.Map<Usuario>(request);
-
                     // Crear el hash y el salt de la contraseña
                     _passwordHashService.CreatePasswordHash(request.Clave, out byte[] passwordHash, out byte[] passwordSalt);
                     user.ContrasenaHash = passwordHash;
                     user.ContrasenaSalt = passwordSalt;
-
                     persona.UsuarioNavegation = user;
                     await context.AddAsync(persona);
                     await context.SaveChangesAsync();
                     var userDto = _mapper.Map<UsuarioDto>(persona);
-
                     _logger.LogInformation("Usuario registrado exitosamente.");
                     return userDto;
                 }
@@ -98,8 +97,8 @@ namespace LogicDeNegocio.Personas
                     var persona = await context.Personas.Include(p => p.UsuarioNavegation).FirstOrDefaultAsync(p => p.Id == id);
                     if (persona == null)
                     {
-                        _logger.LogWarning("Usuario no encontrado.");
-                        throw new Exception("Usuario no encontrado.");
+                        _logger.LogWarning("NombreUsuario no encontrado.");
+                        throw new Exception("NombreUsuario no encontrado.");
                     }
 
                     _mapper.Map(request, persona);
@@ -116,7 +115,7 @@ namespace LogicDeNegocio.Personas
 
                     await context.SaveChangesAsync();
                     var userDto = _mapper.Map<UsuarioDto>(persona);
-                    _logger.LogInformation("Usuario actualizado exitosamente.");
+                    _logger.LogInformation("NombreUsuario actualizado exitosamente.");
                     return userDto;
                 }
             }
@@ -143,8 +142,8 @@ namespace LogicDeNegocio.Personas
                     var usuario = await context.Usuarios.FindAsync(id);
                     if (usuario == null)
                     {
-                        _logger.LogWarning("Usuario no encontrado.");
-                        throw new Exception("Usuario no encontrado.");
+                        _logger.LogWarning("NombreUsuario no encontrado.");
+                        throw new Exception("NombreUsuario no encontrado.");
                     }
 
                     // Crear el hash y el salt de la nueva contraseña
@@ -167,6 +166,10 @@ namespace LogicDeNegocio.Personas
                 _logger.LogError(ex, "Error inesperado al cambiar la contraseña.");
                 throw new Exception("Ocurrió un error inesperado al cambiar la contraseña.", ex);
             }
+
+
         }
+       
+    
     }
 }

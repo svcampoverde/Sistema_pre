@@ -13,6 +13,8 @@ namespace LogicDeNegocio.Mapper.Profiles
             CreateMap<Usuario, UsuarioDto>().IgnoreIfEmpty();
             CreateMap<Usuario, UsuarioRequest>().IgnoreIfEmpty();
             CreateMap<UsuarioRequest, UsuarioDto>().IgnoreIfEmpty();
+            CreateMap<Persona, UsuarioDto>().IgnoreIfEmpty();
+            CreateMap<Persona, UsuarioRequest>().IgnoreIfEmpty();
         }
     }
 }

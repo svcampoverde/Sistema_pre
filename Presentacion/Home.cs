@@ -41,8 +41,7 @@ namespace Presentacion
         private void ptbempresa_Click(object sender, EventArgs e)
         {
             this.Close();
-            var form = _container.Resolve<FrmEmpresa>();
-            Frmdi.OpenChildForm(form);
+            Frmdi.OpenChildForm< FrmEmpresa>();
         }
         private void CloseAllMdiChildren()
         {
@@ -55,36 +54,35 @@ namespace Presentacion
         private void ptbCategoria_Click(object sender, EventArgs e)
         {
             this.Close();
-            var form = _container.Resolve<FrmCategoria>();
-            Frmdi.OpenChildForm(form);
+            Frmdi.OpenChildForm< FrmCategoria>();
         }
 
         private void ptbproveedor_Click(object sender, EventArgs e)
         {
             this.Close();
             var form = _container.Resolve<FrmRegistroProveedor>();
-            Frmdi.OpenChildForm(form);
+            Frmdi.OpenChildForm< FrmRegistroProveedor>();
         }
 
         private void ptbICliente_Click(object sender, EventArgs e)
         {
             this.Close();
             var form = _container.Resolve<FrmRegistrarCliente>();
-            Frmdi.OpenChildForm(form);
+            Frmdi.OpenChildForm< FrmRegistrarCliente>();
         }
 
         private void ptempleado_Click(object sender, EventArgs e)
         {
             this.Close();
             var form = _container.Resolve<FrmEmpleado>();
-            Frmdi.OpenChildForm(form);
+            Frmdi.OpenChildForm< FrmEmpleado>();
         }
         
         private void ptbIproducto_Click(object sender, EventArgs e)
         {
             this.Close();
             var form = _container.Resolve<FrmInventario>();
-            Frmdi.OpenChildForm(form);
+            Frmdi.OpenChildForm< FrmInventario>();
         }
     }
 }

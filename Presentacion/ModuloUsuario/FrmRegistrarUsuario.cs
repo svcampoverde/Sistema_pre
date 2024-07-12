@@ -16,6 +16,8 @@ namespace Presentacion.ModuloUsuario
 
         public FrmRegistrarUsuario(IUsuarioService usuarioService, IRolService rolService, ICiudadService ciudadService)
         {
+
+
             _usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
             _rolService = rolService ?? throw new ArgumentNullException(nameof(rolService));
             _ciudadService = ciudadService ?? throw new ArgumentNullException(nameof(ciudadService));
@@ -24,7 +26,8 @@ namespace Presentacion.ModuloUsuario
         }
         private async void FrmRegistrarUsuario_Load(object sender, EventArgs e)
         {
-             
+            btnGuardar.Enabled = false;
+            btnGuardar.Enabled = ValidarCampos();
             await Task.WhenAll(LlenarComboBoxRoles(),LlenarComboBoxCiudades());
         }
         private async Task LlenarComboBoxRoles()
@@ -73,7 +76,7 @@ namespace Presentacion.ModuloUsuario
                 string cedula = txtCedula.Text.Trim();
                 string nombre = txtNombre.Text.Trim();
                 string apellido = txtApellido.Text.Trim();
-                string genero = cmbGenero.Text.Trim();
+                string genero = cmbGenero.Texts;
                 string telefono = txtTelefono.Text.Trim();
                 string celular = txtCelular.Text.Trim();
                 string correo = txtCorreo.Text.Trim();
@@ -93,7 +96,7 @@ namespace Presentacion.ModuloUsuario
                     Celular = celular,
                     Correo = correo,
                     Direccion = direccion,
-                    Usuario = usuario,
+                    NombreUsuario = usuario,
                     Clave = clave,
                 };
 
@@ -109,6 +112,22 @@ namespace Presentacion.ModuloUsuario
             {
                 btnGuardar.Enabled = true;
             }
+        }
+        private bool ValidarCampos()
+        {
+            if (string.IsNullOrEmpty(txtCedula.Text)
+                || string.IsNullOrEmpty(txtNombre.Text)
+                || string.IsNullOrEmpty(txtApellido.Text)
+                || string.IsNullOrEmpty(txtTelefono.Text)
+                || string.IsNullOrEmpty(txtCelular.Text)
+                || string.IsNullOrEmpty(txtCorreo.Text)
+                || string.IsNullOrEmpty(txtDireccion.Text)
+                || string.IsNullOrEmpty(txtUsuario.Text)
+                || string.IsNullOrEmpty(txtClave.Text))
+            {
+                return false;
+            }
+            return true;
         }
 
         private void LimpiarCampos()
@@ -138,6 +157,81 @@ namespace Presentacion.ModuloUsuario
         private void BorrarAlertas()
         {
             errorProvider1.Clear();
-        } 
+        }
+
+        private void txtCedula_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+        }
+
+        private void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbGenero_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
+
+        private void cmbGenero_TabIndexChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
+
+        private void txtCorreo_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
+
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
+
+        private void txtDireccion_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
+
+        private void txtCelular_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
+
+        private void txtTelefono_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
+
+        private void cmbCiudad_TabIndexChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
+
+        private void cbRol_TabIndexChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = ValidarCampos();
+
+        }
     }
 }

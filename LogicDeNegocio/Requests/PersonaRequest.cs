@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace LogicDeNegocio.Requests
 {
@@ -8,6 +9,8 @@ namespace LogicDeNegocio.Requests
         // Propiedades generadas automáticamente
         public string Cedula { get; set; }
          public string Nombre { get; set; }
+        [Description("Nombre Usuario")]
+         public string NombreUsuario { get; set; }
          public string Apellido { get; set; }
          public string Genero { get; set; }
          public string Telefono { get; set; }
