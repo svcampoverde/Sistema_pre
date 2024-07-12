@@ -39,11 +39,10 @@
             this.labelEdit7 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit8 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit9 = new ReaLTaiizor.Controls.LabelEdit();
-            this.textBoxEdit2 = new ReaLTaiizor.Controls.TextBoxEdit();
+            this.txtlugar = new ReaLTaiizor.Controls.TextBoxEdit();
             this.textBoxEdit3 = new ReaLTaiizor.Controls.TextBoxEdit();
             this.textBoxEdit4 = new ReaLTaiizor.Controls.TextBoxEdit();
             this.textBoxEdit5 = new ReaLTaiizor.Controls.TextBoxEdit();
-            this.textBoxEdit6 = new ReaLTaiizor.Controls.TextBoxEdit();
             this.labelEdit10 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit11 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit12 = new ReaLTaiizor.Controls.LabelEdit();
@@ -80,6 +79,7 @@
             this.labelEdit28 = new ReaLTaiizor.Controls.LabelEdit();
             this.textBoxEdit22 = new ReaLTaiizor.Controls.TextBoxEdit();
             this.button1 = new ReaLTaiizor.Controls.Button();
+            this.cmbEvento = new Presentacion.btnpersonalizados.PersonComboBox();
             this.SuspendLayout();
             // 
             // labelEdit2
@@ -222,21 +222,21 @@
             this.labelEdit9.TabIndex = 13;
             this.labelEdit9.Text = "Lugar:";
             // 
-            // textBoxEdit2
+            // txtlugar
             // 
-            this.textBoxEdit2.BackColor = System.Drawing.Color.Transparent;
-            this.textBoxEdit2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBoxEdit2.ForeColor = System.Drawing.Color.White;
-            this.textBoxEdit2.Image = null;
-            this.textBoxEdit2.Location = new System.Drawing.Point(208, 171);
-            this.textBoxEdit2.MaxLength = 32767;
-            this.textBoxEdit2.Multiline = false;
-            this.textBoxEdit2.Name = "textBoxEdit2";
-            this.textBoxEdit2.ReadOnly = false;
-            this.textBoxEdit2.Size = new System.Drawing.Size(200, 42);
-            this.textBoxEdit2.TabIndex = 14;
-            this.textBoxEdit2.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.textBoxEdit2.UseSystemPasswordChar = false;
+            this.txtlugar.BackColor = System.Drawing.Color.Transparent;
+            this.txtlugar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtlugar.ForeColor = System.Drawing.Color.White;
+            this.txtlugar.Image = null;
+            this.txtlugar.Location = new System.Drawing.Point(208, 217);
+            this.txtlugar.MaxLength = 32767;
+            this.txtlugar.Multiline = false;
+            this.txtlugar.Name = "txtlugar";
+            this.txtlugar.ReadOnly = false;
+            this.txtlugar.Size = new System.Drawing.Size(200, 42);
+            this.txtlugar.TabIndex = 14;
+            this.txtlugar.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtlugar.UseSystemPasswordChar = false;
             // 
             // textBoxEdit3
             // 
@@ -285,22 +285,6 @@
             this.textBoxEdit5.TabIndex = 17;
             this.textBoxEdit5.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.textBoxEdit5.UseSystemPasswordChar = false;
-            // 
-            // textBoxEdit6
-            // 
-            this.textBoxEdit6.BackColor = System.Drawing.Color.Transparent;
-            this.textBoxEdit6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBoxEdit6.ForeColor = System.Drawing.Color.White;
-            this.textBoxEdit6.Image = null;
-            this.textBoxEdit6.Location = new System.Drawing.Point(208, 219);
-            this.textBoxEdit6.MaxLength = 32767;
-            this.textBoxEdit6.Multiline = false;
-            this.textBoxEdit6.Name = "textBoxEdit6";
-            this.textBoxEdit6.ReadOnly = false;
-            this.textBoxEdit6.Size = new System.Drawing.Size(200, 42);
-            this.textBoxEdit6.TabIndex = 18;
-            this.textBoxEdit6.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.textBoxEdit6.UseSystemPasswordChar = false;
             // 
             // labelEdit10
             // 
@@ -748,6 +732,8 @@
             // 
             // personComboBox1
             // 
+            this.personComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.personComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.personComboBox1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.personComboBox1.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.personComboBox1.BorderRadius = 0;
@@ -811,12 +797,35 @@
             this.button1.Text = "Agregar camerino";
             this.button1.TextAlignment = System.Drawing.StringAlignment.Center;
             // 
+            // cmbEvento
+            // 
+            this.cmbEvento.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbEvento.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbEvento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
+            this.cmbEvento.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmbEvento.BorderRadius = 0;
+            this.cmbEvento.BorderSize = 0;
+            this.cmbEvento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cmbEvento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.cmbEvento.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmbEvento.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
+            this.cmbEvento.ListTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.cmbEvento.Location = new System.Drawing.Point(208, 171);
+            this.cmbEvento.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cmbEvento.Name = "cmbEvento";
+            this.cmbEvento.Size = new System.Drawing.Size(202, 36);
+            this.cmbEvento.TabIndex = 57;
+            this.cmbEvento.Texts = "";
+            // 
             // FrmRegistrarPresupuesto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(865, 1100);
+            this.ClientSize = new System.Drawing.Size(816, 504);
+            this.ControlBox = false;
+            this.Controls.Add(this.cmbEvento);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxEdit22);
             this.Controls.Add(this.labelEdit28);
@@ -853,11 +862,10 @@
             this.Controls.Add(this.labelEdit12);
             this.Controls.Add(this.labelEdit11);
             this.Controls.Add(this.labelEdit10);
-            this.Controls.Add(this.textBoxEdit6);
             this.Controls.Add(this.textBoxEdit5);
             this.Controls.Add(this.textBoxEdit4);
             this.Controls.Add(this.textBoxEdit3);
-            this.Controls.Add(this.textBoxEdit2);
+            this.Controls.Add(this.txtlugar);
             this.Controls.Add(this.labelEdit9);
             this.Controls.Add(this.labelEdit8);
             this.Controls.Add(this.labelEdit7);
@@ -871,6 +879,7 @@
             this.Controls.Add(this.labelEdit2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmRegistrarPresupuesto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FrmRegistrarPresupuesto";
             this.Load += new System.EventHandler(this.FrmRegistrarPresupuesto_Load);
             this.ResumeLayout(false);
@@ -891,11 +900,10 @@
         private ReaLTaiizor.Controls.LabelEdit labelEdit7;
         private ReaLTaiizor.Controls.LabelEdit labelEdit8;
         private ReaLTaiizor.Controls.LabelEdit labelEdit9;
-        private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit2;
+        private ReaLTaiizor.Controls.TextBoxEdit txtlugar;
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit3;
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit4;
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit5;
-        private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit6;
         private ReaLTaiizor.Controls.LabelEdit labelEdit10;
         private ReaLTaiizor.Controls.LabelEdit labelEdit11;
         private ReaLTaiizor.Controls.LabelEdit labelEdit12;
@@ -932,5 +940,6 @@
         private ReaLTaiizor.Controls.LabelEdit labelEdit28;
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit22;
         private ReaLTaiizor.Controls.Button button1;
+        private btnpersonalizados.PersonComboBox cmbEvento;
     }
 }

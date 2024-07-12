@@ -80,10 +80,7 @@ namespace Presentacion.ModuloUsuario
 
                         //Frmdi.OpenChildForm<FrmModificarUsuario>(frm => frm.SetIdUsuario(id));
                         this.Close();
-                        var form = _container.Resolve<FrmModificarUsuario>();// frm => frm.SetIdUsuario(id));
-                        form.SetIdUsuario(id);
-
-                        Frmdi.OpenChildForm<FrmModificarUsuario>();
+                        Frmdi.OpenChildForm<FrmModificarUsuario>(frm => frm.SetIdUsuario(id));
                     }
                     else
                     {

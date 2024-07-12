@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEmpresa));
             this.btnBuscaremp = new ReaLTaiizor.Controls.Button();
             this.txtBemp = new ReaLTaiizor.Controls.TextBoxEdit();
@@ -42,7 +42,10 @@
             this.telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEditar = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnEliminar = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlRegEmp = new System.Windows.Forms.Panel();
+            this.ptbleft = new System.Windows.Forms.PictureBox();
             this.btnGuardarE = new Presentacion.btnpersonalizados.Botonper();
             this.cmbtipempresa = new Presentacion.btnpersonalizados.PersonComboBox();
             this.labelEdit12 = new ReaLTaiizor.Controls.LabelEdit();
@@ -56,8 +59,10 @@
             this.labelEdit2 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit1 = new ReaLTaiizor.Controls.LabelEdit();
             this.pnlListEmp = new System.Windows.Forms.Panel();
+            this.ptbadd = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlMempresa = new System.Windows.Forms.Panel();
+            this.ptbleftm = new System.Windows.Forms.PictureBox();
             this.btnActualizarEmp = new Presentacion.btnpersonalizados.Botonper();
             this.cmbMtipemp = new Presentacion.btnpersonalizados.PersonComboBox();
             this.labelEdit3 = new ReaLTaiizor.Controls.LabelEdit();
@@ -72,19 +77,14 @@
             this.labelEdit10 = new ReaLTaiizor.Controls.LabelEdit();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ptbleftm = new System.Windows.Forms.PictureBox();
-            this.ptbadd = new System.Windows.Forms.PictureBox();
-            this.btnEditar = new System.Windows.Forms.DataGridViewImageColumn();
-            this.btnEliminar = new System.Windows.Forms.DataGridViewImageColumn();
-            this.ptbleft = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtgEmpresa)).BeginInit();
             this.pnlRegEmp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbleft)).BeginInit();
             this.pnlListEmp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbadd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pnlMempresa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbleftm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbadd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbleft)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBuscaremp
@@ -132,15 +132,15 @@
             this.dtgEmpresa.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dtgEmpresa.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dtgEmpresa.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgEmpresa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgEmpresa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dtgEmpresa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgEmpresa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idempresa,
@@ -151,28 +151,28 @@
             this.direccion,
             this.btnEditar,
             this.btnEliminar});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.GrayText;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgEmpresa.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GrayText;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgEmpresa.DefaultCellStyle = dataGridViewCellStyle2;
             this.dtgEmpresa.EnableHeadersVisualStyles = false;
             this.dtgEmpresa.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dtgEmpresa.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dtgEmpresa.Location = new System.Drawing.Point(36, 80);
             this.dtgEmpresa.Name = "dtgEmpresa";
             this.dtgEmpresa.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgEmpresa.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgEmpresa.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dtgEmpresa.RowHeadersVisible = false;
             this.dtgEmpresa.RowHeadersWidth = 40;
             this.dtgEmpresa.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
@@ -227,6 +227,24 @@
             this.direccion.ReadOnly = true;
             this.direccion.Width = 102;
             // 
+            // btnEditar
+            // 
+            this.btnEditar.HeaderText = "Editar";
+            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
+            this.btnEditar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.ReadOnly = true;
+            this.btnEditar.Width = 59;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.HeaderText = "Eliminar";
+            this.btnEliminar.Image = global::Presentacion.Properties.Resources.trash;
+            this.btnEliminar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.ReadOnly = true;
+            this.btnEliminar.Width = 73;
+            // 
             // pnlRegEmp
             // 
             this.pnlRegEmp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
@@ -247,6 +265,17 @@
             this.pnlRegEmp.Name = "pnlRegEmp";
             this.pnlRegEmp.Size = new System.Drawing.Size(733, 420);
             this.pnlRegEmp.TabIndex = 84;
+            // 
+            // ptbleft
+            // 
+            this.ptbleft.Image = global::Presentacion.Properties.Resources.left_arrow;
+            this.ptbleft.Location = new System.Drawing.Point(47, 19);
+            this.ptbleft.Name = "ptbleft";
+            this.ptbleft.Size = new System.Drawing.Size(47, 33);
+            this.ptbleft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptbleft.TabIndex = 75;
+            this.ptbleft.TabStop = false;
+            this.ptbleft.Click += new System.EventHandler(this.ptbleft_Click);
             // 
             // btnGuardarE
             // 
@@ -270,6 +299,8 @@
             // 
             // cmbtipempresa
             // 
+            this.cmbtipempresa.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbtipempresa.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbtipempresa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.cmbtipempresa.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.cmbtipempresa.BorderRadius = 0;
@@ -435,6 +466,17 @@
             this.pnlListEmp.Size = new System.Drawing.Size(996, 340);
             this.pnlListEmp.TabIndex = 85;
             // 
+            // ptbadd
+            // 
+            this.ptbadd.Image = global::Presentacion.Properties.Resources.add;
+            this.ptbadd.Location = new System.Drawing.Point(36, 19);
+            this.ptbadd.Name = "ptbadd";
+            this.ptbadd.Size = new System.Drawing.Size(43, 38);
+            this.ptbadd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptbadd.TabIndex = 86;
+            this.ptbadd.TabStop = false;
+            this.ptbadd.Click += new System.EventHandler(this.ptbadd_Click);
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -461,6 +503,17 @@
             this.pnlMempresa.TabIndex = 86;
             this.pnlMempresa.Visible = false;
             // 
+            // ptbleftm
+            // 
+            this.ptbleftm.Image = global::Presentacion.Properties.Resources.left_arrow;
+            this.ptbleftm.Location = new System.Drawing.Point(47, 20);
+            this.ptbleftm.Name = "ptbleftm";
+            this.ptbleftm.Size = new System.Drawing.Size(41, 33);
+            this.ptbleftm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptbleftm.TabIndex = 87;
+            this.ptbleftm.TabStop = false;
+            this.ptbleftm.Click += new System.EventHandler(this.ptbleftm_Click);
+            // 
             // btnActualizarEmp
             // 
             this.btnActualizarEmp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
@@ -483,6 +536,8 @@
             // 
             // cmbMtipemp
             // 
+            this.cmbMtipemp.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbMtipemp.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbMtipemp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.cmbMtipemp.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.cmbMtipemp.BorderRadius = 0;
@@ -655,57 +710,6 @@
             this.dataGridViewImageColumn2.ReadOnly = true;
             this.dataGridViewImageColumn2.Width = 73;
             // 
-            // ptbleftm
-            // 
-            this.ptbleftm.Image = global::Presentacion.Properties.Resources.left_arrow;
-            this.ptbleftm.Location = new System.Drawing.Point(47, 20);
-            this.ptbleftm.Name = "ptbleftm";
-            this.ptbleftm.Size = new System.Drawing.Size(41, 33);
-            this.ptbleftm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptbleftm.TabIndex = 87;
-            this.ptbleftm.TabStop = false;
-            this.ptbleftm.Click += new System.EventHandler(this.ptbleftm_Click);
-            // 
-            // ptbadd
-            // 
-            this.ptbadd.Image = global::Presentacion.Properties.Resources.add;
-            this.ptbadd.Location = new System.Drawing.Point(36, 19);
-            this.ptbadd.Name = "ptbadd";
-            this.ptbadd.Size = new System.Drawing.Size(43, 38);
-            this.ptbadd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptbadd.TabIndex = 86;
-            this.ptbadd.TabStop = false;
-            this.ptbadd.Click += new System.EventHandler(this.ptbadd_Click);
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.HeaderText = "Editar";
-            this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
-            this.btnEditar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.ReadOnly = true;
-            this.btnEditar.Width = 59;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.HeaderText = "Eliminar";
-            this.btnEliminar.Image = global::Presentacion.Properties.Resources.trash;
-            this.btnEliminar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.ReadOnly = true;
-            this.btnEliminar.Width = 73;
-            // 
-            // ptbleft
-            // 
-            this.ptbleft.Image = global::Presentacion.Properties.Resources.left_arrow;
-            this.ptbleft.Location = new System.Drawing.Point(47, 19);
-            this.ptbleft.Name = "ptbleft";
-            this.ptbleft.Size = new System.Drawing.Size(47, 33);
-            this.ptbleft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptbleft.TabIndex = 75;
-            this.ptbleft.TabStop = false;
-            this.ptbleft.Click += new System.EventHandler(this.ptbleft_Click);
-            // 
             // FrmEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -716,19 +720,19 @@
             this.Controls.Add(this.pnlRegEmp);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmEmpresa";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FrmEmpresa";
             this.Load += new System.EventHandler(this.FrmEmpresa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtgEmpresa)).EndInit();
             this.pnlRegEmp.ResumeLayout(false);
             this.pnlRegEmp.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbleft)).EndInit();
             this.pnlListEmp.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ptbadd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.pnlMempresa.ResumeLayout(false);
             this.pnlMempresa.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbleftm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbadd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbleft)).EndInit();
             this.ResumeLayout(false);
 
         }

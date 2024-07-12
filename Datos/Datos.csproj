@@ -482,6 +482,10 @@
     <Compile Include="Migrations\20240711205303_InitialMigrations5.Designer.cs">
       <DependentUpon>20240711205303_InitialMigrations5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20240712010841_add_nombre_producto.cs" />
+    <Compile Include="Migrations\20240712010841_add_nombre_producto.Designer.cs">
+      <DependentUpon>20240712010841_add_nombre_producto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\SistemapContextModelSnapshot.cs" />
     <Compile Include="Models\Atributo.cs" />
     <Compile Include="Models\AtributoProducto.cs" />

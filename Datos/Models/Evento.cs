@@ -10,6 +10,7 @@ namespace Datos.Models
             PresupuestoNavegation = new HashSet<Presupuesto>();
         }
 
+        public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public DateTime FechaEvento { get; set; }
         public string Promotor { get; set; }

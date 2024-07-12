@@ -10,6 +10,7 @@ namespace Datos.Models
             AtributosProductos = new HashSet<AtributoProducto>();
         }
 
+        public string Nombre{ get; set; }
         public string Descripcion { get; set; }
         public float Precio { get; set; }
         public int IdCategoriaProducto { get; set; }

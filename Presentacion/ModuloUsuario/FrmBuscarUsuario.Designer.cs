@@ -178,7 +178,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(1380, 788);
+            this.ClientSize = new System.Drawing.Size(900, 788);
             this.ControlBox = false;
             this.Controls.Add(this.dtgUsuario);
             this.Controls.Add(this.button1);

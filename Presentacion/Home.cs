@@ -20,7 +20,7 @@ namespace Presentacion
 {
     public partial class Home : Form
     {
-        FrmIPrincipal Frmdi;
+        public FrmIPrincipal Frmdi;
         private IUnityContainer _container;
         public Home(IUnityContainer container, FrmIPrincipal mdip)
         {

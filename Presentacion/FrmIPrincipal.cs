@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Presentacion.ModuloPresupuesto;
 using Unity;
+using Unity.Resolution;
 
 namespace Presentacion
 {
@@ -144,13 +145,15 @@ namespace Presentacion
             }
         }
 
-        public void OpenChildForm<T>(Action<T> configureForm = null) where T : Form
+        public void OpenChildForm<T>(Action<T> configureForm = null, Point? location = null, Size? size = null) where T : Form
         {
+            // Cerrar el formulario activo actual si existe
             if (activarForm != null)
             {
                 activarForm.Close();
             }
 
+            // Crear una nueva instancia del formulario si no está activa
             if (!activeForms.ContainsKey(typeof(T)))
             {
                 var form = _container.Resolve<T>();
@@ -159,9 +162,18 @@ namespace Presentacion
                 form.FormClosed += (sender, e) => activeForms.Remove(typeof(T));
             }
 
+            // Activar el formulario y configurarlo si se especifica
             activarForm = activeForms[typeof(T)];
             configureForm?.Invoke((T)activarForm);
-
+            // Ajustar la posición y el tamaño personalizado del formulario hijo si se especifican
+            if (location.HasValue)
+            {
+                activarForm.Location = location.Value;
+            }
+            if (size.HasValue)
+            {
+                activarForm.Size = size.Value;
+            }
             // Obtener el tamaño y la ubicación de los paneles
             int leftPanelWidth = pnelMenu.Width;
             int topPanelHeight = panelHeader.Height;
@@ -176,10 +188,10 @@ namespace Presentacion
             activarForm.MaximizeBox = false;
             activarForm.Show();
         }
-
         private void btnHome_Click(object sender, EventArgs e)
         {
-            OpenChildForm<Home>();
+  
+            OpenChildForm<Home>(hom => hom.Frmdi = this);
         }
 
         private void btnMr_Click(object sender, EventArgs e)

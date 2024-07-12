@@ -18,10 +18,14 @@ namespace Datos.AplicationDB.Configurations
                 .IsRequired()
                 .ValueGeneratedOnAdd(); 
 
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
+            entity.Property(e => e.Nombre)
+                .HasColumnName("nombre")
                 .HasColumnType("VARCHAR(200)") 
                 .IsRequired();
+            
+            entity.Property(e => e.Descripcion)
+                .HasColumnName("descripcion")
+                .IsRequired(false);
 
             entity.Property(e => e.FechaEvento)
                 .HasColumnName("fecha_evento")
