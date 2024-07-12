@@ -101,6 +101,7 @@
             this.ptbCategoria.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ptbCategoria.TabIndex = 0;
             this.ptbCategoria.TabStop = false;
+            this.ptbCategoria.Click += new System.EventHandler(this.ptbCategoria_Click_1);
             // 
             // panel2
             // 
@@ -226,9 +227,9 @@
             this.labelEdit5.ForeColor = System.Drawing.Color.White;
             this.labelEdit5.Location = new System.Drawing.Point(237, 328);
             this.labelEdit5.Name = "labelEdit5";
-            this.labelEdit5.Size = new System.Drawing.Size(107, 20);
+            this.labelEdit5.Size = new System.Drawing.Size(101, 20);
             this.labelEdit5.TabIndex = 66;
-            this.labelEdit5.Text = "Presupuestos";
+            this.labelEdit5.Text = "tipo empresa";
             // 
             // ptbIpresupuesto
             // 

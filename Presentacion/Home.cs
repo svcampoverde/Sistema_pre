@@ -77,5 +77,11 @@ namespace Presentacion
             this.Close();
             Frmdi.OpenChildForm<FrmTipoEmpresa>();
         }
+
+        private void ptbCategoria_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+            Frmdi.OpenChildForm<FrmCategoria>();
+        }
     }
 }

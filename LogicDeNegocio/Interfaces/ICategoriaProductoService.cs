@@ -15,5 +15,6 @@ namespace LogicDeNegocio.Interfaces
         Task EliminarCategoriaProducto(int id);
 
         Task<List<CategoriaProductoDto>> ObtenerTodasCategoriaProductos();
+        Task<List<CategoriaProductoDto>> ObtenerCategorias(string dato);
     }
 }

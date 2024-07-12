@@ -1,8 +1,10 @@
 ﻿//using LogicDeNegocio.personas;
 using LogicDeNegocio;
+using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
 using LogicDeNegocio.Requests;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 //using LogicDeNegocio.producto;
@@ -24,11 +26,18 @@ namespace Presentacion.ModuloProducto
         {
             try
             {
-                var listacategoriaProducto = await _categoriaProductoService.ObtenerTodasCategoriaProductos();
-                dtgCategoria.DataSource = listacategoriaProducto;
-                DataTable dt = new DataTable();
-                dtgCategoria.Columns[2].Visible = false;
-                dtgCategoria.Columns[3].Visible = false;
+                List<CategoriaProductoDto> list = await _categoriaProductoService.ObtenerCategorias(datos);
+                dtgCategoria.Rows.Clear();
+
+                int cont = 0;
+
+                foreach (CategoriaProductoDto categoria in list)
+                {
+                    dtgCategoria.Rows.Add(1);
+                    dtgCategoria.Rows[cont].Cells[0].Value = categoria.Id.ToString();
+                    dtgCategoria.Rows[cont].Cells[1].Value = categoria.Descripcion.ToString();
+                    cont++;
+                }
 
             }
             catch (ExceptionSistema ex)
@@ -104,13 +113,15 @@ namespace Presentacion.ModuloProducto
                         // Verificar si la columna es de tipo DataGridViewImageColumn
                         if (dtgCategoria.Columns[e.ColumnIndex] is DataGridViewImageColumn)
                         {
-                            if (dtgCategoria.Rows[e.RowIndex].Cells[2].Value != null)
+                            // Verificar que la celda tenga un valor válido
+                            if (dtgCategoria.Rows[e.RowIndex].Cells["idcategoria"].Value != null)
                             {
-                                Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells[2].Value);
-                                txtMcategoria.Text = dtgCategoria.Rows[e.RowIndex].Cells[4].Value.ToString();
+                                Id = Convert.ToInt32(dtgCategoria.Rows[e.RowIndex].Cells["idcategoria"].Value);
+                                txtMcategoria.Text = dtgCategoria.Rows[e.RowIndex].Cells["categoria"].Value.ToString();
                                 pnlRegistrocat.Visible = false;
                                 pnlModificacat.Visible = true;
                                 pnllistCat.Visible = false;
+
                             }
                             else
                             {
