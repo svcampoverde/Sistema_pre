@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.UI;
 using System.Windows.Forms;
 
@@ -20,20 +21,14 @@ namespace Presentacion.ModuloUsuario
         private IUnityContainer _container;
         private readonly IUsuarioService _service;
         private readonly IPersonaService _personaService;
-        // private readonly IUsuarioService _usuarioService;
-        private Usuario u = new Usuario();
         private int Id;
-
-        public FrmBuscarUsuario(IUnityContainer container, FrmIPrincipal mdip, IUsuarioService service, IPersonaService personaService)//), IUsuarioService usuarioService)
+        public FrmBuscarUsuario(IUnityContainer container, FrmIPrincipal mdip, IUsuarioService service, IPersonaService personaService)
         {
             InitializeComponent();
-            this.Load += new EventHandler(BuscarUsuario_Load);
             this.Frmdi = mdip;
             this._container = container;
-            //this._usuarioService = usuarioService;
-            this.dtgUsuario.CellClick += new DataGridViewCellEventHandler(this.dtgUsuario_CellClick);
-            _service = service;
-            _personaService = personaService;
+            this._service = service;
+            this._personaService = personaService;
         }
 
         private void BuscarUsuario_Load(object sender, EventArgs e)
@@ -42,17 +37,15 @@ namespace Presentacion.ModuloUsuario
             this.ControlBox = false;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
+
             llenarDatagrid("");
-            txtBuscar.TextChanged += new System.EventHandler(txtBuscar_TextChanged);
-            dtgUsuario.CellClick += new DataGridViewCellEventHandler(dtgUsuario_CellClick);
+            txtBuscar.TextChanged += new EventHandler(txtBuscar_TextChanged);
         }
         private async void llenarDatagrid(string datos)
         {
             try
             {
-                dtgUsuario.DataSource=await _personaService.BuscarPersona(datos);
-
-
+                dtgUsuario.DataSource = await _personaService.BuscarPersona(datos);
             }
             catch (ExceptionSistema ex)
             {
@@ -64,23 +57,40 @@ namespace Presentacion.ModuloUsuario
         {
             llenarDatagrid(txtBuscar.Text);
         }
-        private void dtgUsuario_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void dtgUsuario_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (e.RowIndex >= 0 && e.RowIndex < dtgUsuario.Rows.Count &&
                     e.ColumnIndex >= 0 && e.ColumnIndex < dtgUsuario.Columns.Count)
                 {
-                    if (dtgUsuario.Columns[e.ColumnIndex].Name == "btnEditar" &&
-                        dtgUsuario.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
-                        dtgUsuario.Rows[e.RowIndex].Cells["Idusuario"].Value != null)
+                    if (dtgUsuario.Columns[e.ColumnIndex] is DataGridViewImageColumn &&
+                        dtgUsuario.Rows[e.RowIndex].Cells["Id"].Value != null)
                     {
-                        int id = Convert.ToInt32(dtgUsuario.Rows[e.RowIndex].Cells["Idusuario"].Value);
-                        this.Close();
+                        int id = Convert.ToInt32(dtgUsuario.Rows[e.RowIndex].Cells["Id"].Value);
 
-                        //Frmdi.OpenChildForm<FrmModificarUsuario>(frm => frm.SetIdUsuario(id));
-                        this.Close();
-                        Frmdi.OpenChildForm<FrmModificarUsuario>(frm => frm.SetIdUsuario(id));
+                        // Si se hace clic en el botón de editar
+                        if (dtgUsuario.Columns[e.ColumnIndex].Name == "btnEditar")
+                        {
+                            this.Close(); // Cerrar el formulario actual si es necesario
+
+                            // Abrir el formulario para modificar el usuario
+                            Frmdi.OpenChildForm<FrmModificarUsuario>(frm => frm.SetIdUsuario(id));
+                        }
+                        // Si se hace clic en el botón de eliminar
+                        else if (dtgUsuario.Columns[e.ColumnIndex].Name == "dbtnEliminar")
+                        {
+                            // Aquí puedes implementar la lógica para eliminar el usuario
+                            // Por ejemplo, mostrar un mensaje de confirmación y luego proceder con la eliminación
+                            DialogResult result = MessageBox.Show("¿Estás seguro de que quieres eliminar este usuario?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                            if (result == DialogResult.Yes)
+                            {
+                                // Lógica para eliminar el usuario
+                                await EliminarUsuario(id);
+                                llenarDatagrid(null);
+                            }
+                        }
                     }
                     else
                     {
@@ -92,6 +102,11 @@ namespace Presentacion.ModuloUsuario
             {
                 MessageBox.Show("Se produjo un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private async Task EliminarUsuario(int id)
+        {
+            await _personaService.EliminarPersona(id);
+            MessageBox.Show("Usuario eliminado correctamente.", "Eliminación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void CloseAllMdiChildren()

@@ -60,28 +60,25 @@ namespace Presentacion
         private void ptbproveedor_Click(object sender, EventArgs e)
         {
             this.Close();
-            var form = _container.Resolve<FrmRegistroProveedor>();
             Frmdi.OpenChildForm< FrmRegistroProveedor>();
         }
 
         private void ptbICliente_Click(object sender, EventArgs e)
         {
             this.Close();
-            var form = _container.Resolve<FrmRegistrarCliente>();
             Frmdi.OpenChildForm< FrmRegistrarCliente>();
         }
 
         private void ptempleado_Click(object sender, EventArgs e)
         {
             this.Close();
-            var form = _container.Resolve<FrmEmpleado>();
+
             Frmdi.OpenChildForm< FrmEmpleado>();
         }
         
         private void ptbIproducto_Click(object sender, EventArgs e)
         {
             this.Close();
-            var form = _container.Resolve<FrmInventario>();
             Frmdi.OpenChildForm< FrmInventario>();
         }
     }

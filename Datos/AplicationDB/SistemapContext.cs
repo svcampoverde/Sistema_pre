@@ -62,21 +62,30 @@ namespace Datos.AplicationDB
         {
             // Obtener todas las entidades que han cambiado
             var entities = ChangeTracker.Entries<BaseEntity>()
-                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
+                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
+                .ToList(); // Convertir a lista para evitar la excepción de colección modificada
 
-            // Actualizar la fecha de modificación y establecer como no activo si se elimina
+            // Obtener la fecha actual en UTC
+            DateTime now = DateTime.UtcNow;
+
+            // Actualizar cada entidad según su estado
             foreach (var entityEntry in entities)
             {
-                if (entityEntry.State == EntityState.Deleted)
+                switch (entityEntry.State)
                 {
-                    // Cambiar el estado a Detached para evitar la eliminación física
-                    entityEntry.State = EntityState.Detached;
-                    entityEntry.Entity.FechaModificacionUTC = DateTime.UtcNow;
-                    entityEntry.Entity.Activo = false;
-                }
-                else
-                {
-                    entityEntry.Entity.FechaModificacionUTC = DateTime.UtcNow;
+                    case EntityState.Added:
+                        entityEntry.Entity.FechaCreacionUTC = now;
+                        entityEntry.Entity.Activo = true; // Al agregar, siempre activo
+                        break;
+                    case EntityState.Modified:
+                        entityEntry.Entity.FechaModificacionUTC = now;
+                        break;
+                    case EntityState.Deleted:
+                        // Cambiar el estado a Modified para evitar la eliminación física
+                        entityEntry.State = EntityState.Modified;
+                        entityEntry.Entity.FechaModificacionUTC = now;
+                        entityEntry.Entity.Activo = false; // Al eliminar, se desactiva
+                        break;
                 }
             }
         }
