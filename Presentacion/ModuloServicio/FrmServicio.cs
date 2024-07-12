@@ -1,6 +1,10 @@
 ﻿//using LogicDeNegocio.personas;
 using LogicDeNegocio;
+using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 //using LogicDeNegocio.Servicio;
 
@@ -9,29 +13,30 @@ namespace Presentacion.ModuloServicio
 {
     public partial class FrmServicio : Form
     {
-        // Servicio adms = new Servicio();
+        private readonly ITipoServicioService _tiposervicioService;
         int Id;
-        public FrmServicio()
+        public FrmServicio(ITipoServicioService tiposervicio)
         {
+            _tiposervicioService = tiposervicio;
             InitializeComponent();
             this.Load += new EventHandler(FrmServicio_Load);
         }
-        private void LlenarDataGrid(string datos)
+        private async void LlenarDataGrid(string datos)
         {
             try
             {
-                //List<Servicio> list = adms.BuscarServicio(datos);
-                //dtgServicio.Rows.Clear();
+                List<TipoServicioDto> list = await _tiposervicioService.ObtenerListServicio(datos);
+                dtgServicio.Rows.Clear();
 
-                //int cont = 0;
+                int cont = 0;
 
-                //foreach (Servicio services in list)
-                //{
-                //    dtgServicio.Rows.Add(1);
-                //    dtgServicio.Rows[cont].Cells[0].Value = services.Id.ToString();
-                //    dtgServicio.Rows[cont].Cells[1].Value = services.Descripcion.ToString();
-                //    cont++;
-                //}
+                foreach (TipoServicioDto services in list)
+                {
+                    dtgServicio.Rows.Add(1);
+                    dtgServicio.Rows[cont].Cells[0].Value = services.Id.ToString();
+                    dtgServicio.Rows[cont].Cells[1].Value = services.Descripcion.ToString();
+                    cont++;
+                }
 
             }
             catch (ExceptionSistema ex)
@@ -48,18 +53,20 @@ namespace Presentacion.ModuloServicio
             LlenarDataGrid("");
         }
 
-        private void brnGuardarS_Click(object sender, EventArgs e)
+        private async void brnGuardarS_Click(object sender, EventArgs e)
         {
             // adms.Descripcion = txtServicio.Text;
             try
             {
-                //if (Validar())
-                //{
-                //    adms.InsertarServicio(adms);
-                //    MessageBox.Show("Registro de servicio realizado con éxito");
-                //    Limpiar();
-                //    LlenarDataGrid("");
-                //}
+                if (Validar())
+                {
+                    TipoServicioRequest servicio = new TipoServicioRequest()
+                    {Codigo=txtServicio.Text, Descripcion=txtServicio.Text};
+                    await _tiposervicioService.RegistrarTipoServicio(servicio);
+                    MessageBox.Show("Registro de servicio realizado con éxito");
+                    Limpiar();
+                    LlenarDataGrid("");
+                }
 
             }
             catch (ExceptionSistema ex)
@@ -93,7 +100,7 @@ namespace Presentacion.ModuloServicio
             LlenarDataGrid(txtBservicio.Text);
         }
 
-        private void dtgServico_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void dtgServico_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -127,6 +134,7 @@ namespace Presentacion.ModuloServicio
                         if (result == DialogResult.OK)
                         {
                             Id = Convert.ToInt32(dtgServicio.Rows[e.RowIndex].Cells["idservicio"].Value);
+                            await _tiposervicioService.EliminarTipoServicio(Id);
                             // adms.EliminarServicio(Id);
                             LlenarDataGrid("");
                         }
@@ -140,16 +148,17 @@ namespace Presentacion.ModuloServicio
             }
         }
 
-        private void btnActualizarS_Click(object sender, EventArgs e)
+        private async void btnActualizarS_Click(object sender, EventArgs e)
         {
             string servi = txtMservicio.Text;
             if (!String.IsNullOrEmpty(txtMservicio.Text))
             {
-                //adms.Id = Id;
-                //adms.Descripcion = servi;
-
-                //adms.ActualizarServicio(adms);
-                //MessageBox.Show("Datos actualizados con exito.");
+                TipoServicioRequest tiposervicio = new TipoServicioRequest() { Id = Id,  Descripcion = servi };
+              
+                await _tiposervicioService.ActualizarTipoServicio(Id, tiposervicio);
+                MessageBox.Show("Datos actualizados con exito.");
+                pnlModificaservicio.Visible = false;
+                pnlRegistroservicio.Visible = true;
                 LlenarDataGrid("");
             }
             else

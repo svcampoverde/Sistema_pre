@@ -4,6 +4,7 @@ using Presentacion.ModuloEmpresa;
 using Presentacion.ModuloProducto;
 using Presentacion.ModuloProveedor;
 using Presentacion.ModuloRolusuario;
+using Presentacion.ModuloServicio;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -89,6 +90,12 @@ namespace Presentacion
         {
             this.Close();
             Frmdi.OpenChildForm<FrmRol>();
+        }
+
+        private void ptbIServicio_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Frmdi.OpenChildForm<FrmServicio>();
         }
     }
 }

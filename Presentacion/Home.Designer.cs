@@ -47,6 +47,8 @@
             this.labelEdit4 = new ReaLTaiizor.Controls.LabelEdit();
             this.ptbIproducto = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.labelEdit7 = new ReaLTaiizor.Controls.LabelEdit();
+            this.ptbIServicio = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbempresa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCategoria)).BeginInit();
@@ -58,6 +60,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ptbIpresupuesto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIproducto)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbIServicio)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -278,6 +281,30 @@
             this.panel3.Size = new System.Drawing.Size(157, 151);
             this.panel3.TabIndex = 62;
             // 
+            // labelEdit7
+            // 
+            this.labelEdit7.AutoSize = true;
+            this.labelEdit7.BackColor = System.Drawing.Color.Transparent;
+            this.labelEdit7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelEdit7.ForeColor = System.Drawing.Color.White;
+            this.labelEdit7.Location = new System.Drawing.Point(637, 328);
+            this.labelEdit7.Name = "labelEdit7";
+            this.labelEdit7.Size = new System.Drawing.Size(72, 20);
+            this.labelEdit7.TabIndex = 72;
+            this.labelEdit7.Text = "Servicios";
+            // 
+            // ptbIServicio
+            // 
+            this.ptbIServicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(87)))), ((int)(((byte)(110)))));
+            this.ptbIServicio.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptbIServicio.Location = new System.Drawing.Point(618, 210);
+            this.ptbIServicio.Name = "ptbIServicio";
+            this.ptbIServicio.Size = new System.Drawing.Size(119, 115);
+            this.ptbIServicio.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptbIServicio.TabIndex = 71;
+            this.ptbIServicio.TabStop = false;
+            this.ptbIServicio.Click += new System.EventHandler(this.ptbIServicio_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,6 +312,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
             this.ClientSize = new System.Drawing.Size(1156, 676);
             this.ControlBox = false;
+            this.Controls.Add(this.labelEdit7);
+            this.Controls.Add(this.ptbIServicio);
             this.Controls.Add(this.labelEdit3);
             this.Controls.Add(this.ptbproveedor);
             this.Controls.Add(this.ptbIempleado);
@@ -316,6 +345,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ptbIproducto)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbIServicio)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,5 +372,7 @@
         private ReaLTaiizor.Controls.LabelEdit labelEdit4;
         private System.Windows.Forms.PictureBox ptbIproducto;
         private System.Windows.Forms.Panel panel3;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit7;
+        private System.Windows.Forms.PictureBox ptbIServicio;
     }
 }

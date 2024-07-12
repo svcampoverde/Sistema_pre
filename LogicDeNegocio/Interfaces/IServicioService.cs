@@ -1,8 +1,8 @@
 ﻿using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Requests;
-
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace LogicDeNegocio.Interfaces
 {
@@ -15,7 +15,6 @@ namespace LogicDeNegocio.Interfaces
         Task<ServicioDto> ActualizarServicio(int id, ServicioRequest request);
 
         Task EliminarServicio(int id);
-
         int GetTotalServicios();
     }
 }
