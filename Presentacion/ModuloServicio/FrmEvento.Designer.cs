@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEvento));
             this.pnlRegistroevento = new System.Windows.Forms.Panel();
+            this.ptbIRevento = new System.Windows.Forms.PictureBox();
             this.txtPromotor = new ReaLTaiizor.Controls.TextBoxEdit();
             this.txtArtista = new ReaLTaiizor.Controls.TextBoxEdit();
             this.txtlocalevento = new ReaLTaiizor.Controls.TextBoxEdit();
@@ -45,7 +46,6 @@
             this.txtdescevento = new ReaLTaiizor.Controls.TextBoxEdit();
             this.labelEdit1 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit2 = new ReaLTaiizor.Controls.LabelEdit();
-            this.ptbIRevento = new System.Windows.Forms.PictureBox();
             this.pnlMevento = new System.Windows.Forms.Panel();
             this.ptbIMevento = new System.Windows.Forms.PictureBox();
             this.txtMpromotor = new ReaLTaiizor.Controls.TextBoxEdit();
@@ -64,7 +64,6 @@
             this.ptbaddevento = new System.Windows.Forms.PictureBox();
             this.txtBevento = new ReaLTaiizor.Controls.TextBoxEdit();
             this.dtgEvento = new System.Windows.Forms.DataGridView();
-            this.btnBevento = new ReaLTaiizor.Controls.Button();
             this.idproveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.evento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,6 +72,9 @@
             this.promotor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnEliminar = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnBevento = new ReaLTaiizor.Controls.Button();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlRegistroevento.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIRevento)).BeginInit();
             this.pnlMevento.SuspendLayout();
@@ -103,6 +105,16 @@
             this.pnlRegistroevento.Size = new System.Drawing.Size(507, 425);
             this.pnlRegistroevento.TabIndex = 81;
             this.pnlRegistroevento.Visible = false;
+            // 
+            // ptbIRevento
+            // 
+            this.ptbIRevento.Image = global::Presentacion.Properties.Resources.left_arrow;
+            this.ptbIRevento.Location = new System.Drawing.Point(29, 19);
+            this.ptbIRevento.Name = "ptbIRevento";
+            this.ptbIRevento.Size = new System.Drawing.Size(34, 31);
+            this.ptbIRevento.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptbIRevento.TabIndex = 89;
+            this.ptbIRevento.TabStop = false;
             // 
             // txtPromotor
             // 
@@ -151,7 +163,6 @@
             this.txtlocalevento.TabIndex = 79;
             this.txtlocalevento.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtlocalevento.UseSystemPasswordChar = false;
-            this.txtlocalevento.TextChanged += new System.EventHandler(this.textBoxEdit3_TextChanged);
             // 
             // txtdateevento
             // 
@@ -235,6 +246,7 @@
             this.btnGuardarevento.Text = "Guardar";
             this.btnGuardarevento.TextColor = System.Drawing.Color.White;
             this.btnGuardarevento.UseVisualStyleBackColor = false;
+            this.btnGuardarevento.Click += new System.EventHandler(this.btnGuardarevento_Click);
             // 
             // txtdescevento
             // 
@@ -275,16 +287,6 @@
             this.labelEdit2.Size = new System.Drawing.Size(234, 20);
             this.labelEdit2.TabIndex = 69;
             this.labelEdit2.Text = "Registrar información de evento";
-            // 
-            // ptbIRevento
-            // 
-            this.ptbIRevento.Image = global::Presentacion.Properties.Resources.left_arrow;
-            this.ptbIRevento.Location = new System.Drawing.Point(29, 19);
-            this.ptbIRevento.Name = "ptbIRevento";
-            this.ptbIRevento.Size = new System.Drawing.Size(34, 31);
-            this.ptbIRevento.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ptbIRevento.TabIndex = 89;
-            this.ptbIRevento.TabStop = false;
             // 
             // pnlMevento
             // 
@@ -589,26 +591,6 @@
             this.dtgEvento.Size = new System.Drawing.Size(759, 246);
             this.dtgEvento.TabIndex = 81;
             // 
-            // btnBevento
-            // 
-            this.btnBevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnBevento.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnBevento.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBevento.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.btnBevento.EnteredColor = System.Drawing.Color.Transparent;
-            this.btnBevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnBevento.Image = null;
-            this.btnBevento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBevento.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnBevento.Location = new System.Drawing.Point(400, 19);
-            this.btnBevento.Name = "btnBevento";
-            this.btnBevento.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.btnBevento.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnBevento.Size = new System.Drawing.Size(71, 42);
-            this.btnBevento.TabIndex = 83;
-            this.btnBevento.Text = "Buscar";
-            this.btnBevento.TextAlignment = System.Drawing.StringAlignment.Center;
-            // 
             // idproveedor
             // 
             this.idproveedor.HeaderText = "Id";
@@ -669,6 +651,44 @@
             this.btnEliminar.ReadOnly = true;
             this.btnEliminar.Width = 73;
             // 
+            // btnBevento
+            // 
+            this.btnBevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnBevento.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnBevento.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBevento.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.btnBevento.EnteredColor = System.Drawing.Color.Transparent;
+            this.btnBevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnBevento.Image = null;
+            this.btnBevento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBevento.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnBevento.Location = new System.Drawing.Point(400, 19);
+            this.btnBevento.Name = "btnBevento";
+            this.btnBevento.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.btnBevento.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnBevento.Size = new System.Drawing.Size(71, 42);
+            this.btnBevento.TabIndex = 83;
+            this.btnBevento.Text = "Buscar";
+            this.btnBevento.TextAlignment = System.Drawing.StringAlignment.Center;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.HeaderText = "Editar";
+            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Width = 59;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.HeaderText = "Eliminar";
+            this.dataGridViewImageColumn2.Image = global::Presentacion.Properties.Resources.trash;
+            this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            this.dataGridViewImageColumn2.Width = 73;
+            // 
             // FrmEvento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -680,6 +700,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmEvento";
             this.Text = "FrmEvento";
+            this.Load += new System.EventHandler(this.FrmEvento_Load);
             this.pnlRegistroevento.ResumeLayout(false);
             this.pnlRegistroevento.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIRevento)).EndInit();
@@ -735,5 +756,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn promotor;
         private System.Windows.Forms.DataGridViewImageColumn btnEditar;
         private System.Windows.Forms.DataGridViewImageColumn btnEliminar;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn2;
     }
 }
