@@ -191,7 +191,7 @@ namespace Presentacion
         private void btnHome_Click(object sender, EventArgs e)
         {
   
-            OpenChildForm<Home>(hom => hom.Frmdi = this);
+            OpenChildForm<Home>();
         }
 
         private void btnMr_Click(object sender, EventArgs e)

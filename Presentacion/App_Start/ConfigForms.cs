@@ -28,7 +28,7 @@ namespace Presentacion.App_Start
         {
             container.RegisterType<Home>(new InjectionConstructor(typeof(IUnityContainer), typeof(FrmIPrincipal)));
             container.RegisterType<FrmRegistrarUsuario>(new TransientLifetimeManager());
-            container.RegisterType<FrmIPrincipal>(new TransientLifetimeManager());
+            container.RegisterSingleton<FrmIPrincipal>();
             container.RegisterType<FrmRol>(new TransientLifetimeManager());
             container.RegisterType<FrmCiudad>(new TransientLifetimeManager());
             container.RegisterType<FrmBuscarUsuario>(new TransientLifetimeManager());
