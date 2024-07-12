@@ -66,9 +66,44 @@ namespace LogicDeNegocio.Services
                     _logger.LogWarning("Empresa no encontrada.");
                     throw new KeyNotFoundException($"Empresa con ID {id} no encontrado.");
                 }
+                //entidad.Activo = false;
+                //context.Empresas.Update(entidad);
 
                 context.Empresas.Remove(entidad);
                 await context.SaveChangesAsync();
+            }
+        }
+        public async Task<List<EmpresaDto>> ObtenerEmpresas(string emp)
+        {
+            using (var context = _dbContextFactory())
+            {
+                var query = from e in context.Empresas
+                            join tpem in context.TipoEmpresas on e.IdTipoEmpresa equals tpem.Id
+                            where e.Activo == true// && (string.IsNullOrEmpty(emp) || e.Descripcion.Contains(emp))
+                            select new
+                            {
+                                e.Id,
+                                e.Descripcion,
+                                e.Telefono,
+                                e.Correo,
+                                e.Direccion,
+                                TipoEmpresaDescripcion = tpem.Descripcion
+                            };
+                if (!string.IsNullOrEmpty(emp))
+                {
+                    query = query.Where(e => e.Descripcion.Contains(emp));
+                }
+                var datos = await query.ToListAsync();
+                return datos.Select(d => new EmpresaDto
+                {
+                    Id = d.Id,
+                    Descripcion = d.Descripcion,
+                    Telefono = d.Telefono,
+                    Correo = d.Correo,
+                    Direccion = d.Direccion,
+                    TipoEmpresaDescripcion = d.TipoEmpresaDescripcion
+                }).ToList();
+
             }
         }
 

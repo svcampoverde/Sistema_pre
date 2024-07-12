@@ -1,66 +1,72 @@
 ﻿
 using LogicDeNegocio;
-//using LogicDeNegocio.Empresa;
-//using LogicDeNegocio.provincia;
+using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
 using Presentacion.btnpersonalizados;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Presentacion.ModuloEmpresa
 {
     public partial class FrmEmpresa : Form
     {
-        //TipoEmpresa tp = new TipoEmpresa();
-        //Empresa emp = new Empresa();
+        private readonly IEmpresaService _empresaService;
+        private readonly ITipoEmpresaService _tipoEmpresaService;
         int Id;
-        public FrmEmpresa()
+        public FrmEmpresa(IEmpresaService empresaService, ITipoEmpresaService tipoEmpresaService)
         {
+            _empresaService = empresaService;
+            _tipoEmpresaService = tipoEmpresaService ?? throw new ArgumentNullException(nameof(tipoEmpresaService));
             InitializeComponent();
 
         }
-        private void llenarCombobox(PersonComboBox combo)
+        private async void llenarCombobox(PersonComboBox combo)
         {
             try
             {
-                //List<TipoEmpresa> list = tp.LlenarComboTip();
-                //if (list == null || list.Count == 0)
-                //{
-                //    MessageBox.Show("No se encontraron provincias para cargar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //    return;
-                //}
-                //combo.DataSource = null;
-                //combo.DataSource = list;
-                //combo.DisplayMember = "Descripcion";
-                //combo.ValueMember = "Id";
+                var tipo = await _tipoEmpresaService.ObtenerTodasTipoEmpresas();
+                if (tipo.Any())
+                {
+                    combo.DataSource = tipo;
+                    combo.DisplayMember = "Descripcion";
+                    combo.ValueMember = "Id";
 
-            }
+                 }
+                    
+                }
             catch (ExceptionSistema ex)
             {
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
-        private void LlenarDataGrid(string dato)
+        private async void LlenarDataGrid(string dato)
         {
             try
             {
-                //List<Empresa> list = emp.BuscarEmpresa(dato);
-                //dtgEmpresa.Rows.Clear();
+                pnlRegEmp.Visible = false;
+                pnlMempresa.Visible = false;
+                pnlListEmp.Visible = true;
+                List<EmpresaDto> list = await _empresaService.ObtenerEmpresas(dato);
+                dtgEmpresa.Rows.Clear();
 
-                //int cont = 0;
+                int cont = 0;
 
-                //foreach (Empresa t in list)
-                //{
-                //    dtgEmpresa.Rows.Add(1);
-                //    dtgEmpresa.Rows[cont].Cells[0].Value = t.Id.ToString();
-                //    dtgEmpresa.Rows[cont].Cells[1].Value = t.Descripcion.ToString();
-                //    dtgEmpresa.Rows[cont].Cells[2].Value = t.Tipo.Descripcion.ToString();
-                //    dtgEmpresa.Rows[cont].Cells[3].Value = t.Telefono.ToString();
-                //    dtgEmpresa.Rows[cont].Cells[4].Value = t.Correo.ToString();
-                //    dtgEmpresa.Rows[cont].Cells[5].Value = t.Direccion.ToString();
+                foreach (EmpresaDto t in list)
+                {
+                    dtgEmpresa.Rows.Add(1);
+                    dtgEmpresa.Rows[cont].Cells[0].Value = t.Id.ToString();
+                    dtgEmpresa.Rows[cont].Cells[1].Value = t.Descripcion.ToString();
+                    dtgEmpresa.Rows[cont].Cells[2].Value = t.TipoEmpresaDescripcion.ToString();
+                    dtgEmpresa.Rows[cont].Cells[3].Value = t.Telefono.ToString();
+                    dtgEmpresa.Rows[cont].Cells[4].Value = t.Correo.ToString();
+                    dtgEmpresa.Rows[cont].Cells[5].Value = t.Direccion.ToString();
 
-                //    cont++;
-                //}
+                    cont++;
+                }
 
             }
             catch (ExceptionSistema ex)
@@ -77,6 +83,7 @@ namespace Presentacion.ModuloEmpresa
             this.MaximizeBox = false;
             LlenarDataGrid("");
             llenarCombobox(cmbtipempresa);
+            llenarCombobox(cmbMtipemp);
             pnlListEmp.Dock = DockStyle.Fill;
             //dtgEmpresa.Dock = DockStyle.Fill;
         }
@@ -98,18 +105,21 @@ namespace Presentacion.ModuloEmpresa
             pnlRegEmp.Visible = true;
         }
 
-        private void btnGuardarE_Click(object sender, EventArgs e)
+        private async  void btnGuardarE_Click(object sender, EventArgs e)
         {
-            //emp.Descripcion = txtEmpresa.Text;
-            //emp.Telefono = txtTelefono.Text;
-            //emp.Correo = txtCorreo.Text;
-            //emp.Direccion = txtDireccion.Text;
-            //emp.Idtipo = Convert.ToInt32(cmbtipempresa.SelectedValue);
-            try
+           try 
             {
                 if (Validar())
                 {
-                    //   emp.InsertarEmpresa(emp);
+                    EmpresaRequest empresa = new EmpresaRequest()
+                    {
+                        Descripcion = txtEmpresa.Text,
+                        Telefono = txtTelefono.Text,
+                        Correo = txtCorreo.Text,
+                        Direccion = txtDireccion.Text,
+                        IdTipoEmpresa = cmbtipempresa.SelectedIndex
+                    };
+                    await _empresaService.RegistrarEmpresa(empresa);
                     MessageBox.Show("Registro de provincia realizado con éxito");
                     Limpiar();
                     LlenarDataGrid("");
@@ -173,7 +183,7 @@ namespace Presentacion.ModuloEmpresa
             pnlRegEmp.Visible = false;
             pnlMempresa.Visible = false;
         }
-        private void dtgEmpresa_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async  void dtgEmpresa_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
             try
@@ -214,7 +224,7 @@ namespace Presentacion.ModuloEmpresa
                         if (result == DialogResult.OK)
                         {
                             Id = Convert.ToInt32(dtgEmpresa.Rows[e.RowIndex].Cells["idempresa"].Value);
-                            //emp.EliminarEmpresa(Id);
+                            await _empresaService.EliminarEmpresa(Id);
                             LlenarDataGrid("");
                         }
 
@@ -228,20 +238,24 @@ namespace Presentacion.ModuloEmpresa
 
         }
 
-        private void btnActualizarEmp_Click(object sender, EventArgs e)
+        private async void btnActualizarEmp_Click(object sender, EventArgs e)
         {
             string empresa = txtMempresa.Text, telef = txtMtelefono.Text, correo = txtMcorreo.Text, direccion = txtMdireccion.Text;
             int tpe = Convert.ToInt32(cmbMtipemp.SelectedValue);
             if (!String.IsNullOrEmpty(empresa))
             {
-                //emp.Id = Id;
-                //emp.Descripcion = empresa;
-                //emp.Idtipo = tpe;
-                //emp.Telefono= telef;
-                //emp.Correo = correo;
-                //emp.Direccion = direccion;
-                //emp.ActualizarEmpresa(emp);
+                EmpresaRequest empresaRequest = new EmpresaRequest()
+                {
+                    Id = Id,
+                    Descripcion = empresa,
+                    Telefono = telef,
+                    Correo = correo,
+                    Direccion = direccion,
+                    IdTipoEmpresa = tpe
+                };
+                await _empresaService.ActualizarEmpresa(Id, empresaRequest);
                 MessageBox.Show("Datos actualizados con exito.");
+                LlenarDataGrid("");
                 pnlListEmp.Visible = true;
                 ptbleftm.Visible = false;
                 pnlMempresa.Visible = false;
