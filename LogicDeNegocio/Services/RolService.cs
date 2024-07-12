@@ -57,7 +57,26 @@ namespace LogicDeNegocio.Services
                 return _mapper.Map<RolDto>(rol);
             }
         }
+        public async Task<List<RolDto>> ObtenerRols(string dato)
+        {
+            using (var context = _dbContextFactory())
+            {
+                //  consulta inicial para obtener todos los tipos de empresa
+                var query = context.Roles.AsQueryable();
 
+                // Si 'filtro' no está vacío, agregamos un filtro adicional a la consulta
+                if (!string.IsNullOrEmpty(dato))
+                {
+                    query = query.Where(te => te.Descripcion.Contains(dato));
+                }
+
+                var entidadDto = await query
+                                        .ProjectTo<RolDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
+
+                return entidadDto;
+            }
+        }
         public async Task EliminarRol(int id)
         {
             using (var context = _dbContextFactory())

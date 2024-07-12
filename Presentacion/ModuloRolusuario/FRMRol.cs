@@ -1,6 +1,11 @@
 ﻿//using LogicDeNegocio.provincia;
 using LogicDeNegocio;
+using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Interfaces;
+using LogicDeNegocio.Requests;
+using LogicDeNegocio.Services;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 //using LogicDeNegocio.personas;
 
@@ -8,30 +13,31 @@ namespace Presentacion.ModuloRolusuario
 {
     public partial class FrmRol : Form
     {
-        // Rol admr = new Rol();
+        private readonly IRolService _olService;
         int Id;
-        public FrmRol()
+        public FrmRol(RolService rolService)
         {
+            _olService = rolService;
             InitializeComponent();
             this.Load += new EventHandler(FRMRol_Load);
         }
 
-        private void LlenarDataGrid(string datos)
+        private async void LlenarDataGrid(string datos)
         {
             try
             {
-                //List<Rol> list = admr.BuscarRol(datos);
-                //dtgRol.Rows.Clear();
+                List<RolDto> list = await _olService.ObtenerRols(datos);
+                dtgRol.Rows.Clear();
 
-                //int cont = 0;
+                int cont = 0;
 
-                //foreach (Rol roles in list)
-                //{
-                //    dtgRol.Rows.Add(1);
-                //    dtgRol.Rows[cont].Cells[0].Value = roles.Idrol.ToString();
-                //    dtgRol.Rows[cont].Cells[1].Value = roles.RolUsuario.ToString();
-                //    cont++;
-                //}
+                foreach (RolDto roles in list)
+                {
+                    dtgRol.Rows.Add(1);
+                    dtgRol.Rows[cont].Cells[0].Value = roles.Id.ToString();
+                    dtgRol.Rows[cont].Cells[1].Value = roles.Descripcion.ToString();
+                    cont++;
+                }
 
             }
             catch (ExceptionSistema ex)
@@ -50,14 +56,14 @@ namespace Presentacion.ModuloRolusuario
 
         }
 
-        private void btnRegistrarol_Click(object sender, EventArgs e)
+        private async void btnRegistrarol_Click(object sender, EventArgs e)
         {
-            string rol = txtRol.Text;
             try
             {
                 if (Validar())
                 {
-                    // admr.InsertarRol(admr);
+                    RolRequest r = new RolRequest() { Descripcion = txtRol.Text };
+                    await _olService.RegistrarRol(r);
                     MessageBox.Show("Registro de provincia realizado con éxito");
                     Limpiar();
                 }
@@ -85,7 +91,7 @@ namespace Presentacion.ModuloRolusuario
             txtRol.Text = "";
         }
 
-        private void dtgRol_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void dtgRol_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -119,7 +125,7 @@ namespace Presentacion.ModuloRolusuario
                         if (result == DialogResult.OK)
                         {
                             Id = Convert.ToInt32(dtgRol.Rows[e.RowIndex].Cells["idroles"].Value);
-                            //admr.EliminarRol(Id);
+                            await _olService.EliminarRol(Id);
                             LlenarDataGrid("");
                         }
 
@@ -143,15 +149,13 @@ namespace Presentacion.ModuloRolusuario
             LlenarDataGrid(txtBrol.Text);
         }
 
-        private void brnActualizar_Click(object sender, EventArgs e)
+        private async void brnActualizar_Click(object sender, EventArgs e)
         {
             string nrol = txtErol.Text;
             if (!String.IsNullOrEmpty(txtErol.Text))
             {
-                //admr.Idrol = Id;
-                //admr.RolUsuario = nrol;
-
-                //admr.ActualizarRol(admr);
+                RolRequest r = new RolRequest() { Descripcion = txtErol.Text };
+                await _olService.ActualizarRol(Id, r);
                 MessageBox.Show("Datos actualizados con exito.");
                 LlenarDataGrid("");
             }

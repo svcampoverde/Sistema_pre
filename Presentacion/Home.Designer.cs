@@ -204,9 +204,9 @@
             this.labelEdit6.ForeColor = System.Drawing.Color.White;
             this.labelEdit6.Location = new System.Drawing.Point(440, 328);
             this.labelEdit6.Name = "labelEdit6";
-            this.labelEdit6.Size = new System.Drawing.Size(75, 20);
+            this.labelEdit6.Size = new System.Drawing.Size(50, 20);
             this.labelEdit6.TabIndex = 68;
-            this.labelEdit6.Text = "Reportes";
+            this.labelEdit6.Text = "Reles";
             // 
             // ptbIreportes
             // 
@@ -218,6 +218,7 @@
             this.ptbIreportes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ptbIreportes.TabIndex = 67;
             this.ptbIreportes.TabStop = false;
+            this.ptbIreportes.Click += new System.EventHandler(this.ptbIreportes_Click);
             // 
             // labelEdit5
             // 

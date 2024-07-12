@@ -11,5 +11,6 @@ namespace LogicDeNegocio.Interfaces
         Task<RolDto> ActualizarRol(int id, RolRequest request);
         Task EliminarRol(int id);
         Task<List<RolDto>> ObtenerTodosLosRoles();
+        Task<List<RolDto>> ObtenerRols(string dato);
     }
 }
