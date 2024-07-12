@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmRegistroProveedor));
             this.pnlRegprovedor = new System.Windows.Forms.Panel();
             this.labelEdit14 = new ReaLTaiizor.Controls.LabelEdit();
-            this.textBoxEdit1 = new ReaLTaiizor.Controls.TextBoxEdit();
+            this.txtCuenta = new ReaLTaiizor.Controls.TextBoxEdit();
             this.ptbleftm = new System.Windows.Forms.PictureBox();
             this.labelEdit15 = new ReaLTaiizor.Controls.LabelEdit();
-            this.textBoxEdit4 = new ReaLTaiizor.Controls.TextBoxEdit();
+            this.txtnumCuenta = new ReaLTaiizor.Controls.TextBoxEdit();
             this.labelEdit13 = new ReaLTaiizor.Controls.LabelEdit();
             this.textBoxEdit3 = new ReaLTaiizor.Controls.TextBoxEdit();
             this.btnGuardarprove = new Presentacion.btnpersonalizados.Botonper();
@@ -57,7 +57,7 @@
             this.labelEdit5 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit4 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit3 = new ReaLTaiizor.Controls.LabelEdit();
-            this.txtUsuario = new ReaLTaiizor.Controls.TextBoxEdit();
+            this.txtEmpresa = new ReaLTaiizor.Controls.TextBoxEdit();
             this.txtCorreo = new ReaLTaiizor.Controls.TextBoxEdit();
             this.txtApellido = new ReaLTaiizor.Controls.TextBoxEdit();
             this.txtNombre = new ReaLTaiizor.Controls.TextBoxEdit();
@@ -129,10 +129,10 @@
             // 
             this.pnlRegprovedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
             this.pnlRegprovedor.Controls.Add(this.labelEdit14);
-            this.pnlRegprovedor.Controls.Add(this.textBoxEdit1);
+            this.pnlRegprovedor.Controls.Add(this.txtCuenta);
             this.pnlRegprovedor.Controls.Add(this.ptbleftm);
             this.pnlRegprovedor.Controls.Add(this.labelEdit15);
-            this.pnlRegprovedor.Controls.Add(this.textBoxEdit4);
+            this.pnlRegprovedor.Controls.Add(this.txtnumCuenta);
             this.pnlRegprovedor.Controls.Add(this.labelEdit13);
             this.pnlRegprovedor.Controls.Add(this.textBoxEdit3);
             this.pnlRegprovedor.Controls.Add(this.btnGuardarprove);
@@ -152,7 +152,7 @@
             this.pnlRegprovedor.Controls.Add(this.labelEdit5);
             this.pnlRegprovedor.Controls.Add(this.labelEdit4);
             this.pnlRegprovedor.Controls.Add(this.labelEdit3);
-            this.pnlRegprovedor.Controls.Add(this.txtUsuario);
+            this.pnlRegprovedor.Controls.Add(this.txtEmpresa);
             this.pnlRegprovedor.Controls.Add(this.txtCorreo);
             this.pnlRegprovedor.Controls.Add(this.txtApellido);
             this.pnlRegprovedor.Controls.Add(this.txtNombre);
@@ -176,21 +176,21 @@
             this.labelEdit14.TabIndex = 90;
             this.labelEdit14.Text = "Cuenta:";
             // 
-            // textBoxEdit1
+            // txtCuenta
             // 
-            this.textBoxEdit1.BackColor = System.Drawing.Color.Transparent;
-            this.textBoxEdit1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBoxEdit1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
-            this.textBoxEdit1.Image = null;
-            this.textBoxEdit1.Location = new System.Drawing.Point(118, 385);
-            this.textBoxEdit1.MaxLength = 32767;
-            this.textBoxEdit1.Multiline = false;
-            this.textBoxEdit1.Name = "textBoxEdit1";
-            this.textBoxEdit1.ReadOnly = false;
-            this.textBoxEdit1.Size = new System.Drawing.Size(200, 42);
-            this.textBoxEdit1.TabIndex = 89;
-            this.textBoxEdit1.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.textBoxEdit1.UseSystemPasswordChar = false;
+            this.txtCuenta.BackColor = System.Drawing.Color.Transparent;
+            this.txtCuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtCuenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.txtCuenta.Image = null;
+            this.txtCuenta.Location = new System.Drawing.Point(118, 385);
+            this.txtCuenta.MaxLength = 32767;
+            this.txtCuenta.Multiline = false;
+            this.txtCuenta.Name = "txtCuenta";
+            this.txtCuenta.ReadOnly = false;
+            this.txtCuenta.Size = new System.Drawing.Size(200, 42);
+            this.txtCuenta.TabIndex = 89;
+            this.txtCuenta.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCuenta.UseSystemPasswordChar = false;
             // 
             // ptbleftm
             // 
@@ -214,21 +214,21 @@
             this.labelEdit15.TabIndex = 87;
             this.labelEdit15.Text = "Nº Cuenta:";
             // 
-            // textBoxEdit4
+            // txtnumCuenta
             // 
-            this.textBoxEdit4.BackColor = System.Drawing.Color.Transparent;
-            this.textBoxEdit4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBoxEdit4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
-            this.textBoxEdit4.Image = null;
-            this.textBoxEdit4.Location = new System.Drawing.Point(453, 385);
-            this.textBoxEdit4.MaxLength = 32767;
-            this.textBoxEdit4.Multiline = false;
-            this.textBoxEdit4.Name = "textBoxEdit4";
-            this.textBoxEdit4.ReadOnly = false;
-            this.textBoxEdit4.Size = new System.Drawing.Size(200, 42);
-            this.textBoxEdit4.TabIndex = 86;
-            this.textBoxEdit4.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.textBoxEdit4.UseSystemPasswordChar = false;
+            this.txtnumCuenta.BackColor = System.Drawing.Color.Transparent;
+            this.txtnumCuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtnumCuenta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.txtnumCuenta.Image = null;
+            this.txtnumCuenta.Location = new System.Drawing.Point(453, 385);
+            this.txtnumCuenta.MaxLength = 32767;
+            this.txtnumCuenta.Multiline = false;
+            this.txtnumCuenta.Name = "txtnumCuenta";
+            this.txtnumCuenta.ReadOnly = false;
+            this.txtnumCuenta.Size = new System.Drawing.Size(200, 42);
+            this.txtnumCuenta.TabIndex = 86;
+            this.txtnumCuenta.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtnumCuenta.UseSystemPasswordChar = false;
             // 
             // labelEdit13
             // 
@@ -275,9 +275,12 @@
             this.btnGuardarprove.Text = "Guardar";
             this.btnGuardarprove.TextColor = System.Drawing.Color.White;
             this.btnGuardarprove.UseVisualStyleBackColor = false;
+            this.btnGuardarprove.Click += new System.EventHandler(this.btnGuardarprove_Click);
             // 
             // cmbServicio
             // 
+            this.cmbServicio.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbServicio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbServicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.cmbServicio.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.cmbServicio.BorderRadius = 0;
@@ -297,6 +300,8 @@
             // 
             // cmbGenero
             // 
+            this.cmbGenero.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbGenero.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbGenero.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.cmbGenero.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.cmbGenero.BorderRadius = 0;
@@ -320,6 +325,8 @@
             // 
             // cmbCiudad
             // 
+            this.cmbCiudad.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbCiudad.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCiudad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.cmbCiudad.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.cmbCiudad.BorderRadius = 0;
@@ -505,21 +512,22 @@
             this.labelEdit3.TabIndex = 59;
             this.labelEdit3.Text = "Nombre:";
             // 
-            // txtUsuario
+            // txtEmpresa
             // 
-            this.txtUsuario.BackColor = System.Drawing.Color.Transparent;
-            this.txtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
-            this.txtUsuario.Image = null;
-            this.txtUsuario.Location = new System.Drawing.Point(118, 337);
-            this.txtUsuario.MaxLength = 32767;
-            this.txtUsuario.Multiline = false;
-            this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.ReadOnly = false;
-            this.txtUsuario.Size = new System.Drawing.Size(200, 42);
-            this.txtUsuario.TabIndex = 58;
-            this.txtUsuario.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtUsuario.UseSystemPasswordChar = false;
+            this.txtEmpresa.BackColor = System.Drawing.Color.Transparent;
+            this.txtEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtEmpresa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.txtEmpresa.Image = null;
+            this.txtEmpresa.Location = new System.Drawing.Point(118, 337);
+            this.txtEmpresa.MaxLength = 32767;
+            this.txtEmpresa.Multiline = false;
+            this.txtEmpresa.Name = "txtEmpresa";
+            this.txtEmpresa.ReadOnly = false;
+            this.txtEmpresa.Size = new System.Drawing.Size(200, 42);
+            this.txtEmpresa.TabIndex = 58;
+            this.txtEmpresa.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtEmpresa.UseSystemPasswordChar = false;
+            this.txtEmpresa.TextChanged += new System.EventHandler(this.txtEmpresa_TextChanged);
             // 
             // txtCorreo
             // 
@@ -762,6 +770,8 @@
             // 
             // personComboBox1
             // 
+            this.personComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.personComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.personComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.personComboBox1.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.personComboBox1.BorderRadius = 0;
@@ -781,6 +791,8 @@
             // 
             // personComboBox2
             // 
+            this.personComboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.personComboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.personComboBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.personComboBox2.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.personComboBox2.BorderRadius = 0;
@@ -804,6 +816,8 @@
             // 
             // personComboBox3
             // 
+            this.personComboBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.personComboBox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.personComboBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
             this.personComboBox3.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.personComboBox3.BorderRadius = 0;
@@ -1141,15 +1155,15 @@
             this.dtgEmpresa.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dtgEmpresa.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dtgEmpresa.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(2);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgEmpresa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgEmpresa.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dtgEmpresa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgEmpresa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idproveedor,
@@ -1167,28 +1181,28 @@
             this.direccion,
             this.btnEditar,
             this.btnEliminar});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GrayText;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgEmpresa.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GrayText;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgEmpresa.DefaultCellStyle = dataGridViewCellStyle2;
             this.dtgEmpresa.EnableHeadersVisualStyles = false;
             this.dtgEmpresa.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dtgEmpresa.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dtgEmpresa.Location = new System.Drawing.Point(36, 80);
             this.dtgEmpresa.Name = "dtgEmpresa";
             this.dtgEmpresa.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgEmpresa.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgEmpresa.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dtgEmpresa.RowHeadersVisible = false;
             this.dtgEmpresa.RowHeadersWidth = 40;
             this.dtgEmpresa.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
@@ -1311,7 +1325,9 @@
             // btnBproveedor
             // 
             this.btnBproveedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnBproveedor.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
             this.btnBproveedor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBproveedor.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.btnBproveedor.EnteredColor = System.Drawing.Color.Transparent;
             this.btnBproveedor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.btnBproveedor.Image = null;
@@ -1319,6 +1335,7 @@
             this.btnBproveedor.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
             this.btnBproveedor.Location = new System.Drawing.Point(400, 19);
             this.btnBproveedor.Name = "btnBproveedor";
+            this.btnBproveedor.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.btnBproveedor.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
             this.btnBproveedor.Size = new System.Drawing.Size(71, 42);
             this.btnBproveedor.TabIndex = 83;
@@ -1336,6 +1353,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmRegistroProveedor";
             this.Text = "FrmRegistroProveedor";
+            this.Load += new System.EventHandler(this.FrmRegistroProveedor_Load);
             this.pnlRegprovedor.ResumeLayout(false);
             this.pnlRegprovedor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbleftm)).EndInit();
@@ -1368,7 +1386,7 @@
         private ReaLTaiizor.Controls.LabelEdit labelEdit5;
         private ReaLTaiizor.Controls.LabelEdit labelEdit4;
         private ReaLTaiizor.Controls.LabelEdit labelEdit3;
-        private ReaLTaiizor.Controls.TextBoxEdit txtUsuario;
+        private ReaLTaiizor.Controls.TextBoxEdit txtEmpresa;
         private ReaLTaiizor.Controls.TextBoxEdit txtCorreo;
         private ReaLTaiizor.Controls.TextBoxEdit txtApellido;
         private ReaLTaiizor.Controls.TextBoxEdit txtNombre;
@@ -1376,12 +1394,12 @@
         private ReaLTaiizor.Controls.LabelEdit labelEdit2;
         private ReaLTaiizor.Controls.LabelEdit labelEdit1;
         private ReaLTaiizor.Controls.LabelEdit labelEdit15;
-        private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit4;
+        private ReaLTaiizor.Controls.TextBoxEdit txtnumCuenta;
         private ReaLTaiizor.Controls.LabelEdit labelEdit13;
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit3;
         private System.Windows.Forms.PictureBox ptbleftm;
         private ReaLTaiizor.Controls.LabelEdit labelEdit14;
-        private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit1;
+        private ReaLTaiizor.Controls.TextBoxEdit txtCuenta;
         private System.Windows.Forms.Panel pnlMproveedor;
         private ReaLTaiizor.Controls.LabelEdit labelEdit16;
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit2;

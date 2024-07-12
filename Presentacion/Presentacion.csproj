@@ -644,6 +644,12 @@
     <Compile Include="ModuloRolusuario\FrmRol.Designer.cs">
       <DependentUpon>FrmRol.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuloServicio\FrmEvento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloServicio\FrmEvento.Designer.cs">
+      <DependentUpon>FrmEvento.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModuloServicio\FrmServicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -720,6 +726,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloRolusuario\FrmRol.resx">
       <DependentUpon>FrmRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloServicio\FrmEvento.resx">
+      <DependentUpon>FrmEvento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloServicio\FrmServicio.resx">
       <DependentUpon>FrmServicio.cs</DependentUpon>
@@ -843,6 +852,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\office %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maximize1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimize %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\maximize2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\squares.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\squares1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

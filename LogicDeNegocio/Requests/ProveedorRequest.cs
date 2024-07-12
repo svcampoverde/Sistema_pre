@@ -6,7 +6,7 @@ namespace LogicDeNegocio.Requests
     public class ProveedorRequest
     {
         // Propiedades generadas automáticamente
-        public int IdPersona { get; set; }
+         public int IdPersona { get; set; }
          public string Empresa { get; set; }
          public string TipoServicio { get; set; }
          public int IdCiudad { get; set; }
