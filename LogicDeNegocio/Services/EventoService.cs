@@ -71,7 +71,26 @@ namespace LogicDeNegocio.Services
                 await context.SaveChangesAsync();
             }
         }
+        public async Task<List<EventoDto>> ObtenerListEvent(string dato)
+        {
+            using (var context = _dbContextFactory())
+            {
+                //  consulta inicial para obtener todos los tipos de empresa
+                var query = context.Eventos.AsQueryable();
 
+                // Si 'filtro' no está vacío, agregamos un filtro adicional a la consulta
+                if (!string.IsNullOrEmpty(dato))
+                {
+                    query = query.Where(te => te.Descripcion.Contains(dato)|| te.Nombre.Contains(dato));
+                }
+
+                var entidadDto = await query
+                                        .ProjectTo<EventoDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
+
+                return entidadDto;
+            }
+        }
         public async Task<List<EventoDto>> ObtenerTodasEventos()
         {
             using (var context = _dbContextFactory())

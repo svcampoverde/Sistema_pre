@@ -97,5 +97,11 @@ namespace Presentacion
             this.Close();
             Frmdi.OpenChildForm<FrmServicio>();
         }
+
+        private void ptbIEvento_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Frmdi.OpenChildForm<FrmEvento>();
+        }
     }
 }

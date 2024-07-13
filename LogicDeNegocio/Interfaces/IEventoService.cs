@@ -15,5 +15,6 @@ namespace LogicDeNegocio.Interfaces
         Task EliminarEvento(int id);
 
         Task<List<EventoDto>> ObtenerTodasEventos();
+        Task<List<EventoDto>> ObtenerListEvent(string dato);
     }
 }
