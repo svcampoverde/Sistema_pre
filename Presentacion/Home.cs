@@ -1,6 +1,7 @@
 ﻿using Presentacion.ModuloCliente;
 using Presentacion.ModuloEmpleado;
 using Presentacion.ModuloEmpresa;
+using Presentacion.ModuloPago;
 using Presentacion.ModuloProducto;
 using Presentacion.ModuloProveedor;
 using Presentacion.ModuloRolusuario;
@@ -102,6 +103,12 @@ namespace Presentacion
         {
             this.Close();
             Frmdi.OpenChildForm<FrmEvento>();
+        }
+
+        private void ptbIforpago_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Frmdi.OpenChildForm<FrmFormaPago>();
         }
     }
 }

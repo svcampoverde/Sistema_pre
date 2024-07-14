@@ -51,6 +51,8 @@
             this.ptbIServicio = new System.Windows.Forms.PictureBox();
             this.labelEdit8 = new ReaLTaiizor.Controls.LabelEdit();
             this.ptbIEvento = new System.Windows.Forms.PictureBox();
+            this.labelEdit10 = new ReaLTaiizor.Controls.LabelEdit();
+            this.ptbIforpago = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbempresa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCategoria)).BeginInit();
@@ -64,6 +66,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIServicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIEvento)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbIforpago)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -332,6 +335,30 @@
             this.ptbIEvento.TabStop = false;
             this.ptbIEvento.Click += new System.EventHandler(this.ptbIEvento_Click);
             // 
+            // labelEdit10
+            // 
+            this.labelEdit10.AutoSize = true;
+            this.labelEdit10.BackColor = System.Drawing.Color.Transparent;
+            this.labelEdit10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelEdit10.ForeColor = System.Drawing.Color.White;
+            this.labelEdit10.Location = new System.Drawing.Point(423, 530);
+            this.labelEdit10.Name = "labelEdit10";
+            this.labelEdit10.Size = new System.Drawing.Size(117, 20);
+            this.labelEdit10.TabIndex = 76;
+            this.labelEdit10.Text = "Forma de pago";
+            // 
+            // ptbIforpago
+            // 
+            this.ptbIforpago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(87)))), ((int)(((byte)(110)))));
+            this.ptbIforpago.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptbIforpago.Location = new System.Drawing.Point(421, 412);
+            this.ptbIforpago.Name = "ptbIforpago";
+            this.ptbIforpago.Size = new System.Drawing.Size(119, 115);
+            this.ptbIforpago.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptbIforpago.TabIndex = 75;
+            this.ptbIforpago.TabStop = false;
+            this.ptbIforpago.Click += new System.EventHandler(this.ptbIforpago_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,6 +366,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
             this.ClientSize = new System.Drawing.Size(1156, 676);
             this.ControlBox = false;
+            this.Controls.Add(this.labelEdit10);
+            this.Controls.Add(this.ptbIforpago);
             this.Controls.Add(this.labelEdit8);
             this.Controls.Add(this.ptbIEvento);
             this.Controls.Add(this.labelEdit7);
@@ -376,6 +405,7 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIServicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIEvento)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbIforpago)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -406,5 +436,7 @@
         private System.Windows.Forms.PictureBox ptbIServicio;
         private ReaLTaiizor.Controls.LabelEdit labelEdit8;
         private System.Windows.Forms.PictureBox ptbIEvento;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit10;
+        private System.Windows.Forms.PictureBox ptbIforpago;
     }
 }

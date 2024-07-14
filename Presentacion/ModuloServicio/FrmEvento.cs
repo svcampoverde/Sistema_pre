@@ -206,5 +206,6 @@ namespace Presentacion.ModuloServicio
             pnlListEvento.Visible=true;
             pnlRegistroevento.Visible=false;
         }
+
     }
 }

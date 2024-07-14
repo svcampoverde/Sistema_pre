@@ -3,11 +3,13 @@ using Presentacion.ModuloCliente;
 using Presentacion.ModuloEmpleado;
 using Presentacion.ModuloEmpresa;
 using Presentacion.ModuloLogin;
+using Presentacion.ModuloPago;
 using Presentacion.ModuloPresupuesto;
 using Presentacion.ModuloProducto;
 using Presentacion.ModuloProveedor;
 using Presentacion.ModuloProvincia;
 using Presentacion.ModuloRolusuario;
+using Presentacion.ModuloServicio;
 using Presentacion.ModuloUsuario;
 
 using Unity;
@@ -38,6 +40,8 @@ namespace Presentacion.App_Start
             container.RegisterType<FrmRegistroProveedor>(new TransientLifetimeManager());
             container.RegisterType<FrmInventario>(new TransientLifetimeManager());
             container.RegisterType<FrmProvincia>(new TransientLifetimeManager());
+            container.RegisterType<FrmFormaPago>(new TransientLifetimeManager());
+            container.RegisterType<FrmEvento>(new TransientLifetimeManager());
             container.RegisterType<FrmModificarUsuario>(new TransientLifetimeManager());
             return container;
         }

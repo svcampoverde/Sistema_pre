@@ -55,6 +55,26 @@ namespace LogicDeNegocio.Services
                 return _mapper.Map<FormaPagoDto>(entidad);
             }
         }
+        public async Task<List<FormaPagoDto>> ObtenerListForPage(string dato)
+        {
+            using (var context = _dbContextFactory())
+            {
+                //  consulta inicial para obtener todos los tipos de empresa
+                var query = context.FormaPagos.AsQueryable();
+
+                // Si 'filtro' no está vacío, agregamos un filtro adicional a la consulta
+                if (!string.IsNullOrEmpty(dato))
+                {
+                    query = query.Where(te => te.Descripcion.Contains(dato) || te.Nombre.Contains(dato));
+                }
+
+                var entidadDto = await query
+                                        .ProjectTo<FormaPagoDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
+
+                return entidadDto;
+            }
+        }
 
         public async Task EliminarFormaPago(int id)
         {

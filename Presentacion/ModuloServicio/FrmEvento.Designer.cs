@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEvento));
             this.pnlRegistroevento = new System.Windows.Forms.Panel();
+            this.cmbCiudadevento = new Presentacion.btnpersonalizados.PersonComboBox();
             this.labelEdit14 = new ReaLTaiizor.Controls.LabelEdit();
             this.txtRevento = new ReaLTaiizor.Controls.TextBoxEdit();
             this.labelEdit13 = new ReaLTaiizor.Controls.LabelEdit();
@@ -45,11 +46,13 @@
             this.labelEdit7 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit6 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit5 = new ReaLTaiizor.Controls.LabelEdit();
+            this.btnGuardarevento = new Presentacion.btnpersonalizados.Botonper();
             this.txtdescevento = new ReaLTaiizor.Controls.TextBoxEdit();
             this.labelEdit1 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit2 = new ReaLTaiizor.Controls.LabelEdit();
             this.pnlMevento = new System.Windows.Forms.Panel();
             this.labelEdit16 = new ReaLTaiizor.Controls.LabelEdit();
+            this.cmbMciudevento = new Presentacion.btnpersonalizados.PersonComboBox();
             this.txtMNevento = new ReaLTaiizor.Controls.TextBoxEdit();
             this.labelEdit15 = new ReaLTaiizor.Controls.LabelEdit();
             this.ptbIMevento = new System.Windows.Forms.PictureBox();
@@ -61,6 +64,7 @@
             this.labelEdit4 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit9 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit10 = new ReaLTaiizor.Controls.LabelEdit();
+            this.btnMactevento = new Presentacion.btnpersonalizados.Botonper();
             this.txtMdescripevento = new ReaLTaiizor.Controls.TextBoxEdit();
             this.labelEdit11 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit12 = new ReaLTaiizor.Controls.LabelEdit();
@@ -68,9 +72,6 @@
             this.ptbaddevento = new System.Windows.Forms.PictureBox();
             this.txtBevento = new ReaLTaiizor.Controls.TextBoxEdit();
             this.dtgEvento = new System.Windows.Forms.DataGridView();
-            this.btnBevento = new ReaLTaiizor.Controls.Button();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.idevento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.evento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,10 +82,9 @@
             this.ciu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnEliminar = new System.Windows.Forms.DataGridViewImageColumn();
-            this.cmbMciudevento = new Presentacion.btnpersonalizados.PersonComboBox();
-            this.btnMactevento = new Presentacion.btnpersonalizados.Botonper();
-            this.cmbCiudadevento = new Presentacion.btnpersonalizados.PersonComboBox();
-            this.btnGuardarevento = new Presentacion.btnpersonalizados.Botonper();
+            this.btnBevento = new ReaLTaiizor.Controls.Button();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
             this.pnlRegistroevento.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIRevento)).BeginInit();
             this.pnlMevento.SuspendLayout();
@@ -119,6 +119,27 @@
             this.pnlRegistroevento.Size = new System.Drawing.Size(489, 509);
             this.pnlRegistroevento.TabIndex = 81;
             this.pnlRegistroevento.Visible = false;
+            // 
+            // cmbCiudadevento
+            // 
+            this.cmbCiudadevento.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbCiudadevento.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbCiudadevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
+            this.cmbCiudadevento.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmbCiudadevento.BorderRadius = 0;
+            this.cmbCiudadevento.BorderSize = 0;
+            this.cmbCiudadevento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbCiudadevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cmbCiudadevento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.cmbCiudadevento.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmbCiudadevento.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
+            this.cmbCiudadevento.ListTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.cmbCiudadevento.Location = new System.Drawing.Point(127, 370);
+            this.cmbCiudadevento.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cmbCiudadevento.Name = "cmbCiudadevento";
+            this.cmbCiudadevento.Size = new System.Drawing.Size(202, 36);
+            this.cmbCiudadevento.TabIndex = 93;
+            this.cmbCiudadevento.Texts = "";
             // 
             // labelEdit14
             // 
@@ -283,6 +304,26 @@
             this.labelEdit5.TabIndex = 74;
             this.labelEdit5.Text = "Fecha de evento:";
             // 
+            // btnGuardarevento
+            // 
+            this.btnGuardarevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnGuardarevento.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnGuardarevento.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.btnGuardarevento.BorderRadius = 20;
+            this.btnGuardarevento.BorderSize = 0;
+            this.btnGuardarevento.FlatAppearance.BorderSize = 0;
+            this.btnGuardarevento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardarevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardarevento.ForeColor = System.Drawing.Color.White;
+            this.btnGuardarevento.Location = new System.Drawing.Point(179, 441);
+            this.btnGuardarevento.Name = "btnGuardarevento";
+            this.btnGuardarevento.Size = new System.Drawing.Size(150, 40);
+            this.btnGuardarevento.TabIndex = 73;
+            this.btnGuardarevento.Text = "Guardar";
+            this.btnGuardarevento.TextColor = System.Drawing.Color.White;
+            this.btnGuardarevento.UseVisualStyleBackColor = false;
+            this.btnGuardarevento.Click += new System.EventHandler(this.btnGuardarevento_Click);
+            // 
             // txtdescevento
             // 
             this.txtdescevento.BackColor = System.Drawing.Color.Transparent;
@@ -360,6 +401,27 @@
             this.labelEdit16.Size = new System.Drawing.Size(63, 20);
             this.labelEdit16.TabIndex = 95;
             this.labelEdit16.Text = "Ciudad:";
+            // 
+            // cmbMciudevento
+            // 
+            this.cmbMciudevento.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbMciudevento.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbMciudevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
+            this.cmbMciudevento.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmbMciudevento.BorderRadius = 0;
+            this.cmbMciudevento.BorderSize = 0;
+            this.cmbMciudevento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbMciudevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cmbMciudevento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.cmbMciudevento.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmbMciudevento.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
+            this.cmbMciudevento.ListTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.cmbMciudevento.Location = new System.Drawing.Point(163, 370);
+            this.cmbMciudevento.MinimumSize = new System.Drawing.Size(200, 30);
+            this.cmbMciudevento.Name = "cmbMciudevento";
+            this.cmbMciudevento.Size = new System.Drawing.Size(202, 36);
+            this.cmbMciudevento.TabIndex = 94;
+            this.cmbMciudevento.Texts = "";
             // 
             // txtMNevento
             // 
@@ -512,6 +574,26 @@
             this.labelEdit10.TabIndex = 74;
             this.labelEdit10.Text = "Fecha de evento:";
             // 
+            // btnMactevento
+            // 
+            this.btnMactevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnMactevento.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnMactevento.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.btnMactevento.BorderRadius = 20;
+            this.btnMactevento.BorderSize = 0;
+            this.btnMactevento.FlatAppearance.BorderSize = 0;
+            this.btnMactevento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMactevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMactevento.ForeColor = System.Drawing.Color.White;
+            this.btnMactevento.Location = new System.Drawing.Point(196, 441);
+            this.btnMactevento.Name = "btnMactevento";
+            this.btnMactevento.Size = new System.Drawing.Size(150, 40);
+            this.btnMactevento.TabIndex = 73;
+            this.btnMactevento.Text = "Actualizar";
+            this.btnMactevento.TextColor = System.Drawing.Color.White;
+            this.btnMactevento.UseVisualStyleBackColor = false;
+            this.btnMactevento.Click += new System.EventHandler(this.btnMactevento_Click);
+            // 
             // txtMdescripevento
             // 
             this.txtMdescripevento.BackColor = System.Drawing.Color.Transparent;
@@ -656,44 +738,6 @@
             this.dtgEvento.TabIndex = 81;
             this.dtgEvento.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgEvento_CellClick);
             // 
-            // btnBevento
-            // 
-            this.btnBevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnBevento.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnBevento.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBevento.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.btnBevento.EnteredColor = System.Drawing.Color.Transparent;
-            this.btnBevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnBevento.Image = null;
-            this.btnBevento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBevento.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnBevento.Location = new System.Drawing.Point(400, 19);
-            this.btnBevento.Name = "btnBevento";
-            this.btnBevento.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.btnBevento.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnBevento.Size = new System.Drawing.Size(71, 42);
-            this.btnBevento.TabIndex = 83;
-            this.btnBevento.Text = "Buscar";
-            this.btnBevento.TextAlignment = System.Drawing.StringAlignment.Center;
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.HeaderText = "Editar";
-            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
-            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Width = 59;
-            // 
-            // dataGridViewImageColumn2
-            // 
-            this.dataGridViewImageColumn2.HeaderText = "Eliminar";
-            this.dataGridViewImageColumn2.Image = global::Presentacion.Properties.Resources.trash;
-            this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
-            this.dataGridViewImageColumn2.ReadOnly = true;
-            this.dataGridViewImageColumn2.Width = 73;
-            // 
             // idevento
             // 
             this.idevento.HeaderText = "Id";
@@ -769,87 +813,43 @@
             this.btnEliminar.ReadOnly = true;
             this.btnEliminar.Width = 73;
             // 
-            // cmbMciudevento
+            // btnBevento
             // 
-            this.cmbMciudevento.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbMciudevento.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbMciudevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
-            this.cmbMciudevento.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.cmbMciudevento.BorderRadius = 0;
-            this.cmbMciudevento.BorderSize = 0;
-            this.cmbMciudevento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            this.cmbMciudevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.cmbMciudevento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
-            this.cmbMciudevento.IconColor = System.Drawing.Color.MediumSlateBlue;
-            this.cmbMciudevento.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
-            this.cmbMciudevento.ListTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
-            this.cmbMciudevento.Location = new System.Drawing.Point(163, 370);
-            this.cmbMciudevento.MinimumSize = new System.Drawing.Size(200, 30);
-            this.cmbMciudevento.Name = "cmbMciudevento";
-            this.cmbMciudevento.Size = new System.Drawing.Size(202, 36);
-            this.cmbMciudevento.TabIndex = 94;
-            this.cmbMciudevento.Texts = "";
+            this.btnBevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnBevento.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
+            this.btnBevento.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBevento.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.btnBevento.EnteredColor = System.Drawing.Color.Transparent;
+            this.btnBevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnBevento.Image = null;
+            this.btnBevento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBevento.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnBevento.Location = new System.Drawing.Point(400, 19);
+            this.btnBevento.Name = "btnBevento";
+            this.btnBevento.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.btnBevento.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
+            this.btnBevento.Size = new System.Drawing.Size(71, 42);
+            this.btnBevento.TabIndex = 83;
+            this.btnBevento.Text = "Buscar";
+            this.btnBevento.TextAlignment = System.Drawing.StringAlignment.Center;
             // 
-            // btnMactevento
+            // dataGridViewImageColumn1
             // 
-            this.btnMactevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnMactevento.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnMactevento.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.btnMactevento.BorderRadius = 20;
-            this.btnMactevento.BorderSize = 0;
-            this.btnMactevento.FlatAppearance.BorderSize = 0;
-            this.btnMactevento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMactevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMactevento.ForeColor = System.Drawing.Color.White;
-            this.btnMactevento.Location = new System.Drawing.Point(196, 441);
-            this.btnMactevento.Name = "btnMactevento";
-            this.btnMactevento.Size = new System.Drawing.Size(150, 40);
-            this.btnMactevento.TabIndex = 73;
-            this.btnMactevento.Text = "Actualizar";
-            this.btnMactevento.TextColor = System.Drawing.Color.White;
-            this.btnMactevento.UseVisualStyleBackColor = false;
-            this.btnMactevento.Click += new System.EventHandler(this.btnMactevento_Click);
+            this.dataGridViewImageColumn1.HeaderText = "Editar";
+            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Width = 59;
             // 
-            // cmbCiudadevento
+            // dataGridViewImageColumn2
             // 
-            this.cmbCiudadevento.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbCiudadevento.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbCiudadevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
-            this.cmbCiudadevento.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.cmbCiudadevento.BorderRadius = 0;
-            this.cmbCiudadevento.BorderSize = 0;
-            this.cmbCiudadevento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
-            this.cmbCiudadevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.cmbCiudadevento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
-            this.cmbCiudadevento.IconColor = System.Drawing.Color.MediumSlateBlue;
-            this.cmbCiudadevento.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
-            this.cmbCiudadevento.ListTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
-            this.cmbCiudadevento.Location = new System.Drawing.Point(127, 370);
-            this.cmbCiudadevento.MinimumSize = new System.Drawing.Size(200, 30);
-            this.cmbCiudadevento.Name = "cmbCiudadevento";
-            this.cmbCiudadevento.Size = new System.Drawing.Size(202, 36);
-            this.cmbCiudadevento.TabIndex = 93;
-            this.cmbCiudadevento.Texts = "";
-            // 
-            // btnGuardarevento
-            // 
-            this.btnGuardarevento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnGuardarevento.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(14)))), ((int)(((byte)(15)))));
-            this.btnGuardarevento.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.btnGuardarevento.BorderRadius = 20;
-            this.btnGuardarevento.BorderSize = 0;
-            this.btnGuardarevento.FlatAppearance.BorderSize = 0;
-            this.btnGuardarevento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardarevento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardarevento.ForeColor = System.Drawing.Color.White;
-            this.btnGuardarevento.Location = new System.Drawing.Point(179, 441);
-            this.btnGuardarevento.Name = "btnGuardarevento";
-            this.btnGuardarevento.Size = new System.Drawing.Size(150, 40);
-            this.btnGuardarevento.TabIndex = 73;
-            this.btnGuardarevento.Text = "Guardar";
-            this.btnGuardarevento.TextColor = System.Drawing.Color.White;
-            this.btnGuardarevento.UseVisualStyleBackColor = false;
-            this.btnGuardarevento.Click += new System.EventHandler(this.btnGuardarevento_Click);
+            this.dataGridViewImageColumn2.HeaderText = "Eliminar";
+            this.dataGridViewImageColumn2.Image = global::Presentacion.Properties.Resources.trash;
+            this.dataGridViewImageColumn2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            this.dataGridViewImageColumn2.Width = 73;
             // 
             // FrmEvento
             // 

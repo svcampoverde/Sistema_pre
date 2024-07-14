@@ -590,6 +590,12 @@
     <Compile Include="ModuloEmpresa\FrmTipoEmpresa.Designer.cs">
       <DependentUpon>FrmTipoEmpresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuloFormapago\FrmFormaPago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloFormapago\FrmFormaPago.Designer.cs">
+      <DependentUpon>FrmFormaPago.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModuloLogin\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -699,6 +705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloEmpresa\FrmTipoEmpresa.resx">
       <DependentUpon>FrmTipoEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloFormapago\FrmFormaPago.resx">
+      <DependentUpon>FrmFormaPago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloLogin\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>

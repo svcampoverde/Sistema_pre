@@ -65,7 +65,6 @@
             this.labelEdit21 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit23 = new ReaLTaiizor.Controls.LabelEdit();
             this.labelEdit24 = new ReaLTaiizor.Controls.LabelEdit();
-            this.textBoxEdit15 = new ReaLTaiizor.Controls.TextBoxEdit();
             this.textBoxEdit16 = new ReaLTaiizor.Controls.TextBoxEdit();
             this.textBoxEdit17 = new ReaLTaiizor.Controls.TextBoxEdit();
             this.textBoxEdit18 = new ReaLTaiizor.Controls.TextBoxEdit();
@@ -80,6 +79,7 @@
             this.textBoxEdit22 = new ReaLTaiizor.Controls.TextBoxEdit();
             this.button1 = new ReaLTaiizor.Controls.Button();
             this.cmbEvento = new Presentacion.btnpersonalizados.PersonComboBox();
+            this.cmbfpago = new Presentacion.btnpersonalizados.PersonComboBox();
             this.SuspendLayout();
             // 
             // labelEdit2
@@ -582,22 +582,6 @@
             this.labelEdit24.TabIndex = 41;
             this.labelEdit24.Text = "Abono inicial:";
             // 
-            // textBoxEdit15
-            // 
-            this.textBoxEdit15.BackColor = System.Drawing.Color.Transparent;
-            this.textBoxEdit15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textBoxEdit15.ForeColor = System.Drawing.Color.White;
-            this.textBoxEdit15.Image = null;
-            this.textBoxEdit15.Location = new System.Drawing.Point(208, 267);
-            this.textBoxEdit15.MaxLength = 32767;
-            this.textBoxEdit15.Multiline = false;
-            this.textBoxEdit15.Name = "textBoxEdit15";
-            this.textBoxEdit15.ReadOnly = false;
-            this.textBoxEdit15.Size = new System.Drawing.Size(200, 42);
-            this.textBoxEdit15.TabIndex = 42;
-            this.textBoxEdit15.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.textBoxEdit15.UseSystemPasswordChar = false;
-            // 
             // textBoxEdit16
             // 
             this.textBoxEdit16.BackColor = System.Drawing.Color.Transparent;
@@ -783,7 +767,9 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.button1.EnteredColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.button1.Image = null;
@@ -791,6 +777,7 @@
             this.button1.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
             this.button1.Location = new System.Drawing.Point(679, 705);
             this.button1.Name = "button1";
+            this.button1.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.button1.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.button1.Size = new System.Drawing.Size(83, 40);
             this.button1.TabIndex = 55;
@@ -818,13 +805,38 @@
             this.cmbEvento.TabIndex = 57;
             this.cmbEvento.Texts = "";
             // 
+            // cmbfpago
+            // 
+            this.cmbfpago.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmbfpago.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbfpago.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(76)))), ((int)(((byte)(85)))));
+            this.cmbfpago.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmbfpago.BorderRadius = 0;
+            this.cmbfpago.BorderSize = 0;
+            this.cmbfpago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.cmbfpago.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cmbfpago.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(183)))), ((int)(((byte)(191)))));
+            this.cmbfpago.IconColor = System.Drawing.Color.MediumSlateBlue;
+            this.cmbfpago.Items.AddRange(new object[] {
+            "Efectivo",
+            "Transferencia"});
+            this.cmbfpago.ListBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
+            this.cmbfpago.ListTextColor = System.Drawing.Color.DimGray;
+            this.cmbfpago.Location = new System.Drawing.Point(208, 267);
+            this.cmbfpago.MinimumSize = new System.Drawing.Size(200, 42);
+            this.cmbfpago.Name = "cmbfpago";
+            this.cmbfpago.Size = new System.Drawing.Size(200, 42);
+            this.cmbfpago.TabIndex = 81;
+            this.cmbfpago.Texts = "";
+            // 
             // FrmRegistrarPresupuesto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(816, 504);
+            this.ClientSize = new System.Drawing.Size(1241, 740);
             this.ControlBox = false;
+            this.Controls.Add(this.cmbfpago);
             this.Controls.Add(this.cmbEvento);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxEdit22);
@@ -839,7 +851,6 @@
             this.Controls.Add(this.textBoxEdit18);
             this.Controls.Add(this.textBoxEdit17);
             this.Controls.Add(this.textBoxEdit16);
-            this.Controls.Add(this.textBoxEdit15);
             this.Controls.Add(this.labelEdit24);
             this.Controls.Add(this.labelEdit23);
             this.Controls.Add(this.labelEdit21);
@@ -926,7 +937,6 @@
         private ReaLTaiizor.Controls.LabelEdit labelEdit21;
         private ReaLTaiizor.Controls.LabelEdit labelEdit23;
         private ReaLTaiizor.Controls.LabelEdit labelEdit24;
-        private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit15;
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit16;
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit17;
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit18;
@@ -941,5 +951,6 @@
         private ReaLTaiizor.Controls.TextBoxEdit textBoxEdit22;
         private ReaLTaiizor.Controls.Button button1;
         private btnpersonalizados.PersonComboBox cmbEvento;
+        private btnpersonalizados.PersonComboBox cmbfpago;
     }
 }

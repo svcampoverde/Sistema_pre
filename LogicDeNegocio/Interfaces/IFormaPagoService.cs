@@ -15,5 +15,6 @@ namespace LogicDeNegocio.Interfaces
         Task EliminarFormaPago(int id);
 
         Task<List<FormaPagoDto>> ObtenerTodasFormaPagos();
+        Task<List<FormaPagoDto>> ObtenerListForPage(string dato);
     }
 }
