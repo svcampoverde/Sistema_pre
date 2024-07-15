@@ -12,7 +12,7 @@ namespace Datos.Models
 
         public string Nombre{ get; set; }
         public string Descripcion { get; set; }
-        public float Precio { get; set; }
+        public decimal Precio { get; set; }
         public int IdCategoriaProducto { get; set; }
         public int? IdTipoProducto { get; set; }
 

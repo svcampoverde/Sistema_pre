@@ -38,6 +38,26 @@ namespace LogicDeNegocio.Services
                 return _mapper.Map<TipoProductoDto>(entidad);
             }
         }
+        public async Task<List<TipoProductoDto>> ObtenerTipoProducto(string dato)
+        {
+            using (var context = _dbContextFactory())
+            {
+                //  consulta inicial para obtener todos los tipos de empresa
+                var query = context.TipoProductos.AsQueryable();
+
+                // Si 'filtro' no está vacío, agregamos un filtro adicional a la consulta
+                if (!string.IsNullOrEmpty(dato))
+                {
+                    query = query.Where(te => te.Descripcion.Contains(dato));
+                }
+
+                var entidadDto = await query
+                                        .ProjectTo<TipoProductoDto>(_mapper.ConfigurationProvider)
+                                        .ToListAsync();
+
+                return entidadDto;
+            }
+        }
 
         public async Task<TipoProductoDto> ActualizarTipoProducto(int id, TipoProductoRequest request)
         {

@@ -632,6 +632,12 @@
     <Compile Include="ModuloProducto\FrmInventario.Designer.cs">
       <DependentUpon>FrmInventario.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuloProducto\FrmTipoProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuloProducto\FrmTipoProducto.Designer.cs">
+      <DependentUpon>FrmTipoProducto.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModuloProveedor\FrmRegistroProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -726,6 +732,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloProducto\FrmInventario.resx">
       <DependentUpon>FrmInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuloProducto\FrmTipoProducto.resx">
+      <DependentUpon>FrmTipoProducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModuloProveedor\FrmRegistroProveedor.resx">
       <DependentUpon>FrmRegistroProveedor.cs</DependentUpon>

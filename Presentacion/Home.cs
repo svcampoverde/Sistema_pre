@@ -72,7 +72,8 @@ namespace Presentacion
 
         private void ptbIproducto_Click(object sender, EventArgs e)
         {
-
+            this.Close();
+            Frmdi.OpenChildForm<FrmInventario>();
         }
 
         private void ptbIpresupuesto_Click(object sender, EventArgs e)
@@ -109,6 +110,12 @@ namespace Presentacion
         {
             this.Close();
             Frmdi.OpenChildForm<FrmFormaPago>();
+        }
+
+        private void ptbItipoproducto_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Frmdi.OpenChildForm<FrmTipoProducto>();
         }
     }
 }

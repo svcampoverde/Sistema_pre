@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
 namespace LogicDeNegocio.Services
@@ -20,7 +21,7 @@ namespace LogicDeNegocio.Services
         private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
         private readonly ILogger<ProductoService> _logger;
-
+        
         public ProductoService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<ProductoService> logger)
         {
             _dbContextFactory = dbContextFactory;
@@ -35,11 +36,30 @@ namespace LogicDeNegocio.Services
                 var entidad = _mapper.Map<Producto>(request);
                 await context.Productos.AddAsync(entidad);
                 await context.SaveChangesAsync();
-                return _mapper.Map<ProductoDto>(entidad);
+               // return _mapper.Map<ProductoDto>(entidad);
+               var productodto = _mapper.Map<ProductoDto>(entidad);
+                productodto.Id=entidad.Id;
+                return productodto;
             }
         }
+        public async Task<int> RegistrarProductos(ProductoRequest request)
+        {
+            var producto = new Producto
+            {
+                Nombre = request.Nombre,
+                Descripcion = request.Descripcion,
+                Precio=request.Precio,
+                IdTipoProducto = request.IdTipoProducto,
+                IdCategoriaProducto = request.IdCategoriaProducto,
+            };
 
-        public async Task<ProductoDto> ActualizarProducto(int id, ProductoRequest request)
+            _dbContextFactory().Productos.Add(producto);
+            await _dbContextFactory().SaveChangesAsync();
+
+            return producto.Id; // Devolver el ID generado
+        }
+
+    public async Task<ProductoDto> ActualizarProducto(int id, ProductoRequest request)
         {
             using (var context = _dbContextFactory())
             {

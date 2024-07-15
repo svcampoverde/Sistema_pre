@@ -61,7 +61,7 @@ namespace Presentacion.ModuloEmpresa
                     TipoEmpresaRequest tipo = new TipoEmpresaRequest()
                     { Codigo = txtTipempresa.Text, Descripcion = txtTipempresa.Text };
                     await _tipoEmpresaService.RegistrarTipoEmpresa(tipo);
-                    MessageBox.Show("Registro de provincia realizado con éxito");
+                    MessageBox.Show("Registro realizado con éxito");
                     Limpiar();
                     LlenarDataGrid("");
                 }
@@ -115,7 +115,6 @@ namespace Presentacion.ModuloEmpresa
                             {
                                 Id = Convert.ToInt32(dtgTipEmpresa.Rows[e.RowIndex].Cells["idtipo"].Value);
                                 txtMtipemp.Text = dtgTipEmpresa.Rows[e.RowIndex].Cells["tipemp"].Value.ToString();
-                                MessageBox.Show("ddd");
                                 pnlRegistrotip.Visible = false;
                                 pnlModificatipo.Visible = true;
                                 
@@ -133,7 +132,6 @@ namespace Presentacion.ModuloEmpresa
                         if (result == DialogResult.OK)
                         {
                             Id = Convert.ToInt32(dtgTipEmpresa.Rows[e.RowIndex].Cells["idtipo"].Value);
-                            //temp.EliminarTipempresa(Id);
                             await _tipoEmpresaService.EliminarTipoEmpresa(Id);
                             LlenarDataGrid("");
                         }
@@ -152,9 +150,6 @@ namespace Presentacion.ModuloEmpresa
             string tipo = txtMtipemp.Text;
             if (!String.IsNullOrEmpty(txtMtipemp.Text))
             {
-                //temp.Id = Id;
-                //temp.Descripcion = tipo;
-                //temp.ActualizarTipempresa(temp);
                 TipoEmpresaRequest tipoEmpresa = new TipoEmpresaRequest()
                 {
                     Descripcion = tipo

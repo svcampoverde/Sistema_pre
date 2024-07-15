@@ -15,5 +15,6 @@ namespace LogicDeNegocio.Interfaces
         Task EliminarTipoProducto(int id);
 
         Task<List<TipoProductoDto>> ObtenerTodasTipoProductos();
+        Task<List<TipoProductoDto>> ObtenerTipoProducto(string dato);
     }
 }

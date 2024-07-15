@@ -42,6 +42,7 @@ namespace Presentacion.App_Start
             container.RegisterType<FrmProvincia>(new TransientLifetimeManager());
             container.RegisterType<FrmFormaPago>(new TransientLifetimeManager());
             container.RegisterType<FrmEvento>(new TransientLifetimeManager());
+            container.RegisterType<FrmTipoProducto>(new TransientLifetimeManager());
             container.RegisterType<FrmModificarUsuario>(new TransientLifetimeManager());
             return container;
         }

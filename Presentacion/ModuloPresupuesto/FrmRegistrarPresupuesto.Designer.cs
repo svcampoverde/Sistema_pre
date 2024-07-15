@@ -834,7 +834,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(1241, 740);
+            this.ClientSize = new System.Drawing.Size(1241, 794);
             this.ControlBox = false;
             this.Controls.Add(this.cmbfpago);
             this.Controls.Add(this.cmbEvento);

@@ -53,6 +53,8 @@
             this.ptbIEvento = new System.Windows.Forms.PictureBox();
             this.labelEdit10 = new ReaLTaiizor.Controls.LabelEdit();
             this.ptbIforpago = new System.Windows.Forms.PictureBox();
+            this.labelEdit11 = new ReaLTaiizor.Controls.LabelEdit();
+            this.ptbItipoproducto = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbempresa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCategoria)).BeginInit();
@@ -67,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ptbIServicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIEvento)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIforpago)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbItipoproducto)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -359,13 +362,39 @@
             this.ptbIforpago.TabStop = false;
             this.ptbIforpago.Click += new System.EventHandler(this.ptbIforpago_Click);
             // 
+            // labelEdit11
+            // 
+            this.labelEdit11.AutoSize = true;
+            this.labelEdit11.BackColor = System.Drawing.Color.Transparent;
+            this.labelEdit11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelEdit11.ForeColor = System.Drawing.Color.White;
+            this.labelEdit11.Location = new System.Drawing.Point(624, 530);
+            this.labelEdit11.Name = "labelEdit11";
+            this.labelEdit11.Size = new System.Drawing.Size(102, 20);
+            this.labelEdit11.TabIndex = 78;
+            this.labelEdit11.Text = "tipo producto";
+            // 
+            // ptbItipoproducto
+            // 
+            this.ptbItipoproducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(87)))), ((int)(((byte)(110)))));
+            this.ptbItipoproducto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ptbItipoproducto.Location = new System.Drawing.Point(618, 412);
+            this.ptbItipoproducto.Name = "ptbItipoproducto";
+            this.ptbItipoproducto.Size = new System.Drawing.Size(119, 115);
+            this.ptbItipoproducto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ptbItipoproducto.TabIndex = 77;
+            this.ptbItipoproducto.TabStop = false;
+            this.ptbItipoproducto.Click += new System.EventHandler(this.ptbItipoproducto_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(1156, 676);
+            this.ClientSize = new System.Drawing.Size(1156, 725);
             this.ControlBox = false;
+            this.Controls.Add(this.labelEdit11);
+            this.Controls.Add(this.ptbItipoproducto);
             this.Controls.Add(this.labelEdit10);
             this.Controls.Add(this.ptbIforpago);
             this.Controls.Add(this.labelEdit8);
@@ -406,6 +435,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ptbIServicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIEvento)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbIforpago)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbItipoproducto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -438,5 +468,7 @@
         private System.Windows.Forms.PictureBox ptbIEvento;
         private ReaLTaiizor.Controls.LabelEdit labelEdit10;
         private System.Windows.Forms.PictureBox ptbIforpago;
+        private ReaLTaiizor.Controls.LabelEdit labelEdit11;
+        private System.Windows.Forms.PictureBox ptbItipoproducto;
     }
 }
