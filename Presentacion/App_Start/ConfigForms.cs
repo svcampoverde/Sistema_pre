@@ -44,6 +44,7 @@ namespace Presentacion.App_Start
             container.RegisterType<FrmEvento>(new TransientLifetimeManager());
             container.RegisterType<FrmTipoProducto>(new TransientLifetimeManager());
             container.RegisterType<FrmModificarUsuario>(new TransientLifetimeManager());
+            container.RegisterType<FormPresupuesto> ();
             return container;
         }
 

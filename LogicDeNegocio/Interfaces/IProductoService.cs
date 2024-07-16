@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using LogicDeNegocio.Dtos;
+using LogicDeNegocio.Extensions;
 using LogicDeNegocio.Requests;
 
 namespace LogicDeNegocio.Interfaces
@@ -11,6 +12,9 @@ namespace LogicDeNegocio.Interfaces
         Task<int> RegistrarProductos(ProductoRequest request);
         Task<ProductoDto> ActualizarProducto(int id, ProductoRequest request);
         Task EliminarProducto(int id);
+        int GetTotalProductos();
         Task<List<ProductoDto>> ObtenerTodoslosProductos();
+        Task<Paginate<ProductoDto>> GetServicioPaginate(string search = null, int pageIndex = 1, int pageSize = 10);
+
     }
 }

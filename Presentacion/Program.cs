@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Presentacion.ModuloPresupuesto;
+using Presentacion.ModuloProducto;
+using Presentacion.ModuloServicio;
+using System;
 using System.Windows.Forms;
 using Unity;
 
@@ -15,7 +18,7 @@ namespace Presentacion
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Resolver el formulario principal con Unity
-            var form = UnityConfig.Container.Resolve<FrmIPrincipal>();
+            var form = UnityConfig.Container.Resolve<FormPresupuesto>();
             Application.Run(form);
             // Application.Run(new FRMPrincipal());
         }

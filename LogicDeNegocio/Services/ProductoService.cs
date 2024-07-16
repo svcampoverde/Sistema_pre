@@ -21,7 +21,7 @@ namespace LogicDeNegocio.Services
         private readonly Func<SistemapContext> _dbContextFactory;
         private readonly IMapper _mapper;
         private readonly ILogger<ProductoService> _logger;
-        
+
         public ProductoService(Func<SistemapContext> dbContextFactory, IMapper mapper, ILogger<ProductoService> logger)
         {
             _dbContextFactory = dbContextFactory;
@@ -36,9 +36,9 @@ namespace LogicDeNegocio.Services
                 var entidad = _mapper.Map<Producto>(request);
                 await context.Productos.AddAsync(entidad);
                 await context.SaveChangesAsync();
-               // return _mapper.Map<ProductoDto>(entidad);
-               var productodto = _mapper.Map<ProductoDto>(entidad);
-                productodto.Id=entidad.Id;
+                // return _mapper.Map<ProductoDto>(entidad);
+                var productodto = _mapper.Map<ProductoDto>(entidad);
+                productodto.Id = entidad.Id;
                 return productodto;
             }
         }
@@ -48,7 +48,7 @@ namespace LogicDeNegocio.Services
             {
                 Nombre = request.Nombre,
                 Descripcion = request.Descripcion,
-                Precio=request.Precio,
+                Precio = request.Precio,
                 IdTipoProducto = request.IdTipoProducto,
                 IdCategoriaProducto = request.IdCategoriaProducto,
             };
@@ -59,7 +59,7 @@ namespace LogicDeNegocio.Services
             return producto.Id; // Devolver el ID generado
         }
 
-    public async Task<ProductoDto> ActualizarProducto(int id, ProductoRequest request)
+        public async Task<ProductoDto> ActualizarProducto(int id, ProductoRequest request)
         {
             using (var context = _dbContextFactory())
             {
@@ -100,6 +100,35 @@ namespace LogicDeNegocio.Services
                                             .ProjectTo<ProductoDto>(_mapper.ConfigurationProvider)
                                             .ToListAsync();
                 return entidadDto;
+            }
+        }
+
+        public int GetTotalProductos()
+        {
+            using (var context = _dbContextFactory())
+            {
+                return context.Productos.Count();
+            }
+        }
+
+        public async Task<Paginate<ProductoDto>> GetServicioPaginate(string search = null, int pageIndex = 1, int pageSize = 10)
+        {
+            using (var context = _dbContextFactory())
+            {
+                var query = context.Productos.AsQueryable();
+                if (!string.IsNullOrWhiteSpace(search))
+                {
+                    query = query.Where(x => x.Nombre.Contains(search));
+                }
+
+                var totalItems = query.Count();
+                var items = await query
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .ProjectTo<ProductoDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+
+                return new Paginate<ProductoDto>(items, totalItems, pageIndex, pageSize);
             }
         }
     }

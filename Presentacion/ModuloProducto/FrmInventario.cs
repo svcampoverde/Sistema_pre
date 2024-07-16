@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore.Internal;
-using DevComponents.DotNetBar.Validator;
+
 using LogicDeNegocio;
 using LogicDeNegocio.Requests;
 using LogicDeNegocio.Dtos;

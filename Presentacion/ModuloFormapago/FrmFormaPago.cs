@@ -1,4 +1,4 @@
-﻿using DevComponents.DotNetBar.Validator;
+﻿
 using LogicDeNegocio;
 using LogicDeNegocio.Dtos;
 using LogicDeNegocio.Interfaces;
