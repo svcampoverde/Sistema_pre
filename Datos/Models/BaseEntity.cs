@@ -12,7 +12,7 @@ namespace Datos.Models
     {
         public bool Activo { get; set; } = true;
         public DateTime FechaCreacionUTC { get; set; } = DateTime.UtcNow;
-        public DateTime FechaModificacionUTC { get; set; }
+        public DateTime? FechaModificacionUTC { get; set; }
     }
 
 }

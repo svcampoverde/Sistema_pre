@@ -8,7 +8,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Cliente> entity)
         {
-            entity.ToTable("cliente"); // 
+            entity.ToTable("cliente"); //
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -16,7 +16,7 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.Id)
                 .HasColumnName("id").HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.IdPersona)
                 .HasColumnName("idPersona")
@@ -53,7 +53,7 @@ namespace Datos.AplicationDB.Configurations
 
             // Relaciones con otras entidades
             entity.HasOne(d => d.Persona)
-                .WithMany(e=>e.Clientes)
+                .WithMany(e => e.Clientes)
                 .HasForeignKey(d => d.IdPersona)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("cliente_personafk");
@@ -82,19 +82,18 @@ namespace Datos.AplicationDB.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("cliente_formapagofk");
 
-            // 
+            //
             entity.Property(e => e.FechaCreacionUTC)
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
                 .IsRequired();
 
             entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+    .HasColumnName("fecha_modificacion_utc")
+    .HasColumnType("datetime").IsRequired(false);
 
-    
             entity.HasQueryFilter(e => e.Activo);
-            // 
+            //
             OnConfigurePartial(entity);
         }
 

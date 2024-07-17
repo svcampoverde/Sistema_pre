@@ -43,8 +43,8 @@ namespace Datos.AplicationDB.Configurations
                 .IsRequired();
 
             entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+                  .HasColumnName("fecha_modificacion_utc")
+                  .HasColumnType("datetime").IsRequired(false);
 
             // Relación muchos a uno con CategoriaAtributo
             entity.HasOne(e => e.CategoriaAtributo)
@@ -57,6 +57,6 @@ namespace Datos.AplicationDB.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Atributo> entity);
+         partial void OnConfigurePartial(EntityTypeBuilder<Atributo> entity);
     }
 }

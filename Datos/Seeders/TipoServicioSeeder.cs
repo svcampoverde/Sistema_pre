@@ -13,7 +13,7 @@ namespace Datos.Seeders
         public static void SeedTipoServicio(this EntityTypeBuilder<TipoServicio> entity)
         {
             entity.HasData(
-                new TipoServicio { Id = 1, Codigo = "CAMERINO", Descripcion = "Camerino", Activo = true, FechaCreacionUTC = DateTime.UtcNow }
+                new TipoServicio { Id = 1, Codigo = "CAMERINO", Nombre="Camerino", Descripcion = "Camerino", Activo = true, FechaCreacionUTC = DateTime.UtcNow }
                 );
 
         }

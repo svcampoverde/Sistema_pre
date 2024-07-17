@@ -451,6 +451,9 @@
     <Compile Include="AplicationDB\Configurations\BancoConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\CategoriaAtributoConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\CategoriaBancoConfiguration.cs" />
+    <Compile Include="AplicationDB\Configurations\DescuentoPresupuestoDetalleConfiguration.cs" />
+    <Compile Include="AplicationDB\Configurations\ImpuestoConfiguration.cs" />
+    <Compile Include="AplicationDB\Configurations\ImpuestoProductoCategoriaConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\InventarioConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\PresupuestoConfiguration.cs" />
     <Compile Include="AplicationDB\Configurations\CategoriaProductoConfiguration.cs" />
@@ -474,17 +477,9 @@
     <Compile Include="AplicationDB\Configurations\UsuarioConfiguration.cs" />
     <Compile Include="AplicationDB\SistemapContext.cs" />
     <Compile Include="AplicationDB\SistemapContextFactory.cs" />
-    <Compile Include="Migrations\20240711205151_InitialMigration.cs" />
-    <Compile Include="Migrations\20240711205151_InitialMigration.Designer.cs">
-      <DependentUpon>20240711205151_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20240711205303_InitialMigrations5.cs" />
-    <Compile Include="Migrations\20240711205303_InitialMigrations5.Designer.cs">
-      <DependentUpon>20240711205303_InitialMigrations5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20240712010841_add_nombre_producto.cs" />
-    <Compile Include="Migrations\20240712010841_add_nombre_producto.Designer.cs">
-      <DependentUpon>20240712010841_add_nombre_producto.cs</DependentUpon>
+    <Compile Include="Migrations\20240717063610_Initial.cs" />
+    <Compile Include="Migrations\20240717063610_Initial.Designer.cs">
+      <DependentUpon>20240717063610_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\SistemapContextModelSnapshot.cs" />
     <Compile Include="Models\Atributo.cs" />
@@ -493,7 +488,12 @@
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\CategoriaAtributo.cs" />
     <Compile Include="Models\CategoriaBanco.cs" />
+    <Compile Include="Models\Descuento.cs" />
+    <Compile Include="Models\DescuentoPresupuestoDetalle.cs" />
+    <Compile Include="Models\DescuentoProductoCategoria .cs" />
     <Compile Include="Models\FormaPago.cs" />
+    <Compile Include="Models\Impuesto.cs" />
+    <Compile Include="Models\ImpuestoProductoCategoria.cs" />
     <Compile Include="Models\Inventario.cs" />
     <Compile Include="Models\Presupuesto.cs" />
     <Compile Include="Models\CategoriaProducto.cs" />

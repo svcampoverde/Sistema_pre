@@ -9,7 +9,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<CategoriaProducto> entity)
         {
-            entity.ToTable("categorias_producto"); // 
+            entity.ToTable("categorias_producto"); //
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -17,16 +17,15 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.Id)
                 .HasColumnName("id").HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.Codigo)
                 .HasColumnName("codigo")
                 .HasColumnType("VARCHAR(50)") // Ajusta según la longitud necesaria
                 .IsRequired();
 
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
-                .HasColumnType("VARCHAR(200)"); // Ajusta según la longitud necesaria
+           entity.Property(e => e.Descripcion)  .IsRequired(false)
+                .HasColumnName("descripcion"); // Ajusta según la longitud necesaria
 
             entity.Property(e => e.Activo)
                 .HasColumnName("activo")
@@ -42,7 +41,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+                .HasColumnType("datetime").IsRequired(false);
 
             // Relación uno a muchos con Producto
             entity.HasMany(e => e.Productos)

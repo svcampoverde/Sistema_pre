@@ -8,7 +8,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Empresa> entity)
         {
-            entity.ToTable("empresa"); // 
+            entity.ToTable("empresa"); //
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -16,12 +16,10 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.Id)
                 .HasColumnName("id").HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
-                .HasColumnType("VARCHAR(200)")
-                .IsRequired();
+           entity.Property(e => e.Descripcion)  .IsRequired(false)
+                .HasColumnName("descripcion");
 
             entity.Property(e => e.Telefono)
                 .HasColumnName("telefono")
@@ -49,30 +47,18 @@ namespace Datos.AplicationDB.Configurations
                            .HasColumnName("fecha_creacion_utc")
                            .HasColumnType("datetime")
                            .IsRequired();
-
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
-
+                .HasColumnType("datetime").IsRequired(false);
+            entity.HasQueryFilter(e => e.Activo);
             // Relación con TipoEmpresa
             entity.HasOne(d => d.IdTipoEmpresaNavigation)
-                .WithMany(e=>e.Empresas)
+                .WithMany(e => e.Empresas)
                 .HasForeignKey(d => d.IdTipoEmpresa)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("empresa_tipoempresafk");
 
-            // 
-            entity.Property(e => e.FechaCreacionUTC)
-                .HasColumnName("fecha_creacion_utc")
-                .HasColumnType("datetime")
-                .IsRequired();
-
-            entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
-
-            entity.HasQueryFilter(e => e.Activo);
-            // 
+            //
             OnConfigurePartial(entity);
         }
 

@@ -17,20 +17,20 @@ namespace Presentacion.ModuloPresupuesto
         private Label label1;
         private Label label4;
         private Panel panel1;
-        private TextBox textBox2;
+        private TextBox txtTipoServicio;
         private Label label3;
         private TextBox txtNombreServicio;
         private Label label2;
         private Panel panel2;
-        private TextBox textTipoProducto;
+        private TextBox txtTipoProducto;
         private Label label5;
         private TextBox txtNombreProducto;
         private Label label6;
         private TextBox txtPrecio;
         private Label label7;
-        private TextBox textCantidad;
+        private TextBox txtCantidad;
         private Label label9;
-        private TextBox textIva;
+        private TextBox txtIva;
         private Label label8;
         private RichTextBox richTextDescripcion;
         private Label label10;
@@ -54,9 +54,12 @@ namespace Presentacion.ModuloPresupuesto
             if (formBuscarProducto.ShowDialog() == DialogResult.OK)
             {
                 var producto = formBuscarProducto.ProductoSeleccionado;
+                txtNombreProducto.Text = producto.Nombre;
                 richTextDescripcion.Text = producto.Descripcion;
-                txtPrecio.Text = $"Precio: {producto.Precio:C2}";
-                textTipoProducto.Text = $"Tipo: {producto.IdTipoProducto}";
+                txtPrecio.Text = producto.Precio.ToString();
+                txtTipoProducto.Text = producto.TipoProducto;
+                //.Text = producto.Precio;
+
                 // Actualiza otros campos según necesites
             }
         }
@@ -68,6 +71,7 @@ namespace Presentacion.ModuloPresupuesto
             if (formBuscarServicio.ShowDialog() == DialogResult.OK)
             {
                 var servicio = formBuscarServicio.ServicioSeleccionado;
+                txtTipoServicio.Text = servicio.TipoServicio;
                 txtNombreServicio.Text = servicio.Descripcion;
                 // Actualiza otros campos según necesites
             }
@@ -80,9 +84,7 @@ namespace Presentacion.ModuloPresupuesto
             {
                 DetalleRequest = new PresupuestoDetalleRequest
                 {
-                    // IdProducto = // Asigna el ID del producto seleccionado,
-                    // IdServicio = // Asigna el ID del servicio seleccionado,
-                    // Asigna otros campos del detalle del presupuesto según necesites
+
                 };
 
                 DialogResult = DialogResult.OK;
@@ -99,13 +101,21 @@ namespace Presentacion.ModuloPresupuesto
         {
             this.panelDetalle = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textTipoProducto = new System.Windows.Forms.TextBox();
+            this.richTextDescripcion = new System.Windows.Forms.RichTextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtIva = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtPrecio = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtTipoProducto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtNombreProducto = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtTipoServicio = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtNombreServicio = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -113,14 +123,6 @@ namespace Presentacion.ModuloPresupuesto
             this.btnBuscarProducto = new System.Windows.Forms.Button();
             this.btnBuscarServicio = new System.Windows.Forms.Button();
             this.btnGuardarDetalle = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtPrecio = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textIva = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textCantidad = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.richTextDescripcion = new System.Windows.Forms.RichTextBox();
             this.panelDetalle.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -147,13 +149,13 @@ namespace Presentacion.ModuloPresupuesto
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.richTextDescripcion);
             this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.textCantidad);
+            this.panel2.Controls.Add(this.txtCantidad);
             this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.textIva);
+            this.panel2.Controls.Add(this.txtIva);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.txtPrecio);
             this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.textTipoProducto);
+            this.panel2.Controls.Add(this.txtTipoProducto);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.txtNombreProducto);
             this.panel2.Controls.Add(this.label6);
@@ -162,13 +164,80 @@ namespace Presentacion.ModuloPresupuesto
             this.panel2.Size = new System.Drawing.Size(513, 149);
             this.panel2.TabIndex = 11;
             // 
-            // textTipoProducto
+            // richTextDescripcion
             // 
-            this.textTipoProducto.Enabled = false;
-            this.textTipoProducto.Location = new System.Drawing.Point(323, 3);
-            this.textTipoProducto.Name = "textTipoProducto";
-            this.textTipoProducto.Size = new System.Drawing.Size(147, 23);
-            this.textTipoProducto.TabIndex = 10;
+            this.richTextDescripcion.Location = new System.Drawing.Point(102, 39);
+            this.richTextDescripcion.Name = "richTextDescripcion";
+            this.richTextDescripcion.Size = new System.Drawing.Size(136, 105);
+            this.richTextDescripcion.TabIndex = 18;
+            this.richTextDescripcion.Text = "";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(8, 79);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 16);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Descripcion";
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Location = new System.Drawing.Point(323, 102);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(82, 23);
+            this.txtCantidad.TabIndex = 16;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(244, 109);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(64, 16);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Cantidad";
+            // 
+            // txtIva
+            // 
+            this.txtIva.Enabled = false;
+            this.txtIva.Location = new System.Drawing.Point(323, 72);
+            this.txtIva.Name = "txtIva";
+            this.txtIva.Size = new System.Drawing.Size(82, 23);
+            this.txtIva.TabIndex = 14;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(244, 75);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(25, 16);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Iva";
+            // 
+            // txtPrecio
+            // 
+            this.txtPrecio.Enabled = false;
+            this.txtPrecio.Location = new System.Drawing.Point(323, 39);
+            this.txtPrecio.Name = "txtPrecio";
+            this.txtPrecio.Size = new System.Drawing.Size(82, 23);
+            this.txtPrecio.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(244, 46);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 16);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Precio";
+            // 
+            // txtTipoProducto
+            // 
+            this.txtTipoProducto.Enabled = false;
+            this.txtTipoProducto.Location = new System.Drawing.Point(323, 3);
+            this.txtTipoProducto.Name = "txtTipoProducto";
+            this.txtTipoProducto.Size = new System.Drawing.Size(147, 23);
+            this.txtTipoProducto.TabIndex = 10;
             // 
             // label5
             // 
@@ -210,7 +279,7 @@ namespace Presentacion.ModuloPresupuesto
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.txtTipoServicio);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txtNombreServicio);
             this.panel1.Controls.Add(this.label2);
@@ -219,13 +288,13 @@ namespace Presentacion.ModuloPresupuesto
             this.panel1.Size = new System.Drawing.Size(512, 68);
             this.panel1.TabIndex = 7;
             // 
-            // textBox2
+            // txtTipoServicio
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(75, 34);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(177, 23);
-            this.textBox2.TabIndex = 10;
+            this.txtTipoServicio.Enabled = false;
+            this.txtTipoServicio.Location = new System.Drawing.Point(75, 34);
+            this.txtTipoServicio.Name = "txtTipoServicio";
+            this.txtTipoServicio.Size = new System.Drawing.Size(177, 23);
+            this.txtTipoServicio.TabIndex = 10;
             // 
             // label3
             // 
@@ -291,73 +360,6 @@ namespace Presentacion.ModuloPresupuesto
             this.btnGuardarDetalle.Text = "Guardar";
             this.btnGuardarDetalle.UseVisualStyleBackColor = true;
             this.btnGuardarDetalle.Click += new System.EventHandler(this.btnGuardarDetalle_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(244, 46);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 16);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Precio";
-            // 
-            // txtPrecio
-            // 
-            this.txtPrecio.Enabled = false;
-            this.txtPrecio.Location = new System.Drawing.Point(323, 39);
-            this.txtPrecio.Name = "txtPrecio";
-            this.txtPrecio.Size = new System.Drawing.Size(82, 23);
-            this.txtPrecio.TabIndex = 12;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(244, 75);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(25, 16);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Iva";
-            // 
-            // textIva
-            // 
-            this.textIva.Enabled = false;
-            this.textIva.Location = new System.Drawing.Point(323, 72);
-            this.textIva.Name = "textIva";
-            this.textIva.Size = new System.Drawing.Size(82, 23);
-            this.textIva.TabIndex = 14;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(244, 109);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(64, 16);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "Cantidad";
-            // 
-            // textCantidad
-            // 
-            this.textCantidad.Location = new System.Drawing.Point(323, 102);
-            this.textCantidad.Name = "textCantidad";
-            this.textCantidad.Size = new System.Drawing.Size(82, 23);
-            this.textCantidad.TabIndex = 16;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 79);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 16);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "Descripcion";
-            // 
-            // richTextDescripcion
-            // 
-            this.richTextDescripcion.Location = new System.Drawing.Point(102, 39);
-            this.richTextDescripcion.Name = "richTextDescripcion";
-            this.richTextDescripcion.Size = new System.Drawing.Size(136, 105);
-            this.richTextDescripcion.TabIndex = 18;
-            this.richTextDescripcion.Text = "";
             // 
             // FormAgregarDetalle
             // 

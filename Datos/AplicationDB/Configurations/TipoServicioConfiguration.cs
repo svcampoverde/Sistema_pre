@@ -15,19 +15,23 @@ namespace Datos.AplicationDB.Configurations
                 .HasName("PRIMARY");
 
             entity.Property(e => e.Id)
-                .HasColumnName("id") // Nombre de la columna en la base de datos
+                .HasColumnName("id")
                 .HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.Codigo)
-                .HasColumnName("codigo") // Nombre de la columna en la base de datos
-                .HasColumnType("varchar(50)") // Tipo y tamaño de datos según tus requisitos
+                .HasColumnName("codigo")
+                .HasColumnType("varchar(50)") 
                 .IsRequired();
 
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion") // Nombre de la columna en la base de datos
-                .HasColumnType("varchar(255)"); // Tipo y tamaño de datos según tus requisitos
+            entity.Property(e => e.Nombre)
+                .HasColumnName("nombre")
+                .HasColumnType("varchar(255)")
+                        .IsRequired();
+            
+           entity.Property(e => e.Descripcion)  .IsRequired(false)
+                .HasColumnName("descripcion");
 
             entity.Property(e => e.Activo)
                 .HasColumnName("activo")
@@ -38,15 +42,15 @@ namespace Datos.AplicationDB.Configurations
             entity.HasMany(ts => ts.Servicios)
                 .WithOne(s => s.TipoServicio)
                 .HasForeignKey(s => s.IdTipoServicio)
-                .OnDelete(DeleteBehavior.Restrict) // 
+                .OnDelete(DeleteBehavior.Restrict) 
                 .HasConstraintName("servicio_tipo_servicio_fk");
             entity.Property(e => e.FechaCreacionUTC)
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
                 .IsRequired();
             entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+    .HasColumnName("fecha_modificacion_utc")
+    .HasColumnType("datetime").IsRequired(false);
             entity.HasQueryFilter(e => e.Activo);
             entity.SeedTipoServicio();
             OnConfigurePartial(entity);

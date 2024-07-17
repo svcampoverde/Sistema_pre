@@ -13,6 +13,7 @@ namespace Datos.Seeders
                 {
                     Id = 1,
                     Codigo = "CA",
+                    Nombre = "Cuentas de Ahorros",
                     Descripcion = "Cuentas de Ahorros",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,
@@ -22,6 +23,7 @@ namespace Datos.Seeders
                 {
                     Id = 2,
                     Codigo = "CC",
+                    Nombre = "Cuentas Corriente",
                     Descripcion = "Cuentas Corriente",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,
@@ -31,6 +33,7 @@ namespace Datos.Seeders
                 {
                     Id = 3,
                     Codigo = "PF",
+                    Nombre = "Cuentas a Plazo Fijo",
                     Descripcion = "Cuentas a Plazo Fijo",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,
@@ -40,6 +43,7 @@ namespace Datos.Seeders
                 {
                     Id = 4,
                     Codigo = "MM",
+                    Nombre = "Cuentas de Mercado Monetario",
                     Descripcion = "Cuentas de Mercado Monetario",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,
@@ -49,6 +53,7 @@ namespace Datos.Seeders
                 {
                     Id = 5,
                     Codigo = "IP",
+                    Nombre = "Cuentas de Inversión Personal",
                     Descripcion = "Cuentas de Inversión Personal",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,

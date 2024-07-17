@@ -8,7 +8,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Presupuesto> entity)
         {
-            entity.ToTable("presupuesto"); // 
+            entity.ToTable("presupuesto"); //
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -29,10 +29,8 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("float")
                 .IsRequired();
 
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
-                .HasColumnType("VARCHAR(200)")
-                .IsRequired();
+           entity.Property(e => e.Descripcion)  .IsRequired(false)
+                .HasColumnName("descripcion");
 
             entity.Property(e => e.FechaEvento)
                 .HasColumnName("fecha_evento")
@@ -73,9 +71,8 @@ namespace Datos.AplicationDB.Configurations
                  .IsRequired();
 
             entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
-
+                     .HasColumnName("fecha_modificacion_utc")
+                     .HasColumnType("datetime").IsRequired(false);
 
             // Relación con Evento
             entity.HasOne(d => d.IdeventoNavigation)
@@ -84,11 +81,10 @@ namespace Datos.AplicationDB.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("presupuesto_eventofk");
 
-            // 
-
+            //
 
             entity.HasQueryFilter(e => e.Activo);
-            // 
+            //
             OnConfigurePartial(entity);
         }
 

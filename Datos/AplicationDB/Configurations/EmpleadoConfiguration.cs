@@ -8,7 +8,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Empleado> entity)
         {
-            entity.ToTable("empleado"); // 
+            entity.ToTable("empleado"); //
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -16,7 +16,7 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.Id)
                 .HasColumnName("id").HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.IdPersona)
                 .HasColumnName("idPersona")
@@ -53,11 +53,11 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+                .HasColumnType("datetime").IsRequired(false);
 
             // Relaciones con otras entidades
             entity.HasOne(d => d.IdPersonaNavigation)
-                .WithMany(e=>e.Empleados)
+                .WithMany(e => e.Empleados)
                 .HasForeignKey(d => d.IdPersona)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("empleado_personafk");
@@ -67,9 +67,9 @@ namespace Datos.AplicationDB.Configurations
                 .HasForeignKey(d => d.IdCiudad)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("empleado_ciudadfk");
- 
+
             entity.HasQueryFilter(e => e.Activo);
-            // 
+            //
             OnConfigurePartial(entity);
         }
 

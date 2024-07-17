@@ -9,7 +9,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<TipoCuenta> entity)
         {
-            entity.ToTable("tipocuenta"); 
+            entity.ToTable("tipocuenta");
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -18,18 +18,20 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("id")
                 .HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.Codigo)
-                .HasColumnName("codigo") // Nombre de la columna en la base de datos
-                .HasColumnType("varchar(20)") // Tipo y tamaño de datos según tus requisitos
+                .HasColumnName("codigo")
+                .HasColumnType("varchar(20)") 
                 .IsRequired();
-
+            entity.Property(e => e.Nombre)
+               .HasColumnName("nombre")
+               .HasColumnType("varchar(255)")
+                       .IsRequired();
             entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion") // Nombre de la columna en la base de datos
-                .HasColumnType("varchar(200)") // Tipo y tamaño de datos según tus requisitos
-                .IsRequired();
-
+       .HasColumnName("descripcion") 
+       
+       .IsRequired(false);
             entity.Property(e => e.Activo)
                 .HasColumnName("activo")
                 .HasColumnType("bit")
@@ -39,19 +41,19 @@ namespace Datos.AplicationDB.Configurations
             entity.HasMany(e => e.Cuenta)
                 .WithOne(p => p.IdTipoCuentaNavigation)
                 .HasForeignKey(e => e.IdTipoCuenta)
-                .OnDelete(DeleteBehavior.Restrict) // 
+                .OnDelete(DeleteBehavior.Restrict) //
                 .HasConstraintName("tipocuenta_cuentafk");
 
-            // 
+            //
             entity.Property(e => e.FechaCreacionUTC)
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
                 .IsRequired();
 
             entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
- 
+   .HasColumnName("fecha_modificacion_utc")
+   .HasColumnType("datetime").IsRequired(false);
+
             entity.HasQueryFilter(e => e.Activo);
 
             // Llama al seeder

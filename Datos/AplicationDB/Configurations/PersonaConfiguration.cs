@@ -8,7 +8,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Persona> entity)
         {
-            entity.ToTable("persona"); // 
+            entity.ToTable("persona"); //
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -16,7 +16,7 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.Id)
                 .HasColumnName("id").HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.Cedula)
                 .HasColumnName("cedula")
@@ -69,8 +69,9 @@ namespace Datos.AplicationDB.Configurations
                 .IsRequired();
 
             entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+                     .HasColumnName("fecha_modificacion_utc")
+                     .HasColumnType("datetime").IsRequired(false);
+
             // Relaciones con otras entidades
             entity.HasOne(d => d.CiudadNavegation)
                 .WithMany()

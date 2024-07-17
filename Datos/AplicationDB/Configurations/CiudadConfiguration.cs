@@ -28,21 +28,17 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("int")
                 .IsRequired();
 
- 
             // Relación con la tabla Provincia
             entity.HasOne(e => e.ProvinciaNavigation)
-                .WithMany(e=>e.Ciudades)
+                .WithMany(e => e.Ciudades)
                 .HasForeignKey(e => e.IdProvincia)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_ciudad_provincia");
 
             entity.SeedCiudades();
             OnConfigurePartial(entity);
-    
-
-
         }
-        partial void OnConfigurePartial(EntityTypeBuilder<Ciudad> entity);
 
+         partial void OnConfigurePartial(EntityTypeBuilder<Ciudad> entity);
     }
 }

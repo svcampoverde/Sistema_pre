@@ -9,7 +9,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Provincia> entity)
         {
-            entity.ToTable("provincias"); 
+            entity.ToTable("provincias");
 
             entity.HasKey(e => e.Id);
 
@@ -17,16 +17,15 @@ namespace Datos.AplicationDB.Configurations
                     .HasColumnName("id") // Nombre de la columna en minúsculas
                     .HasColumnType("int")
                     .IsRequired()
-                    .ValueGeneratedOnAdd(); 
-
+                    .ValueGeneratedOnAdd();
 
             entity.Property(e => e.Nombre)
                 .HasColumnName("nombre")
-                .HasColumnType("VARCHAR(200)") 
+                .HasColumnType("VARCHAR(200)")
                 .IsRequired();
             entity.HasMany(e => e.Ciudades)
                 .WithOne(e => e.ProvinciaNavigation)
-                .HasForeignKey(e=>e.IdProvincia)
+                .HasForeignKey(e => e.IdProvincia)
                 ;
             entity.SeedProvincias();
             OnConfigurePartial(entity);

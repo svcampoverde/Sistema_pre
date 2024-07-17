@@ -8,7 +8,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Cuenta> entity)
         {
-            entity.ToTable("cuenta"); // 
+            entity.ToTable("cuenta"); //
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -17,7 +17,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("id")
                 .HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.NumCuenta)
                 .HasColumnName("numcuenta")
@@ -38,7 +38,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("activo")
                 .HasColumnType("bit")
                 .IsRequired();
-            // 
+            //
             entity.Property(e => e.FechaCreacionUTC)
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
@@ -46,7 +46,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+                .HasColumnType("datetime").IsRequired(false);
 
             // Relaciones
             entity.HasOne(e => e.IdBancoNavigation)
@@ -62,10 +62,10 @@ namespace Datos.AplicationDB.Configurations
                 .HasConstraintName("tipocuenta_cuentafk");
 
             entity.HasQueryFilter(e => e.Activo);
-            // 
+            //
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Cuenta> entity);
+         partial void OnConfigurePartial(EntityTypeBuilder<Cuenta> entity);
     }
 }

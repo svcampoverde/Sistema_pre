@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Datos.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,9 +16,10 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Activo = table.Column<bool>(nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     codigo = table.Column<string>(type: "varchar(50)", nullable: false),
-                    descripcion = table.Column<string>(type: "VARCHAR(200)", nullable: false)
+                    Nombre = table.Column<string>(nullable: true),
+                    descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,7 +34,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     codigo = table.Column<string>(type: "VARCHAR(50)", nullable: false),
                     nombre = table.Column<string>(nullable: false),
                     descripcion = table.Column<string>(nullable: true)
@@ -51,13 +52,32 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     codigo = table.Column<string>(type: "VARCHAR(50)", nullable: false),
-                    descripcion = table.Column<string>(type: "VARCHAR(200)", nullable: true)
+                    Nombre = table.Column<string>(nullable: true),
+                    descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PRIMARY", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Descuento",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Activo = table.Column<bool>(nullable: false),
+                    FechaCreacionUTC = table.Column<DateTime>(nullable: false),
+                    FechaModificacionUTC = table.Column<DateTime>(nullable: true),
+                    Nombre = table.Column<string>(nullable: true),
+                    Tasa = table.Column<decimal>(nullable: false),
+                    EsPorcentaje = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Descuento", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,7 +88,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Activo = table.Column<bool>(nullable: false),
                     FechaCreacionUTC = table.Column<DateTime>(nullable: false),
-                    FechaModificacionUTC = table.Column<DateTime>(nullable: false),
+                    FechaModificacionUTC = table.Column<DateTime>(nullable: true),
                     Codigo = table.Column<string>(nullable: true),
                     Nombre = table.Column<string>(nullable: true),
                     Descripcion = table.Column<string>(nullable: true)
@@ -76,6 +96,24 @@ namespace Datos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FormaPagos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Impuesto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
+                    fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Nombre = table.Column<string>(maxLength: 100, nullable: false),
+                    Tasa = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    EsPorcentaje = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Impuesto", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,9 +137,10 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     codigo = table.Column<string>(type: "VARCHAR(70)", nullable: false),
-                    descripcion = table.Column<string>(type: "VARCHAR(200)", nullable: false)
+                    nombre = table.Column<string>(type: "varchar(255)", nullable: false),
+                    descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -116,9 +155,10 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     codigo = table.Column<string>(type: "VARCHAR(50)", nullable: false),
-                    descripcion = table.Column<string>(type: "VARCHAR(200)", nullable: false)
+                    nombre = table.Column<string>(type: "varchar(255)", nullable: false),
+                    descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -133,9 +173,10 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     codigo = table.Column<string>(type: "varchar(50)", nullable: false),
-                    descripcion = table.Column<string>(type: "varchar(255)", nullable: true)
+                    nombre = table.Column<string>(type: "varchar(255)", nullable: false),
+                    descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -150,9 +191,10 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     codigo = table.Column<string>(type: "varchar(20)", nullable: false),
-                    descripcion = table.Column<string>(type: "varchar(200)", nullable: false)
+                    nombre = table.Column<string>(type: "varchar(255)", nullable: false),
+                    descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -167,9 +209,10 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     codigo = table.Column<string>(type: "varchar(20)", nullable: false),
-                    descripcion = table.Column<string>(type: "varchar(200)", nullable: false)
+                    nombre = table.Column<string>(type: "varchar(255)", nullable: false),
+                    descripcion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -184,7 +227,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     nombre = table.Column<string>(type: "VARCHAR(200)", nullable: false),
                     unidades = table.Column<string>(type: "VARCHAR(50)", nullable: true),
                     fk_categoria_atributo = table.Column<int>(type: "int", nullable: false)
@@ -208,9 +251,9 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     nombre = table.Column<string>(type: "VARCHAR(100)", nullable: false),
-                    descripcion = table.Column<string>(maxLength: 200, nullable: false),
+                    descripcion = table.Column<string>(maxLength: 200, nullable: true),
                     direccion = table.Column<string>(maxLength: 500, nullable: true),
                     idCategoriaBanco = table.Column<int>(type: "int", nullable: false),
                     telefono = table.Column<string>(type: "varchar(30)", maxLength: 20, nullable: true)
@@ -252,26 +295,27 @@ namespace Datos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Activo = table.Column<bool>(nullable: false),
-                    FechaCreacionUTC = table.Column<DateTime>(nullable: false),
-                    FechaModificacionUTC = table.Column<DateTime>(nullable: false),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
+                    fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     nombre = table.Column<string>(type: "VARCHAR(200)", nullable: false),
+                    descripcion = table.Column<string>(nullable: false),
                     precio = table.Column<float>(type: "float", nullable: false),
-                    IdCategoriaProducto = table.Column<int>(type: "int", nullable: false),
-                    IdTipoProducto = table.Column<int>(type: "int", nullable: true)
+                    idCategoriaProducto = table.Column<int>(type: "int", nullable: false),
+                    idTipoProducto = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_productos", x => x.id);
                     table.ForeignKey(
                         name: "producto_categoria_producto_fk",
-                        column: x => x.IdCategoriaProducto,
+                        column: x => x.idCategoriaProducto,
                         principalTable: "categorias_producto",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "producto_tipoproducto_fk",
-                        column: x => x.IdTipoProducto,
+                        column: x => x.idTipoProducto,
                         principalTable: "tipo_producto",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
@@ -285,8 +329,9 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    descripcion = table.Column<string>(type: "VARCHAR(200)", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
+                    nombre = table.Column<string>(nullable: true),
+                    descripcion = table.Column<string>(nullable: true),
                     IdTipoServicio = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -308,8 +353,8 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    descripcion = table.Column<string>(type: "VARCHAR(200)", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
+                    descripcion = table.Column<string>(nullable: true),
                     telefono = table.Column<string>(type: "VARCHAR(20)", nullable: true),
                     correo = table.Column<string>(type: "VARCHAR(100)", nullable: true),
                     direccion = table.Column<string>(type: "VARCHAR(200)", nullable: true),
@@ -334,7 +379,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     numcuenta = table.Column<string>(type: "VARCHAR(80)", nullable: false),
                     idBanco = table.Column<int>(type: "int", nullable: false),
                     idTipocuenta = table.Column<int>(type: "int", nullable: false)
@@ -364,8 +409,9 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    descripcion = table.Column<string>(type: "VARCHAR(200)", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
+                    nombre = table.Column<string>(type: "VARCHAR(200)", nullable: false),
+                    descripcion = table.Column<string>(nullable: true),
                     fecha_evento = table.Column<DateTime>(type: "datetime", nullable: false),
                     promotor = table.Column<string>(type: "VARCHAR(100)", nullable: true),
                     artista = table.Column<string>(type: "VARCHAR(100)", nullable: true),
@@ -391,7 +437,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     cedula = table.Column<string>(type: "VARCHAR(20)", nullable: false),
                     nombre = table.Column<string>(type: "VARCHAR(100)", nullable: false),
                     apellido = table.Column<string>(type: "VARCHAR(100)", nullable: false),
@@ -428,7 +474,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     fk_producto = table.Column<int>(type: "int", nullable: false),
                     fk_atributo = table.Column<int>(type: "int", nullable: false),
                     valor = table.Column<string>(type: "VARCHAR(200)", nullable: false)
@@ -451,6 +497,83 @@ namespace Datos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DescuentoProductoCategoria",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Activo = table.Column<bool>(nullable: false),
+                    FechaCreacionUTC = table.Column<DateTime>(nullable: false),
+                    FechaModificacionUTC = table.Column<DateTime>(nullable: true),
+                    IdProducto = table.Column<int>(nullable: true),
+                    IdCategoriaProducto = table.Column<int>(nullable: true),
+                    IdDescuento = table.Column<int>(nullable: false),
+                    TasaEspecifica = table.Column<decimal>(nullable: true),
+                    ProductoId = table.Column<int>(nullable: true),
+                    CategoriaProductoId = table.Column<int>(nullable: true),
+                    DescuentoId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DescuentoProductoCategoria", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DescuentoProductoCategoria_categorias_producto_CategoriaProd~",
+                        column: x => x.CategoriaProductoId,
+                        principalTable: "categorias_producto",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DescuentoProductoCategoria_Descuento_DescuentoId",
+                        column: x => x.DescuentoId,
+                        principalTable: "Descuento",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DescuentoProductoCategoria_productos_ProductoId",
+                        column: x => x.ProductoId,
+                        principalTable: "productos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImpuestoProductoCategoria",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
+                    fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
+                    IdProducto = table.Column<int>(nullable: true),
+                    IdCategoriaProducto = table.Column<int>(nullable: true),
+                    IdImpuesto = table.Column<int>(nullable: false),
+                    TasaEspecifica = table.Column<decimal>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImpuestoProductoCategoria", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ImpuestoProductoCategoria_CategoriaProducto",
+                        column: x => x.IdCategoriaProducto,
+                        principalTable: "categorias_producto",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ImpuestoProductoCategoria_Impuesto",
+                        column: x => x.IdImpuesto,
+                        principalTable: "Impuesto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ImpuestoProductoCategoria_Producto",
+                        column: x => x.IdProducto,
+                        principalTable: "productos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "inventario",
                 columns: table => new
                 {
@@ -458,7 +581,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     idProducto = table.Column<int>(type: "int", nullable: false),
                     cantidad = table.Column<int>(type: "int", nullable: false),
                     ubicacion = table.Column<string>(type: "VARCHAR(500)", nullable: true),
@@ -484,10 +607,10 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     codigo = table.Column<int>(type: "int", nullable: false),
                     version = table.Column<float>(type: "float", nullable: false),
-                    descripcion = table.Column<string>(type: "VARCHAR(200)", nullable: false),
+                    descripcion = table.Column<string>(nullable: true),
                     fecha_evento = table.Column<DateTime>(type: "datetime", nullable: false),
                     fecha_cotizacion = table.Column<DateTime>(type: "datetime", nullable: false),
                     descuento = table.Column<float>(type: "float", nullable: false),
@@ -521,7 +644,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     idPersona = table.Column<int>(type: "int", nullable: false),
                     idCiudad = table.Column<int>(type: "int", nullable: false),
                     CuentaId = table.Column<int>(nullable: false),
@@ -575,7 +698,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     idPersona = table.Column<int>(type: "int", nullable: false),
                     empresa = table.Column<string>(type: "VARCHAR(100)", nullable: false),
                     sueldo = table.Column<float>(type: "float", nullable: false),
@@ -607,7 +730,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     idPersona = table.Column<int>(type: "int", nullable: false),
                     empresa = table.Column<string>(type: "VARCHAR(100)", nullable: false),
                     tiposervicio = table.Column<string>(type: "VARCHAR(50)", nullable: true),
@@ -666,7 +789,7 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<bool>(nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     idPersona = table.Column<int>(nullable: false),
                     nombreUsuario = table.Column<string>(maxLength: 100, nullable: false),
                     contrasenaHash = table.Column<byte[]>(nullable: false),
@@ -698,17 +821,20 @@ namespace Datos.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     activo = table.Column<ulong>(type: "bit", nullable: false),
                     fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
-                    servicio = table.Column<string>(type: "VARCHAR(200)", nullable: true),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
                     idServicio = table.Column<int>(type: "int", nullable: false),
                     idProducto = table.Column<int>(type: "int", nullable: false),
-                    idPresupuesto = table.Column<int>(type: "int", nullable: false)
+                    idPresupuesto = table.Column<int>(type: "int", nullable: false),
+                    ValorBase = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    TotalDescuentos = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    TotalImpuestos = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    Cantidad = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PRIMARY", x => x.id);
                     table.ForeignKey(
-                        name: "presupuesto_detalle_presupuestofk",
+                        name: "FK_PresupuestoDetalle_Presupuesto",
                         column: x => x.idPresupuesto,
                         principalTable: "presupuesto",
                         principalColumn: "id",
@@ -727,37 +853,66 @@ namespace Datos.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "descuento_presupuesto_detalle",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    activo = table.Column<ulong>(type: "bit", nullable: false),
+                    fecha_creacion_utc = table.Column<DateTime>(type: "datetime", nullable: false),
+                    fecha_modificacion_utc = table.Column<DateTime>(type: "datetime", nullable: true),
+                    idPresupuestoDetalle = table.Column<int>(nullable: false),
+                    idDescuento = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_descuento_presupuesto_detalle", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_descuento_presupuesto_detalle_descuento",
+                        column: x => x.idDescuento,
+                        principalTable: "Descuento",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DescuentoPresupuestoDetalle_PresupuestoDetalle",
+                        column: x => x.idPresupuestoDetalle,
+                        principalTable: "presupuesto_detalle",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "categorias_bancos",
                 columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc", "nombre" },
                 values: new object[,]
                 {
-                    { 1, 1ul, "PRIVN", "Bancos privados nacionales", new DateTime(2024, 7, 11, 20, 51, 51, 137, DateTimeKind.Utc).AddTicks(3050), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "BANCOS PRIVADOS NACIONALES" },
-                    { 2, 1ul, "PUB", "Banco público", new DateTime(2024, 7, 11, 20, 51, 51, 137, DateTimeKind.Utc).AddTicks(3050), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "CASAS DE CAMBIO" },
-                    { 3, 1ul, "MICRO", "Banco de microfinanzas", new DateTime(2024, 7, 11, 20, 51, 51, 137, DateTimeKind.Utc).AddTicks(3050), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "COMPAÑIAS DE TITULARIZACION" },
-                    { 4, 1ul, "SAVINGS", "Banco enfocado en cuentas de ahorro", new DateTime(2024, 7, 11, 20, 51, 51, 137, DateTimeKind.Utc).AddTicks(3050), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "BANCOS PRIVADOS EXTRANJEROS" },
-                    { 5, 1ul, "COMM", "Banco que ofrece una gama completa de servicios financieros", new DateTime(2024, 7, 11, 20, 51, 51, 137, DateTimeKind.Utc).AddTicks(3050), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "BANCOS OFF SHORE" },
-                    { 6, 1ul, "COOP", "Banco que opera bajo una estructura cooperativa", new DateTime(2024, 7, 11, 20, 51, 51, 137, DateTimeKind.Utc).AddTicks(3050), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "OFIC. REPRESENTACION BANCOS EXTRANJEROS" },
-                    { 7, 1ul, "COOP", "Banco que opera bajo una estructura cooperativa", new DateTime(2024, 7, 11, 20, 51, 51, 137, DateTimeKind.Utc).AddTicks(3050), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "BUROS DE INFORMACION CREDITICIA" },
-                    { 8, 1ul, "AGN", "Agencia que opera bajo la estructura de agencia", new DateTime(2024, 7, 11, 20, 51, 51, 137, DateTimeKind.Utc).AddTicks(3050), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "AGENCIA DE BANCO NACIONAL EN EL EXTERIOR" },
-                    { 9, 1ul, "AGD", "ALMACENES GENERALES DE DEPOSITOS", new DateTime(2024, 7, 11, 20, 51, 51, 137, DateTimeKind.Utc).AddTicks(3050), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ALMACENES GENERALES DE DEPOSITOS" }
+                    { 1, 1ul, "PRIVN", "Bancos privados nacionales", new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708), null, "BANCOS PRIVADOS NACIONALES" },
+                    { 2, 1ul, "PUB", "Banco público", new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708), null, "CASAS DE CAMBIO" },
+                    { 3, 1ul, "MICRO", "Banco de microfinanzas", new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708), null, "COMPAÑIAS DE TITULARIZACION" },
+                    { 4, 1ul, "SAVINGS", "Banco enfocado en cuentas de ahorro", new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708), null, "BANCOS PRIVADOS EXTRANJEROS" },
+                    { 5, 1ul, "COMM", "Banco que ofrece una gama completa de servicios financieros", new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708), null, "BANCOS OFF SHORE" },
+                    { 6, 1ul, "COOP", "Banco que opera bajo una estructura cooperativa", new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708), null, "OFIC. REPRESENTACION BANCOS EXTRANJEROS" },
+                    { 7, 1ul, "COOP", "Banco que opera bajo una estructura cooperativa", new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708), null, "BUROS DE INFORMACION CREDITICIA" },
+                    { 8, 1ul, "AGN", "Agencia que opera bajo la estructura de agencia", new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708), null, "AGENCIA DE BANCO NACIONAL EN EL EXTERIOR" },
+                    { 9, 1ul, "AGD", "ALMACENES GENERALES DE DEPOSITOS", new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708), null, "ALMACENES GENERALES DE DEPOSITOS" }
                 });
 
             migrationBuilder.InsertData(
                 table: "categorias_producto",
-                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc", "Nombre" },
                 values: new object[,]
                 {
-                    { 10, 1ul, "PET_SUPPLIES", "Suministros para mascotas", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 9, 1ul, "AUTOMOTIVE", "Automotriz", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, 1ul, "GROCERY", "Abarrotes y supermercado", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, 1ul, "TOYS", "Juguetes y juegos", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, 1ul, "BOOKS", "Libros y audiolibros", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, 1ul, "BEAUTY", "Belleza y cuidado personal", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 1ul, "APPAREL", "Ropa y calzado", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1ul, "HOME_APPL", "Electrodomésticos", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, 1ul, "ELECT", "Electrónicos", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, 1ul, "SPORTS", "Deportes y aire libre", new DateTime(2024, 7, 11, 20, 51, 51, 149, DateTimeKind.Utc).AddTicks(2230), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 10, 1ul, "PET_SUPPLIES", "Suministros para mascotas", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null },
+                    { 9, 1ul, "AUTOMOTIVE", "Automotriz", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null },
+                    { 8, 1ul, "GROCERY", "Abarrotes y supermercado", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null },
+                    { 6, 1ul, "TOYS", "Juguetes y juegos", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null },
+                    { 7, 1ul, "BOOKS", "Libros y audiolibros", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null },
+                    { 4, 1ul, "BEAUTY", "Belleza y cuidado personal", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null },
+                    { 3, 1ul, "APPAREL", "Ropa y calzado", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null },
+                    { 2, 1ul, "HOME_APPL", "Electrodomésticos", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null },
+                    { 1, 1ul, "ELECT", "Electrónicos", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null },
+                    { 5, 1ul, "SPORTS", "Deportes y aire libre", new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602), null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -794,90 +949,90 @@ namespace Datos.Migrations
 
             migrationBuilder.InsertData(
                 table: "rol",
-                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc", "nombre" },
                 values: new object[,]
                 {
-                    { 10, 1ul, "ANALYST", "Analista", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 15, 1ul, "QA", "Aseguramiento de Calidad", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 14, 1ul, "DEV", "Desarrollador", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 13, 1ul, "CUSTSERV", "Servicio al Cliente", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 12, 1ul, "MARKET", "Marketing", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 11, 1ul, "PROJMAN", "Gerente de Proyecto", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 9, 1ul, "SUPPORT", "Soporte Técnico", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, 1ul, "ACCT", "Contador", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, 1ul, "SALES", "Ventas", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, 1ul, "IT", "Tecnología de la Información", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, 1ul, "HR", "Recursos Humanos", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, 1ul, "MNGR", "Gerente", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 1ul, "SUP", "Supervisor", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1ul, "USER", "Usuario Estándar", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, 1ul, "ADM", "Administrador", new DateTime(2024, 7, 11, 20, 51, 51, 194, DateTimeKind.Utc).AddTicks(8517), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 10, 1ul, "ANALYST", "Analista", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Analista" },
+                    { 15, 1ul, "QA", "Aseguramiento de Calidad", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Aseguramiento de Calidad" },
+                    { 14, 1ul, "DEV", "Desarrollador", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Desarrollador" },
+                    { 13, 1ul, "CUSTSERV", "Servicio al Cliente", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Servicio al Cliente" },
+                    { 12, 1ul, "MARKET", "Marketing", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Marketing" },
+                    { 11, 1ul, "PROJMAN", "Gerente de Proyecto", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Gerente de Proyecto" },
+                    { 9, 1ul, "SUPPORT", "Soporte Técnico", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Soporte Técnico" },
+                    { 6, 1ul, "ACCT", "Contador", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Contador" },
+                    { 7, 1ul, "SALES", "Ventas", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Ventas" },
+                    { 8, 1ul, "IT", "Tecnología de la Información", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Tecnología de la Información" },
+                    { 5, 1ul, "HR", "Recursos Humanos", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Recursos Humanos" },
+                    { 4, 1ul, "MNGR", "Gerente", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Gerente" },
+                    { 3, 1ul, "SUP", "Supervisor", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Supervisor" },
+                    { 2, 1ul, "USER", "Usuario Estándar", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Usuario Estándar" },
+                    { 1, 1ul, "ADM", "Administrador", new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600), null, "Administrador" }
                 });
 
             migrationBuilder.InsertData(
                 table: "tipo_producto",
-                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc", "nombre" },
                 values: new object[,]
                 {
-                    { 13, 1ul, "WASHING_MACHINE", "Lavadora", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 14, 1ul, "DRYER", "Secadora", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 15, 1ul, "BLENDER", "Licuadora", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 16, 1ul, "VACUUM_CLEANER", "Aspiradora", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 17, 1ul, "COFFEE_MACHINE", "Cafetera", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 18, 1ul, "TOASTER", "Tostadora", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 19, 1ul, "IRON", "Plancha", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 20, 1ul, "PROJECTOR", "Proyector", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 33, 1ul, "DAIRY", "Productos lácteos", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 32, 1ul, "VEGETABLES", "Verduras", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 12, 1ul, "FRIDGE", "Refrigerador", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 34, 1ul, "BAKERY", "Panadería", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 35, 1ul, "MEAT", "Carne y aves", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 36, 1ul, "SEAFOOD", "Mariscos", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 37, 1ul, "BEVERAGES", "Bebidas", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 38, 1ul, "SNACKS", "Snacks y golosinas", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 39, 1ul, "CONDIMENTS", "Condimentos y salsas", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 31, 1ul, "FRUITS", "Frutas", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 11, 1ul, "MICROWAVE", "Microondas", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 7, 1ul, "HEADPHONES", "Audífonos", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 9, 1ul, "MONITOR", "Monitor", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 8, 1ul, "PRINTER", "Impresora", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, 1ul, "CAMERA", "Cámara Fotográfica", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, 1ul, "TV", "TV", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, 1ul, "SMARTWATCH", "Smartwatch", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 1ul, "TABLET", "Tablet", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1ul, "LAPTOP", "Laptop", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, 1ul, "SMARTPHONE", "Smartphone", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 40, 1ul, "CANNED_FOODS", "Alimentos enlatados", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 10, 1ul, "ROUTER", "Router", new DateTime(2024, 7, 11, 20, 51, 51, 208, DateTimeKind.Utc).AddTicks(9337), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 13, 1ul, "WASHING_MACHINE", "Lavadora", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Lavadora" },
+                    { 14, 1ul, "DRYER", "Secadora", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Secadora" },
+                    { 15, 1ul, "BLENDER", "Licuadora", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Licuadora" },
+                    { 16, 1ul, "VACUUM_CLEANER", "Aspiradora", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Aspiradora" },
+                    { 17, 1ul, "COFFEE_MACHINE", "Cafetera", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Cafetera" },
+                    { 18, 1ul, "TOASTER", "Tostadora", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Tostadora" },
+                    { 19, 1ul, "IRON", "Plancha", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Plancha" },
+                    { 20, 1ul, "PROJECTOR", "Proyector", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Proyector" },
+                    { 33, 1ul, "DAIRY", "Productos lácteos", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Productos lácteos" },
+                    { 32, 1ul, "VEGETABLES", "Verduras", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Verduras" },
+                    { 12, 1ul, "FRIDGE", "Refrigerador", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Refrigerador" },
+                    { 34, 1ul, "BAKERY", "Panadería", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Panadería" },
+                    { 35, 1ul, "MEAT", "Carne y aves", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Carne y aves" },
+                    { 36, 1ul, "SEAFOOD", "Mariscos", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Mariscos" },
+                    { 37, 1ul, "BEVERAGES", "Bebidas", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Bebidas" },
+                    { 38, 1ul, "SNACKS", "Snacks y golosinas", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Snacks y golosinas" },
+                    { 39, 1ul, "CONDIMENTS", "Condimentos y salsas", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Condimentos y salsas" },
+                    { 31, 1ul, "FRUITS", "Frutas", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Frutas" },
+                    { 11, 1ul, "MICROWAVE", "Microondas", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Microondas" },
+                    { 7, 1ul, "HEADPHONES", "Audífonos", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Audífonos" },
+                    { 9, 1ul, "MONITOR", "Monitor", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Monitor" },
+                    { 8, 1ul, "PRINTER", "Impresora", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Impresora" },
+                    { 6, 1ul, "CAMERA", "Cámara Fotográfica", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Cámara Fotográfica" },
+                    { 5, 1ul, "TV", "TV", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "TV" },
+                    { 4, 1ul, "SMARTWATCH", "Smartwatch", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Smartwatch" },
+                    { 3, 1ul, "TABLET", "Tablet", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Tablet" },
+                    { 2, 1ul, "LAPTOP", "Laptop", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Laptop" },
+                    { 1, 1ul, "SMARTPHONE", "Smartphone", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Smartphone" },
+                    { 40, 1ul, "CANNED_FOODS", "Alimentos enlatados", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Alimentos enlatados" },
+                    { 10, 1ul, "ROUTER", "Router", new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605), null, "Router" }
                 });
 
             migrationBuilder.InsertData(
                 table: "tipo_servicio",
-                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
-                values: new object[] { 1, 1ul, "CAMERINO", "Camerino", new DateTime(2024, 7, 11, 20, 51, 51, 210, DateTimeKind.Utc).AddTicks(9417), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc", "nombre" },
+                values: new object[] { 1, 1ul, "CAMERINO", "Camerino", new DateTime(2024, 7, 17, 6, 36, 9, 577, DateTimeKind.Utc).AddTicks(1601), null, "Camerino" });
 
             migrationBuilder.InsertData(
                 table: "tipocuenta",
-                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc", "nombre" },
                 values: new object[,]
                 {
-                    { 5, 1ul, "IP", "Cuentas de Inversión Personal", new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499), new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499) },
-                    { 4, 1ul, "MM", "Cuentas de Mercado Monetario", new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499), new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499) },
-                    { 3, 1ul, "PF", "Cuentas a Plazo Fijo", new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499), new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499) },
-                    { 2, 1ul, "CC", "Cuentas Corriente", new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499), new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499) },
-                    { 1, 1ul, "CA", "Cuentas de Ahorros", new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499), new DateTime(2024, 7, 11, 20, 51, 51, 200, DateTimeKind.Utc).AddTicks(8499) }
+                    { 5, 1ul, "IP", "Cuentas de Inversión Personal", new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), "Cuentas de Inversión Personal" },
+                    { 4, 1ul, "MM", "Cuentas de Mercado Monetario", new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), "Cuentas de Mercado Monetario" },
+                    { 3, 1ul, "PF", "Cuentas a Plazo Fijo", new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), "Cuentas a Plazo Fijo" },
+                    { 2, 1ul, "CC", "Cuentas Corriente", new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), "Cuentas Corriente" },
+                    { 1, 1ul, "CA", "Cuentas de Ahorros", new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601), "Cuentas de Ahorros" }
                 });
 
             migrationBuilder.InsertData(
                 table: "tipoempresa",
-                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc" },
+                columns: new[] { "id", "activo", "codigo", "descripcion", "fecha_creacion_utc", "fecha_modificacion_utc", "nombre" },
                 values: new object[,]
                 {
-                    { 2, 1ul, "SRL", "Sociedad de Responsabilidad Limitada", new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303), new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303) },
-                    { 1, 1ul, "SA", "Sociedad Anónima", new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303), new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303) },
-                    { 5, 1ul, "COOP", "Cooperativa", new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303), new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303) },
-                    { 4, 1ul, "SC", "Sociedad en Comandita", new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303), new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303) },
-                    { 3, 1ul, "SC", "Sociedad Colectiva", new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303), new DateTime(2024, 7, 11, 20, 51, 51, 203, DateTimeKind.Utc).AddTicks(9303) }
+                    { 2, 1ul, "SRL", "Sociedad de Responsabilidad Limitada", new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), "Sociedad de Responsabilidad Limitada" },
+                    { 1, 1ul, "SA", "Sociedad Anónima", new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), "Sociedad Anónima" },
+                    { 5, 1ul, "COOP", "Cooperativa", new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), "Cooperativa" },
+                    { 4, 1ul, "COM", "Sociedad en Comandita", new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), "Sociedad en Comandita" },
+                    { 3, 1ul, "SC", "Sociedad Colectiva", new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603), "Sociedad Colectiva" }
                 });
 
             migrationBuilder.InsertData(
@@ -885,36 +1040,36 @@ namespace Datos.Migrations
                 columns: new[] { "id", "activo", "descripcion", "direccion", "fecha_creacion_utc", "fecha_modificacion_utc", "idCategoriaBanco", "nombre", "telefono" },
                 values: new object[,]
                 {
-                    { 7, 1ul, "BANCO AMAZONAS S.A.", "AV. FRANCISCO DE ORELLANA 238 Y ALBERTO BORGES", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO AMAZONAS S.A.", "(04)2683-600" },
-                    { 30, 1ul, "ALMACENERA GUAYAQUIL CEM ALMAQUIL", "AV. 25 DE JULIO KM 4 1/2 VIA PUERTO MARITIMO", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 9, "ALMACENERA GUAYAQUIL CEM ALMAQUIL", "(04)2488-672" },
-                    { 4, 1ul, "ALMACENERA DEL ECUADOR S.A. ALMESA", "CADENA Y AV. MONSEÑOR DOMINGO, COMIN, FRENTE A LA CDLA. PRADERA II Y IIIJUNTO A LAS BODEGAS DE CONAUTO", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 9, "ALMACENERA DEL ECUADOR S.A. ALMESA", "(04)2490-070/ (04)2495-933" },
-                    { 2, 1ul, "ALMACENERA ALMACOPIO S.A.", "KM. 3 1/2 VIA DURAN TAMBO (ENTRANDO AV. TANASA)", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 9, "ALMACENERA ALMACOPIO S.A.", "(04)2800-114 - 2800-115" },
-                    { 1, 1ul, "BANCO PICHINCHA MIAMI AGENCY", "", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 8, "BANCO PICHINCHA MIAMI AGENCY", null },
-                    { 5, 1ul, "BANCO FINANCIERO DEL PERU", "", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "BANCO FINANCIERO DEL PERU", null },
-                    { 6, 1ul, "CITIBANK, N.A. SUCURSAL ECUADOR", "AV REPUBLICA DEL SALVADOR N36-230 Y AV NNUU", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "CITIBANK, N.A. SUCURSAL ECUADOR", "3939063" },
-                    { 29, 1ul, "BANCO DE LA UNION S.A.", "AV. 9 DE OCTUBRE Y MALECON", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO DE LA UNION S.A.", "2325151" },
-                    { 28, 1ul, "BANCO PROMERICA S.A.", "AV. FRANCISCO DE ORELLANA 240 Y AV. JOSE CASTILLO", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO PROMERICA S.A.", "2696000" },
-                    { 27, 1ul, "BANCO PROCREDIT S.A.", "AV. 10 DE AGOSTO N36-150 Y MURGEON", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO PROCREDIT S.A.", "2446000" },
-                    { 26, 1ul, "BANCO CAPITAL S.A.", "AV. 6 DE DICIEMBRE N24-600 Y COLON", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO CAPITAL S.A.", "2433650" },
-                    { 25, 1ul, "BANCO TERRITORIAL S.A.", "9 DE OCTUBRE 300 Y MALECON", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO TERRITORIAL S.A.", "2323700" },
-                    { 24, 1ul, "BANCO SOLIDARIO S.A.", "AV. AMAZONAS N36-69 Y COREA", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO SOLIDARIO S.A.", "(02) 3950600" },
-                    { 23, 1ul, "BANCO RIO S.A.", "VELEZ 303 Y CORDOVA ESQUINA", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO RIO S.A.", "2513140" },
-                    { 22, 1ul, "BANCO DE LA PRODUCCION S.A. PRODUBANCO", "AV. 12 DE OCTUBRE Y CAAMANO, EDIFICIO WORLD TRADE CENTER", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO DE LA PRODUCCION S.A. PRODUBANCO", "3988600" },
-                    { 3, 1ul, "ALMACENERA DEL AGRO S.A. (ALMAGRO)", "AV. 25 JULIO KM 4 1/2 VIA PTO MARITIMO", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 9, "ALMACENERA DEL AGRO S.A. (ALMAGRO)", "04-2484700 al 707" },
-                    { 20, 1ul, "BANCO SOLIDARIO S.A.", "AV. AMAZONAS N36-69 Y COREA", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO SOLIDARIO S.A.", "(02) 3950600" },
-                    { 21, 1ul, "BANCO COOPNACIONAL S.A.", "CAPITAN NAJERA 4210 Y YAHUACHI", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO COOPNACIONAL S.A.", "(04)2471118" },
-                    { 8, 1ul, "BANCO AUSTRO S.A.", "SUCRE Y BORRERO ESQ.", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO AUSTRO S.A.", "07831222" },
-                    { 10, 1ul, "BANCO BOLIVARIANO C.A.", "JUNIN 200 Y PANAMA", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO BOLIVARIANO C.A.", "2305000" },
-                    { 11, 1ul, "BANCO COMERCIAL DE MANABI S.A.", "AV. REALES TAMARINDO Y ALAMOS", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO COMERCIAL DE MANABI S.A.", "05 632 222 / 632 223" },
-                    { 12, 1ul, "BANCO DEL LITORAL S.A.", "MALECON 514 E IMBABURA", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO DEL LITORAL S.A.", "59342313151" },
-                    { 13, 1ul, "BANCO GENERAL RUMIÑAHUI S.A.", "AV. REPUBLICA E37-55 Y MARTIN CARRION", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO GENERAL RUMIÑAHUI S.A.", "2509-929 2221-372" },
-                    { 9, 1ul, "BANCO GUAYAQUIL S.A.", "CALLES PICHINCHA 105-107 Y FRANCISCO DE PAULA YCAZA", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO GUAYAQUIL S.A.", "(04)3730-100" },
-                    { 15, 1ul, "BANCO DE LOJA S.A.", "ROCAFUERTE y BOLIVAR (ESQ.)", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO DE LOJA S.A.", "(07)2571 682" },
-                    { 16, 1ul, "BANCO DE MACHALA S.A.", "9 DE MAYO Y ROCAFUERTE ESQUINA", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO DE MACHALA S.A.", "59372930100" },
-                    { 17, 1ul, "BANCO DEL PACIFICO S.A.", "P.YCAZA 200 ENTRE PEDRO CARBO Y PICHINCHA", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO DEL PACIFICO S.A.", "(04)2328333 -2566010" },
-                    { 18, 1ul, "BANCO PICHINCHA C.A.", "AV. AMAZONAS 4560 Y PEREIRA", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO PICHINCHA C.A.", "980-980/981" },
-                    { 14, 1ul, "BANCO INTERNACIONAL S.A.", "AV. PATRIA E4-21 Y 9 DE OCTUBRE", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO INTERNACIONAL S.A.", "(02)565-547548/549/550" },
-                    { 19, 1ul, "BANCO DE LA PRODUCCION S.A.", "AV. SIMON BOLIVAR Y VIA A NAYON, COMPLEJO CORPORATIVO EKOPARK, TORRE I", new DateTime(2024, 7, 11, 20, 51, 51, 132, DateTimeKind.Utc).AddTicks(3231), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "BANCO DE LA PRODUCCION S.A.", "2563-900" }
+                    { 7, 1ul, "BANCO AMAZONAS S.A.", "AV. FRANCISCO DE ORELLANA 238 Y ALBERTO BORGES", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO AMAZONAS S.A.", "(04)2683-600" },
+                    { 30, 1ul, "ALMACENERA GUAYAQUIL CEM ALMAQUIL", "AV. 25 DE JULIO KM 4 1/2 VIA PUERTO MARITIMO", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 9, "ALMACENERA GUAYAQUIL CEM ALMAQUIL", "(04)2488-672" },
+                    { 4, 1ul, "ALMACENERA DEL ECUADOR S.A. ALMESA", "CADENA Y AV. MONSEÑOR DOMINGO, COMIN, FRENTE A LA CDLA. PRADERA II Y IIIJUNTO A LAS BODEGAS DE CONAUTO", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 9, "ALMACENERA DEL ECUADOR S.A. ALMESA", "(04)2490-070/ (04)2495-933" },
+                    { 2, 1ul, "ALMACENERA ALMACOPIO S.A.", "KM. 3 1/2 VIA DURAN TAMBO (ENTRANDO AV. TANASA)", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 9, "ALMACENERA ALMACOPIO S.A.", "(04)2800-114 - 2800-115" },
+                    { 1, 1ul, "BANCO PICHINCHA MIAMI AGENCY", "", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 8, "BANCO PICHINCHA MIAMI AGENCY", null },
+                    { 5, 1ul, "BANCO FINANCIERO DEL PERU", "", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 5, "BANCO FINANCIERO DEL PERU", null },
+                    { 6, 1ul, "CITIBANK, N.A. SUCURSAL ECUADOR", "AV REPUBLICA DEL SALVADOR N36-230 Y AV NNUU", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 4, "CITIBANK, N.A. SUCURSAL ECUADOR", "3939063" },
+                    { 29, 1ul, "BANCO DE LA UNION S.A.", "AV. 9 DE OCTUBRE Y MALECON", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO DE LA UNION S.A.", "2325151" },
+                    { 28, 1ul, "BANCO PROMERICA S.A.", "AV. FRANCISCO DE ORELLANA 240 Y AV. JOSE CASTILLO", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO PROMERICA S.A.", "2696000" },
+                    { 27, 1ul, "BANCO PROCREDIT S.A.", "AV. 10 DE AGOSTO N36-150 Y MURGEON", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO PROCREDIT S.A.", "2446000" },
+                    { 26, 1ul, "BANCO CAPITAL S.A.", "AV. 6 DE DICIEMBRE N24-600 Y COLON", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO CAPITAL S.A.", "2433650" },
+                    { 25, 1ul, "BANCO TERRITORIAL S.A.", "9 DE OCTUBRE 300 Y MALECON", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO TERRITORIAL S.A.", "2323700" },
+                    { 24, 1ul, "BANCO SOLIDARIO S.A.", "AV. AMAZONAS N36-69 Y COREA", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO SOLIDARIO S.A.", "(02) 3950600" },
+                    { 23, 1ul, "BANCO RIO S.A.", "VELEZ 303 Y CORDOVA ESQUINA", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO RIO S.A.", "2513140" },
+                    { 22, 1ul, "BANCO DE LA PRODUCCION S.A. PRODUBANCO", "AV. 12 DE OCTUBRE Y CAAMANO, EDIFICIO WORLD TRADE CENTER", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO DE LA PRODUCCION S.A. PRODUBANCO", "3988600" },
+                    { 3, 1ul, "ALMACENERA DEL AGRO S.A. (ALMAGRO)", "AV. 25 JULIO KM 4 1/2 VIA PTO MARITIMO", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 9, "ALMACENERA DEL AGRO S.A. (ALMAGRO)", "04-2484700 al 707" },
+                    { 20, 1ul, "BANCO SOLIDARIO S.A.", "AV. AMAZONAS N36-69 Y COREA", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO SOLIDARIO S.A.", "(02) 3950600" },
+                    { 21, 1ul, "BANCO COOPNACIONAL S.A.", "CAPITAN NAJERA 4210 Y YAHUACHI", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO COOPNACIONAL S.A.", "(04)2471118" },
+                    { 8, 1ul, "BANCO AUSTRO S.A.", "SUCRE Y BORRERO ESQ.", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO AUSTRO S.A.", "07831222" },
+                    { 10, 1ul, "BANCO BOLIVARIANO C.A.", "JUNIN 200 Y PANAMA", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO BOLIVARIANO C.A.", "2305000" },
+                    { 11, 1ul, "BANCO COMERCIAL DE MANABI S.A.", "AV. REALES TAMARINDO Y ALAMOS", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO COMERCIAL DE MANABI S.A.", "05 632 222 / 632 223" },
+                    { 12, 1ul, "BANCO DEL LITORAL S.A.", "MALECON 514 E IMBABURA", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO DEL LITORAL S.A.", "59342313151" },
+                    { 13, 1ul, "BANCO GENERAL RUMIÑAHUI S.A.", "AV. REPUBLICA E37-55 Y MARTIN CARRION", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO GENERAL RUMIÑAHUI S.A.", "2509-929 2221-372" },
+                    { 9, 1ul, "BANCO GUAYAQUIL S.A.", "CALLES PICHINCHA 105-107 Y FRANCISCO DE PAULA YCAZA", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO GUAYAQUIL S.A.", "(04)3730-100" },
+                    { 15, 1ul, "BANCO DE LOJA S.A.", "ROCAFUERTE y BOLIVAR (ESQ.)", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO DE LOJA S.A.", "(07)2571 682" },
+                    { 16, 1ul, "BANCO DE MACHALA S.A.", "9 DE MAYO Y ROCAFUERTE ESQUINA", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO DE MACHALA S.A.", "59372930100" },
+                    { 17, 1ul, "BANCO DEL PACIFICO S.A.", "P.YCAZA 200 ENTRE PEDRO CARBO Y PICHINCHA", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO DEL PACIFICO S.A.", "(04)2328333 -2566010" },
+                    { 18, 1ul, "BANCO PICHINCHA C.A.", "AV. AMAZONAS 4560 Y PEREIRA", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO PICHINCHA C.A.", "980-980/981" },
+                    { 14, 1ul, "BANCO INTERNACIONAL S.A.", "AV. PATRIA E4-21 Y 9 DE OCTUBRE", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO INTERNACIONAL S.A.", "(02)565-547548/549/550" },
+                    { 19, 1ul, "BANCO DE LA PRODUCCION S.A.", "AV. SIMON BOLIVAR Y VIA A NAYON, COMPLEJO CORPORATIVO EKOPARK, TORRE I", new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707), null, 1, "BANCO DE LA PRODUCCION S.A.", "2563-900" }
                 });
 
             migrationBuilder.InsertData(
@@ -1208,6 +1363,31 @@ namespace Datos.Migrations
                 column: "idTipocuenta");
 
             migrationBuilder.CreateIndex(
+                name: "IX_descuento_presupuesto_detalle_idDescuento",
+                table: "descuento_presupuesto_detalle",
+                column: "idDescuento");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_descuento_presupuesto_detalle_idPresupuestoDetalle",
+                table: "descuento_presupuesto_detalle",
+                column: "idPresupuestoDetalle");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DescuentoProductoCategoria_CategoriaProductoId",
+                table: "DescuentoProductoCategoria",
+                column: "CategoriaProductoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DescuentoProductoCategoria_DescuentoId",
+                table: "DescuentoProductoCategoria",
+                column: "DescuentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DescuentoProductoCategoria_ProductoId",
+                table: "DescuentoProductoCategoria",
+                column: "ProductoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_empleado_idCiudad",
                 table: "empleado",
                 column: "idCiudad");
@@ -1226,6 +1406,21 @@ namespace Datos.Migrations
                 name: "IX_evento_IdCiudad",
                 table: "evento",
                 column: "IdCiudad");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImpuestoProductoCategoria_IdCategoriaProducto",
+                table: "ImpuestoProductoCategoria",
+                column: "IdCategoriaProducto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImpuestoProductoCategoria_IdImpuesto",
+                table: "ImpuestoProductoCategoria",
+                column: "IdImpuesto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImpuestoProductoCategoria_IdProducto",
+                table: "ImpuestoProductoCategoria",
+                column: "IdProducto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_inventario_idProducto",
@@ -1269,14 +1464,14 @@ namespace Datos.Migrations
                 column: "idServicio");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productos_IdCategoriaProducto",
+                name: "IX_productos_idCategoriaProducto",
                 table: "productos",
-                column: "IdCategoriaProducto");
+                column: "idCategoriaProducto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productos_IdTipoProducto",
+                name: "IX_productos_idTipoProducto",
                 table: "productos",
-                column: "IdTipoProducto");
+                column: "idTipoProducto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_proveedor_idCiudad",
@@ -1334,13 +1529,19 @@ namespace Datos.Migrations
                 name: "cliente");
 
             migrationBuilder.DropTable(
+                name: "descuento_presupuesto_detalle");
+
+            migrationBuilder.DropTable(
+                name: "DescuentoProductoCategoria");
+
+            migrationBuilder.DropTable(
                 name: "empleado");
 
             migrationBuilder.DropTable(
-                name: "inventario");
+                name: "ImpuestoProductoCategoria");
 
             migrationBuilder.DropTable(
-                name: "presupuesto_detalle");
+                name: "inventario");
 
             migrationBuilder.DropTable(
                 name: "proveedor");
@@ -1352,10 +1553,13 @@ namespace Datos.Migrations
                 name: "atributos");
 
             migrationBuilder.DropTable(
-                name: "presupuesto");
+                name: "presupuesto_detalle");
 
             migrationBuilder.DropTable(
-                name: "productos");
+                name: "Descuento");
+
+            migrationBuilder.DropTable(
+                name: "Impuesto");
 
             migrationBuilder.DropTable(
                 name: "cuenta");
@@ -1367,9 +1571,6 @@ namespace Datos.Migrations
                 name: "FormaPagos");
 
             migrationBuilder.DropTable(
-                name: "servicio");
-
-            migrationBuilder.DropTable(
                 name: "persona");
 
             migrationBuilder.DropTable(
@@ -1379,13 +1580,13 @@ namespace Datos.Migrations
                 name: "categorias_atributo");
 
             migrationBuilder.DropTable(
-                name: "evento");
+                name: "presupuesto");
 
             migrationBuilder.DropTable(
-                name: "categorias_producto");
+                name: "productos");
 
             migrationBuilder.DropTable(
-                name: "tipo_producto");
+                name: "servicio");
 
             migrationBuilder.DropTable(
                 name: "bancos");
@@ -1397,13 +1598,22 @@ namespace Datos.Migrations
                 name: "tipoempresa");
 
             migrationBuilder.DropTable(
+                name: "evento");
+
+            migrationBuilder.DropTable(
+                name: "categorias_producto");
+
+            migrationBuilder.DropTable(
+                name: "tipo_producto");
+
+            migrationBuilder.DropTable(
                 name: "tipo_servicio");
 
             migrationBuilder.DropTable(
-                name: "ciudad");
+                name: "categorias_bancos");
 
             migrationBuilder.DropTable(
-                name: "categorias_bancos");
+                name: "ciudad");
 
             migrationBuilder.DropTable(
                 name: "provincias");

@@ -8,7 +8,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Proveedor> entity)
         {
-            entity.ToTable("proveedor"); // 
+            entity.ToTable("proveedor"); //
 
             entity.HasKey(e => e.Id)
                 .HasName("PRIMARY");
@@ -17,7 +17,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("id") // Nombre de la columna en minúsculas y específico para Proveedor
                 .HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.IdPersona)
                 .HasColumnName("idPersona")
@@ -48,7 +48,6 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("int")
                 .IsRequired();
 
-  
             entity.Property(e => e.IdEmpresa)
                 .HasColumnName("idempresa")
                 .HasColumnType("int")
@@ -61,12 +60,12 @@ namespace Datos.AplicationDB.Configurations
 
             // Relaciones con otras entidades
             entity.HasOne(d => d.IdCiudadNavigation)
-                .WithMany(e=>e.Proveedors)
+                .WithMany(e => e.Proveedors)
                 .HasForeignKey(d => d.IdCiudad)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("proveedor_ciudadfk");
             entity.HasOne(d => d.FormaPago)
-                .WithMany(e=>e.Proveedores)
+                .WithMany(e => e.Proveedores)
                 .HasForeignKey(d => d.IdFormaPago)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("proveedor_IdFormaPagofk");
@@ -78,13 +77,13 @@ namespace Datos.AplicationDB.Configurations
                 .HasConstraintName("proveedor_cuentafk");
 
             entity.HasOne(d => d.IdEmpresaNavigation)
-                .WithMany(e=>e.Proveedores)
+                .WithMany(e => e.Proveedores)
                 .HasForeignKey(d => d.IdEmpresa)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("proveedor_empresafk");
 
             entity.HasOne(d => d.IdPersonaNavigation)
-                .WithMany(e=>e.Proveedores)
+                .WithMany(e => e.Proveedores)
                 .HasForeignKey(d => d.IdPersona)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("proveedor_personafk");
@@ -95,18 +94,17 @@ namespace Datos.AplicationDB.Configurations
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("proveedor_serviciofk");
 
-            // 
+            //
             entity.Property(e => e.FechaCreacionUTC)
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
                 .IsRequired();
 
             entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
- 
+               .HasColumnName("fecha_modificacion_utc")
+               .HasColumnType("datetime").IsRequired(false);
             entity.HasQueryFilter(e => e.Activo);
-            // 
+            //
             OnConfigurePartial(entity);
         }
 

@@ -8,7 +8,7 @@ namespace Datos.AplicationDB.Configurations
     {
         public void Configure(EntityTypeBuilder<Evento> entity)
         {
-            entity.ToTable("evento"); 
+            entity.ToTable("evento");
 
             entity.HasKey(e => e.Id)
                 .HasName("PK_evento");
@@ -16,16 +16,15 @@ namespace Datos.AplicationDB.Configurations
             entity.Property(e => e.Id)
                 .HasColumnName("id").HasColumnType("int")
                 .IsRequired()
-                .ValueGeneratedOnAdd(); 
+                .ValueGeneratedOnAdd();
 
             entity.Property(e => e.Nombre)
                 .HasColumnName("nombre")
-                .HasColumnType("VARCHAR(200)") 
+                .HasColumnType("VARCHAR(200)")
                 .IsRequired();
-            
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
-                .IsRequired(false);
+
+           entity.Property(e => e.Descripcion)  .IsRequired(false)
+                .HasColumnName("descripcion");
 
             entity.Property(e => e.FechaEvento)
                 .HasColumnName("fecha_evento")
@@ -59,7 +58,7 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("datetime");
 
             entity.HasOne(e => e.CiudadNavegation)
-                .WithMany(e=>e.Eventos)
+                .WithMany(e => e.Eventos)
                 .HasForeignKey(e => e.IdCiudad)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_evento_ciudad");
@@ -70,8 +69,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
-
+                .HasColumnType("datetime").IsRequired(false);
 
             entity.HasQueryFilter(e => e.Activo);
         }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Datos.AplicationDB.Configurations
 {
-    partial class CategoriaBancoConfiguration : IEntityTypeConfiguration<CategoriaBanco>
+    internal partial class CategoriaBancoConfiguration : IEntityTypeConfiguration<CategoriaBanco>
     {
         public void Configure(EntityTypeBuilder<CategoriaBanco> builder)
         {
@@ -41,10 +41,9 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
                 .IsRequired();
-
             builder.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+                .HasColumnType("datetime").IsRequired(false);
 
             builder.HasQueryFilter(e => e.Activo);
 
@@ -59,6 +58,6 @@ namespace Datos.AplicationDB.Configurations
             OnConfigurePartial(builder);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<CategoriaBanco> entity);
+         partial void OnConfigurePartial(EntityTypeBuilder<CategoriaBanco> entity);
     }
 }

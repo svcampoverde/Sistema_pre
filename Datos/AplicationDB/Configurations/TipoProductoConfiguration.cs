@@ -34,19 +34,19 @@ namespace Datos.AplicationDB.Configurations
                 .IsRequired();
 
             entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
-
+                  .HasColumnName("fecha_modificacion_utc")
+                  .HasColumnType("datetime").IsRequired(false);
             // Configuración de columnas de TipoProducto
             entity.Property(e => e.Codigo)
                 .HasColumnName("codigo")
                 .HasColumnType("VARCHAR(50)")
                 .IsRequired();
-
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
-                .HasColumnType("VARCHAR(200)")
-                .IsRequired();
+            entity.Property(e => e.Nombre)
+               .HasColumnName("nombre")
+               .HasColumnType("varchar(255)")
+                       .IsRequired();
+           entity.Property(e => e.Descripcion)  .IsRequired(false)
+                  .HasColumnName("descripcion");
 
             // Relación uno a muchos con Producto
             entity.HasMany(e => e.Productos)

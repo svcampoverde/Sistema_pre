@@ -58,7 +58,7 @@ namespace Datos.AplicationDB.Configurations
 
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+                .HasColumnType("datetime").IsRequired(false);
 
             // Configuración de relación con Producto
             entity.HasOne(e => e.Producto)

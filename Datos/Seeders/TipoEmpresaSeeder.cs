@@ -13,6 +13,7 @@ namespace Datos.Seeders
                 {
                     Id = 1,
                     Codigo = "SA",
+                    Nombre = "Sociedad Anónima",
                     Descripcion = "Sociedad Anónima",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,
@@ -22,6 +23,7 @@ namespace Datos.Seeders
                 {
                     Id = 2,
                     Codigo = "SRL",
+                    Nombre = "Sociedad de Responsabilidad Limitada",
                     Descripcion = "Sociedad de Responsabilidad Limitada",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,
@@ -31,6 +33,7 @@ namespace Datos.Seeders
                 {
                     Id = 3,
                     Codigo = "SC",
+                    Nombre = "Sociedad Colectiva",
                     Descripcion = "Sociedad Colectiva",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,
@@ -39,7 +42,8 @@ namespace Datos.Seeders
                 new TipoEmpresa
                 {
                     Id = 4,
-                    Codigo = "SC",
+                    Codigo = "COM",
+                    Nombre = "Sociedad en Comandita",
                     Descripcion = "Sociedad en Comandita",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,
@@ -49,6 +53,7 @@ namespace Datos.Seeders
                 {
                     Id = 5,
                     Codigo = "COOP",
+                    Nombre = "Cooperativa",
                     Descripcion = "Cooperativa",
                     Activo = true,
                     FechaCreacionUTC = DateTime.UtcNow,

@@ -32,7 +32,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -71,7 +71,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -109,7 +109,6 @@ namespace Datos.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
                         .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
                         .HasMaxLength(200);
@@ -123,7 +122,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -155,8 +154,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO PICHINCHA MIAMI AGENCY",
                             Direccion = "",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 8,
                             Nombre = "BANCO PICHINCHA MIAMI AGENCY"
                         },
@@ -166,8 +164,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "ALMACENERA ALMACOPIO S.A.",
                             Direccion = "KM. 3 1/2 VIA DURAN TAMBO (ENTRANDO AV. TANASA)",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 9,
                             Nombre = "ALMACENERA ALMACOPIO S.A.",
                             Telefono = "(04)2800-114 - 2800-115"
@@ -178,8 +175,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "ALMACENERA DEL AGRO S.A. (ALMAGRO)",
                             Direccion = "AV. 25 JULIO KM 4 1/2 VIA PTO MARITIMO",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 9,
                             Nombre = "ALMACENERA DEL AGRO S.A. (ALMAGRO)",
                             Telefono = "04-2484700 al 707"
@@ -190,8 +186,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "ALMACENERA DEL ECUADOR S.A. ALMESA",
                             Direccion = "CADENA Y AV. MONSEÑOR DOMINGO, COMIN, FRENTE A LA CDLA. PRADERA II Y IIIJUNTO A LAS BODEGAS DE CONAUTO",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 9,
                             Nombre = "ALMACENERA DEL ECUADOR S.A. ALMESA",
                             Telefono = "(04)2490-070/ (04)2495-933"
@@ -202,8 +197,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO FINANCIERO DEL PERU",
                             Direccion = "",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 5,
                             Nombre = "BANCO FINANCIERO DEL PERU"
                         },
@@ -213,8 +207,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "CITIBANK, N.A. SUCURSAL ECUADOR",
                             Direccion = "AV REPUBLICA DEL SALVADOR N36-230 Y AV NNUU",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 4,
                             Nombre = "CITIBANK, N.A. SUCURSAL ECUADOR",
                             Telefono = "3939063"
@@ -225,8 +218,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO AMAZONAS S.A.",
                             Direccion = "AV. FRANCISCO DE ORELLANA 238 Y ALBERTO BORGES",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO AMAZONAS S.A.",
                             Telefono = "(04)2683-600"
@@ -237,8 +229,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO AUSTRO S.A.",
                             Direccion = "SUCRE Y BORRERO ESQ.",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO AUSTRO S.A.",
                             Telefono = "07831222"
@@ -249,8 +240,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO GUAYAQUIL S.A.",
                             Direccion = "CALLES PICHINCHA 105-107 Y FRANCISCO DE PAULA YCAZA",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO GUAYAQUIL S.A.",
                             Telefono = "(04)3730-100"
@@ -261,8 +251,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO BOLIVARIANO C.A.",
                             Direccion = "JUNIN 200 Y PANAMA",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO BOLIVARIANO C.A.",
                             Telefono = "2305000"
@@ -273,8 +262,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO COMERCIAL DE MANABI S.A.",
                             Direccion = "AV. REALES TAMARINDO Y ALAMOS",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO COMERCIAL DE MANABI S.A.",
                             Telefono = "05 632 222 / 632 223"
@@ -285,8 +273,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO DEL LITORAL S.A.",
                             Direccion = "MALECON 514 E IMBABURA",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO DEL LITORAL S.A.",
                             Telefono = "59342313151"
@@ -297,8 +284,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO GENERAL RUMIÑAHUI S.A.",
                             Direccion = "AV. REPUBLICA E37-55 Y MARTIN CARRION",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO GENERAL RUMIÑAHUI S.A.",
                             Telefono = "2509-929 2221-372"
@@ -309,8 +295,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO INTERNACIONAL S.A.",
                             Direccion = "AV. PATRIA E4-21 Y 9 DE OCTUBRE",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO INTERNACIONAL S.A.",
                             Telefono = "(02)565-547548/549/550"
@@ -321,8 +306,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO DE LOJA S.A.",
                             Direccion = "ROCAFUERTE y BOLIVAR (ESQ.)",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO DE LOJA S.A.",
                             Telefono = "(07)2571 682"
@@ -333,8 +317,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO DE MACHALA S.A.",
                             Direccion = "9 DE MAYO Y ROCAFUERTE ESQUINA",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO DE MACHALA S.A.",
                             Telefono = "59372930100"
@@ -345,8 +328,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO DEL PACIFICO S.A.",
                             Direccion = "P.YCAZA 200 ENTRE PEDRO CARBO Y PICHINCHA",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO DEL PACIFICO S.A.",
                             Telefono = "(04)2328333 -2566010"
@@ -357,8 +339,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO PICHINCHA C.A.",
                             Direccion = "AV. AMAZONAS 4560 Y PEREIRA",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO PICHINCHA C.A.",
                             Telefono = "980-980/981"
@@ -369,8 +350,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO DE LA PRODUCCION S.A.",
                             Direccion = "AV. SIMON BOLIVAR Y VIA A NAYON, COMPLEJO CORPORATIVO EKOPARK, TORRE I",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO DE LA PRODUCCION S.A.",
                             Telefono = "2563-900"
@@ -381,8 +361,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO SOLIDARIO S.A.",
                             Direccion = "AV. AMAZONAS N36-69 Y COREA",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO SOLIDARIO S.A.",
                             Telefono = "(02) 3950600"
@@ -393,8 +372,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO COOPNACIONAL S.A.",
                             Direccion = "CAPITAN NAJERA 4210 Y YAHUACHI",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO COOPNACIONAL S.A.",
                             Telefono = "(04)2471118"
@@ -405,8 +383,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO DE LA PRODUCCION S.A. PRODUBANCO",
                             Direccion = "AV. 12 DE OCTUBRE Y CAAMANO, EDIFICIO WORLD TRADE CENTER",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO DE LA PRODUCCION S.A. PRODUBANCO",
                             Telefono = "3988600"
@@ -417,8 +394,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO RIO S.A.",
                             Direccion = "VELEZ 303 Y CORDOVA ESQUINA",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO RIO S.A.",
                             Telefono = "2513140"
@@ -429,8 +405,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO SOLIDARIO S.A.",
                             Direccion = "AV. AMAZONAS N36-69 Y COREA",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO SOLIDARIO S.A.",
                             Telefono = "(02) 3950600"
@@ -441,8 +416,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO TERRITORIAL S.A.",
                             Direccion = "9 DE OCTUBRE 300 Y MALECON",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO TERRITORIAL S.A.",
                             Telefono = "2323700"
@@ -453,8 +427,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO CAPITAL S.A.",
                             Direccion = "AV. 6 DE DICIEMBRE N24-600 Y COLON",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO CAPITAL S.A.",
                             Telefono = "2433650"
@@ -465,8 +438,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO PROCREDIT S.A.",
                             Direccion = "AV. 10 DE AGOSTO N36-150 Y MURGEON",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO PROCREDIT S.A.",
                             Telefono = "2446000"
@@ -477,8 +449,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO PROMERICA S.A.",
                             Direccion = "AV. FRANCISCO DE ORELLANA 240 Y AV. JOSE CASTILLO",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO PROMERICA S.A.",
                             Telefono = "2696000"
@@ -489,8 +460,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "BANCO DE LA UNION S.A.",
                             Direccion = "AV. 9 DE OCTUBRE Y MALECON",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 1,
                             Nombre = "BANCO DE LA UNION S.A.",
                             Telefono = "2325151"
@@ -501,8 +471,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Descripcion = "ALMACENERA GUAYAQUIL CEM ALMAQUIL",
                             Direccion = "AV. 25 DE JULIO KM 4 1/2 VIA PUERTO MARITIMO",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 642, DateTimeKind.Utc).AddTicks(2655),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 459, DateTimeKind.Utc).AddTicks(3707),
                             IdCategoriaBanco = 9,
                             Nombre = "ALMACENERA GUAYAQUIL CEM ALMAQUIL",
                             Telefono = "(04)2488-672"
@@ -525,17 +494,19 @@ namespace Datos.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
-                        .HasColumnType("VARCHAR(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -566,7 +537,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -587,8 +558,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "PRIVN",
                             Descripcion = "Bancos privados nacionales",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 649, DateTimeKind.Utc).AddTicks(2678),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708),
                             Nombre = "BANCOS PRIVADOS NACIONALES"
                         },
                         new
@@ -597,8 +567,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "PUB",
                             Descripcion = "Banco público",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 649, DateTimeKind.Utc).AddTicks(2678),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708),
                             Nombre = "CASAS DE CAMBIO"
                         },
                         new
@@ -607,8 +576,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "MICRO",
                             Descripcion = "Banco de microfinanzas",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 649, DateTimeKind.Utc).AddTicks(2678),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708),
                             Nombre = "COMPAÑIAS DE TITULARIZACION"
                         },
                         new
@@ -617,8 +585,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SAVINGS",
                             Descripcion = "Banco enfocado en cuentas de ahorro",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 649, DateTimeKind.Utc).AddTicks(2678),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708),
                             Nombre = "BANCOS PRIVADOS EXTRANJEROS"
                         },
                         new
@@ -627,8 +594,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "COMM",
                             Descripcion = "Banco que ofrece una gama completa de servicios financieros",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 649, DateTimeKind.Utc).AddTicks(2678),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708),
                             Nombre = "BANCOS OFF SHORE"
                         },
                         new
@@ -637,8 +603,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "COOP",
                             Descripcion = "Banco que opera bajo una estructura cooperativa",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 649, DateTimeKind.Utc).AddTicks(2678),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708),
                             Nombre = "OFIC. REPRESENTACION BANCOS EXTRANJEROS"
                         },
                         new
@@ -647,8 +612,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "COOP",
                             Descripcion = "Banco que opera bajo una estructura cooperativa",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 649, DateTimeKind.Utc).AddTicks(2678),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708),
                             Nombre = "BUROS DE INFORMACION CREDITICIA"
                         },
                         new
@@ -657,8 +621,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "AGN",
                             Descripcion = "Agencia que opera bajo la estructura de agencia",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 649, DateTimeKind.Utc).AddTicks(2678),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708),
                             Nombre = "AGENCIA DE BANCO NACIONAL EN EL EXTERIOR"
                         },
                         new
@@ -667,8 +630,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "AGD",
                             Descripcion = "ALMACENES GENERALES DE DEPOSITOS",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 649, DateTimeKind.Utc).AddTicks(2678),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 467, DateTimeKind.Utc).AddTicks(3708),
                             Nombre = "ALMACENES GENERALES DE DEPOSITOS"
                         });
                 });
@@ -691,15 +653,18 @@ namespace Datos.Migrations
 
                     b.Property<string>("Descripcion")
                         .HasColumnName("descripcion")
-                        .HasColumnType("VARCHAR(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
@@ -713,8 +678,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "ELECT",
                             Descripcion = "Electrónicos",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         },
                         new
                         {
@@ -722,8 +686,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "HOME_APPL",
                             Descripcion = "Electrodomésticos",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         },
                         new
                         {
@@ -731,8 +694,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "APPAREL",
                             Descripcion = "Ropa y calzado",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         },
                         new
                         {
@@ -740,8 +702,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "BEAUTY",
                             Descripcion = "Belleza y cuidado personal",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         },
                         new
                         {
@@ -749,8 +710,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SPORTS",
                             Descripcion = "Deportes y aire libre",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         },
                         new
                         {
@@ -758,8 +718,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "TOYS",
                             Descripcion = "Juguetes y juegos",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         },
                         new
                         {
@@ -767,8 +726,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "BOOKS",
                             Descripcion = "Libros y audiolibros",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         },
                         new
                         {
@@ -776,8 +734,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "GROCERY",
                             Descripcion = "Abarrotes y supermercado",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         },
                         new
                         {
@@ -785,8 +742,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "AUTOMOTIVE",
                             Descripcion = "Automotriz",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         },
                         new
                         {
@@ -794,8 +750,7 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "PET_SUPPLIES",
                             Descripcion = "Suministros para mascotas",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 664, DateTimeKind.Utc).AddTicks(2684),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 498, DateTimeKind.Utc).AddTicks(1602)
                         });
                 });
 
@@ -2192,7 +2147,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -2246,7 +2201,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -2273,6 +2228,117 @@ namespace Datos.Migrations
                     b.ToTable("cuenta");
                 });
 
+            modelBuilder.Entity("Datos.Models.Descuento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("EsPorcentaje")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("FechaCreacionUTC")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("FechaModificacionUTC")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<decimal>("Tasa")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Descuento");
+                });
+
+            modelBuilder.Entity("Datos.Models.DescuentoPresupuestoDetalle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<ulong>("Activo")
+                        .HasColumnName("activo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("FechaCreacionUTC")
+                        .HasColumnName("fecha_creacion_utc")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("FechaModificacionUTC")
+                        .HasColumnName("fecha_modificacion_utc")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("IdDescuento")
+                        .HasColumnName("idDescuento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPresupuestoDetalle")
+                        .HasColumnName("idPresupuestoDetalle")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdDescuento");
+
+                    b.HasIndex("IdPresupuestoDetalle");
+
+                    b.ToTable("descuento_presupuesto_detalle");
+                });
+
+            modelBuilder.Entity("Datos.Models.DescuentoProductoCategoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("CategoriaProductoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DescuentoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaCreacionUTC")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("FechaModificacionUTC")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("IdCategoriaProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdDescuento")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductoId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("TasaEspecifica")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaProductoId");
+
+                    b.HasIndex("DescuentoId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.ToTable("DescuentoProductoCategoria");
+                });
+
             modelBuilder.Entity("Datos.Models.Empleado", b =>
                 {
                     b.Property<int>("Id")
@@ -2297,7 +2363,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -2339,9 +2405,8 @@ namespace Datos.Migrations
                         .HasColumnType("VARCHAR(100)");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
-                        .HasColumnType("VARCHAR(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Direccion")
                         .HasColumnName("direccion")
@@ -2351,7 +2416,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -2387,9 +2452,8 @@ namespace Datos.Migrations
                         .HasColumnType("VARCHAR(100)");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
-                        .HasColumnType("VARCHAR(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Direccion")
                         .HasColumnName("direccion")
@@ -2403,12 +2467,17 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_evento")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
                     b.Property<int>("IdCiudad")
                         .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnName("nombre")
+                        .HasColumnType("VARCHAR(200)");
 
                     b.Property<string>("Promotor")
                         .HasColumnName("promotor")
@@ -2440,7 +2509,7 @@ namespace Datos.Migrations
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Nombre")
@@ -2449,6 +2518,81 @@ namespace Datos.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FormaPagos");
+                });
+
+            modelBuilder.Entity("Datos.Models.Impuesto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<ulong>("Activo")
+                        .HasColumnName("activo")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("EsPorcentaje")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("FechaCreacionUTC")
+                        .HasColumnName("fecha_creacion_utc")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("FechaModificacionUTC")
+                        .HasColumnName("fecha_modificacion_utc")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
+                        .HasMaxLength(100);
+
+                    b.Property<decimal>("Tasa")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Impuesto");
+                });
+
+            modelBuilder.Entity("Datos.Models.ImpuestoProductoCategoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<ulong>("Activo")
+                        .HasColumnName("activo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("FechaCreacionUTC")
+                        .HasColumnName("fecha_creacion_utc")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("FechaModificacionUTC")
+                        .HasColumnName("fecha_modificacion_utc")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("IdCategoriaProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdImpuesto")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdProducto")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("TasaEspecifica")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCategoriaProducto");
+
+                    b.HasIndex("IdImpuesto");
+
+                    b.HasIndex("IdProducto");
+
+                    b.ToTable("ImpuestoProductoCategoria");
                 });
 
             modelBuilder.Entity("Datos.Models.Inventario", b =>
@@ -2470,7 +2614,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -2539,7 +2683,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -2586,9 +2730,8 @@ namespace Datos.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
-                        .HasColumnType("VARCHAR(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<float>("Descuento")
                         .HasColumnName("descuento")
@@ -2609,7 +2752,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_evento")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -2650,11 +2793,14 @@ namespace Datos.Migrations
                         .HasColumnName("activo")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -2670,9 +2816,14 @@ namespace Datos.Migrations
                         .HasColumnName("idServicio")
                         .HasColumnType("int");
 
-                    b.Property<string>("Servicio")
-                        .HasColumnName("servicio")
-                        .HasColumnType("VARCHAR(200)");
+                    b.Property<decimal>("TotalDescuentos")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("TotalImpuestos")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("ValorBase")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
@@ -2693,8 +2844,9 @@ namespace Datos.Migrations
                         .HasColumnName("id")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Activo")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<ulong>("Activo")
+                        .HasColumnName("activo")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
@@ -2702,10 +2854,12 @@ namespace Datos.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FechaCreacionUTC")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnName("fecha_creacion_utc")
+                        .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateTime?>("FechaModificacionUTC")
+                        .HasColumnName("fecha_modificacion_utc")
+                        .HasColumnType("datetime");
 
                     b.Property<int>("IdCategoriaProducto")
                         .HasColumnName("idCategoriaProducto")
@@ -2753,7 +2907,7 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
@@ -2963,17 +3117,21 @@ namespace Datos.Migrations
                         .HasColumnType("VARCHAR(70)");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
-                        .HasColumnType("VARCHAR(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnName("nombre")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id")
                         .HasName("PK_rol");
@@ -2987,8 +3145,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "ADM",
                             Descripcion = "Administrador",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Administrador"
                         },
                         new
                         {
@@ -2996,8 +3154,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "USER",
                             Descripcion = "Usuario Estándar",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Usuario Estándar"
                         },
                         new
                         {
@@ -3005,8 +3163,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SUP",
                             Descripcion = "Supervisor",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Supervisor"
                         },
                         new
                         {
@@ -3014,8 +3172,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "MNGR",
                             Descripcion = "Gerente",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Gerente"
                         },
                         new
                         {
@@ -3023,8 +3181,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "HR",
                             Descripcion = "Recursos Humanos",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Recursos Humanos"
                         },
                         new
                         {
@@ -3032,8 +3190,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "ACCT",
                             Descripcion = "Contador",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Contador"
                         },
                         new
                         {
@@ -3041,8 +3199,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SALES",
                             Descripcion = "Ventas",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Ventas"
                         },
                         new
                         {
@@ -3050,8 +3208,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "IT",
                             Descripcion = "Tecnología de la Información",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Tecnología de la Información"
                         },
                         new
                         {
@@ -3059,8 +3217,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SUPPORT",
                             Descripcion = "Soporte Técnico",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Soporte Técnico"
                         },
                         new
                         {
@@ -3068,8 +3226,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "ANALYST",
                             Descripcion = "Analista",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Analista"
                         },
                         new
                         {
@@ -3077,8 +3235,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "PROJMAN",
                             Descripcion = "Gerente de Proyecto",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Gerente de Proyecto"
                         },
                         new
                         {
@@ -3086,8 +3244,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "MARKET",
                             Descripcion = "Marketing",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Marketing"
                         },
                         new
                         {
@@ -3095,8 +3253,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "CUSTSERV",
                             Descripcion = "Servicio al Cliente",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Servicio al Cliente"
                         },
                         new
                         {
@@ -3104,8 +3262,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "DEV",
                             Descripcion = "Desarrollador",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Desarrollador"
                         },
                         new
                         {
@@ -3113,8 +3271,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "QA",
                             Descripcion = "Aseguramiento de Calidad",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 722, DateTimeKind.Utc).AddTicks(9430),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 558, DateTimeKind.Utc).AddTicks(1600),
+                            Nombre = "Aseguramiento de Calidad"
                         });
                 });
 
@@ -3130,20 +3288,23 @@ namespace Datos.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
-                        .HasColumnType("VARCHAR(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
 
                     b.Property<int>("IdTipoServicio")
                         .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnName("nombre")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
@@ -3170,17 +3331,21 @@ namespace Datos.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnName("nombre")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
@@ -3194,8 +3359,9 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "CA",
                             Descripcion = "Cuentas de Ahorros",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            Nombre = "Cuentas de Ahorros"
                         },
                         new
                         {
@@ -3203,8 +3369,9 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "CC",
                             Descripcion = "Cuentas Corriente",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            Nombre = "Cuentas Corriente"
                         },
                         new
                         {
@@ -3212,8 +3379,9 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "PF",
                             Descripcion = "Cuentas a Plazo Fijo",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            Nombre = "Cuentas a Plazo Fijo"
                         },
                         new
                         {
@@ -3221,8 +3389,9 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "MM",
                             Descripcion = "Cuentas de Mercado Monetario",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            Nombre = "Cuentas de Mercado Monetario"
                         },
                         new
                         {
@@ -3230,8 +3399,9 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "IP",
                             Descripcion = "Cuentas de Inversión Personal",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 728, DateTimeKind.Utc).AddTicks(9429)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 565, DateTimeKind.Utc).AddTicks(1601),
+                            Nombre = "Cuentas de Inversión Personal"
                         });
                 });
 
@@ -3252,17 +3422,21 @@ namespace Datos.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnName("nombre")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
@@ -3276,8 +3450,9 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SA",
                             Descripcion = "Sociedad Anónima",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            Nombre = "Sociedad Anónima"
                         },
                         new
                         {
@@ -3285,8 +3460,9 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SRL",
                             Descripcion = "Sociedad de Responsabilidad Limitada",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            Nombre = "Sociedad de Responsabilidad Limitada"
                         },
                         new
                         {
@@ -3294,17 +3470,19 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SC",
                             Descripcion = "Sociedad Colectiva",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            Nombre = "Sociedad Colectiva"
                         },
                         new
                         {
                             Id = 4,
                             Activo = 1ul,
-                            Codigo = "SC",
+                            Codigo = "COM",
                             Descripcion = "Sociedad en Comandita",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            Nombre = "Sociedad en Comandita"
                         },
                         new
                         {
@@ -3312,8 +3490,9 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "COOP",
                             Descripcion = "Cooperativa",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428),
-                            FechaModificacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 731, DateTimeKind.Utc).AddTicks(9428)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            FechaModificacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 569, DateTimeKind.Utc).AddTicks(1603),
+                            Nombre = "Cooperativa"
                         });
                 });
 
@@ -3334,17 +3513,21 @@ namespace Datos.Migrations
                         .HasColumnType("VARCHAR(50)");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnName("descripcion")
-                        .HasColumnType("VARCHAR(200)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnName("nombre")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
@@ -3358,8 +3541,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SMARTPHONE",
                             Descripcion = "Smartphone",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Smartphone"
                         },
                         new
                         {
@@ -3367,8 +3550,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "LAPTOP",
                             Descripcion = "Laptop",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Laptop"
                         },
                         new
                         {
@@ -3376,8 +3559,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "TABLET",
                             Descripcion = "Tablet",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Tablet"
                         },
                         new
                         {
@@ -3385,8 +3568,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SMARTWATCH",
                             Descripcion = "Smartwatch",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Smartwatch"
                         },
                         new
                         {
@@ -3394,8 +3577,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "TV",
                             Descripcion = "TV",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "TV"
                         },
                         new
                         {
@@ -3403,8 +3586,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "CAMERA",
                             Descripcion = "Cámara Fotográfica",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Cámara Fotográfica"
                         },
                         new
                         {
@@ -3412,8 +3595,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "HEADPHONES",
                             Descripcion = "Audífonos",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Audífonos"
                         },
                         new
                         {
@@ -3421,8 +3604,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "PRINTER",
                             Descripcion = "Impresora",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Impresora"
                         },
                         new
                         {
@@ -3430,8 +3613,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "MONITOR",
                             Descripcion = "Monitor",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Monitor"
                         },
                         new
                         {
@@ -3439,8 +3622,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "ROUTER",
                             Descripcion = "Router",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Router"
                         },
                         new
                         {
@@ -3448,8 +3631,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "MICROWAVE",
                             Descripcion = "Microondas",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Microondas"
                         },
                         new
                         {
@@ -3457,8 +3640,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "FRIDGE",
                             Descripcion = "Refrigerador",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Refrigerador"
                         },
                         new
                         {
@@ -3466,8 +3649,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "WASHING_MACHINE",
                             Descripcion = "Lavadora",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Lavadora"
                         },
                         new
                         {
@@ -3475,8 +3658,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "DRYER",
                             Descripcion = "Secadora",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Secadora"
                         },
                         new
                         {
@@ -3484,8 +3667,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "BLENDER",
                             Descripcion = "Licuadora",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Licuadora"
                         },
                         new
                         {
@@ -3493,8 +3676,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "VACUUM_CLEANER",
                             Descripcion = "Aspiradora",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Aspiradora"
                         },
                         new
                         {
@@ -3502,8 +3685,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "COFFEE_MACHINE",
                             Descripcion = "Cafetera",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Cafetera"
                         },
                         new
                         {
@@ -3511,8 +3694,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "TOASTER",
                             Descripcion = "Tostadora",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Tostadora"
                         },
                         new
                         {
@@ -3520,8 +3703,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "IRON",
                             Descripcion = "Plancha",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Plancha"
                         },
                         new
                         {
@@ -3529,8 +3712,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "PROJECTOR",
                             Descripcion = "Proyector",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Proyector"
                         },
                         new
                         {
@@ -3538,8 +3721,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "FRUITS",
                             Descripcion = "Frutas",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Frutas"
                         },
                         new
                         {
@@ -3547,8 +3730,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "VEGETABLES",
                             Descripcion = "Verduras",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Verduras"
                         },
                         new
                         {
@@ -3556,8 +3739,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "DAIRY",
                             Descripcion = "Productos lácteos",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Productos lácteos"
                         },
                         new
                         {
@@ -3565,8 +3748,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "BAKERY",
                             Descripcion = "Panadería",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Panadería"
                         },
                         new
                         {
@@ -3574,8 +3757,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "MEAT",
                             Descripcion = "Carne y aves",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Carne y aves"
                         },
                         new
                         {
@@ -3583,8 +3766,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SEAFOOD",
                             Descripcion = "Mariscos",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Mariscos"
                         },
                         new
                         {
@@ -3592,8 +3775,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "BEVERAGES",
                             Descripcion = "Bebidas",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Bebidas"
                         },
                         new
                         {
@@ -3601,8 +3784,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "SNACKS",
                             Descripcion = "Snacks y golosinas",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Snacks y golosinas"
                         },
                         new
                         {
@@ -3610,8 +3793,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "CONDIMENTS",
                             Descripcion = "Condimentos y salsas",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Condimentos y salsas"
                         },
                         new
                         {
@@ -3619,8 +3802,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "CANNED_FOODS",
                             Descripcion = "Alimentos enlatados",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 735, DateTimeKind.Utc).AddTicks(9414),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 573, DateTimeKind.Utc).AddTicks(1605),
+                            Nombre = "Alimentos enlatados"
                         });
                 });
 
@@ -3642,15 +3825,20 @@ namespace Datos.Migrations
 
                     b.Property<string>("Descripcion")
                         .HasColumnName("descripcion")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("FechaCreacionUTC")
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnName("nombre")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
@@ -3664,8 +3852,8 @@ namespace Datos.Migrations
                             Activo = 1ul,
                             Codigo = "CAMERINO",
                             Descripcion = "Camerino",
-                            FechaCreacionUTC = new DateTime(2024, 7, 12, 1, 8, 40, 738, DateTimeKind.Utc).AddTicks(9431),
-                            FechaModificacionUTC = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            FechaCreacionUTC = new DateTime(2024, 7, 17, 6, 36, 9, 577, DateTimeKind.Utc).AddTicks(1601),
+                            Nombre = "Camerino"
                         });
                 });
 
@@ -3694,9 +3882,9 @@ namespace Datos.Migrations
                         .HasColumnName("fecha_creacion_utc")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("FechaModificacionUTC")
+                    b.Property<DateTime?>("FechaModificacionUTC")
                         .HasColumnName("fecha_modificacion_utc")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("IdPersona")
                         .HasColumnName("idPersona")
@@ -3815,6 +4003,38 @@ namespace Datos.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Datos.Models.DescuentoPresupuestoDetalle", b =>
+                {
+                    b.HasOne("Datos.Models.Descuento", "Descuento")
+                        .WithMany("DescuentoPresupuestoDetalle")
+                        .HasForeignKey("IdDescuento")
+                        .HasConstraintName("FK_descuento_presupuesto_detalle_descuento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Datos.Models.PresupuestoDetalle", "PresupuestoDetalle")
+                        .WithMany("DescuentoPresupuestoDetalle")
+                        .HasForeignKey("IdPresupuestoDetalle")
+                        .HasConstraintName("FK_DescuentoPresupuestoDetalle_PresupuestoDetalle")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Datos.Models.DescuentoProductoCategoria", b =>
+                {
+                    b.HasOne("Datos.Models.CategoriaProducto", "CategoriaProducto")
+                        .WithMany()
+                        .HasForeignKey("CategoriaProductoId");
+
+                    b.HasOne("Datos.Models.Descuento", "Descuento")
+                        .WithMany()
+                        .HasForeignKey("DescuentoId");
+
+                    b.HasOne("Datos.Models.Producto", "Producto")
+                        .WithMany("DescuentosProductoCategoria")
+                        .HasForeignKey("ProductoId");
+                });
+
             modelBuilder.Entity("Datos.Models.Empleado", b =>
                 {
                     b.HasOne("Datos.Models.Ciudad", "IdCiudadNavigation")
@@ -3848,6 +4068,25 @@ namespace Datos.Migrations
                         .HasConstraintName("FK_evento_ciudad")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Datos.Models.ImpuestoProductoCategoria", b =>
+                {
+                    b.HasOne("Datos.Models.CategoriaProducto", "CategoriaProducto")
+                        .WithMany("ImpuestoProductoCategorias")
+                        .HasForeignKey("IdCategoriaProducto")
+                        .HasConstraintName("FK_ImpuestoProductoCategoria_CategoriaProducto");
+
+                    b.HasOne("Datos.Models.Impuesto", "Impuesto")
+                        .WithMany("ImpuestoProductoCategoria")
+                        .HasForeignKey("IdImpuesto")
+                        .HasConstraintName("FK_ImpuestoProductoCategoria_Impuesto")
+                        .IsRequired();
+
+                    b.HasOne("Datos.Models.Producto", "Producto")
+                        .WithMany("ImpuestosProductoCategoria")
+                        .HasForeignKey("IdProducto")
+                        .HasConstraintName("FK_ImpuestoProductoCategoria_Producto");
                 });
 
             modelBuilder.Entity("Datos.Models.Inventario", b =>
@@ -3891,7 +4130,7 @@ namespace Datos.Migrations
                     b.HasOne("Datos.Models.Presupuesto", "IdPresupuestoNavigation")
                         .WithMany("PresupuestoDetalles")
                         .HasForeignKey("IdPresupuesto")
-                        .HasConstraintName("presupuesto_detalle_presupuestofk")
+                        .HasConstraintName("FK_PresupuestoDetalle_Presupuesto")
                         .IsRequired();
 
                     b.HasOne("Datos.Models.Producto", "IdproductoNavigation")

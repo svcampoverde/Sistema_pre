@@ -23,10 +23,8 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("varchar(50)")
                 .IsRequired(); // Configuración de la columna Codigo
 
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
-                .HasColumnType("VARCHAR(200)")
-                .IsRequired(); // Configuración de la columna Descripcion
+           entity.Property(e => e.Descripcion)  .IsRequired(false)
+                .HasColumnName("descripcion"); // Configuración de la columna Descripcion
 
             entity.HasQueryFilter(e => e.Activo); // Filtro global para entidades activas
 
@@ -36,8 +34,8 @@ namespace Datos.AplicationDB.Configurations
                 .IsRequired(); // Configuración de la columna FechaCreacionUTC
 
             entity.Property(e => e.FechaModificacionUTC)
-                .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime"); // Configuración de la columna FechaModificacionUTC
+      .HasColumnName("fecha_modificacion_utc")
+      .HasColumnType("datetime").IsRequired(false);
 
             // Relación uno a muchos con Atributo
             entity.HasMany(e => e.Atributos)
@@ -50,6 +48,6 @@ namespace Datos.AplicationDB.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<CategoriaAtributo> entity);
+         partial void OnConfigurePartial(EntityTypeBuilder<CategoriaAtributo> entity);
     }
 }

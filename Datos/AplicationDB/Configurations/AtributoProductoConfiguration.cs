@@ -32,20 +32,19 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnName("valor")
                 .HasColumnType("VARCHAR(200)")
                 .IsRequired(); // Configuración de la columna Valor
-              entity.Property(e => e.Activo)
-                .HasColumnName("activo")
-                .HasColumnType("bit")
-                .IsRequired();
+            entity.Property(e => e.Activo)
+              .HasColumnName("activo")
+              .HasColumnType("bit")
+              .IsRequired();
             // Query Filter para propiedades activas
             entity.HasQueryFilter(e => e.Activo);
             entity.Property(e => e.FechaCreacionUTC)
                 .HasColumnName("fecha_creacion_utc")
                 .HasColumnType("datetime")
                 .IsRequired();
-
             entity.Property(e => e.FechaModificacionUTC)
                 .HasColumnName("fecha_modificacion_utc")
-                .HasColumnType("datetime");
+                .HasColumnType("datetime").IsRequired(false);
 
             // Relación muchos a uno con Producto
             entity.HasOne(e => e.Producto)
@@ -65,6 +64,6 @@ namespace Datos.AplicationDB.Configurations
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<AtributoProducto> entity);
+         partial void OnConfigurePartial(EntityTypeBuilder<AtributoProducto> entity);
     }
 }

@@ -10,7 +10,12 @@ namespace LogicDeNegocio.Mapper.Profiles
     {
         public ProductoProfile()
         {
-            CreateMap<Producto, ProductoDto>().IgnoreIfEmpty();
+            CreateMap<Producto, ProductoDto>()
+                .ForMember(dest => dest.NombreCategoria,
+                opt => opt.MapFrom(src => src.CategoriaProducto.Descripcion))
+                .ForMember(dest => dest.TipoProducto,
+                opt => opt.MapFrom(src => src.TipoProducto.Descripcion))
+                .IgnoreIfEmpty();
             CreateMap<Producto, ProductoRequest>().IgnoreIfEmpty();
             CreateMap<ProductoRequest, ProductoDto>().IgnoreIfEmpty();
         }

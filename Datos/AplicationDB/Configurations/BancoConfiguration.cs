@@ -26,9 +26,8 @@ namespace Datos.AplicationDB.Configurations
                 .HasColumnType("VARCHAR(100)")
                 .IsRequired();
 
-            entity.Property(e => e.Descripcion)
-                .HasColumnName("descripcion")
-                .IsRequired();
+           entity.Property(e => e.Descripcion)  .IsRequired(false)
+                .HasColumnName("descripcion");
 
             entity.Property(e => e.Direccion)
                 .HasColumnName("direccion");
@@ -70,11 +69,11 @@ namespace Datos.AplicationDB.Configurations
                 .HasForeignKey(e => e.IdCategoriaBanco)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("banco_categoriabancofk");
-             entity.SeedBancos();
+            entity.SeedBancos();
 
             OnConfigurePartial(entity);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<Banco> entity);
+         partial void OnConfigurePartial(EntityTypeBuilder<Banco> entity);
     }
 }

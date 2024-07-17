@@ -25,7 +25,9 @@ namespace Datos.AplicationDB
         public virtual DbSet<CategoriaAtributo> CategoriaAtributos { get; set; }
         public virtual DbSet<CategoriaBanco> CategoriaBancos { get; set; }
         public virtual DbSet<CategoriaProducto> CategoriaProductos { get; set; }
+        public virtual DbSet<ImpuestoProductoCategoria> ImpuestoProductoCategorias { get; set; }
         public virtual DbSet<Ciudad> Ciudades { get; set; }
+        public virtual DbSet<Impuesto> Impuestos { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Cuenta> Cuentas { get; set; }
         public virtual DbSet<Empleado> Empleados { get; set; }
