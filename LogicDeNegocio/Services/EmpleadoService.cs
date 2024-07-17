@@ -55,6 +55,77 @@ namespace LogicDeNegocio.Services
                 return _mapper.Map<EmpleadoDto>(entidad);
             }
         }
+        public async Task<List<EmpleadoDto>> ObtenerEmpleados(string emp)
+        {
+            using (var context = _dbContextFactory())
+            {
+                var query = from p in context.Personas
+                            join emple in context.Empleados on p.Id equals emple.IdPersona
+                            join ciu in context.Ciudades on p.IdCiudad equals ciu.Id
+                            where p.Activo == true
+                            select new
+                            {
+                                emple.Id,
+                                p.Cedula,
+                                p.Nombre,
+                                p.Apellido,
+                                p.Genero,
+                                p.Telefono,
+                                p.Celular,
+                                p.Correo,
+                                p.Direccion,
+                                Ciudaddescripcion = ciu.Nombre,
+                                emple.Sueldo,
+                                emple.Empresa,
+                                emple.FechaContrato,
+                            };
+                if (!string.IsNullOrEmpty(emp))
+                {
+                    query = query.Where(e => e.Cedula.Contains(emp));
+                }
+                var datos = await query.ToListAsync();
+                return datos.Select(d => new EmpleadoDto
+                {
+                    Id = d.Id,
+                    Cedula = d.Cedula,
+                    Nombre = d.Nombre,
+                    Apellido = d.Apellido,
+                    Celular = d.Celular,
+                    Telefono = d.Telefono,
+                    Genero = d.Genero,
+                    Correo = d.Correo,
+                    Direccion = d.Direccion,
+                    Empresa = d.Empresa,
+                    Sueldo = Convert.ToDecimal(d.Sueldo),
+                    FechaContrato = d.FechaContrato,
+                    CiudadDescripcion = d.Ciudaddescripcion
+                }).ToList();
+
+            }
+        }
+        public async Task<EmpleadoDto> ObtenerEmpleadoPorId(int id)
+        {
+            using (var context = _dbContextFactory())
+            {
+                // Buscar la entidad del empleado por su ID
+                var entidad = await context.Empleados.FindAsync(id);
+
+                if (entidad == null)
+                {
+                    _logger.LogWarning($"Empleado con ID {id} no encontrado.");
+                    throw new KeyNotFoundException($"Empleado con ID {id} no encontrado.");
+                }
+
+                // Mapear la entidad del empleado al DTO
+                var empleadoDto = new EmpleadoDto
+                {
+                    Id = entidad.Id,
+                    IdPersona = entidad.IdPersona,
+                };
+
+                return empleadoDto;
+            }
+        }
 
         public async Task EliminarEmpleado(int id)
         {

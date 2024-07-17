@@ -6,7 +6,7 @@ namespace Datos.Models
     {
         public int IdPersona { get; set; }
         public string Empresa { get; set; }
-        public float Sueldo { get; set; }
+        public decimal Sueldo { get; set; }
         public DateTime? FechaContrato { get; set; }
         public int IdCiudad { get; set; }
 

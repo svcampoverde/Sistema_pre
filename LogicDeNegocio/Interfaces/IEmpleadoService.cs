@@ -15,5 +15,7 @@ namespace LogicDeNegocio.Interfaces
         Task EliminarEmpleado(int id);
 
         Task<List<EmpleadoDto>> ObtenerTodasEmpleados();
+        Task<List<EmpleadoDto>> ObtenerEmpleados(string emp);
+        Task<EmpleadoDto> ObtenerEmpleadoPorId(int id);
     }
 }
